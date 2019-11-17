@@ -29,6 +29,7 @@ if (isset($user) && ($user === 'admin')) {
 }
 
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+$dbpdo = new PDO("mysql:host=localhost;dbname=analeerose_bpa", DB_USER, DB_PASSWORD);
 
 
 function escape_data($data, $dbc) {

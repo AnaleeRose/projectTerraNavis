@@ -22,7 +22,7 @@ if ($media_type === 'article') {
 
 $newArticle_errors = []; //tracks all errors
 $firstLists = []; //
-$trackElements = []; // tracks element id and order
+if (!isset($trackElements)) $trackElements = []; // tracks element id and order
 $at_least_one_element = false;
 
 // generates all possible values for possible list **
@@ -74,11 +74,16 @@ if (isset($_POST['publishMediaBtn'])) {
     // if a required item is empty, toss an error
     if (empty($_POST['article_name'])) $newArticle_errors['article_name'] = "Missing: Name";
     if (empty($_POST['article_category']) || $_POST['article_category'] === 1) $newArticle_errors['article_category'] = "Missing: Category";
+    if (empty($_POST['article_description']) || $_POST['article_description'] === 1) $newArticle_errors['article_description'] = "Missing: Description";
     foreach ($possible as $elementToCheck) {
         if (isset($_POST[$elementToCheck]) && !empty($_POST[$elementToCheck])) {
             $at_least_one_element = true;
             break;
         }
+    }
+
+    if ($at_least_one_element === false) {
+        $newArticle_errors['article_name'] = "No content in article...";
     }
 
     // SPECIAL HANDILING FOR LISTS
@@ -91,7 +96,6 @@ if (isset($_POST['publishMediaBtn'])) {
                 $list_name = $list_type . '_' . $list_num;
                 $listAll[$list_name][] = $elementToCheck;
             }
-        } else {
         }
     }
 
@@ -108,18 +112,6 @@ if (isset($_POST['publishMediaBtn'])) {
     $elementsUsed = explode(',', $noSpaceElementTracker);
 
     // IS IT TIME TO SEND TO DB???? ---------------------------------------------->
-    if (empty($newArticle_errors) && $at_least_one_element === true) {
-        // yeet that bad boi into the db
-        echo 'reay to YEET dat bad boi!!!';
-       //  $stmt = $dbh->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `content`) VALUES (NULL, , '2', '1', 'wassup')");
-
-       // /*** bind the paramaters ***/
-       // $stmt->bindParam(':animal_id', $animal_id, PDO::PARAM_INT);
-       // $stmt->bindParam(':animal_name', $animal_name, PDO::PARAM_STR, 5);
-
-       // /*** execute the prepared statement ***/
-       // $stmt->execute();
-    }
 }
 
 
@@ -173,7 +165,7 @@ $options = ['required' => null];
                     }
                     echo '</select>';
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
-                    $options = ['placeholder' => 'Description', 'maxlength' => 250];
+                    $options = ['required' => null, 'placeholder' => 'Description', 'maxlength' => 250];
                     create_form_input('article_description', 'textarea', 'Description', $newArticle_errors, $options);
                     // create_form_input('addThisContent', 'hidden', '', $newArticle_errors);
                 ?>
@@ -182,6 +174,39 @@ $options = ['required' => null];
                     <div id="newContent" class="newContent">
                         <?php require './assets/includes/contentTypeSwitch.php'; ?>
                     </div>
+<!-- check content if you clicked published and send it on it's way! -->
+<?php
+    if (isset($_POST['publishMediaBtn'])) {
+        if (empty($newArticle_errors) && $at_least_one_element === true) {
+            $a_name = $_POST['article_name'];
+            $a_description = $_POST['article_description'];
+            $a_category = $_POST['article_category'];
+            echo 'd: ' . $a_description . '<br>';
+
+            $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified) VALUES (NULL, :a_name, :a_description, :a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+            // bind the paramaters
+            $stmt->bindParam(':a_name', $a_name, PDO::PARAM_STR);
+            $stmt->bindParam(':a_description', $a_description, PDO::PARAM_STR);
+            $stmt->bindParam(':a_category', $a_category, PDO::PARAM_INT);
+
+            // execute the prepared statement
+            if ($stmt->execute()) {
+                echo 'added';
+                $article_db_id = $dbpdo->lastInsertId();
+                echo $article_db_id;
+            } else {
+                echo 'crap';
+            }
+
+
+            foreach ($trackElements as $this_element_name => $this_element_info) {
+                echo $this_element_name;
+                print_r($this_element_info);
+            }
+
+        }
+    }
+?>
                     <div class="contentTypes">
                         <p data-contentType="p" class="contentTypeBtn contentPhpBtn" data-content_type_id=1>Paragraph</p>
                         <div class="contentTypeList">

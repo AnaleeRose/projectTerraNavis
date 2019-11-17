@@ -5,6 +5,7 @@ if (isset($_POST['publishMediaBtn'])) {
         if (isset($_POST[$content]) && !empty($_POST[$content])) {
             switch ($content) {
                 case strpos($content, 'p'):
+                    $trackElements[$content]['content'] = $_POST[$content];
                     $trackElements[$content]['id'] = 1;
                     $trackElements[$content]['order'] = $currentNum;
                     // echo "Paragrah: " . $content;
@@ -13,6 +14,7 @@ if (isset($_POST['publishMediaBtn'])) {
                     break;
 
                 case strpos($content, 'he'): {
+                    $trackElements[$content]['content'] = $_POST[$content];
                     $heading_num = substr($content, 7, 1);
                     // echo '<p class="formNotice formNotice_Error">' . $content . '</p>';
                     $element_class = 'h' . $heading_num;
@@ -50,7 +52,7 @@ if (isset($_POST['publishMediaBtn'])) {
                 }
 
                 case strpos($content, 'hr');
-                    // echo '<p class="formNotice formNotice_Error">' . $content . '</p>';
+                    $trackElements[$content]['content'] = $_POST[$content];
                     $trackElements[$content]['id'] = 6;
                     $trackElements[$content]['order'] = $currentNum;
 
@@ -61,6 +63,7 @@ if (isset($_POST['publishMediaBtn'])) {
                     break;
 
                 case (strpos($content, 'ul') !== false);
+                    $trackElements[$content]['content'] = $_POST[$content];
                     $trackElements[$content]['id'] = 7;
                     $trackElements[$content]['order'] = $currentNum;
 
@@ -79,6 +82,7 @@ if (isset($_POST['publishMediaBtn'])) {
 
                     // if the last li, conclude fieldset
                     if (in_array($content, $last)) {
+                        $trackElements[$content]['last_li'] = true;
                         $listType = substr($content, 0, 2);
                         $listNum = substr($content, 3, 1);
                         $listName = $listType . '_' . $listNum;
@@ -86,31 +90,21 @@ if (isset($_POST['publishMediaBtn'])) {
 
                         echo '<p data-list-name="' . $list_name . '"class="addToListBtn ' . $btnName . '">+</p>';
                         echo '</fieldset>';
-                        echo 'last';
-                        $trackElements[$content]['last_li'] = true;
-                        echo '<br>last_after';
                     }
                     break;
 
                 case (strpos($content, 'ol') !== false);
+                    $trackElements[$content]['content'] = $_POST[$content];
                     $trackElements[$content]['id'] = 8;
                     $trackElements[$content]['order'] = $currentNum;
 
-                    if (substr($content, 8,2) === '2') {
-                        $trackElements[$content]['first_li'] = true;
-                        $listType = substr($content, 0, 2);
-                        $listNum = substr($content, 3, 1);
-                        $listName = $listType . '_' . $listNum;
-                        $btnName = $listName . '_btn';
-
-                        echo '<p data-list-name="' . $list_name . '"class="addToListBtn ' . $btnName . '">+</p>';
-                        echo '</fieldset>';
-                        break;
-                    } // check if first in list, if so start a fieldset
+                    $this_list_num = substr($content, 3,1);
                     if (substr($content, 8,2) === '1') { // check if first in list, if so start a fieldset
-                        echo '<fieldset data-max=2 class="ol">';
+                        $trackElements[$content]['first_li'] = true;
+                        echo '<fieldset data-max=' . $max_lists_on_page . ' class="ol">';
                         echo '<legend>';
-                        echo 'Ordered List ' . $list_num ;
+
+                        echo 'Ordered List ' . $this_list_num ;
 
                         echo '</legend>';
                     }
@@ -119,6 +113,7 @@ if (isset($_POST['publishMediaBtn'])) {
 
                     // if the last li, conclude fieldset
                     if (in_array($content, $last)) {
+                        $trackElements[$content]['content'] = $_POST[$content];
                         $trackElements[$content]['last_li'] = true;
                         $listType = substr($content, 0, 2);
                         $listNum = substr($content, 3, 1);
@@ -138,4 +133,5 @@ if (isset($_POST['publishMediaBtn'])) {
         }
     }
 }
-print_r($trackElements);
+
+
