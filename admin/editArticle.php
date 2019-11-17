@@ -6,19 +6,48 @@ check_if_admin(); // toss user back to login page if they're not logged in
 require MYSQL; // connect to db
 require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
 require './../html/assets/includes/functions.php'; // various functions
-$media_type = $_GET['media_type']; // tells it whether to produce the form for emails vs the form for articles
+$media_type = 'article';
 
 // build list of expected, required, and possile post values based on media type
-if ($media_type === 'article') {
-    $expected = ['article_name', 'article_category', 'article_description', 'imgs'];
-    $required = ['article_name', 'article_category'];
-    $possible = [];
-    $element_types = ['p', 'heading2', 'heading3', 'heading4', 'heading5', 'hr', 'ul', 'ol']; // we'll build all possible lists from this list l8r
-} elseif ($media_type === 'email') {
-    $expected = ['email_subject', 'email_msg'];
-    $required = ['email_subject', 'email_msg'];
-}
+$expected = ['article_name', 'article_category', 'article_description', 'imgs'];
+$required = ['article_name', 'article_category'];
+$possible = [];
+$element_types = ['p', 'heading2', 'heading3', 'heading4', 'heading5', 'hr', 'ul', 'ol']; // we'll build all possible lists from this list l8r
+$article_id = $_GET['article_id'];
+$elementsUsed;
 
+$q = 'SELECT * FROM articles';
+$r = mysqli_query($dbc, $q);
+if ($r) {
+    while ($row = $r->fetch_assoc()) {
+        $_POST['article_name'] = $row['article_name'];
+        $_POST['article_description'] = $row['article_description'];
+        $_POST['article_category'] = $row['article_category'];
+    }
+
+    $q = "SELECT * FROM `article_content` WHERE article_id = $article_id";
+    $r = mysqli_query($dbc, $q);
+    if ($r) {
+        while ($row = $r->fetch_assoc()) {
+            $elementName =  $row['element_name'];
+            $_POST[$elementName] = $elementName;
+            $elementsUsed .= $elementName . ',';
+            if (isset($row['is_first_li'])) {
+                $this_element_type = 'li';
+                echo 'li';
+            } else {
+                echo 'other';
+            }
+            // [content_id] => 27
+            // [article_id] => 18
+            // [content_type] => 1
+            // [order_of_content] => 1
+            // [content] => A paragraph
+            // [is_first_li] =>
+            // [is_last_li] =>
+        }
+    }
+}
 
 $newArticle_errors = []; //tracks all errors
 $firstLists = []; //
@@ -132,13 +161,7 @@ $options = ['required' => null];
                 <h2 class="adminHeading">New <?= ucfirst($media_type) ?></h2>
                 <div class="cornerLinks">
                 <?php
-                if ($media_type === 'article') {
-                    echo '<a href="./new.php?media_type=email" class="adminBtn adminBtn_accent">Switch To Email</a>';
-                    echo '<a href="./new.php?media_type=article&clear=true" class="adminBtn adminBtn_danger">Clear Page</a>';
-                } elseif ($media_type === 'email') {
-                    echo '<a href="./new.php?media_type=article" class="adminBtn adminBtn_accent">Switch To Article</a>';
-                    echo '<a href="./new.php?media_type=email&clear=true" class="adminBtn adminBtn_danger">Clear Page</a>';
-                }
+                echo '<a href="./new.php?media_type=article&clear=true" class="adminBtn adminBtn_danger">Clear Page</a>';
                 ?>
                 </div>
                 <!-- <a href="new?media_type<?= $media_type ?>&clear=true" class="adminBtn adminBtn_danger">Clear Page</a> -->
@@ -178,71 +201,69 @@ $options = ['required' => null];
 <?php
     if (isset($_POST['publishMediaBtn'])) {
         if (empty($newArticle_errors) && $at_least_one_element === true) {
-            $a_name = $_POST['article_name'];
-            $a_description = $_POST['article_description'];
-            $a_category = $_POST['article_category'];
+            // $a_name = $_POST['article_name'];
+            // $a_description = $_POST['article_description'];
+            // $a_category = $_POST['article_category'];
 
-            $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified) VALUES (NULL, :a_name, :a_description, :a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
-            // bind the paramaters
-            $stmt->bindParam(':a_name', $a_name, PDO::PARAM_STR);
-            $stmt->bindParam(':a_description', $a_description, PDO::PARAM_STR);
-            $stmt->bindParam(':a_category', $a_category, PDO::PARAM_INT);
+            // $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified) VALUES (NULL, :a_name, :a_description, :a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+            // // bind the paramaters
+            // $stmt->bindParam(':a_name', $a_name, PDO::PARAM_STR);
+            // $stmt->bindParam(':a_description', $a_description, PDO::PARAM_STR);
+            // $stmt->bindParam(':a_category', $a_category, PDO::PARAM_INT);
 
-            // execute the prepared statement
-            if ($stmt->execute()) {
-                echo 'added';
-                $article_db_id = $dbpdo->lastInsertId();
-                foreach ($trackElements as $this_element_name => $this_element_info) {
-                    if (strpos($this_element_name, 'l') !== false) {
-                        $this_element_id = $this_element_info['id'];
-                        $this_element_order = $this_element_info['order'];
-                        $this_element_content = $this_element_info['content'];
-                        if (isset($this_element_info['first_li'])) {
-                            $this_element_first_li = 1;
-                        } else {
-                            $this_element_first_li = 0;
-                        }
+            // // execute the prepared statement
+            // if ($stmt->execute()) {
+            //     echo 'added';
+            //     $article_db_id = $dbpdo->lastInsertId();
+            //     foreach ($trackElements as $this_element_name => $this_element_info) {
+            //         if (strpos($this_element_name, 'l') !== false) {
+                        // $this_element_id = $this_element_info['id'];
+                        // $this_element_order = $this_element_info['order'];
+                        // $this_element_content = $this_element_info['content'];
+                        // if (isset($this_element_info['first_li'])) {
+                        //     $this_element_first_li = 1;
+                        // } else {
+                        //     $this_element_first_li = 0;
+                        // }
 
-                        if (isset($this_element_info['last_li'])) {
-                            $this_element_last_li = 1;
-                        } else {
-                            $this_element_last_li = 0;
-                        }
-                        // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_content', $this_element_first_li, $this_element_last_li)";
+                        // if (isset($this_element_info['last_li'])) {
+                        //     $this_element_last_li = 1;
+                        // } else {
+                        //     $this_element_last_li = 0;
+                        // }
+                        // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_content', $this_element_first_li, $this_element_last_li)";
 
-                        $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content, :elem_first_li, :elem_last_li)");
-                        $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
-                        $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
-                        $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
-                        if ($stmt->execute()) {
-                            echo "<br>_LILILILIGOOD_<br>";
-                        } else {
-                            print_r($dbpdo->errorInfo());
-                        }
-                    } else {
+            //             $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_content, :elem_first_li, :elem_last_li)");
+            //             $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
+            //             $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
+            //             $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
+            //             $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
+            //             $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
+            //             $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
+            //             if ($stmt->execute()) {
+            //                 echo "<br>_LILILILIGOOD_<br>";
+            //             } else {
+            //                 print_r($dbpdo->errorInfo());
+            //             }
+            //         } else {
 
-                        $this_element_id = $this_element_info['id'];
-                        $this_element_order = $this_element_info['order'];
-                        $this_element_content = $this_element_info['content'];
-                        $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content)");
-                        $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
-                        $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
-                        if ($stmt->execute()) {
-                            echo "<br>_OTHERGOOD_<br>";
-                        } else {
-                            echo '<br>_OTHERBAD_<br>';
-                        }
-                    }
-                } // foreach END
+            //             $this_element_id = $this_element_info['id'];
+            //             $this_element_order = $this_element_info['order'];
+            //             $this_element_content = $this_element_info['content'];
+            //             $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `content`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_content)");
+            //             $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
+            //             $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
+            //             $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
+            //             $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
+            //             if ($stmt->execute()) {
+            //                 echo "<br>_OTHERGOOD_<br>";
+            //             } else {
+            //                 echo '<br>_OTHERBAD_<br>';
+            //             }
+            //         }
+            //     } // foreach END
 
-            } //stmt execute END
+            // } //stmt execute END
     } // no errors, contents exists check END
 } // btn was pushed END
 ?>
@@ -273,13 +294,6 @@ $options = ['required' => null];
 
                     <input type="submit" name="publishMediaBtn" id="publishBtn" class="adminBtn adminBtn_accent publishBtn" value="Publish Article">
                 <?php
-                } elseif ($media_type === 'email') {
-                    $options = ['required' => null, 'placeholder' => 'Subject', 'maxlength' => 50];
-                    create_form_input('email_subject', 'text', ' ', $newArticle_errors, $options);
-                    $options = ['required' => null, 'placeholder' => 'Message | Max 250 characters', 'maxlength' => 250];
-                    create_form_input('email_msg', 'textarea', '', $newArticle_errors, $options);
-                    echo '<hr class="newHr">';
-                    echo '<input type="submit" name="publishMediaBtn" id="sendEmailBtn" class="adminBtn adminBtn_accent sendEmailBtn" value="Send Email">';
                 }
                 ?>
                 <input type="text" id="elementTracker" name="elementTracker" class="hidden" value="<?php if (isset($_POST['elementTracker'])) echo $_POST['elementTracker']; ?> " data-general-max="<?= $max_on_page ;?>" data-max-li="<?= $max_li_on_page ;?>" data-max-lists="<?= $max_lists_on_page ;?>">
