@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="147" height="147" viewBox="0 0 147 147">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.207" y1="0.148" x2="0.856" y2="0.865" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f0f1fa"/>
+      <stop offset="0.251" stop-color="#f0f1fa"/>
+      <stop offset="1" stop-color="#e1e3f4"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_1" data-name="Group 1" transform="translate(-519 -229)">
+    <circle id="Ellipse_1" data-name="Ellipse 1" cx="73.5" cy="73.5" r="73.5" transform="translate(519 229)" fill="#f0f1fa"/>
+    <circle id="Ellipse_2" data-name="Ellipse 2" cx="27" cy="27" r="27" transform="translate(527 249)" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_3" data-name="Ellipse 3" cx="16" cy="16" r="16" transform="translate(619.347 265.241) rotate(11)" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_4" data-name="Ellipse 4" cx="21.5" cy="21.5" r="21.5" transform="translate(585.628 302.901) rotate(9)" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_5" data-name="Ellipse 5" cx="8.5" cy="8.5" r="8.5" transform="translate(596.485 248.965) rotate(11)" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_6" data-name="Ellipse 6" cx="8.5" cy="8.5" r="8.5" transform="translate(547.485 328.965) rotate(11)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

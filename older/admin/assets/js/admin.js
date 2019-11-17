@@ -1,0 +1,497 @@
+var serverProfilePicID =  document.body.querySelector(".profilePicThumb").getAttribute('data-profilePic_id');
+var profilePic = document.body.querySelector(".profilePic");
+var choosePicBtn = document.body.querySelector(".choosePic");
+var changePicBtn = document.body.querySelector(".changePicBtn");
+var thumbTable = document.body.querySelector(".chooseThumbTable");
+var registerForm = document.body.querySelector(".registerForm");
+var updatePicForm = document.body.querySelector(".updatePicForm");
+var saveChangesBtn = document.body.querySelector(".saveChangesBtn");
+var profilePicChoice = document.body.querySelector("#profilePicChoice");
+var lightModeBtn = document.body.querySelector(".lightModeBtn");
+var lightModeInput = document.body.querySelector(".lightModeInput");
+var profileInfo1 = document.body.querySelector(".profileInfo:first-of-type");
+if (document.body.querySelector("#serverLightMode")) {
+    var serverLightMode = document.body.querySelector("#serverLightMode").innerText;
+    var currentLightMode = serverLightMode; 
+}
+
+var requiredInputs = document.body.querySelectorAll(".requiredInput");
+var allThumbnails = document.body.querySelectorAll(".chooseThumb");
+var formNotices = document.body.querySelectorAll(".formNotice");
+
+list = [];
+allValid = false;
+
+
+
+
+// choose profile picture button
+if (choosePicBtn) {
+    choosePicBtn.addEventListener('click', function(){
+        if (thumbTable.classList.contains('chooseThumbTable_anim')) {
+            thumbTable.classList.remove('chooseThumbTable_anim');
+            registerForm.style.marginTop = '-8rem';
+        } else {
+            thumbTable.classList.add('chooseThumbTable_anim');
+            registerForm.style.marginTop = null;
+        }
+    });
+} else if (changePicBtn) {
+    changePicBtn.addEventListener('click', function(){
+        if (thumbTable.classList.contains('updateThumbTable_anim')) {
+            changePicBtn.innerText = "Change Picture";
+            changePicBtn.style.width = null;
+            thumbTable.classList.remove('updateThumbTable_anim');
+            profileInfo1.style.marginTop = '-5rem';
+            if (serverLightMode === currentLightMode) {
+                saveChangesBtn.classList.remove('saveChangesBtn_hidden');
+            }
+        } else {
+            changePicBtn.innerText = "Cancel";
+            changePicBtn.style.width = "3.5rem";
+            thumbTable.classList.add('updateThumbTable_anim');
+            profileInfo1.style.marginTop = null;
+            if (serverLightMode === currentLightMode) {
+                saveChangesBtn.classList.remove('saveChangesBtn_hidden');
+            }
+        }
+    });
+}
+
+
+// choose profile image
+function selectNewProfilePicture(elem) {
+    profilePicChoice.setAttribute('value', elem.getAttribute('data-id')) ;
+    profilePic.src = elem.src;
+}
+
+allThumbnails.forEach(function(elem) {
+    elem.setAttribute('data-listener', 'true');
+    elem.addEventListener('click', function(){
+        selectNewProfilePicture(elem);
+    });
+});
+
+
+//lightmode switch
+if (lightModeBtn) {
+    if (serverLightMode === 'dmode') {
+        lightModeBtn.classList.add('lightModeBtn_d');
+    }
+    lightModeBtn.addEventListener('click', function(){
+        if (lightModeBtn.classList.contains('lightModeBtn_d')){
+            //animation
+            lightModeInput.setAttribute('value', 'lmode');
+            lightModeBtn.classList.add('lightModeBtn_l');
+            lightModeBtn.classList.remove('lightModeBtn_d');
+
+            //changing value for php
+            if (currentLightMode === 'lmode') {
+                document.body.classList.remove("lmode")
+                document.body.classList.add("dmode")
+                currentLightMode = 'dmode';
+            } else if  (currentLightMode === 'dmode') {
+                document.body.classList.remove("dmode")
+                document.body.classList.add("lmode")
+                currentLightMode = 'lmode';
+            }
+
+            if (serverLightMode === currentLightMode) {
+                lightModeBtn.style.border = null;
+            } else {
+                lightModeBtn.style.border = '2px solid #43ac11';
+            }
+
+            if (serverLightMode === currentLightMode && !thumbTable.classList.contains("updateThumbTable_anim")){
+                saveChangesBtn.classList.add('saveChangesBtn_hidden')
+            } else {
+                saveChangesBtn.classList.remove('saveChangesBtn_hidden')
+            }
+
+        } else {
+            if(lightModeBtn.classList.contains('lightModeBtn_l') ){
+                lightModeBtn.classList.remove('lightModeBtn_l');
+            }
+            lightModeInput.setAttribute('value', 'dmode');
+
+            lightModeBtn.classList.add('lightModeBtn_d');
+
+            if (currentLightMode === 'lmode') {
+                document.body.classList.remove("lmode")
+                document.body.classList.add("dmode")
+                currentLightMode = 'dmode';
+            } else if  (currentLightMode === 'dmode') {
+                document.body.classList.remove("dmode")
+                document.body.classList.add("lmode")
+                currentLightMode = 'lmode';
+            }
+
+            if (serverLightMode === currentLightMode) {
+                lightModeBtn.style.border = null;
+            } else {
+                lightModeBtn.style.border = '2px solid #43ac11';
+            }
+
+            if (serverLightMode === currentLightMode && !thumbTable.classList.contains("updateThumbTable_anim")) {
+                saveChangesBtn.classList.add('saveChangesBtn_hidden')
+            } else {
+                saveChangesBtn.classList.remove('saveChangesBtn_hidden')
+            }
+        }
+    })
+}
+
+
+// formNotices
+formNotices.forEach(function(elem) {
+    // let text = document.createElement("p");
+    // elem.classList.forEach(function(e){
+    //     text.classList.add(e);
+    // })
+    // let content = document.createTextNode(elem.innerText)
+    // text.appendChild(content);
+    // document.body.appendChild(text);
+    // text.style.marginLeft = '-' + text.offsetWidth/2;
+    // text.addEventListener('click', function() { 
+    //     text.parentNode.removeChild(text);
+    // });
+});0
+
+function create_form_notice(name, notice_text, form_notice_type) {
+    name = document.createElement('p');
+    if (form_notice_type === 'error') {
+        name.classList.add('formNotice', 'formNotice_Error');
+    }
+    let content = document.createTextNode(notice_text)
+    name.appendChild(content);
+    document.body.appendChild(name);
+    let ml = 'margin-left: -' + name.offsetWidth/2 + 'px';
+    name.setAttribute('style', ml);
+    name.addEventListener('click', function() { 
+        name.parentNode.removeChild(name);
+    });
+}
+
+
+// ------------------------------------------------------------------------------------------------>
+// work with php to create elements on demand
+// ------------------------------------------------------------------------------------------------>
+
+var allContentTypeBtns = document.body.querySelectorAll(".contentPhpBtn");
+var addThisContent = document.body.querySelector("#addThisContent");
+var newContentDiv = document.body.querySelector("#newContent");
+var max_on_page = 2;
+let all, amount_on_page, input, label, labelName, element_class;
+
+
+// create regular element
+function create_element(input_type, type_of_input, label_name, individual_name, data_content_id) {
+    if (input_type === 'hr') {
+        newElement = document.createElement('hr');
+        newElement.classList.add('newHr');
+        newContentDiv.appendChild(newElement) 
+
+        input = document.createElement('input');
+        input.classList.add(individual_name, type_of_input, 'textInput', 'createInput');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', individual_name);
+        input.setAttribute('id', individual_name);
+        input.setAttribute('placeholder', label_name);
+        input.setAttribute('data-content_type_id',data_content_id);
+        input.setAttribute('value', individual_name);
+        newContentDiv.appendChild(input) 
+    } else {
+        label = document.createElement('label');
+        labelName = document.createTextNode(label_name);
+        label.setAttribute('for', individual_name);
+        label.appendChild(labelName)
+        newContentDiv.appendChild(label)
+        if (input_type === 'textarea') {
+            input = document.createElement('textarea');
+            input.classList.add(individual_name, type_of_input, 'textareaInput', 'createInput');
+        } else if (input_type === 'text') {
+            input = document.createElement('input');
+            input.classList.add(individual_name, type_of_input, 'textInput', 'createInput');
+            input.setAttribute('type', 'text');
+        }
+        input.setAttribute('name', individual_name);
+        input.setAttribute('id', individual_name);
+        input.setAttribute('placeholder', label_name);
+        input.setAttribute('data-content_type_id', data_content_id);
+        newContentDiv.appendChild(input);
+    }
+
+}
+
+// create list element, requires special treatment
+function create_list(input_type, type_of_input, label_name, individual_name, data_content_id) {
+    // create a field set to group it all visually 
+        fieldset = document.createElement('fieldset');
+        fieldset.setAttribute('data-max', 2)
+        // fieldset.setAttribute('id', individual_name);
+        legend = document.createElement('legend');
+        legend_text = document.createTextNode(individual_name);
+        list_type = individual_name.substring(0,1)
+        if (list_type === 'u') {
+            legend_text = document.createTextNode('Unordered List ' + individual_name.substring(3,4));
+            legend.classList.add('ul')
+        } else if (list_type === 'o') {
+            legend_text = document.createTextNode('Ordered List ' + individual_name.substring(3,4));
+            legend.classList.add('ol')
+        }
+        legend.appendChild(legend_text);
+        newContentDiv.appendChild(fieldset);
+        fieldset.appendChild(legend);
+
+    // create a button to add to list as needed
+        btn_name = individual_name + '_btn'
+        amount_on_page = document.body.querySelectorAll('.' + btn_name);
+        num = amount_on_page.length + 1;
+        addToListBtn = document.createElement('p');
+        addToListBtn.innerText = '+';
+        addToListBtn.setAttribute('data-list-name', individual_name);
+        addToListBtn.classList.add("addToListBtn", btn_name);
+        fieldset.appendChild(addToListBtn);
+        activate_list_btns();
+}
+
+
+// lets you add a list item to a list
+function activate_list_btns() {
+    allListBtns = document.querySelectorAll('.addToListBtn');
+    allListBtns.forEach(function(e) {
+        e.addEventListener('click', function(e){
+            add_to_list(e);
+        })
+    })
+}
+
+
+function add_to_list(e) {
+    btn_clicked = e.srcElement;
+    list_name = btn_clicked.getAttribute('data-list-name')
+    fieldset = btn_clicked.parentNode;
+    list_max = fieldset.getAttribute("data-max");
+    list_type = list_name.substring(0,2);
+    list_item_name = list_name + '_li';
+    console.log(list_item_name);
+    all = document.body.querySelectorAll('.' + list_item_name).length;
+    if (all < list_max) {
+        num = all + 1;
+        individual_name = list_item_name + '_' + num;
+
+        label = document.createElement('label');
+        labelText = document.createTextNode('List Item ' + individual_name.substring(8,10));
+        label.setAttribute('for', individual_name);
+        label.classList.add('listItemLabel')
+        label.appendChild(labelText)
+
+        newListItemInput = document.createElement('input');
+        newListItemInput.setAttribute('name', individual_name)
+        newListItemInput.classList.add(list_item_name, individual_name, 'list_item', 'createInput');
+        btn_clicked.parentNode.insertBefore(label, btn_clicked)
+        btn_clicked.parentNode.insertBefore(newListItemInput, btn_clicked)
+
+    } else {
+        create_form_notice('maxElement', 'Maximum number of list items reached', 'error');
+    }
+}
+
+allContentTypeBtns.forEach(function(elem) {
+    elem.addEventListener('click', function(elem) {
+        type_of_element(elem.srcElement);
+    });
+})
+
+function type_of_element(contentBtnClicked) {
+    contentType = contentBtnClicked.getAttribute('data-contentType');
+    switch (contentType) {
+        case 'p':
+            all = document.body.querySelectorAll(".paragraph");
+            num = all.length + 1
+            individualName = 'p_' + num;
+            placeholder = 'Paragraph';
+            if (all.length < max_on_page) {
+                create_element('textarea', 'paragraph', 'Paragraph', individualName, 1)
+            } else {
+                create_form_notice('maxElement', 'Maximum number of paragraphs reached', 'error');
+            }
+            break;
+
+
+        case 'h2':
+            headingNum = contentType.substring(1,2);
+            element_class = '.heading' + headingNum
+            all = document.body.querySelectorAll(element_class);
+            amount_on_page = all.length + 1;
+            individualName = 'heading' + headingNum + '_'  + amount_on_page;
+            label_placeholder_name = 'Heading ' + headingNum
+            element_name = 'heading' + headingNum
+            if (all.length < max_on_page) {
+                create_element('text', element_name, label_placeholder_name, individualName, 2)
+            } else {
+                create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
+            }
+            break;
+
+
+        case 'h3':
+            headingNum = contentType.substring(1,2);
+            element_class = '.heading' + headingNum
+            all = document.body.querySelectorAll(element_class);
+            amount_on_page = all.length + 1;
+            individualName = 'heading' + headingNum + '_'  + amount_on_page;
+            label_placeholder_name = 'Heading ' + headingNum
+            element_name = 'heading' + headingNum
+            if (all.length < max_on_page) {
+                create_element('text', element_name, label_placeholder_name, individualName, 3)
+            } else {
+                create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
+            }
+            break;
+
+
+        case 'h4':
+            headingNum = contentType.substring(1,2);
+            element_class = '.heading' + headingNum
+            all = document.body.querySelectorAll(element_class);
+            amount_on_page = all.length + 1;
+            individualName = 'heading' + headingNum + '_'  + amount_on_page;
+            label_placeholder_name = 'Heading ' + headingNum
+            element_name = 'heading' + headingNum
+            if (all.length < max_on_page) {
+                create_element('text', element_name, label_placeholder_name, individualName, 4)
+            } else {
+                create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
+            }
+            break;
+
+
+        case 'h5':
+            headingNum = contentType.substring(1,2);
+            element_class = '.heading' + headingNum
+            all = document.body.querySelectorAll(element_class);
+            amount_on_page = all.length + 1;
+            individualName = 'heading' + headingNum + '_'  + amount_on_page;
+            label_placeholder_name = 'Heading ' + headingNum
+            element_name = 'heading' + headingNum
+            if (all.length < max_on_page) {
+                create_element('text', element_name, label_placeholder_name, individualName, 5)
+            } else {
+                create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
+            }
+            break;
+
+        case 'hr':
+            element_class = '.hr';
+            all = document.body.querySelectorAll(element_class);
+            amount_on_page = all.length + 1;
+            individualName = 'hr' + '_'  + amount_on_page;
+            element_name = 'hr'
+            label_placeholder_name = 'none';
+            if (all.length < max_on_page) {
+                create_element('hr', element_name, label_placeholder_name, individualName, 6)
+            } else {
+                create_form_notice('maxElement', 'Maximum number of hr reached', 'error');
+            }
+            break;
+
+
+        case 'ul':
+            listType = contentType.substring(0,1);
+            element_type = listType + 'l'
+            element_class = '.' + element_type
+            all = document.body.querySelectorAll('.' + element_type);
+            amount_on_page = all.length + 1;
+            individualName = element_type + '_'  + amount_on_page;
+            if (listType === 'u') {
+                label_placeholder_name = 'Unordered List '
+            } else if (listType === 'o') {
+                label_placeholder_name = 'Ordered List '
+            }
+            if (all.length < max_on_page) {
+                create_list('text', element_type, label_placeholder_name, individualName, 5);
+            } else {
+                create_form_notice('maxElement', 'Maximum number of unordered lists reached', 'error');
+            }
+            break;
+
+        case 'ol':
+            listType = contentType.substring(0,1);
+            element_type = listType + 'l'
+            element_class = '.' +  element_type
+            all = document.body.querySelectorAll('.' + element_type);
+            amount_on_page = all.length + 1;
+            individualName = element_type + '_'  + amount_on_page;
+            if (listType === 'u') {
+                label_placeholder_name = 'Unordered List ';
+            } else if (listType === 'o') {
+                label_placeholder_name = 'Ordered List ';
+            }
+            if (all.length < max_on_page) {
+                create_list('text', element_type, label_placeholder_name, individualName, 5);
+            } else {
+                create_form_notice('maxElement', 'Maximum number of unordered lists reached', 'error');
+            }
+            break;
+
+        default:
+            console.log('mistake ' + contentType);
+            break;
+    }
+}
+
+
+// ------------------------------------------------------------------------------------------------>
+// popup contentTypeBtns
+// ------------------------------------------------------------------------------------------------>
+
+var allContentTypeListBtns = document.body.querySelectorAll(".contentTypeList > .contentTypeBtn");
+let thisList;
+
+allContentTypeListBtns.forEach(function(elem) {
+    elem.addEventListener('click', function(elem) {
+        popup_btn(elem.srcElement);
+    });
+})
+
+function popup_btn(btn) {
+    if (btn.innerText === 'Header') {
+        thisList = document.body.querySelector(".headerContentTypes");
+        btn.parentNode.classList.add("headerContentTypeList_show");
+    } else if (btn.innerText === 'List') {
+        thisList = document.body.querySelector(".listContentTypes");
+        btn.parentNode.classList.add("listContentTypeList_show");
+    }
+
+    if (btn.parentNode.classList.contains("contentTypeList_show")) {
+        btn.parentNode.classList.remove("contentTypeList_show");
+        btn.parentNode.classList.remove("headerContentTypeList_show");
+        thisList.classList.remove("showList");
+        thisList.classList.add("hidden");
+    } else {
+        btn.parentNode.classList.add("contentTypeList_show");
+        btn.parentNode.classList.remove("headerContentTypeList_show");
+        thisList.classList.add("showList");
+        thisList.classList.remove("hidden");
+    }
+
+}
+
+// ------------------------------------------------------------------------------------------------>
+// Run On Load
+// ------------------------------------------------------------------------------------------------>
+
+activate_list_btns();
+
+
+
+
+
+
+
+
+
+
+
+

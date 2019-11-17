@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="147" height="147" viewBox="0 0 147 147">
+  <g id="Group_4" data-name="Group 4" transform="translate(-1007.5 -454.777)">
+    <ellipse id="Ellipse_1" data-name="Ellipse 1" cx="55" cy="53" rx="55" ry="53" transform="translate(1028.5 475.777)" fill="#fff"/>
+    <path id="Polygon_1" data-name="Polygon 1" d="M16,0,32,31H0Z" transform="translate(1067.5 454.777)" fill="#fff"/>
+    <path id="Polygon_9" data-name="Polygon 9" d="M16,0,32,31H0Z" transform="translate(1099.5 601.777) rotate(180)" fill="#fff"/>
+    <path id="Path_5" data-name="Path 5" d="M16.434,0,32.024,31.181,0,31.612Z" transform="translate(1126.766 467.076) rotate(45)" fill="#fff"/>
+    <path id="Path_6" data-name="Path 6" d="M15.591,0,32.024,31.612,0,31.181Z" transform="translate(1017.045 489.721) rotate(-45)" fill="#fff"/>
+    <path id="Path_7" data-name="Path 7" d="M15.591,0,32.024,31.612,0,31.181Z" transform="translate(1149.41 566.393) rotate(135)" fill="#fff"/>
+    <path id="Path_8" data-name="Path 8" d="M16.434,0,32.024,31.181,0,31.612Z" transform="translate(1039.689 589.037) rotate(-135)" fill="#fff"/>
+    <path id="Polygon_14" data-name="Polygon 14" d="M15.8,0l15.8,31.818H0Z" transform="translate(1154.5 512.879) rotate(90)" fill="#fff"/>
+    <path id="Polygon_15" data-name="Polygon 15" d="M15.8,0l15.8,31.818H0Z" transform="translate(1007.5 543.234) rotate(-90)" fill="#fff"/>
+  </g>
+</svg>
