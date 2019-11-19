@@ -16,7 +16,6 @@ if (isset($no_articles) && $no_articles) {
     $r = mysqli_query($dbc, $q);
     if ($r && mysqli_num_rows($r) > 0) {
         while ($row = $r->fetch_assoc()) {
-            $date_added = $row['date_added'];
             if (!isset($row['error_flag'])) {
                 $description = $row['article_description'];
                 preg_match("/(\S+\s*){0,$numwords}/", $description, $regs);

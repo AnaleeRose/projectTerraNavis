@@ -985,6 +985,10 @@ END Newsfeed
         width: 5.5rem;
     }
 
+    #templateMsgBtn {
+        width: 12rem;
+    }
+
 .contentTypes {
     display: flex;
     justify-content: center;
@@ -1156,14 +1160,44 @@ END Newsfeed
     position: absolute;
 }
 
-.newMediaForm textarea.contentInput {
-    height: 12rem;
+/*----------------------------------------------------------------------->
+New Article
+------------------------------------------------------------------------->*/
+
+
+
+/*----------------------------------------------------------------------->
+END New Article
+------------------------------------------------------------------------->*/
+
+
+/*----------------------------------------------------------------------->
+New Email
+------------------------------------------------------------------------->*/
+
+.newMediaForm textarea.contentInput, .newMediaForm .emailInput {
     max-width: 40rem;
     min-width: 28rem;
 }
+
+.newMediaForm textarea.contentInput,
+.newMediaForm textarea.emailInput {
+    height: 12rem;
+}
+
+.linkBtn_email {
+    margin: 1rem auto;
+}
+
+/*----------------------------------------------------------------------->
+END New Email
+------------------------------------------------------------------------->*/
+
+
 /*----------------------------------------------------------------------->
 END All Emails & All Articles & New Article & New Email
 ------------------------------------------------------------------------->*/
+
 
 
 
