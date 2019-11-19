@@ -1,4 +1,5 @@
 <?php
+echo 'typeSwitch_orignal';
 $currentNum = 1;
 if (isset($_POST['publishMediaBtn'])) {
     foreach ($elementsUsed as $content) {
