@@ -172,9 +172,9 @@ $options = ['required' => null];
                     }
                     echo '</select>';
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
-                    $options = ['required' => null, 'placeholder' => 'Description', 'maxlength' => 250];
+                    $options = ['required' => null, 'placeholder' => 'Description', 'maxlength' => 400];
                     create_form_input('article_description', 'textarea', 'Description', $newArticle_errors, $options);
-                    echo '<input type="text" name="date_added" id="date_added" class="textInput createInput"' ;
+                    echo '<input type="text" name="date_added" id="date_added" class="textInput createInput hidden"' ;
                     if (isset($date_added)) echo ' value="' . $date_added . '"';
                     '>';
                 ?>
