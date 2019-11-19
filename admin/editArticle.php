@@ -193,8 +193,6 @@ $options = ['required' => null];
 <?php
     if (isset($_POST['publishMediaBtn'])) {
         if (empty($newArticle_errors) && $at_least_one_element === true) {
-
-            print_r($_POST);
             $a_name = $_POST['article_name'];
             $a_description = $_POST['article_description'];
             $a_category = $_POST['article_category'];
@@ -235,11 +233,11 @@ $options = ['required' => null];
                         $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
                         $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
                         $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
-                        if ($stmt->execute()) {
-                            echo "<br>_LILILILIGOOD_<br>";
-                        } else {
-                            print_r($dbpdo->errorInfo());
-                        }
+                        // if ($stmt->execute()) {
+                        //     echo "<br>_LILILILIGOOD_<br>";
+                        // } else {
+                        //     print_r($dbpdo->errorInfo());
+                        // }
                     } else {
                         $this_element_id = $this_element_info['id'];
                         $this_element_order = $this_element_info['order'];
@@ -261,8 +259,7 @@ $options = ['required' => null];
                 $stmt = $dbpdo->prepare("DELETE FROM articles WHERE article_id = :a_id");
                 $stmt->bindParam(':a_id', $article_id, PDO::PARAM_STR);
                 if ($stmt->execute()) {
-                    echo 'deleted';
-                    // header('Location: ' . BASE_URL . 'admin/editArticle.php?article_id=' . $article_db_id);
+                    header('Location: ' . BASE_URL . 'admin/editArticle.php?article_id=' . $article_db_id);
                 } else {
                     echo 'not deleted';
                 }
@@ -297,7 +294,7 @@ $options = ['required' => null];
                     </div>
 
 
-                    <input type="submit" name="publishMediaBtn" id="publishBtn" class="adminBtn adminBtn_accent publishBtn" value="Publish Article">
+                    <input type="submit" name="publishMediaBtn" id="publishBtn" class="adminBtn adminBtn_accent publishBtn" value="Edit Article">
                 <?php
                 }
                 ?>
