@@ -1,4 +1,6 @@
-var serverProfilePicID =  document.body.querySelector(".profilePicThumb").getAttribute('data-profilePic_id');
+if ( document.body.querySelector(".profilePicThumb")) {
+    var serverProfilePicID =  document.body.querySelector(".profilePicThumb").getAttribute('data-profilePic_id');
+}
 var profilePic = document.body.querySelector(".profilePic");
 var choosePicBtn = document.body.querySelector(".choosePic");
 var changePicBtn = document.body.querySelector(".changePicBtn");
@@ -183,9 +185,12 @@ function create_form_notice(name, notice_text, form_notice_type) {
 var allContentTypeBtns = document.body.querySelectorAll(".contentPhpBtn");
 var addThisContent = document.body.querySelector("#addThisContent");
 var newContentDiv = document.body.querySelector("#newContent");
-var max_on_page = elementTracker.getAttribute('data-general-max');
-var max_li_elements = elementTracker.getAttribute('data-max-li')
-var max_list_elements = elementTracker.getAttribute('data-max-lists')
+if (elementTracker) {
+    var max_on_page = elementTracker.getAttribute('data-general-max');
+    var max_li_elements = elementTracker.getAttribute('data-max-li')
+    var max_list_elements = elementTracker.getAttribute('data-max-lists');
+}
+
 let all, amount_on_page, input, label, labelName, element_class;
 
 

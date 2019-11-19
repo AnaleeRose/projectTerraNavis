@@ -22,9 +22,8 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		}
 		echo 'Input createInput';
 
-
-		if (array_key_exists($name, $errors)) echo ' createFormError ';
-		if ((!empty($options)) && (is_array($options)) && (!empty($options['required']))) {echo ' requiredInput';}
+		if (array_key_exists($name, $errors)) {echo ' createFormError ';}
+		if (array_key_exists('required', $options)) {echo ' requiredInput';}
 		echo '"';
 		if ($value) echo 'value="' . htmlspecialchars($value) . '"';
 		if (!empty($options) && is_array($options)) {
@@ -47,6 +46,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 			echo $type;
 		}
 		echo 'Input createInput';
+		if (array_key_exists('required', $options)) {echo ' requiredInput';}
 		echo '"';
 		if (!empty($options) && is_array($options)) {
 			foreach ($options as $k => $v) {
@@ -71,7 +71,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		echo 'Input createInput';
 
 		if (array_key_exists($name, $errors)) echo ' createFormError ';
-		if ((!empty($options)) && (is_array($options)) && (!empty($options['required']))) {echo ' requiredInput';}
+		if (array_key_exists('required', $options)) {echo ' requiredInput';}
 		echo '"';
 		if ($value) echo 'value="' . htmlspecialchars($value) . '"';
 		if (!empty($options) && is_array($options)) {

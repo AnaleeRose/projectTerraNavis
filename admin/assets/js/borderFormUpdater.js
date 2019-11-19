@@ -39,3 +39,6 @@ function updateProfileBorder() {
         if (choosePicBtn) choosePicBtn.style.background = '#d8253d';
     }
 };
+
+// run these onload
+updateProfileBorder();

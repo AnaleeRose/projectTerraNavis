@@ -1,11 +1,11 @@
 <?php
 $currentNum = 1;
-if (isset($_POST['publishMediaBtn']) || isset($_GET['article_id'])) {
+if (isset($_GET['article_id'])) {
     foreach ($elementsUsed as $content) {
-        if (isset($_POST[$content]) && !empty($_POST[$content])) {
+        if (isset($_POST[$content]['elementName']) && !empty($_POST[$content]['content'])) {
             switch ($content) {
                 case strpos($content, 'p'):
-                    $trackElements[$content]['content'] = $_POST[$content];
+                    $trackElements[$content]['content'] = $_POST[$content]['content'];
                     $trackElements[$content]['id'] = 1;
                     $trackElements[$content]['order'] = $currentNum;
                     // echo "Paragrah: " . $content;
@@ -14,7 +14,7 @@ if (isset($_POST['publishMediaBtn']) || isset($_GET['article_id'])) {
                     break;
 
                 case strpos($content, 'he'): {
-                    $trackElements[$content]['content'] = $_POST[$content];
+                    $trackElements[$content]['content'] = $_POST[$content]['content'];
                     $heading_num = substr($content, 7, 1);
                     // echo '<p class="formNotice formNotice_Error">' . $content . '</p>';
                     $element_class = 'h' . $heading_num;
@@ -52,7 +52,7 @@ if (isset($_POST['publishMediaBtn']) || isset($_GET['article_id'])) {
                 }
 
                 case strpos($content, 'hr');
-                    $trackElements[$content]['content'] = $_POST[$content];
+                    $trackElements[$content]['content'] = $_POST[$content]['content'];
                     $trackElements[$content]['id'] = 6;
                     $trackElements[$content]['order'] = $currentNum;
 
@@ -63,12 +63,12 @@ if (isset($_POST['publishMediaBtn']) || isset($_GET['article_id'])) {
                     break;
 
                 case (strpos($content, 'ul') !== false);
-                    $trackElements[$content]['content'] = $_POST[$content];
+                    $trackElements[$content]['content'] = $_POST[$content]['content'];
                     $trackElements[$content]['id'] = 7;
                     $trackElements[$content]['order'] = $currentNum;
 
                     $this_list_num = substr($content, 3,1);
-                    if (substr($content, 8,2) === '1') { // check if first in list, if so start a fieldset
+                    if (substr($content, 8,2) === '1' || (isset($_POST[$elementName]['first_li']) && $_POST[$elementName]['first_li'])) { // check if first in list, if so start a fieldset
                         $trackElements[$content]['first_li'] = true;
                         echo '<fieldset data-max=' . $max_lists_on_page . ' class="ul">';
                         echo '<legend>';
@@ -78,7 +78,7 @@ if (isset($_POST['publishMediaBtn']) || isset($_GET['article_id'])) {
                         echo '</legend>';
                     }
                     // create the input
-                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item createInput" value="' . $_POST[$content] . '" data-content_type_id=7>';
+                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item createInput" value="' . $_POST[$content]['content'] . '" data-content_type_id=7>';
 
                     // if the last li, conclude fieldset
                     if (in_array($content, $last)) {
@@ -94,7 +94,7 @@ if (isset($_POST['publishMediaBtn']) || isset($_GET['article_id'])) {
                     break;
 
                 case (strpos($content, 'ol') !== false);
-                    $trackElements[$content]['content'] = $_POST[$content];
+                    $trackElements[$content]['content'] = $_POST[$content]['content'];
                     $trackElements[$content]['id'] = 8;
                     $trackElements[$content]['order'] = $currentNum;
 
@@ -109,11 +109,11 @@ if (isset($_POST['publishMediaBtn']) || isset($_GET['article_id'])) {
                         echo '</legend>';
                     }
                     // create the input
-                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item createInput" value="' . $_POST[$content] . '" data-content_type_id=8>';
+                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item createInput" value="' . $_POST[$content]['content'] . '" data-content_type_id=8>';
 
                     // if the last li, conclude fieldset
                     if (in_array($content, $last)) {
-                        $trackElements[$content]['content'] = $_POST[$content];
+                        $trackElements[$content]['content'] = $_POST[$content]['content'];
                         $trackElements[$content]['last_li'] = true;
                         $listType = substr($content, 0, 2);
                         $listNum = substr($content, 3, 1);

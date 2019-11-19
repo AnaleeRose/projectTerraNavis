@@ -1,7 +1,7 @@
 <?php
-$ptitle = "Login";
+$pageTitle = "Login";
 nd('loginDiv', 'loginDiv');
-$options = ['required' => null];
+$options['required'] = null;
 
 echo '<img class="profilePic" src="assets/profilePictures/';
 if (isset($session['profilePic_Location'])) {
