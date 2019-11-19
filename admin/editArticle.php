@@ -21,10 +21,10 @@ $q = "SELECT * FROM `articles` WHERE article_id = $article_id";
 $r = mysqli_query($dbc, $q);
 if ($r) {
     while ($row = $r->fetch_assoc()) {
-        $_POST['article_name'] = $row['article_name'];
-        $_POST['article_description'] = $row['article_description'];
-        $_POST['article_category'] = $row['article_category'];
-        if (isset($_POST['date_added'])) $_POST['date_added'] = $row['date_added'];
+        if (!isset($_POST['article_name'])) $_POST['article_name'] = $row['article_name'];
+        if (!isset($_POST['article_description'])) $_POST['article_description'] = $row['article_description'];
+        if (!isset($_POST['article_category']))$_POST['article_category'] = $row['article_category'];
+        if (!isset($_POST['date_added'])) $_POST['date_added'] = $row['date_added'];
         $date_added = $row['date_added'];
     }
 }
