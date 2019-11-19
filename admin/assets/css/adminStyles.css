@@ -1132,9 +1132,6 @@ END Newsfeed
     background: #fff;
     border-radius: 2rem;
     color: var(--magenta);
-/*    text-align: right;
-    padding-right: .5rem;
-    width: 12rem;*/
 }
 
 
@@ -1159,6 +1156,52 @@ END Newsfeed
     position: absolute;
 }
 
+.newMediaForm textarea.contentInput {
+    height: 12rem;
+    max-width: 40rem;
+    min-width: 28rem;
+}
 /*----------------------------------------------------------------------->
 END All Emails & All Articles & New Article & New Email
+------------------------------------------------------------------------->*/
+
+
+
+/*----------------------------------------------------------------------->
+delete article
+------------------------------------------------------------------------->*/
+
+.deletePage {
+    margin: 4rem auto 1rem;
+    width: 70%;
+}
+
+.deletePage h2 {
+    color: var(--dark-reddish);
+}
+
+.deletePage .deleteArticleBtn {
+    margin: 0;
+    text-align: center;
+}
+
+.deletePage .cancelBtn {
+    display: inline-block;
+    margin: 0 1.5rem;
+}
+
+.deletePage .btnContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 1.2rem 0;
+}
+
+.deleteTable th, td {
+    padding: .5rem .3rem;
+}
+
+
+/*----------------------------------------------------------------------->
+END delete article
 ------------------------------------------------------------------------->*/

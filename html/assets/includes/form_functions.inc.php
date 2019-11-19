@@ -24,12 +24,12 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 
 
 		if (array_key_exists($name, $errors)) echo ' createFormError ';
-		if ((!empty($options)) && (is_array($options)) && (!empty($options['required']))) {echo ' requiredInput';}
+		if ((!empty($options)) && (is_array($options)) && (array_key_exists('required', $options))) {echo ' requiredInput';}
 		echo '"';
 		if ($value) echo 'value="' . htmlspecialchars($value) . '"';
 		if (!empty($options) && is_array($options)) {
 			foreach ($options as $k => $v) {
-				echo " $k=\"$v\"";
+                if ($k !== 'addtl_classes') echo " $k=\"$v\"";
 			}
 		}
 		echo '>';
@@ -47,10 +47,11 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 			echo $type;
 		}
 		echo 'Input createInput';
+		if ((!empty($options)) && (is_array($options)) && (array_key_exists('required', $options))) {echo ' requiredInput';}
 		echo '"';
 		if (!empty($options) && is_array($options)) {
 			foreach ($options as $k => $v) {
-				echo " $k=\"$v\"";
+                if ($k !== 'addtl_classes') echo " $k=\"$v\"";
 			}
 		}
 		echo '>';
@@ -71,12 +72,12 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		echo 'Input createInput';
 
 		if (array_key_exists($name, $errors)) echo ' createFormError ';
-		if ((!empty($options)) && (is_array($options)) && (!empty($options['required']))) {echo ' requiredInput';}
+		if ((!empty($options)) && (is_array($options)) && (array_key_exists('required', $options))) {echo ' requiredInput';}
 		echo '"';
 		if ($value) echo 'value="' . htmlspecialchars($value) . '"';
 		if (!empty($options) && is_array($options)) {
 			foreach ($options as $k => $v) {
-				echo " $k=\"$v\"";
+                echo $options['addtl_classes'] . ' ' . $type;
 			}
 		}
 		echo '>';

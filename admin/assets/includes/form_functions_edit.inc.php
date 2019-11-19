@@ -28,7 +28,7 @@ function create_form_input_e_ver($name, $type, $label = '', $value, $errors = []
         if (!empty($value)) echo 'value="' . htmlspecialchars($value) . '"';
         if (!empty($options) && is_array($options)) {
             foreach ($options as $k => $v) {
-                echo " $k=\"$v\"";
+                if ($k !== 'addtl_classes') echo " $k=\"$v\"";
             }
         }
         echo '>';
@@ -51,7 +51,7 @@ function create_form_input_e_ver($name, $type, $label = '', $value, $errors = []
         echo '"';
         if (!empty($options) && is_array($options)) {
             foreach ($options as $k => $v) {
-                echo " $k=\"$v\"";
+                if ($k !== 'addtl_classes') echo " $k=\"$v\"";
             }
         }
         echo '>';
@@ -78,7 +78,6 @@ function create_form_input_e_ver($name, $type, $label = '', $value, $errors = []
         if ($value) echo 'value="' . htmlspecialchars($value) . '"';
         if (!empty($options) && is_array($options)) {
             foreach ($options as $k => $v) {
-                echo " $k=\"$v\"";
             }
         }
         echo '>';

@@ -1,4 +1,6 @@
-var serverProfilePicID =  document.body.querySelector(".profilePicThumb").getAttribute('data-profilePic_id');
+if (document.body.querySelector(".profilePicThumb")) {
+    var serverProfilePicID =  document.body.querySelector(".profilePicThumb").getAttribute('data-profilePic_id');
+}
 var profilePic = document.body.querySelector(".profilePic");
 var choosePicBtn = document.body.querySelector(".choosePic");
 var changePicBtn = document.body.querySelector(".changePicBtn");
@@ -183,9 +185,11 @@ function create_form_notice(name, notice_text, form_notice_type) {
 var allContentTypeBtns = document.body.querySelectorAll(".contentPhpBtn");
 var addThisContent = document.body.querySelector("#addThisContent");
 var newContentDiv = document.body.querySelector("#newContent");
-var max_on_page = elementTracker.getAttribute('data-general-max');
-var max_li_elements = elementTracker.getAttribute('data-max-li')
-var max_list_elements = elementTracker.getAttribute('data-max-lists')
+if (elementTracker) {
+    var max_on_page = elementTracker.getAttribute('data-general-max');
+    var max_li_elements = elementTracker.getAttribute('data-max-li')
+    var max_list_elements = elementTracker.getAttribute('data-max-lists')
+}
 let all, amount_on_page, input, label, labelName, element_class;
 
 
@@ -197,7 +201,7 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
         newContentDiv.appendChild(newElement)
 
         input = document.createElement('input');
-        input.classList.add(individual_name, type_of_input, 'textInput', 'createInput');
+        input.classList.add(individual_name, type_of_input, 'textInput', 'contentInput', 'createInput');
         input.setAttribute('type', 'hidden');
         input.setAttribute('name', individual_name);
         input.setAttribute('id', individual_name);
@@ -213,10 +217,10 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
         newContentDiv.appendChild(label)
         if (input_type === 'textarea') {
             input = document.createElement('textarea');
-            input.classList.add(individual_name, type_of_input, 'textareaInput', 'createInput');
+            input.classList.add(individual_name, type_of_input, 'textareaInput', 'contentInput', 'createInput');
         } else if (input_type === 'text') {
             input = document.createElement('input');
-            input.classList.add(individual_name, type_of_input, 'textInput', 'createInput');
+            input.classList.add(individual_name, type_of_input, 'textInput', 'contentInput', 'createInput');
             input.setAttribute('type', 'text');
         }
         input.setAttribute('name', individual_name);
@@ -294,7 +298,7 @@ function add_to_list(e) {
 
         newListItemInput = document.createElement('input');
         newListItemInput.setAttribute('name', individual_name)
-        newListItemInput.classList.add(list_item_name, individual_name, 'list_item', 'createInput');
+        newListItemInput.classList.add(list_item_name, individual_name, 'list_item', 'contentInput', 'createInput');
         btn_clicked.parentNode.insertBefore(label, btn_clicked)
         btn_clicked.parentNode.insertBefore(newListItemInput, btn_clicked)
         elementTracker.value += individual_name + ',';

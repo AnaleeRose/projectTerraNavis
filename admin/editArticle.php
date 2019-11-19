@@ -37,7 +37,6 @@ if ($r && mysqli_num_rows($r) > 0) {
     exit();
 }
 
-// $q = "SELECT `element_name`, `content_id`, `article_id`, `content_type`, `order_of_content`, `content`, `is_first_li`, `is_last_li` FROM `article_content` WHERE article_id = $article_id";
 $q = "SELECT `element_name` FROM `article_content` WHERE article_id = $article_id";
 $r = mysqli_query($dbc, $q);
 if ($r && mysqli_num_rows($r) > 0) {
@@ -174,6 +173,7 @@ $options = ['required' => null];
                 if ($media_type === 'article') {
                     $options = ['required' => null, 'placeholder' => 'Name', 'maxlength' => 50];
                     create_form_input('article_name', 'text', 'Aricle Name: ', $newArticle_errors, $options);
+                    echo REQUIRED;
                     ?>
                     <label for="article_category">Category</label>
                     <select class="categorySelect" required name="article_category" id="article_category">
@@ -189,9 +189,11 @@ $options = ['required' => null];
                         }
                     }
                     echo '</select>';
+                    echo REQUIRED;
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
                     $options = ['required' => null, 'placeholder' => 'Description', 'maxlength' => 400];
                     create_form_input('article_description', 'textarea', 'Description', $newArticle_errors, $options);
+                    echo REQUIRED;
                     echo '<input type="text" name="date_added" id="date_added" class="textInput createInput hidden"' ;
                     if (isset($date_added)) echo ' value="' . $date_added . '"';
                     '>';
@@ -214,13 +216,15 @@ $options = ['required' => null];
             $a_name = $_POST['article_name'];
             $a_description = $_POST['article_description'];
             $a_category = $_POST['article_category'];
+            $noErrors = 1;
 
-            $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified) VALUES (NULL, :a_name, :a_description, :a_category, :date_added, CURRENT_TIMESTAMP)");
+            $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, :date_added, CURRENT_TIMESTAMP, :error_flag)");
             // bind the paramaters
             $stmt->bindParam(':a_name', $a_name, PDO::PARAM_STR);
             $stmt->bindParam(':a_description', $a_description, PDO::PARAM_STR);
             $stmt->bindParam(':a_category', $a_category, PDO::PARAM_INT);
             $stmt->bindParam(':date_added', $date_added, PDO::PARAM_STR);
+            $stmt->bindParam(':error_flag', $noErrors, PDO::PARAM_BOOL);
 
             // // execute the prepared statement
             if ($stmt->execute()) {
@@ -274,20 +278,42 @@ $options = ['required' => null];
                     }
                 } // foreach END
 
-                // $stmt = $dbpdo->prepare("DELETE FROM articles WHERE article_id = :a_id");
-                // $stmt->bindParam(':a_id', $article_id, PDO::PARAM_STR);
-                // if ($stmt->execute()) {
-                $q = "DELETE FROM articles WHERE article_id = $article_id";
-                $r = mysqli_query($dbc, $q);
-                if ($r) {
-                    header('Location: ' . BASE_URL . 'admin/editArticle.php?article_id=' . $article_db_id);
+                $stmt = $dbpdo->prepare("DELETE FROM articles WHERE article_id = :a_id");
+                $stmt->bindParam(':a_id', $article_id, PDO::PARAM_STR);
+                if ($stmt->execute()) {
+                    $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
+                    $stmt->bindParam(':a_id', $article_db_id, PDO::PARAM_STR);
+                    if ($stmt->execute()) {
+                        header('Location: ' . BASE_URL . 'admin/allArticles.php');
+                    } else {
+                        ob_end_clean();
+                        require './assets/includes/header.html';
+                        require './assets/includes/error.php';
+                        $links = ['Return To Home' => 'index.php'];
+                        produce_error_page('Could not connect to the database, your article may be salvageable. Please contact our service team to resolve the issue.', $links);
+                        require './assets/includes/footer.html';
+                        exit();
+                    }
+                // $q = "DELETE FROM articles WHERE article_id = $article_id";
+                // $r = mysqli_query($dbc, $q);
+                // if ($r) {
                 } else {
-                    echo("Error description: " . mysqli_error($dbc));
-                    // echo "| DELETE FROM articles WHERE article_id = $article_id | ";
-                    // echo 'not deleted';
+                    ob_end_clean();
+                    require './assets/includes/header.html';
+                    require './assets/includes/error.php';
+                    $links = ['Return To Home' => 'index.php'];
+                    produce_error_page('Could not connect to the database, your article may be salvageable. Please contact our service team to resolve the issue.', $links);
+                    require './assets/includes/footer.html';
+                    exit();
                 }
             } else {
-                echo 'oh nos';
+                ob_end_clean();
+                require './assets/includes/header.html';
+                require './assets/includes/error.php';
+                $links = ['Return To Home' => 'index.php'];
+                produce_error_page('Could not connect to the database. Please contact our service team to resolve the issue.', $links);
+                require './assets/includes/footer.html';
+                exit();
             } //stmt execute END
     } // no errors, contents exists check END
 } // btn was pushed END

@@ -1,5 +1,4 @@
 <?php
-echo 'typeSwitch_orignal';
 $currentNum = 1;
 if (isset($_POST['publishMediaBtn'])) {
     foreach ($elementsUsed as $content) {
@@ -10,7 +9,7 @@ if (isset($_POST['publishMediaBtn'])) {
                     $trackElements[$content]['id'] = 1;
                     $trackElements[$content]['order'] = $currentNum;
                     // echo "Paragrah: " . $content;
-                    $options = ['placeholder' => 'Paragraph | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes'=>'Paragraph createInput', 'required' => null, 'data-content_type_id' => 1];
+                    $options = ['placeholder' => 'Paragraph | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes'=>'Paragraph contentInput', 'required' => null, 'data-content_type_id' => 1];
                     create_form_input($content, 'textarea', 'Paragraph', $newArticle_errors, $options);
                     break;
 
@@ -22,7 +21,7 @@ if (isset($_POST['publishMediaBtn'])) {
                     $element_name = 'Heading ' . $heading_num;
                     $options['maxlength'] = 100;
                     $options['placeholder'] = $element_name . ' | Max 150 characters ';
-                    $options['addtl_classes'] = $element_class . ' createInput';
+                    $options['addtl_classes'] = $element_class . ' contentInput';
                     switch ($element_class) {
                         case 'h2';
                             $trackElements[$content]['id'] = 2;
@@ -57,7 +56,7 @@ if (isset($_POST['publishMediaBtn'])) {
                     $trackElements[$content]['id'] = 6;
                     $trackElements[$content]['order'] = $currentNum;
 
-                    $options['addtl_classes'] = 'hr createInput';
+                    $options['addtl_classes'] = 'hr contentInput';
                     $options['data-content_type_id'] = 6;
                     echo '<hr class="newHr">';
                     create_form_input($content, 'hidden', '', $newArticle_errors, $options);
@@ -79,7 +78,7 @@ if (isset($_POST['publishMediaBtn'])) {
                         echo '</legend>';
                     }
                     // create the input
-                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item createInput" value="' . $_POST[$content] . '" data-content_type_id=7>';
+                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item contentInput" value="' . $_POST[$content] . '" data-content_type_id=7>';
 
                     // if the last li, conclude fieldset
                     if (in_array($content, $last)) {
@@ -110,7 +109,7 @@ if (isset($_POST['publishMediaBtn'])) {
                         echo '</legend>';
                     }
                     // create the input
-                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item createInput" value="' . $_POST[$content] . '" data-content_type_id=8>';
+                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item contentInput" value="' . $_POST[$content] . '" data-content_type_id=8>';
 
                     // if the last li, conclude fieldset
                     if (in_array($content, $last)) {

@@ -6,31 +6,34 @@ if (isset($no_articles) && $no_articles) {
 } else {
     if (isset($list_all) && $list_all) {
         if (isset($offset)) {
-            $q = 'SELECT * FROM `articles` ORDER BY date_added DESC LIMIT 25 OFFSET ' . $ofset;
+            $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 25 OFFSET ' . $ofset;
         } else {
-            $q = 'SELECT * FROM `articles` ORDER BY date_added DESC LIMIT 25';
+            $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 25';
         }
     } else {
-        $q = 'SELECT * FROM `articles` ORDER BY date_added DESC LIMIT 3';
+        $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 3';
     }
     $r = mysqli_query($dbc, $q);
     if ($r && mysqli_num_rows($r) > 0) {
         while ($row = $r->fetch_assoc()) {
-            $description = $row['article_description'];
-            preg_match("/(\S+\s*){0,$numwords}/", $description, $regs);
-            $article_description = trim($regs[0]) . '...';
-            ?>
+            $date_added = $row['date_added'];
+            if (!isset($row['error_flag'])) {
+                $description = $row['article_description'];
+                preg_match("/(\S+\s*){0,$numwords}/", $description, $regs);
+                $article_description = trim($regs[0]) . '...';
+                ?>
 
-    <div class="nwBox backShadow_light">
-        <h3 class="newsfeedHeading"><?= $row['article_name'] ?></h3>
-        <p class="newsfeedDescription"><?= $article_description ?></p>
-        <div class="btnBox">
-            <a href="editArticle.php?<?php echo 'article_id=' . $row['article_id']?>" class="adminBtn adminBtn_accent editBtn">Edit Article</a>
-            <a href="deleteArticle.php?<?php echo 'article_id=' . $row['article_id']?>" class="adminBtn adminBtn_danger deleteBtn">Delete Article</a>
+        <div class="nwBox backShadow_light">
+            <h3 class="newsfeedHeading"><?= $row['article_name'] ?></h3>
+            <p class="newsfeedDescription"><?= $article_description ?></p>
+            <div class="btnBox">
+                <a href="editArticle.php?<?php echo 'article_id=' . $row['article_id']?>" class="adminBtn adminBtn_accent editBtn">Edit Article</a>
+                <a href="deleteArticle.php?<?php echo 'article_id=' . $row['article_id']?>" class="adminBtn adminBtn_danger deleteBtn">Delete Article</a>
+            </div>
         </div>
-    </div>
 
-        <?php
+            <?php
+            }
         }
     }
 }

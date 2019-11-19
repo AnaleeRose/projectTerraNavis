@@ -182,12 +182,13 @@ $options = ['required' => null];
             $a_name = $_POST['article_name'];
             $a_description = $_POST['article_description'];
             $a_category = $_POST['article_category'];
-
-            $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified) VALUES (NULL, :a_name, :a_description, :a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+            $noErrors = 1;
+            $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :error_flag)");
             // bind the paramaters
             $stmt->bindParam(':a_name', $a_name, PDO::PARAM_STR);
             $stmt->bindParam(':a_description', $a_description, PDO::PARAM_STR);
             $stmt->bindParam(':a_category', $a_category, PDO::PARAM_INT);
+            $stmt->bindParam(':error_flag', $noErrors, PDO::PARAM_BOOL);
 
             // execute the prepared statement
             if ($stmt->execute()) {
@@ -222,7 +223,13 @@ $options = ['required' => null];
                         if ($stmt->execute()) {
                             echo "<br>_LILILILIGOOD_<br>";
                         } else {
-                            print_r($dbpdo->errorInfo());
+                            ob_end_clean();
+                            require './assets/includes/header.html';
+                            require './assets/includes/error.php';
+                            $links = ['Return To Home' => 'index.php'];
+                            produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
+                            require './assets/includes/footer.html';
+                            exit();
                         }
                     } else {
                         $this_element_id = $this_element_info['id'];
@@ -238,10 +245,30 @@ $options = ['required' => null];
                         if ($stmt->execute()) {
                             echo "<br>_OTHERGOOD_<br>";
                         } else {
-                            echo '<br>_OTHERBAD_<br>';
+                            ob_end_clean();
+                            require './assets/includes/header.html';
+                            require './assets/includes/error.php';
+                            $links = ['Return To Home' => 'index.php'];
+                            produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
+                            require './assets/includes/footer.html';
+                            exit();
                         }
                     }
+                    
+                    header('Location: ' . BASE_URL . 'admin/allArticles.php');
                 } // foreach END
+
+                $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
+                $stmt->bindParam(':a_id', $article_db_id, PDO::PARAM_STR);
+                if (!$stmt->execute()) {
+                    ob_end_clean();
+                    require './assets/includes/header.html';
+                    require './assets/includes/error.php';
+                    $links = ['Return To Home' => 'index.php'];
+                    produce_error_page('Could not connect to the database, your article may be salvageable. Please contact our service team to resolve the issue.', $links);
+                    require './assets/includes/footer.html';
+                    exit();
+                }
 
             } //stmt execute END
     } // no errors, contents exists check END
