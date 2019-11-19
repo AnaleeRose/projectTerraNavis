@@ -3,6 +3,7 @@ ob_start();
 session_start();
 require './../html/assets/includes/config.inc.php'; // basic definitions used throughout the site
 check_if_admin(); // toss user back to login page if they're not logged in
+$user = 'admin';
 require MYSQL; // connect to db
 require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
 if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php'; // makes it easy to create forms
@@ -19,7 +20,7 @@ $elementsUsed;
 
 $q = "SELECT * FROM `articles` WHERE article_id = $article_id";
 $r = mysqli_query($dbc, $q);
-if ($r) {
+if ($r && mysqli_num_rows($r) > 0) {
     while ($row = $r->fetch_assoc()) {
         if (!isset($_POST['article_name'])) $_POST['article_name'] = $row['article_name'];
         if (!isset($_POST['article_description'])) $_POST['article_description'] = $row['article_description'];
@@ -27,9 +28,37 @@ if ($r) {
         if (!isset($_POST['date_added'])) $_POST['date_added'] = $row['date_added'];
         $date_added = $row['date_added'];
     }
+} else {
+    require './assets/includes/header.html';
+    require './assets/includes/error.php';
+    $links = ['Return To Home' => 'index.php'];
+    produce_error_page('There\'s no record of that article. Please contact our service team to resolve the issue.', $links);
+    require './assets/includes/footer.html';
+    exit();
 }
 
-echo $date_added;
+// $q = "SELECT `element_name`, `content_id`, `article_id`, `content_type`, `order_of_content`, `content`, `is_first_li`, `is_last_li` FROM `article_content` WHERE article_id = $article_id";
+$q = "SELECT `element_name` FROM `article_content` WHERE article_id = $article_id";
+$r = mysqli_query($dbc, $q);
+if ($r && mysqli_num_rows($r) > 0) {
+    while ($row = $r->fetch_assoc()) {
+        $elementToCheck = $row['element_name'];
+        if (strpos($elementToCheck, 'l') !== false) {
+            $list_type = substr($elementToCheck, 0, 2);
+            $list_num = substr($elementToCheck, 3, 1);
+            $list_name = $list_type . '_' . $list_num;
+            $listAll[$list_name][] = $elementToCheck;
+        }
+    }
+} else {
+    require './assets/includes/header.html';
+    require './assets/includes/error.php';
+    $links = ['Return To Home' => 'index.php'];
+    produce_error_page('Something is wrong with the database. Please contact our service team to resolve the issue.', $links);
+    require './assets/includes/footer.html';
+    exit();
+}
+
 
 $newArticle_errors = []; //tracks all errors
 $firstLists = []; //
@@ -81,18 +110,7 @@ foreach ($list_names as $each_list) {
 
 // SPECIAL HANDILING FOR LISTS
 // gathers info on all lists/list items
-$q = "SELECT `element_name`, `content_id`, `article_id`, `content_type`, `order_of_content`, `content`, `is_first_li`, `is_last_li` FROM `article_content` WHERE article_id = $article_id";
-$r = mysqli_query($dbc, $q);
-// if (1 === 0) {
-while ($row = $r->fetch_assoc()) {
-    $elementToCheck = $row['element_name'];
-    if (strpos($elementToCheck, 'l') !== false) {
-        $list_type = substr($elementToCheck, 0, 2);
-        $list_num = substr($elementToCheck, 3, 1);
-        $list_name = $list_type . '_' . $list_num;
-        $listAll[$list_name][] = $elementToCheck;
-    }
-}
+
 
 if (!empty($listAll) && is_array($listAll)) {
     foreach ($listAll as $elementToCheck) {
@@ -256,12 +274,17 @@ $options = ['required' => null];
                     }
                 } // foreach END
 
-                $stmt = $dbpdo->prepare("DELETE FROM articles WHERE article_id = :a_id");
-                $stmt->bindParam(':a_id', $article_id, PDO::PARAM_STR);
-                if ($stmt->execute()) {
+                // $stmt = $dbpdo->prepare("DELETE FROM articles WHERE article_id = :a_id");
+                // $stmt->bindParam(':a_id', $article_id, PDO::PARAM_STR);
+                // if ($stmt->execute()) {
+                $q = "DELETE FROM articles WHERE article_id = $article_id";
+                $r = mysqli_query($dbc, $q);
+                if ($r) {
                     header('Location: ' . BASE_URL . 'admin/editArticle.php?article_id=' . $article_db_id);
                 } else {
-                    echo 'not deleted';
+                    echo("Error description: " . mysqli_error($dbc));
+                    // echo "| DELETE FROM articles WHERE article_id = $article_id | ";
+                    // echo 'not deleted';
                 }
             } else {
                 echo 'oh nos';

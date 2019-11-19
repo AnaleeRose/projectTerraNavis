@@ -178,8 +178,32 @@ ul, ol {list-style-type: none;}
 
 .errorPage {
     color: var(--reddish);
-    margin: 1rem auto;
+    margin: 5rem auto;
+    text-align: center;
+    width: 85%;
 }
+    
+    .errorPage h2 {
+    }
+
+    .errorText {
+        color: var(--dmodeBlack);
+        margin: 1rem 0 1.5rem;
+    }
+
+    .errorBtnContainer {
+        direction: flex;
+        flex-direction: column;
+    }
+
+    .errorBtnContainer a {
+        margin: 1rem auto;
+        width: 9rem;
+    }
+
+    .errorBtnContainer a:hover {
+        background: #e05c73;
+    }
 
 /*------------------- buttons ----------------------------->*/
 

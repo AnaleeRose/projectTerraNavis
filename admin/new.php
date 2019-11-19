@@ -177,6 +177,7 @@ $options = ['required' => null];
 <!-- check content if you clicked published and send it on it's way! -->
 <?php
     if (isset($_POST['publishMediaBtn'])) {
+        print_r($trackElements);
         if (empty($newArticle_errors) && $at_least_one_element === true) {
             $a_name = $_POST['article_name'];
             $a_description = $_POST['article_description'];
@@ -224,15 +225,15 @@ $options = ['required' => null];
                             print_r($dbpdo->errorInfo());
                         }
                     } else {
-
                         $this_element_id = $this_element_info['id'];
                         $this_element_order = $this_element_info['order'];
                         $this_element_content = $this_element_info['content'];
+                        // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, $this_element_name, $this_element_content)";
                         $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content)");
                         $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
                         $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
                         $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
+                        $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
                         $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
                         if ($stmt->execute()) {
                             echo "<br>_OTHERGOOD_<br>";

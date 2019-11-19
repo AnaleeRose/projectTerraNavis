@@ -13,7 +13,8 @@ if ($online) {
     define('BASE_URL', 'http://bpa-development.savannahskinner.com/');
 } else {
     define('BASE_URI', '/Applications/XAMPP/xamppfiles/htdocs/BPA/');
-    define('BASE_URL', 'http://localhost:81/BPA/');
+    // define('BASE_URL', 'http://localhost:81/BPA/');
+    define('BASE_URL', 'http://localhost/BPA/');
 }
 
 define('PDFS_DIR', BASE_URI . 'pdfs/');
@@ -63,7 +64,8 @@ function check_if_admin() {
         if ($online) {
             header('Location: http://bpa-development.savannahskinner.com/admin/');
         } else {
-            header('Location: http://localhost:81/bpa/admin/');
+            // header('Location: http://localhost:81/bpa/admin/');
+            header('Location: ' . BASE_URL . 'admin/');
         }
     }
 }

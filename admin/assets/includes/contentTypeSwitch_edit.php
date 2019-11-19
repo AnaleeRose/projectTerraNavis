@@ -1,12 +1,12 @@
 <?php
 // echo 'typeSwitch_edit';
 $currentNum = 1;
-$q = "SELECT `element_name`, `content_id`, `article_id`, `content_type`, `order_of_content`, `content`, `is_first_li`, `is_last_li` FROM `article_content` WHERE article_id = $article_id";
+$q = "SELECT * FROM `article_content` WHERE article_id = $article_id";
 $r = mysqli_query($dbc, $q);
-// if (1 === 0) {
+// if ($r) {
 while ($row = $r->fetch_assoc()) {
     $elemName = $row['element_name'];
-    echo 'e: ' . $elemName;
+    // echo 'e: ' . $elemName;
     $elemContents = $row['content'];
         switch ($row['element_name']) {
             case strpos($elemName, 'p'):
@@ -140,9 +140,7 @@ while ($row = $r->fetch_assoc()) {
                 break;
         } // switch END
         $currentNum++;
-        // } // not empty post END
-    // } // foreach END
 } // while END
-// }
+// } else {echo 'why';} // foreach END
 
 
