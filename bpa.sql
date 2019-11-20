@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2019 at 04:56 PM
+-- Generation Time: Nov 20, 2019 at 05:28 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -23,6 +23,17 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `analeerose_bpa` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `analeerose_bpa`;
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateProfilePic` (`pid` INT(6), `uid` INT(11))  BEGIN
+	UPDATE `adminuser` SET `profilePic_id` = pid WHERE `adminuser`.`admin_id` = uid;
+	SELECT pic_location FROM profilepictures WHERE profilePic_id = pid;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -73,8 +84,9 @@ INSERT INTO `articles` (`article_id`, `article_name`, `article_description`, `ar
 (4, 'This is a new article name', 'This is a new article decrip', 1, '2019-11-18 13:53:42', '2019-11-18 13:53:42', NULL),
 (5, 'Article With Content', 'Content', 1, '2019-11-19 14:26:57', '2019-11-19 14:26:57', NULL),
 (29, 'Hola', 'tho', 2, '2019-11-19 16:30:52', '2019-11-19 16:32:25', 0),
-(30, 'New article', 'guk', 2, '2019-11-19 16:24:50', '2019-11-19 16:35:29', NULL),
-(31, 'Brand New One', 'wassup', 1, '2019-11-19 18:58:34', '2019-11-19 18:58:34', NULL);
+(31, 'Brand New One', 'wassup', 1, '2019-11-19 18:58:34', '2019-11-19 18:58:34', NULL),
+(40, 'tfj', 'tj', 1, '2019-11-20 16:22:27', '2019-11-20 16:22:27', NULL),
+(41, 'ygk', 'gy', 1, '2019-11-20 16:23:12', '2019-11-20 16:23:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -88,19 +100,23 @@ CREATE TABLE `article_content` (
   `content_type` int(11) NOT NULL,
   `order_of_content` int(11) NOT NULL,
   `element_name` varchar(50) NOT NULL,
-  `content` longtext NOT NULL
+  `content` longtext NOT NULL,
+  `is_first_li` tinyint(1) DEFAULT NULL,
+  `is_last_li` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `article_content`
 --
 
-INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES
-(1, 1, 2, 0, '', 'New Heading'),
-(2, 1, 1, 0, '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
-(24, 29, 1, 1, 'p_1', 'srge'),
-(25, 30, 2, 1, 'heading2_1', 'gky'),
-(26, 31, 1, 1, 'p_1', 'seg');
+INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES
+(1, 1, 2, 0, '', 'New Heading', NULL, NULL),
+(2, 1, 1, 0, '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL, NULL),
+(24, 29, 1, 1, 'p_1', 'srge', NULL, NULL),
+(26, 31, 1, 1, 'p_1', 'seg', NULL, NULL),
+(45, 40, 7, 1, 'ul_1_li_1', 'tfj', 1, 0),
+(46, 40, 7, 2, 'ul_1_li_2', 'tj', 0, 1),
+(47, 41, 1, 1, 'p_1', 'ygk', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -288,13 +304,13 @@ ALTER TABLE `adminuser`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `article_content`
 --
 ALTER TABLE `article_content`
-  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `categories`
