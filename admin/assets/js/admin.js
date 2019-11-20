@@ -525,16 +525,105 @@ function popup_btn(btn) {
 // link generator
 // ------------------------------------------------------------------------------------------------>
 
-linkGen = document.querySelector('.linkGenerator')
+linkGeneratorBtn = document.querySelector('.linkGeneratorBtn')
+linkGenBox = document.querySelector('.linkGenBox')
+linkGenCloseBtn = document.querySelector('.linkGenCloseBtn')
+linkGenBtn = document.querySelector('.linkGenBtn')
+linkGenOutput = document.querySelector('.linkGenOutput')
+linkNameInput = document.querySelector('.linkName')
+linkHrefInput = document.querySelector('.linkHref')
+linkOutputText = document.querySelector('.linkOutputText')
+linkOutputHref = document.querySelector('.linkOutputHref')
+generatorInstructionsBox = document.querySelector('.generatorInstructions')
+linkGenEmptyError = document.querySelector('.linkGenEmptyError')
+linkNameSampleText = 'My Link'
+linkHrefSampleText = 'https://www.mylink.com'
 
-if (linkGen) {
-    linkGen.addEventListener('click', function(){
+
+if (linkGeneratorBtn) {
+    linkGeneratorBtn.addEventListener('click', function(){
         open_link_gen();
     })
+
+    linkGenCloseBtn.addEventListener('click', function(){
+        open_link_gen();
+    })
+
+    linkGenBtn.addEventListener('click', function(){
+        generate_link();
+    })
+
+    linkNameInput.addEventListener('click', function(){
+        if (linkNameInput.innerText === linkNameSampleText) {
+            linkNameInput.innerText = '';
+        }
+    })
+
+    // linkNameInput.addEventListener('keyup', function(){
+    //     if (linkNameInput.innerText === '') {
+    //         linkNameInput.innerText = linkNameSampleText;
+    //     }
+    // });
+
+    linkHrefInput.addEventListener('click', function(){
+        if (linkHrefInput.innerText === linkHrefSampleText) {
+            linkHrefInput.innerText = '';
+        }
+    })
+
+    // linkHrefInput.addEventListener('keyup', function(){
+    //     if (linkHrefInput.innerText === '') {
+    //         linkHrefInput.innerText = linkHrefSampleText;
+    //     }
+    // });
+
 }
 
 function open_link_gen() {
-    linkGen.style.height = '11rem';
+    if (linkGenBox.classList.contains('linkGenBox_show')) {
+        console.log("esists")
+        linkGenBox.classList.remove('linkGenBox_show')
+    } else {
+        linkGenBox.classList.add('linkGenBox_show')
+    }
+}
+
+function generate_link() {
+    linkName = document.querySelector('.linkName').innerText
+    linkHref = document.querySelector('.linkHref').innerText
+    if (linkName.trim() === '' || linkHref.trim() === '') {
+        console.log('empty');
+        linkGenEmptyError.classList.remove('hidden')
+        if (!generatorInstructionsBox.classList.contains('hidden')) {
+            generatorInstructionsBox.classList.add('hidden')
+        }
+    } else {
+        console.log('<a href="'+linkHref+'">'+linkName+'</a>');
+        if (!linkGenEmptyError.classList.contains('hidden')) {
+            linkGenEmptyError.classList.add('hidden')
+        }
+        generatorInstructionsBox.classList.remove('hidden')
+        linkOutputText.innerText = linkName;
+        linkOutputHref.innerText = linkHref;
+        linkGenOutput.innerText = '<a href="'+linkHref+'">'+linkName+'</a>';
+    }
+}
+
+// ------------------------------------------------------------------------------------------------>
+// email preview
+// ------------------------------------------------------------------------------------------------>
+
+emailMsg = document.body.querySelector('.emailMsg')
+
+if (emailMsg) {
+    editedMsg = emailMsg.outerHTML;
+    editedMsg = editedMsg.replace(new RegExp('&lt;br&gt;', 'gi'), '</p><p class="emailMsg">');
+    emailMsg.outerHTML = editedMsg
+    start = editedMsg.search('&lt;a href=') + 13;
+    end = editedMsg.search('"&gt;')
+    console.log(editedMsg.slice(start, end));
+
+    // console.log(editedMsg_start)
 }
 
 

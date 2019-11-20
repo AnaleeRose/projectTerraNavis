@@ -107,10 +107,7 @@ foreach ($list_names as $each_list) {
 // END possible list generator **
 
 
-// SPECIAL HANDILING FOR LISTS
 // gathers info on all lists/list items
-
-
 if (!empty($listAll) && is_array($listAll)) {
     foreach ($listAll as $elementToCheck) {
         $last[] = end($elementToCheck);
@@ -220,8 +217,8 @@ $options = ['required' => null];
 
             $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, :date_added, CURRENT_TIMESTAMP, :error_flag)");
             // bind the paramaters
-            $stmt->bindParam(':a_name', $a_name, PDO::PARAM_STR);
-            $stmt->bindParam(':a_description', $a_description, PDO::PARAM_STR);
+            $stmt->bindParam(':a_name', htmlentities($a_name), PDO::PARAM_STR);
+            $stmt->bindParam(':a_description', htmlentities($a_description), PDO::PARAM_STR);
             $stmt->bindParam(':a_category', $a_category, PDO::PARAM_INT);
             $stmt->bindParam(':date_added', $date_added, PDO::PARAM_STR);
             $stmt->bindParam(':error_flag', $noErrors, PDO::PARAM_BOOL);
@@ -252,14 +249,10 @@ $options = ['required' => null];
                         $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
                         $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
                         $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
-                        $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
+                        $stmt->bindParam(':elem_content', htmlentities($this_element_content), PDO::PARAM_STR);
                         $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
                         $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
-                        // if ($stmt->execute()) {
-                        //     echo "<br>_LILILILIGOOD_<br>";
-                        // } else {
-                        //     print_r($dbpdo->errorInfo());
-                        // }
+
                     } else {
                         $this_element_id = $this_element_info['id'];
                         $this_element_order = $this_element_info['order'];
@@ -269,7 +262,7 @@ $options = ['required' => null];
                         $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
                         $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
                         $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
+                        $stmt->bindParam(':elem_content', htmlentities($this_element_content), PDO::PARAM_STR);
                         if ($stmt->execute()) {
                             echo "<br>_OTHERGOOD_<br>";
                         } else {

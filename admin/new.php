@@ -258,7 +258,7 @@ $options = ['required' => null];
                         }
                     }
                     
-                    header('Location: ' . BASE_URL . 'admin/allArticles.php');
+                    header('Location: ' . BASE_URL . 'admin/view.php?view_type=read&media_type=article&media_id=' . $article_db_id);
                 } // foreach END
 
                 $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
@@ -289,7 +289,7 @@ $options = ['required' => null];
                             </ol>
                         </div>
                         <p class="contentTypeBtn contentPhpBtn" data-contentType="hr" data-content_type_id=6 >Horizontal Line</p>
-                        <p class="contentTypeBtn linkBtn linkGenerator">Link</p>
+                        <p class="contentTypeBtn linkBtn linkGeneratorBtn">Link</p>
                         <div class="contentTypeList">
                             <p class="contentTypeBtn listBtn">List</p>
                             <ul class="listContentTypes hidden">
@@ -297,8 +297,7 @@ $options = ['required' => null];
                                 <li><p class="contentPhpBtn" data-contentType="ol" data-content_type_id=8>Ordered List</p></li>
                             </ul>
                         </div>
-                        <label for="imgs" class="contentTypeBtn uploadImgBtn" id="uploadImgBtn" data-content_type_id=9>Small Image</label>
-                        <label for="imgs" class="contentTypeBtn uploadImgBtn" id="uploadImgBtn" data-content_type_id=10>Large Image</label>
+                        <label for="imgs" class="contentTypeBtn uploadImgBtn" id="uploadImgBtn" data-content_type_id=10>Image</label>
                         <small class="imgsNotice">Images will be placed automatically, based upon size</small>
                 <input type="file" name="imgs" class="hidden" id="imgs" onChange="file_funct" data-content_type_id=9>
                     </div>
@@ -312,17 +311,33 @@ $options = ['required' => null];
                         if (empty($_POST['email_subject'])) {
                             $newEmail_errors['email_subject'] = 'Missing: Subject';
                         } else {
-                            $subject = htmlentities($_POST['email_subject']);
+                            $e_subject = $_POST['email_subject'];
                         }
 
                         if (empty($_POST['email_msg'])) {
                             $newEmail_errors['email_msg'] = 'Missing: Message';
                         } else {
-                            $subject = htmlentities($_POST['email_msg']);
+                            $e_msg = $_POST['email_msg'];
                         }
 
                         if (empty($newEmail_errors)) {
                             print_r($_POST);
+                            $stmt = $dbpdo->prepare("INSERT INTO `emails` (`email_id`, `email_subject`, `email_message`, `date_added`) VALUES (NULL, :e_subject, :e_msg, current_timestamp())");
+                            $stmt->bindParam(':e_subject', $e_subject, PDO::PARAM_STR);
+                            $stmt->bindParam(':e_msg', $e_msg, PDO::PARAM_STR);
+                            if ($stmt->execute()) {
+                                echo 'added';
+                                $new_email_id = $dbpdo->lastInsertId();
+                                header('Location: view.php?view_type=preview&media_type=email&media_id=' . $new_email_id);
+                            } else {
+                                ob_end_clean();
+                                require './assets/includes/header.html';
+                                require './assets/includes/error.php';
+                                $links = ['Return To Home' => 'index.php'];
+                                produce_error_page('Could not connect to the database, your email may be salvageable. Please contact our service team to resolve the issue.', $links);
+                                require './assets/includes/footer.html';
+                                exit();
+                            }
                         }
 
                     }
@@ -336,7 +351,7 @@ $_POST['email_msg'] = 'Terra Navis
 <br>
 A new article has been posted on the newsfeed!
 <br>
-Check out ' . $row['article_name'] . ' or read more articles about ' . $row['category_name'] . ' at <a href=\"http://bpa-development.savannahskinner.com/admin/\">Terra Navis</a>';
+Check out ' . $row['article_name'] . ' or read more articles about ' . $row['category_name'] . ' at <a href=\"http://bpa-development.savannahskinner.com/admin/newsfeed.php">Terra Navis.com</a>!';
                             }
                         } else {
                             notice('error', 'Template Message could not be generated.');
@@ -352,14 +367,34 @@ Check out ' . $row['article_name'] . ' or read more articles about ' . $row['cat
                     $options = ['required' => null, 'placeholder' => 'Message | Max 250 characters', 'maxlength' => 250, 'addtl_classes' => 'emailInput'];
                     create_form_input('email_msg', 'textarea', 'Message', $newEmail_errors, $options);
                     ?>
-                    '<hr class="newHr">
-                    <p class="contentTypeBtn linkBtn_email linkGenerator">Link</p>
-                    <input type="submit" name="publishMediaBtn" id="sendEmailBtn" class="adminBtn adminBtn_accent sendEmailBtn" value="Send Email">
+                    <hr class="newHr">
+                    <p class="contentTypeBtn linkBtn_email linkGeneratorBtn">Link</p>
+                    <input type="submit" name="publishMediaBtn" id="sendEmailBtn" class="adminBtn adminBtn_accent sendEmailBtn" value="Preview Email">
                 <?php 
                 }
                 ?>
 
             </form>
+            <div class="linkGenBox">
+                <h5 class="linkGenHeading">Link Generator</h5>
+                <p class="linkLabel">Link Text</p>
+                <p class="linkGenInput linkName" id="linkName" contenteditable="true">My Link</p>
+                <p class="linkLabel">Link URL</p>
+                <p class="linkGenInput linkHref" id="linkHrek" contenteditable="true">https://www.mylink.com</p>
+                <p class="linkGenBtn adminBtn adminBtn_aqua" id="linkGenBtn">Generate Link</p>
+                <p class="linkNote linkNote_subtle">Note: Links should only be used in the main content. They should not be used in the name or description of an article.</p>
+                <div class="generatorInstructions hidden">
+                <h4>Here's your link: </h4>
+                <hr class="linkGenHr">
+                    <p class="linkGenOutputReview">The link will say: <span class="linkOutputText linkGen_accent"></span> and will link to <span class="linkOutputHref linkGen_accent"></span>.</p>
+                    <p class="linkP" id="linkP">Steps to add to article: </p>
+                    <p class="linkP" id="linkP">1) Copy this text:</p>
+                    <p class="linkGenOutput linkGen_accent" id="linkGenOutput"></p>
+                    <p class="linkP" id="linkP">2) Paste the text where you want the link to be in the final article</p>
+                </div>
+                <p class="linkGenEmptyError hidden">You're missing one or more values. Please fill both of the above boxes before generating the link.</p>
+                <p class="linkGenCloseBtn">➔</p>
+            </div>
             <?php
             ed();
         ed();

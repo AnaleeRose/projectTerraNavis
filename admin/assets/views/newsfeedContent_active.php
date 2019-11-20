@@ -58,7 +58,7 @@ if (isset($no_emails) && $no_emails) {
         <h3 class="newsfeedHeading"><?= $row['email_subject'] ?></h3>
         <p class="newsfeedDescription"><?= $email_message ?></p>
         <div class="btnBox">
-            <a href="readEmail.php?<?php echo 'email_id=' . $row['email_id']?>" class="adminBtn adminBtn_accent readEmailBtn">Read Email</a>
+            <a href="view.php?view_type=read&media_type=email&media_id=<?= $row['email_id']; ?>" class="adminBtn adminBtn_accent readEmailBtn">Read Email</a>
         </div>
     </div>
 
