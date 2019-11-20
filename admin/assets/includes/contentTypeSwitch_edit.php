@@ -6,13 +6,12 @@ $r = mysqli_query($dbc, $q);
 while ($row = $r->fetch_assoc()) {
     $elemName = $row['element_name'];
     // echo 'e: ' . $elemName;
-    $elemContents = $row['content'];
+    $elemContents = htmlspecialchars($row['content']);
         switch ($row['element_name']) {
             case strpos($elemName, 'p'):
                 $trackElements[$elemName]['content'] = $elemContents;
                 $trackElements[$elemName]['id'] = 1;
                 $trackElements[$elemName]['order'] = $currentNum;
-                // echo "Paragrah: " . $content;
                 $options = ['placeholder' => 'Paragraph | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes'=>'Paragraph contentInput', 'required' => null, 'data-content_type_id' => 1];
                 create_form_input_e_ver($elemName, 'textarea', 'Paragraph', $elemContents, $newArticle_errors, $options);
                 $listAllElements .= $elemName . ',';
@@ -21,7 +20,6 @@ while ($row = $r->fetch_assoc()) {
             case strpos($elemName, 'he'): {
                 $trackElements[$elemName]['content'] = $elemContents;
                 $heading_num = substr($elemName, 7, 1);
-                // echo '<p class="formNotice formNotice_Error">' . $content . '</p>';
                 $element_class = 'h' . $heading_num;
                 $element_name = 'Heading ' . $heading_num;
                 $options['maxlength'] = 100;
@@ -108,7 +106,7 @@ while ($row = $r->fetch_assoc()) {
 
                 $this_list_num = substr($elemName, 3,1);
                 if (substr($elemName, 8,2) === '1') { // check if first in list, if so start a fieldset
-                    $trackElements[$elemName]['first_li'] = true;
+                    $trackElements[$elemName]['first_li'] = 'true';
                     echo '<fieldset data-max=' . $max_lists_on_page . ' class="ol">';
                     echo '<legend>';
 

@@ -179,18 +179,21 @@ ul, ol {list-style-type: none;}
 
 .errorPage {
     color: var(--reddish);
-    margin: 5rem auto;
+    height: 100vh;
+    padding: 5rem;
     text-align: center;
-    width: 85%;
 }
     
-    .errorPage h2 {
+    .errorPage.dmode {
+        background: var(--dmodeBlack);
     }
 
     .errorText {
         color: var(--dmodeBlack);
         margin: 1rem 0 1.5rem;
     }
+
+        .errorText.dmode {color: #fff;}
 
     .errorBtnContainer {
         direction: flex;
@@ -986,9 +989,8 @@ END Newsfeed
         width: 8rem;
     }
 
-    .cornerLinks a:last-of-type {
-        width: 5.5rem;
-    }
+    /*.cornerLinks a:last-of-type {width: 8rem;}*/
+    .newPage .cornerLinks a:last-of-type {width: 5.5rem;}
 
     #templateMsgBtn {
         width: 12rem;
@@ -1014,6 +1016,10 @@ END Newsfeed
 
 #publishBtn {
     width: 12.5rem;
+}
+
+#sendEmailBtn {
+    width: 10.5rem;
 }
 
 .contentTypeList_show {
@@ -1356,8 +1362,12 @@ END delete article
 preview
 ------------------------------------------------------------------------->*/
 
+.previewEmailBox h3.adminHeading {
+    font-size: 1.7rem;
+}
+
 .newMediaHeading .cornerLinks .seeAll {
-    width: 7rem;
+    width: 8rem;
 }
 
 .previewEmailBox {
@@ -1368,7 +1378,11 @@ preview
     font-size: 1.8rem
 }
 
-.emailSubject {color: var(--dmodeBlack);}
+.emailSubject {
+    color: var(--dmodeBlack);
+    padding-left: 2rem;
+    margin-bottom: 3rem;
+}
     .dmode .emailSubject {color: #fff;}
 
 .emailMsg {
@@ -1376,16 +1390,90 @@ preview
     padding: 0 2rem;
 }
 
-.emailMsg a {
+.emailMsg a, .newsfeedDescription a {
     color: var(--magenta);
 }
 
-    .emailMsg a:hover {
+    .emailMsg a:hover, .newsfeedDescription a:hover  {
         color: var(--brightAqua)
     }
 
 
+.previewTable {
+    border-bottom: 2px solid var(--aqua);
+    border-top: 2px solid var(--aqua);
+    padding: .5rem 0;
+    margin-bottom: 2.5rem;
+}
+
+    .previewTable th, td {
+        font-weight: lighter;
+        padding: 1rem 1.5rem;
+    }
+
+    .previewTable th:first-of-type, .previewTable td:first-of-type {
+        padding-left: 0
+
+    }
+
+
+    .previewTable th {
+        font-size: 1.2rem;
+        color: var(--aqua);
+    }
+
+    .previewTable td {
+        font-size: 1rem;
+    }
 
 /*----------------------------------------------------------------------->
 END preview
+------------------------------------------------------------------------->*/
+
+
+
+/*----------------------------------------------------------------------->
+Printed Styles
+------------------------------------------------------------------------->*/
+
+
+.printedOl, .printedUl {
+    margin: 2.5rem 1rem;
+}
+
+.printedOl li {
+    list-style-type: decimal;
+    margin: .8rem 0 .8rem 1.5rem;
+    padding-left: .5rem;
+}
+
+.printedUl li {
+    background-image: url("../imgs/leaf_icon.png");
+    background-repeat: no-repeat;
+    background-position: 0 ;
+    background-size: 20px;
+    list-style: none;
+    margin: .8rem 0;
+    padding-left: 2rem;
+}
+
+.printedHr {
+    margin-left: .5rem;
+}
+
+.printedElement a {
+    color: var(--magenta);
+}
+
+    .printedElement a:hover {
+        color: var(--brightAqua)
+    }
+
+.printedP {
+    margin: 1rem;
+    padding: 1rem;
+}
+
+/*----------------------------------------------------------------------->
+END Printed Styles
 ------------------------------------------------------------------------->*/

@@ -156,11 +156,11 @@ $options = ['required' => null];
     nd('adminMC_Wrapper', 'noDI');
         nd('newMedia', 'noID');
             ?>
-            <div class="newMediaHeading">
-                <h2 class="adminHeading">New <?= ucfirst($media_type) ?></h2>
+            <div class="newMediaHeading editPage">
+                <h2 class="adminHeading">Edit <?= ucfirst($media_type) ?></h2>
                 <div class="cornerLinks">
                 <?php
-                echo '<a href="./new.php?media_type=article&clear=true" class="adminBtn adminBtn_danger">Clear Page</a>';
+                echo '<a href="deleteArticle.php?article_id=' . $article_id  . '" class="adminBtn adminBtn_danger">Delete Article</a>';
                 ?>
                 </div>
             </div>
@@ -277,7 +277,7 @@ $options = ['required' => null];
                     $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
                     $stmt->bindParam(':a_id', $article_db_id, PDO::PARAM_STR);
                     if ($stmt->execute()) {
-                        header('Location: ' . BASE_URL . 'admin/allArticles.php');
+                        header('Location: ' . BASE_URL . 'admin/view.php?view_type=view&media_type=article&media_id=' . $article_db_id);
                     } else {
                         ob_end_clean();
                         require './assets/includes/header.html';

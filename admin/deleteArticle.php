@@ -55,7 +55,6 @@ if ($r && mysqli_num_rows($r) > 0) {
 	if (empty($a_name)) $a_name = 'Error';
 } elseif (mysqli_num_rows($r) == 0) {
     ob_end_clean();
-	echo 'deleted';
 	require './assets/views/articleDeleted.php';
     exit();
 }

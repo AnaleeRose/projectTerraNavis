@@ -126,7 +126,7 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 $options = ['required' => null];
     require './assets/includes/adminMenu.php';
     require './assets/includes/newsfeed_active.php';
-    nd('adminMC_Wrapper', 'noDI');
+    nd('adminMC_Wrapper newPage', 'noDI');
         nd('newMedia', 'noID');
             // nd('adminMainContent', 'mainContent');
             ?>
@@ -369,7 +369,7 @@ Check out ' . $row['article_name'] . ' or read more articles about ' . $row['cat
                     ?>
                     <hr class="newHr">
                     <p class="contentTypeBtn linkBtn_email linkGeneratorBtn">Link</p>
-                    <input type="submit" name="publishMediaBtn" id="sendEmailBtn" class="adminBtn adminBtn_accent sendEmailBtn" value="Preview Email">
+                    <input type="submit" name="publishMediaBtn" id="sendEmailBtn" class="adminBtn adminBtn_accent sendEmailBtn" value="Send Email">
                 <?php 
                 }
                 ?>

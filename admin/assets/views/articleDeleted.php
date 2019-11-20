@@ -1,8 +1,7 @@
 <?php
 require './assets/includes/header.html';
 ?>
-
-<article class="errorPage">
+<article class="errorPage <?= $_SESSION['light_mode']; ?>">
 	<h2>Article Was Deleted</h2>
     <div class="errorBtnContainer">
         <a href="index.php" class="adminBtn adminBtn_aqua">Return To Home</a>
