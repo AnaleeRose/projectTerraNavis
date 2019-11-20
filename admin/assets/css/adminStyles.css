@@ -32,17 +32,18 @@ ul, ol {list-style-type: none;}
 :root {
     --green: #4dc312;
     --reddish: #e03b51;
-    --dark-reddish: #9a1d2d;
+    --darkReddish: #9a1d2d;
     --grey: #3b3535;
     --aqua: #00A2B8;
-    --bright-aqua: #00b7d0;
+    --brightAqua: #00b7d0;
     --dmodeBlack: #101520;
     /*--dmodeBlack: #202131;*/
     --marigold: #f9cc0c;
-    /*--greyBG: #282838;*/
+    --lmodeBoxShadow: #b7b7b7;
     --greyBG: #353131;
     --text-grey: #ACACAC;
     --tanGold: #c79e63;
+    --brown: #563a0e;
 }
 
 
@@ -50,7 +51,7 @@ ul, ol {list-style-type: none;}
 :root .dmode {
     --magenta: #df3c50;
     --aqua: #af936a;
-    --bright-aqua: #c79e63;
+    --brightAqua: #c79e63;
 }
 
 .hidden {
@@ -219,6 +220,8 @@ ul, ol {list-style-type: none;}
     text-decoration: none;
 }
 
+    .lmode .adminBtn_accent:hover, .lmode .adminBtn_danger:hover {box-shadow: 0px 1.5px 2px var(--lmodeBoxShadow);}
+
 .loginBtn, .registerBtn, .adminBtn_submit {
     background: linear-gradient(345deg, rgba(77,195,18,1) 0%, rgba(52,130,15,1) 100%);
     width: 6rem;
@@ -235,8 +238,10 @@ ul, ol {list-style-type: none;}
     z-index: 10;
 }
 
+    .lmode .adminBtn_accent {box-shadow: 1px 3px 2px var(--lmodeBoxShadow);}
+
 .adminBtn_aqua {
-    background: var(--bright-aqua);
+    background: var(--brightAqua);
     display: block;
     font-weight: 600;
     margin: 0 auto;
@@ -262,6 +267,8 @@ ul, ol {list-style-type: none;}
 .adminBtn_danger {
     background: linear-gradient(340deg, rgba(231,66,88,1) 0%, rgba(147,23,39,1) 100%);
 }
+
+    .lmode .adminBtn_danger {box-shadow: 1px 3px 2px var(--lmodeBoxShadow);}
     .lmode .adminBtn_subtle {background: linear-gradient(330deg, rgb(74, 68, 68) 26%, rgba(33,19,19,1) 100%);}
 
     .dmode .adminBtn_subtle,
@@ -336,12 +343,14 @@ ul, ol {list-style-type: none;}
     text-align: center;
     white-space: nowrap
 }
+    .lmode .contentTypeBtn {box-shadow: 1px 3px 2px var(--lmodeBoxShadow);}
 
     .contentTypeBtn:hover {
         background: #fff;
         color: var(--marigold);
     }
 
+        .lmode .contentTypeBtn:hover {box-shadow: 0px 1.5px 2px var(--lmodeBoxShadow);}
         .contentTypeBtn:hover:before {
             color: var(--marigold);
         }
@@ -370,16 +379,16 @@ ul, ol {list-style-type: none;}
         }
 
     .contentTypes > .contentTypeBtn:last-of-type {
-        background: var(--bright-aqua);
+        background: var(--brightAqua);
     }
 
         .contentTypes > .contentTypeBtn:last-of-type:hover {
             background: #fff;
-            color: var(--bright-aqua);
+            color: var(--brightAqua);
         }
 
         .contentTypes > .contentTypeBtn:last-of-type:hover:before {
-            color: var(--bright-aqua);
+            color: var(--brightAqua);
         }
 
 /*----------------------------------------------------------------------->
@@ -550,7 +559,7 @@ END Login & Register
     }
     .lmode .adminMainContent {background-color: #fff;}
     .lmode .adminHome_fullWidth .adminMainContent {background: none;}
-    .dmode .adminMainContent {background-color: var(--greyBG);}
+    .dmode .adminMainContent {background: none;}
 
 .adminMenu {
     background: #fff;
@@ -600,7 +609,7 @@ END Login & Register
     }
 
     .dmode .profilePicThumb:hover {
-        background: var(--dark-reddish);
+        background: var(--darkReddish);
     }
 
 .menuLinks {
@@ -652,7 +661,7 @@ END Login & Register
             color: var(--marigold);
         }
         .dmode .profileBtn:hover, .dmode .changePicBtn:hover  {background: var(--dmodeBlack);}
-        /*.dmode .profileBtn:hover, .dmode .changePicBtn:hover {background: linear-gradient(330deg, var(--dark-reddish) 0%, #4a0b13 100%); }*/
+        /*.dmode .profileBtn:hover, .dmode .changePicBtn:hover {background: linear-gradient(330deg, var(--darkReddish) 0%, #4a0b13 100%); }*/
 
 
 .mainLinks {
@@ -739,7 +748,7 @@ END Homepage
 
     .profileInfo span, .adminControlsP span {padding:0 10px;}
     .lmode .profileInfo span, .lmode .adminControlsP span {background: #fff;}
-    .dmode .profileInfo span, .dmode .adminControlsP span {background: var(--greyBG);}
+    .dmode .profileInfo span, .dmode .adminControlsP span {background: var(--dmodeBlack);}
     .dmode .profileInfo, .dmode .adminControlsP {
         color: #b7ada2;
         border-color: #b7ada2;
@@ -856,11 +865,6 @@ END Profile
 `Newsfeed
 ------------------------------------------------------------------------->*/
 
-/*h2.newsfeedHeading {
-    color: var(--dmodeBlack);
-    padding-left: 1rem;
-}*/
-
 h2.newsfeedHeading {
     padding-left: 1rem;
     position: fixed;
@@ -894,6 +898,7 @@ h2.newsfeedHeading {
     .adminHome_fullWidth .nwBox:first-of-type {margin-top: 2rem;}
 .lmode .nwBox {background: #fff;}
 .dmode .nwBox {background: var(--dmodeBlack);}
+.allPage .nwBox {background: var(--greyBG);}
 
 .nwBox .btnBox {
     display: flex;
@@ -927,7 +932,7 @@ END Newsfeed
 }
 
 .adminHeading {
-    color: var(--bright-aqua);
+    color: var(--brightAqua);
     font-weight: lighter;
     font-size: 2rem;
 }
@@ -1004,16 +1009,12 @@ END Newsfeed
 #publishBtn, #sendEmailBtn {
     font-size: 1.5rem;
     margin-top: 2rem;
+    width: 12.5rem;
 }
 
 #publishBtn {
     width: 12.5rem;
 }
-
-#sendEmailBtn {
-    width: 10rem;
-}
-
 
 .contentTypeList_show {
     margin-bottom: 1rem;
@@ -1088,7 +1089,7 @@ END Newsfeed
 
 /*fieldset*/
 .newMediaForm fieldset {
-    border-color: var(--bright-aqua);
+    border-color: var(--brightAqua);
     border-radius: 2rem;
     padding: .5rem 1rem 4rem;
     position: relative;
@@ -1099,9 +1100,9 @@ END Newsfeed
 }
 
 .newMediaForm legend {
-    border: 1px solid var(--bright-aqua);
+    border: 1px solid var(--brightAqua);
     border-radius: 1rem;
-    color: var(--bright-aqua);
+    color: var(--brightAqua);
     font-size: 1.2rem;
     margin: 1rem auto 0;
     padding: 5px;
@@ -1189,6 +1190,115 @@ New Email
     margin: 1rem auto;
 }
 
+.linkGenBox {
+    background: var(--brightAqua);
+    border: 4px solid #Fff;
+    border-radius: 2rem;
+    bottom: 5rem;
+    color: #fff;
+    padding: 1rem 3rem 1rem 1.5rem;
+    position: fixed;
+    right: -50rem;
+    transition: right .7s;
+    width: 40rem;
+    z-index: 500;
+}
+
+    .linkGenBox_show {
+        right: -2rem;
+    }
+
+    .dmode .linkGenBox {
+        background: #000000;
+        border: none;
+        color: var(--tanGold);
+    }
+
+.linkGenHeading {
+    font-size: 1.4rem;
+    margin: .7rem 0 1.4rem;
+}
+
+.linkLabel {
+    margin-top: 1.8rem;
+    border-bottom: 1px solid #fff;
+    width: 5rem;
+}
+
+    .dmode .linkLabel {border-color: var(--brown);}
+
+.linkGenInput {
+    border: 2px solid #fff;
+    border-radius: 2rem;
+    padding: .5rem;
+    margin-left: .2rem;
+    max-width: 20rem;
+    min-width: 10rem;
+}
+
+    .linkGenInput:focus {
+        border-color: var(--marigold);
+        outline: none;
+    }
+
+    .dmode .linkGenInput:focus {border-color: var(--marigold);}
+
+    .dmode .linkGenBox, .dmode .linkGenInput {
+        border-color: var(--brown);
+    }
+
+.linkGenBtn {
+    background-color: var(--magenta);
+    box-shadow: 2px 2px 0px #006775;
+    margin: 0;
+    transition: background .1s;
+    width: 7rem; 
+}
+    .dmode .linkGenBtn {
+        background-color: var(--marigold);
+        border: none;
+        box-shadow: 2px 2px 0px #8c6227;
+        color: #fff;
+    }
+
+    .linkGenBox .linkGenBtn:hover, .linkGenBox .linkGenBtn:focus {
+        background: #fff;
+        color: var(--magenta);
+        box-shadow: 1px 1px 0px #006775;
+    }
+
+        .dmode .linkGenBox .linkGenBtn:hover, .dmode .linkGenBox .linkGenBtn:focus {
+            color: var(--marigold);
+            box-shadow: 1px 1px 0px #8c6227;
+        }
+
+.linkGenCloseBtn {
+    cursor: pointer;
+    font-size: 1.7rem;
+    font-weight: bold;
+    position: absolute;
+    right: 4rem;
+    top: 0;
+    /*transform: scaleY(0.9);*/
+}
+
+.linkGenCloseBtn:hover {color: var(--marigold);}
+
+.linkGen_accent {
+    color: #ffdf56;
+}
+
+.linkGenHr {
+    border-color: #fff;
+    margin-left: -.2rem;
+}
+
+    .dmode .linkGenHr {border-color: var(--brown)}
+
+
+.linkGenEmptyError {color: var(--reddish);}
+    .dmode .linkGenEmptyError {color: var(--magenta);}
+
 /*----------------------------------------------------------------------->
 END New Email
 ------------------------------------------------------------------------->*/
@@ -1211,7 +1321,7 @@ delete article
 }
 
 .deletePage h2 {
-    color: var(--dark-reddish);
+    color: var(--darkReddish);
 }
 
 .deletePage .deleteArticleBtn {
@@ -1238,4 +1348,44 @@ delete article
 
 /*----------------------------------------------------------------------->
 END delete article
+------------------------------------------------------------------------->*/
+
+
+
+/*----------------------------------------------------------------------->
+preview
+------------------------------------------------------------------------->*/
+
+.newMediaHeading .cornerLinks .seeAll {
+    width: 7rem;
+}
+
+.previewEmailBox {
+    padding: 0 2rem;
+}
+
+.previewEmailBox .adminHeading {
+    font-size: 1.8rem
+}
+
+.emailSubject {color: var(--dmodeBlack);}
+    .dmode .emailSubject {color: #fff;}
+
+.emailMsg {
+    font-size: 1.1rem;
+    padding: 0 2rem;
+}
+
+.emailMsg a {
+    color: var(--magenta);
+}
+
+    .emailMsg a:hover {
+        color: var(--brightAqua)
+    }
+
+
+
+/*----------------------------------------------------------------------->
+END preview
 ------------------------------------------------------------------------->*/
