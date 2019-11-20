@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2019 at 10:09 PM
+-- Generation Time: Nov 20, 2019 at 04:56 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -43,7 +43,7 @@ CREATE TABLE `adminuser` (
 --
 
 INSERT INTO `adminuser` (`admin_id`, `admin_username`, `admin_email`, `profilePic_id`, `light_mode`) VALUES
-(1, 'analee', 'analeeskinner@gmail.com', 3, 'lmode'),
+(1, 'analee', 'analeeskinner@gmail.com', 4, 'lmode'),
 (22, 'bpaAdmin', 'bpa_admin@email.com', 4, 'lmode');
 
 -- --------------------------------------------------------
@@ -58,17 +58,23 @@ CREATE TABLE `articles` (
   `article_description` mediumtext NOT NULL,
   `article_category` int(11) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
-  `date_modified` timestamp NOT NULL DEFAULT current_timestamp()
+  `date_modified` timestamp NOT NULL DEFAULT current_timestamp(),
+  `error_flag` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `articles`
 --
 
-INSERT INTO `articles` (`article_id`, `article_name`, `article_description`, `article_category`, `date_added`, `date_modified`) VALUES
-(1, 'Test Article #1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, '2019-11-07 08:56:13', '2019-11-11 08:56:13'),
-(2, 'Test Article #2', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', 2, '2019-11-10 08:56:13', '2019-11-11 08:56:13'),
-(3, 'Test Article #3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, '2019-11-11 08:56:13', '2019-11-11 08:56:13');
+INSERT INTO `articles` (`article_id`, `article_name`, `article_description`, `article_category`, `date_added`, `date_modified`, `error_flag`) VALUES
+(1, 'Test Article #1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, '2019-11-07 08:56:13', '2019-11-11 08:56:13', NULL),
+(2, 'Test Article #2', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', 2, '2019-11-10 08:56:13', '2019-11-11 08:56:13', NULL),
+(3, 'Test Article #3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, '2019-11-11 08:56:13', '2019-11-11 08:56:13', NULL),
+(4, 'This is a new article name', 'This is a new article decrip', 1, '2019-11-18 13:53:42', '2019-11-18 13:53:42', NULL),
+(5, 'Article With Content', 'Content', 1, '2019-11-19 14:26:57', '2019-11-19 14:26:57', NULL),
+(29, 'Hola', 'tho', 2, '2019-11-19 16:30:52', '2019-11-19 16:32:25', 0),
+(30, 'New article', 'guk', 2, '2019-11-19 16:24:50', '2019-11-19 16:35:29', NULL),
+(31, 'Brand New One', 'wassup', 1, '2019-11-19 18:58:34', '2019-11-19 18:58:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -80,6 +86,8 @@ CREATE TABLE `article_content` (
   `content_id` int(11) NOT NULL,
   `article_id` int(11) NOT NULL,
   `content_type` int(11) NOT NULL,
+  `order_of_content` int(11) NOT NULL,
+  `element_name` varchar(50) NOT NULL,
   `content` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -87,9 +95,12 @@ CREATE TABLE `article_content` (
 -- Dumping data for table `article_content`
 --
 
-INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `content`) VALUES
-(1, 1, 2, 'New Heading'),
-(2, 1, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES
+(1, 1, 2, 0, '', 'New Heading'),
+(2, 1, 1, 0, '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+(24, 29, 1, 1, 'p_1', 'srge'),
+(25, 30, 2, 1, 'heading2_1', 'gky'),
+(26, 31, 1, 1, 'p_1', 'seg');
 
 -- --------------------------------------------------------
 
@@ -277,13 +288,13 @@ ALTER TABLE `adminuser`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `article_content`
 --
 ALTER TABLE `article_content`
-  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `categories`
