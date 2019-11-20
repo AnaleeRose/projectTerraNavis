@@ -228,7 +228,7 @@ $options = ['required' => null];
 
             // // execute the prepared statement
             if ($stmt->execute()) {
-                echo 'added';
+                // echo 'added';
                 $article_db_id = $dbpdo->lastInsertId();
                 foreach ($trackElements as $this_element_name => $this_element_info) {
                     if (strpos($this_element_name, 'l') !== false) {
@@ -255,11 +255,15 @@ $options = ['required' => null];
                         $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
                         $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
                         $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
-                        // if ($stmt->execute()) {
-                        //     echo "<br>_LILILILIGOOD_<br>";
-                        // } else {
-                        //     print_r($dbpdo->errorInfo());
-                        // }
+                        if (!$stmt->execute()) {
+                            ob_end_clean();
+                            require './assets/includes/header.html';
+                            require './assets/includes/error.php';
+                            $links = ['Return To Home' => 'index.php', $this_element_name => 'mistake.html'];
+                            produce_error_page('Could not connect to the database, your article may be salvageable. Please contact our service team to resolve the issue.', $links);
+                            require './assets/includes/footer.html';
+                            exit();
+                        }
                     } else {
                         $this_element_id = $this_element_info['id'];
                         $this_element_order = $this_element_info['order'];
@@ -270,10 +274,14 @@ $options = ['required' => null];
                         $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
                         $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
                         $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
-                        if ($stmt->execute()) {
-                            echo "<br>_OTHERGOOD_<br>";
-                        } else {
-                            echo '<br>_OTHERBAD_<br>';
+                        if (!$stmt->execute()) {
+                            ob_end_clean();
+                            require './assets/includes/header.html';
+                            require './assets/includes/error.php';
+                            $links = ['Return To Home' => 'index.php', $this_element_name => 'mistake.html'];
+                            produce_error_page('Could not connect to the database, your article may be salvageable. Please contact our service team to resolve the issue.', $links);
+                            require './assets/includes/footer.html';
+                            exit();
                         }
                     }
                 } // foreach END
@@ -284,6 +292,7 @@ $options = ['required' => null];
                     $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
                     $stmt->bindParam(':a_id', $article_db_id, PDO::PARAM_STR);
                     if ($stmt->execute()) {
+                        // echo 'complete';
                         header('Location: ' . BASE_URL . 'admin/allArticles.php');
                     } else {
                         ob_end_clean();
@@ -294,9 +303,6 @@ $options = ['required' => null];
                         require './assets/includes/footer.html';
                         exit();
                     }
-                // $q = "DELETE FROM articles WHERE article_id = $article_id";
-                // $r = mysqli_query($dbc, $q);
-                // if ($r) {
                 } else {
                     ob_end_clean();
                     require './assets/includes/header.html';

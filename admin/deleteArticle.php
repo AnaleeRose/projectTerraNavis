@@ -45,6 +45,7 @@ $q = "SELECT * FROM articles WHERE article_id = $article_id";
 $r = mysqli_query($dbc, $q);
 if ($r && mysqli_num_rows($r) > 0) {
 	while ($row = $r->fetch_assoc()) {
+		$a_id = $row['article_id'];
 		$a_name = $row['article_name'];
 		$a_category = $row['article_category'];
 		$a_description = $row['article_description'];
@@ -53,9 +54,9 @@ if ($r && mysqli_num_rows($r) > 0) {
 	}
 
 	if (empty($a_name)) $a_name = 'Error';
+
 } elseif (mysqli_num_rows($r) == 0) {
     ob_end_clean();
-	echo 'deleted';
 	require './assets/views/articleDeleted.php';
     exit();
 }
@@ -71,13 +72,15 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 			<p>Are you sure you want to delete this article?</p>
 			<table class="deleteTable">
 				<tr>
-					<th align="left">Article Name</th>
+					<th align="left">ID</th>
+					<th align="left">Name</th>
 					<th align="left">Category</th>
 					<th align="left">Description</th>
-					<th align="left">Date Created</th>
+					<th align="left">Created</th>
 					<th align="left">Last Modified</th>
 				</tr>
 				<tr>
+					<td><?= $a_id; ?></td>
 					<td><?= $a_name; ?></td>
 					<td><?= $a_category; ?></td>
 					<td><?= $a_description; ?></td>

@@ -223,9 +223,7 @@ $options = ['required' => null];
                         $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
                         $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
                         $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
-                        if ($stmt->execute()) {
-                            echo "<br>_LILILILIGOOD_<br>";
-                        } else {
+                        if (!$stmt->execute()) {
                             ob_end_clean();
                             require './assets/includes/header.html';
                             require './assets/includes/error.php';
@@ -245,9 +243,7 @@ $options = ['required' => null];
                         $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
                         $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
                         $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
-                        if ($stmt->execute()) {
-                            echo "<br>_OTHERGOOD_<br>";
-                        } else {
+                        if (!$stmt->execute()) {
                             ob_end_clean();
                             require './assets/includes/header.html';
                             require './assets/includes/error.php';
