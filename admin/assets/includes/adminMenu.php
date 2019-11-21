@@ -14,7 +14,7 @@ if (isset($pageTitle)) {
     ?>
     <a href="./profile.php" class="profilePicThumbLink">
         <?php
-            echo '<img class="profilePicThumb" src="assets/profilePictures/';
+            echo '<img class="profilePicThumb" alt="Profile Image" src="assets/profilePictures/';
             echo $_SESSION['profilePic_Location'];
             echo '" data-profilePic_id="';
             echo $_SESSION['profilePic_id'];

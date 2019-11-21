@@ -842,6 +842,8 @@ END Login & Register
     }
 
 
+
+
 /*----------------------------------------------------------------------->
 END Homepage
 ------------------------------------------------------------------------->*/
@@ -986,6 +988,10 @@ hr {
     }
 }
 
+.backToProfile {
+    margin-top: 1rem;
+    width: 7rem;
+}
 
 /*----------------------------------------------------------------------->
 END Profile
@@ -1078,14 +1084,20 @@ END Newsfeed
     font-size: 2rem;
 }
 
-.newMediaForm {
+.newMediaForm, .editProfileForm {
     display: flex;
     flex-direction: column;
     margin: 1rem auto;
     padding: 1rem 2rem ;
 }
 
-    .newMediaForm .createInput, .newMediaForm select, .newMediaForm textarea {
+.editProfileForm input {
+    text-align: center;
+}
+
+
+    .newMediaForm .createInput, .newMediaForm select, .newMediaForm textarea,
+    .editProfileForm .createInput, .editProfileForm select, .editProfileForm textarea {
         border: 2px solid var(--aqua);
         border-radius: 2rem;
         color: #000;
@@ -1097,10 +1109,11 @@ END Newsfeed
         width: 100%;
     }
 
-    .newMediaForm select {width: 25rem;}
-    .newMediaForm select option {color: #000;}
+    .newMediaForm select, .editProfileForm select {width: 25rem;}
+    .newMediaForm select option, .editProfileForm select option {color: #000;}
 
-    .newMediaForm .textareaInput {
+    .newMediaForm .textareaInput,
+    .editProfileForm .textareaInput {
         display: block;
         color: #000;
         font: lighter 1rem/1.5 'Muli', sans-serif;
@@ -1213,7 +1226,8 @@ END Newsfeed
 }
 
 
-.newMediaForm label , .newContent label {
+.newMediaForm label, .newContent label,
+.editProfileForm label, .newContent label {
     border-bottom: 1px solid var(--aqua);
     color: var(--aqua);
     display: block;
@@ -1228,7 +1242,8 @@ END Newsfeed
 
 
 /*fieldset*/
-.newMediaForm fieldset {
+.newMediaForm fieldset,
+.editProfileForm fieldset {
     border-color: var(--brightAqua);
     border-radius: 2rem;
     padding: .5rem 1rem 4rem;
@@ -1239,7 +1254,8 @@ END Newsfeed
     width: 100%;
 }
 
-.newMediaForm legend {
+.newMediaForm legend,
+.editProfileForm legend {
     border: 1px solid var(--brightAqua);
     border-radius: 1rem;
     color: var(--brightAqua);
@@ -1250,9 +1266,6 @@ END Newsfeed
     width: 10rem;
 }
 
-.newMediaForm fieldset input {
-
-}
 
 .addToListBtn {
     background: var(--magenta);
@@ -1287,7 +1300,8 @@ END Newsfeed
     width: 7rem;
 }
 
-.newMediaForm .uploadImgBtn {
+.newMediaForm .uploadImgBtn,
+.editProfileForm .uploadImgBtn {
     border: none;
     color: #fff;
     margin: .5rem;
@@ -1316,13 +1330,14 @@ END New Article
 New Email & Edit Email
 ------------------------------------------------------------------------->*/
 
-.newMediaForm textarea.contentInput, .newMediaForm .emailInput {
+.newMediaForm textarea.contentInput, .newMediaForm .emailInput,
+.editProfileForm textarea.contentInput {
     max-width: 40rem;
     min-width: 28rem;
 }
 
-.newMediaForm textarea.contentInput,
-.newMediaForm textarea.emailInput {
+.newMediaForm textarea.contentInput, .newMediaForm textarea.emailInput,
+.editProfileForm textarea.contentInput, .editProfileForm textarea.emailInput {
     height: 12rem;
 }
 

@@ -7,6 +7,7 @@ $user = 'admin';
 require MYSQL;
 require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
 require './../html/assets/includes/functions.php'; // basic functions used throughout the site
+$_SESSION['relogged_in'] = false;
 
 
 $pageTitle = 'Profile';
