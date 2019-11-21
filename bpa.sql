@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2019 at 05:28 PM
+-- Generation Time: Nov 21, 2019 at 10:19 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -24,17 +24,6 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `analeerose_bpa` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `analeerose_bpa`;
 
-DELIMITER $$
---
--- Procedures
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateProfilePic` (`pid` INT(6), `uid` INT(11))  BEGIN
-	UPDATE `adminuser` SET `profilePic_id` = pid WHERE `adminuser`.`admin_id` = uid;
-	SELECT pic_location FROM profilepictures WHERE profilePic_id = pid;
-END$$
-
-DELIMITER ;
-
 -- --------------------------------------------------------
 
 --
@@ -54,8 +43,8 @@ CREATE TABLE `adminuser` (
 --
 
 INSERT INTO `adminuser` (`admin_id`, `admin_username`, `admin_email`, `profilePic_id`, `light_mode`) VALUES
-(1, 'analee', 'analeeskinner@gmail.com', 4, 'lmode'),
-(22, 'bpaAdmin', 'bpa_admin@email.com', 4, 'lmode');
+(22, 'bpaAdmin', 'bpa_admin@email.com', 4, 'lmode'),
+(27, 'analeerose', 'analeeskinner@gmail.com', 2, 'lmode');
 
 -- --------------------------------------------------------
 
@@ -81,12 +70,9 @@ INSERT INTO `articles` (`article_id`, `article_name`, `article_description`, `ar
 (1, 'Test Article #1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, '2019-11-07 08:56:13', '2019-11-11 08:56:13', NULL),
 (2, 'Test Article #2', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', 2, '2019-11-10 08:56:13', '2019-11-11 08:56:13', NULL),
 (3, 'Test Article #3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, '2019-11-11 08:56:13', '2019-11-11 08:56:13', NULL),
-(4, 'This is a new article name', 'This is a new article decrip', 1, '2019-11-18 13:53:42', '2019-11-18 13:53:42', NULL),
-(5, 'Article With Content', 'Content', 1, '2019-11-19 14:26:57', '2019-11-19 14:26:57', NULL),
 (29, 'Hola', 'tho', 2, '2019-11-19 16:30:52', '2019-11-19 16:32:25', 0),
-(31, 'Brand New One', 'wassup', 1, '2019-11-19 18:58:34', '2019-11-19 18:58:34', NULL),
-(40, 'tfj', 'tj', 1, '2019-11-20 16:22:27', '2019-11-20 16:22:27', NULL),
-(41, 'ygk', 'gy', 1, '2019-11-20 16:23:12', '2019-11-20 16:23:12', NULL);
+(45, 'Article With Everything', 'This is an article with every type of element except images, just to test it!', 2, '2019-11-20 20:57:51', '2019-11-20 21:14:06', NULL),
+(48, 'edit this article', 'edit moiiiiii~~~~', 2, '2019-11-21 16:16:19', '2019-11-21 16:16:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -113,10 +99,18 @@ INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `orde
 (1, 1, 2, 0, '', 'New Heading', NULL, NULL),
 (2, 1, 1, 0, '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL, NULL),
 (24, 29, 1, 1, 'p_1', 'srge', NULL, NULL),
-(26, 31, 1, 1, 'p_1', 'seg', NULL, NULL),
-(45, 40, 7, 1, 'ul_1_li_1', 'tfj', 1, 0),
-(46, 40, 7, 2, 'ul_1_li_2', 'tj', 0, 1),
-(47, 41, 1, 1, 'p_1', 'ygk', NULL, NULL);
+(73, 45, 2, 1, 'heading2_1', 'Heading 2', NULL, NULL),
+(74, 45, 3, 2, 'heading3_1', 'Heading 3', NULL, NULL),
+(75, 45, 4, 3, 'heading4_1', 'Heading 4', NULL, NULL),
+(76, 45, 5, 4, 'heading5_1', 'Heading 5', NULL, NULL),
+(77, 45, 1, 5, 'p_1', 'Paragraph', NULL, NULL),
+(78, 45, 6, 6, 'hr_1', 'hr_1', NULL, NULL),
+(84, 48, 1, 1, 'p_1', 'THis is a para', NULL, NULL),
+(85, 48, 6, 2, 'hr_1', 'hr_1', NULL, NULL),
+(86, 48, 4, 3, 'heading4_1', 'info', NULL, NULL),
+(87, 48, 7, 4, 'ul_1_li_1', '<a href=\"https://www.mylink.com\">My Link</a>', 1, 0),
+(88, 48, 7, 5, 'ul_1_li_2', '<a href=\"https://www.mylink.com\">My Link</a>', 0, 0),
+(89, 48, 7, 6, 'ul_1_li_3', '<a href=\"https://www.mylink.com\">My Link</a>', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -173,19 +167,25 @@ CREATE TABLE `emails` (
   `email_id` int(11) NOT NULL,
   `email_subject` varchar(250) NOT NULL,
   `email_message` longtext NOT NULL,
-  `email_category` int(11) NOT NULL,
+  `save_for_later` tinyint(1) NOT NULL DEFAULT 1,
   `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
-  `date_modified` timestamp NULL DEFAULT current_timestamp()
+  `date_sent` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `emails`
 --
 
-INSERT INTO `emails` (`email_id`, `email_subject`, `email_message`, `email_category`, `date_added`, `date_modified`) VALUES
-(1, 'Test Email #1', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', 1, '2019-11-08 08:55:34', '2019-11-11 08:55:34'),
-(2, 'Test Email #2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2, '2019-11-10 08:55:34', '2019-11-11 08:55:34'),
-(3, 'Test Email #3', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', 1, '2019-11-11 08:55:34', '2019-11-11 08:55:34');
+INSERT INTO `emails` (`email_id`, `email_subject`, `email_message`, `save_for_later`, `date_added`, `date_sent`) VALUES
+(1, 'Test Email #1', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', 0, '2019-11-08 08:55:34', '2019-11-07 18:52:25'),
+(2, 'Test Email #2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 0, '2019-11-10 08:55:34', '2019-11-05 18:52:25'),
+(3, 'Test Email #3', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', 0, '2019-11-11 08:55:34', '2019-11-02 17:52:25'),
+(7, 'New Email', 'THis is my new email\r\n<br>\r\n<br>\r\nLink: <a href=\"egsesg.com\">egs</a>', 0, '2019-11-20 19:20:24', '2019-11-20 19:20:24'),
+(8, 'Terra Navis Newsfeed | ygk', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out ygk or read more articles about Earthship Construction & Design at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis</a>', 0, '2019-11-20 19:21:45', '2019-11-20 19:21:45'),
+(9, 'Terra Navis Newsfeed | ygk', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out ygk or read more articles about Earthship Construction & Design at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis</a>', 0, '2019-11-20 19:22:07', '2019-11-20 19:22:07'),
+(10, 'Terra Navis Newsfeed | ygk', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out ygk or read more articles about Earthship Construction & Design at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!', 0, '2019-11-20 19:30:05', '2019-11-20 19:30:05'),
+(11, 'Terra Navis Newsfeed | edit this article', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out edit this article or read more articles about Clean Energy at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!', 0, '2019-11-21 16:18:06', '2019-11-21 16:18:06'),
+(12, 'reedy reeds', 'rdh', 1, '2019-11-21 16:37:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -204,8 +204,8 @@ CREATE TABLE `info` (
 --
 
 INSERT INTO `info` (`pwd_id`, `admin_id`, `info`) VALUES
-(6, 1, '$2y$10$XiySWbUz.SF2s2sruz8S0uxUsa1mv7HjKJPA/3csBtIO1Kyl385bC'),
-(13, 22, '$2y$10$ojtLGpxbIZtX3W4RXLN8BunxmNdUb5fIWGu1Gsgojuqk/TdB2qoWC');
+(13, 22, '$2y$10$ojtLGpxbIZtX3W4RXLN8BunxmNdUb5fIWGu1Gsgojuqk/TdB2qoWC'),
+(14, 27, '$2y$10$R0kSMuSJo02V0QA3UFFLR.9AldHw2Me5JKLe7MYawl6lkWfaplR8S');
 
 -- --------------------------------------------------------
 
@@ -274,8 +274,7 @@ ALTER TABLE `content_types`
 -- Indexes for table `emails`
 --
 ALTER TABLE `emails`
-  ADD PRIMARY KEY (`email_id`),
-  ADD KEY `email_category` (`email_category`);
+  ADD PRIMARY KEY (`email_id`);
 
 --
 -- Indexes for table `info`
@@ -298,19 +297,19 @@ ALTER TABLE `profilepictures`
 -- AUTO_INCREMENT for table `adminuser`
 --
 ALTER TABLE `adminuser`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `article_content`
 --
 ALTER TABLE `article_content`
-  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -328,13 +327,13 @@ ALTER TABLE `content_types`
 -- AUTO_INCREMENT for table `emails`
 --
 ALTER TABLE `emails`
-  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `info`
 --
 ALTER TABLE `info`
-  MODIFY `pwd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `pwd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `profilepictures`
@@ -364,12 +363,6 @@ ALTER TABLE `articles`
 ALTER TABLE `article_content`
   ADD CONSTRAINT `article_content_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `articles` (`article_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `article_content_ibfk_2` FOREIGN KEY (`content_type`) REFERENCES `content_types` (`content_type_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `emails`
---
-ALTER TABLE `emails`
-  ADD CONSTRAINT `emails_ibfk_1` FOREIGN KEY (`email_category`) REFERENCES `categories` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `info`
