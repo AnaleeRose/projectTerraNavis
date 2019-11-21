@@ -10,13 +10,26 @@ if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions
 require './../html/assets/includes/functions.php'; // various functions
 $media_type = 'article';
 
-// build list of expected, required, and possile post values based on media type
+// intialize various variables
 $expected = ['article_name', 'article_category', 'article_description', 'imgs'];
 $required = ['article_name', 'article_category'];
 $possible = [];
 $element_types = ['p', 'heading2', 'heading3', 'heading4', 'heading5', 'hr', 'ul', 'ol']; // we'll build all possible lists from this list l8r
 $article_id = $_GET['article_id'];
 $elementsUsed;
+
+$max_on_page = 5;
+$max_lists_on_page = 2;
+$max_li_on_page = 20;
+$list_names;
+$last = [];
+$newArticle_errors = []; //tracks all errors
+$firstLists = []; //
+$listAllElements = '';
+if (!isset($trackElements)) $trackElements = []; // tracks element id and order
+$at_least_one_element = false;
+
+
 
 $q = "SELECT * FROM `articles` WHERE article_id = $article_id";
 $r = mysqli_query($dbc, $q);
@@ -37,17 +50,15 @@ if ($r && mysqli_num_rows($r) > 0) {
     exit();
 }
 
-$q = "SELECT `element_name` FROM `article_content` WHERE article_id = $article_id";
+$q = "SELECT `element_name` FROM `article_content` WHERE article_id = " . $article_id . " && ((content_type = 7) || (content_type = 8))";
 $r = mysqli_query($dbc, $q);
 if ($r && mysqli_num_rows($r) > 0) {
     while ($row = $r->fetch_assoc()) {
         $elementToCheck = $row['element_name'];
-        if (strpos($elementToCheck, 'l') !== false) {
-            $list_type = substr($elementToCheck, 0, 2);
-            $list_num = substr($elementToCheck, 3, 1);
-            $list_name = $list_type . '_' . $list_num;
-            $listAll[$list_name][] = $elementToCheck;
-        }
+        $list_type = substr($elementToCheck, 0, 2);
+        $list_num = substr($elementToCheck, 3, 1);
+        $list_name = $list_type . '_' . $list_num;
+        $listAll[$list_name][] = $elementToCheck;
     }
 } else {
     require './assets/includes/header.html';
@@ -59,19 +70,10 @@ if ($r && mysqli_num_rows($r) > 0) {
 }
 
 
-$newArticle_errors = []; //tracks all errors
-$firstLists = []; //
-$listAllElements = '';
-if (!isset($trackElements)) $trackElements = []; // tracks element id and order
-$at_least_one_element = false;
+
 
 // generates all possible values for possible list **
-$max_on_page = 5;
-$max_lists_on_page = 2;
-$max_li_on_page = 20;
-$list_names;
-$listAll = [];
-$last = [];
+
 
 foreach ($element_types as $each_element_type) {
     $x = 1;
@@ -113,6 +115,7 @@ if (!empty($listAll) && is_array($listAll)) {
         $last[] = end($elementToCheck);
     }
 }
+
 
 
 // CHECK PAGE IF SUBMITTED----------------------------------------------------------->
