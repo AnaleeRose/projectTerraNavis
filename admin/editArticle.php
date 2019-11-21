@@ -60,7 +60,7 @@ if ($r && mysqli_num_rows($r) > 0) {
         $list_name = $list_type . '_' . $list_num;
         $listAll[$list_name][] = $elementToCheck;
     }
-} else {
+} elseif (!$r) {
     require './assets/includes/header.html';
     require './assets/includes/error.php';
     $links = ['Return To Home' => 'index.php'];
@@ -326,6 +326,7 @@ $options = ['required' => null];
                             </ol>
                         </div>
                         <p class="contentTypeBtn contentPhpBtn" data-contentType="hr" data-content_type_id=6 >Horizontal Line</p>
+                        <p class="contentTypeBtn linkBtn linkGeneratorBtn">Link</p>
                         <div class="contentTypeList">
                             <p class="contentTypeBtn listBtn">List</p>
                             <ul class="listContentTypes hidden">
@@ -351,6 +352,26 @@ $options = ['required' => null];
                  ?> " data-general-max="<?= $max_on_page ;?>" data-max-li="<?= $max_li_on_page ;?>" data-max-lists="<?= $max_lists_on_page ;?>">
 
             </form>
+            <div class="linkGenBox">
+                <h5 class="linkGenHeading">Link Generator</h5>
+                <p class="linkLabel">Link Text</p>
+                <p class="linkGenInput linkName" id="linkName" contenteditable="true">My Link</p>
+                <p class="linkLabel">Link URL</p>
+                <p class="linkGenInput linkHref" id="linkHrek" contenteditable="true">https://www.mylink.com</p>
+                <p class="linkGenBtn adminBtn adminBtn_aqua" id="linkGenBtn">Generate Link</p>
+                <p class="linkNote linkNote_subtle">Note: Links should only be used in the main content. They should not be used in the name or description of an article.</p>
+                <div class="generatorInstructions hidden">
+                <h4>Here's your link: </h4>
+                <hr class="linkGenHr">
+                    <p class="linkGenOutputReview">The link will say: <span class="linkOutputText linkGen_accent"></span> and will link to <span class="linkOutputHref linkGen_accent"></span>.</p>
+                    <p class="linkP" id="linkP">Steps to add to article: </p>
+                    <p class="linkP" id="linkP">1) Copy this text:</p>
+                    <p class="linkGenOutput linkGen_accent" id="linkGenOutput"></p>
+                    <p class="linkP" id="linkP">2) Paste the text where you want the link to be in the final article</p>
+                </div>
+                <p class="linkGenEmptyError hidden">You're missing one or more values. Please fill both of the above boxes before generating the link.</p>
+                <p class="linkGenCloseBtn">➔</p>
+            </div>
             <?php
             ed();
         ed();
