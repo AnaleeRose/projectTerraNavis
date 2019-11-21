@@ -129,7 +129,7 @@ echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>
                     <a href="editInfo.php?edit_type=changep" class="adminBtn adminBtn_subtle changePwdBtn">Change Password</a>
                     <p class="adminControlsP"><span>Admin Controls</span></p>
                     <a href="register.php" class="adminBtn adminBtn_subtle editAdminsBtn">Create Admin</a>
-                    <a href="delete_admin.php" class="adminBtn adminBtn_subtle editAdminsBtn">Delete Admin</a>
+                    <a href="deleteAdmin.php" class="adminBtn adminBtn_subtle editAdminsBtn">Delete Admin</a>
                     <form action="profile.php" method="post" class="registerForm updatePicForm" name="profilePicForm">
                         <input type="number" name="profilePicChoice" value="<?= $_SESSION['profilePic_id'] ?>" id="profilePicChoice" class="profilePicChoice hidden">
                         <input type="hidden" name="lightModeInput" value="<?= $_SESSION['light_mode'] ?>" id="lightModeInput" class="lightModeInput">

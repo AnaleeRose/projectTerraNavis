@@ -6,15 +6,9 @@ check_if_admin(); // toss user back to login page if they're not logged in
 require MYSQL; // connect to db
 require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
 require './../html/assets/includes/functions.php'; // various functions
-if (isset($_COOKIE['relogged_in']) && (strlen($_COOKIE['relogged_in']) === 32)) {
-	$r_id = $_COOKIE['relogged_in'];
-} else {
-	$r_id = openssl_random_pseudo_bytes(16);
-	$r_id = bin2hex($r_id);
-}
-setcookie('relogged_in', $r_id, time()+(60*60*24*30), '/');
 
-$pageTitle = 'Edit profile Info';
+
+$pageTitle = 'Edit Profile Info';
 $editProfile_errors = [];
 $verifyPwd_errors = [];
 $relogged_in = $_SESSION['relogged_in'];
