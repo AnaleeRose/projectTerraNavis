@@ -122,9 +122,19 @@ if (!empty($listAll) && is_array($listAll)) {
 if (isset($_POST['publishMediaBtn'])) {
     // ERROR HANDLING
     // if a required item is empty, toss an error
-    if (empty($_POST['article_name'])) $newArticle_errors['article_name'] = "Missing: Name";
-    if (empty($_POST['article_category']) || $_POST['article_category'] === 1) $newArticle_errors['article_category'] = "Missing: Category";
-    if (empty($_POST['article_description']) || $_POST['article_description'] === 1) $newArticle_errors['article_description'] = "Missing: Description";
+    if (empty($_POST['article_name'])) {
+        $newArticle_errors['article_name'] = "Missing: Name";
+    } elseif (strpos($_POST['article_name'], 'a href="') !== false) {
+        $newArticle_errors['article_name'] = "Links are not allowed in the name or description.";
+    }
+
+    if (empty($_POST['article_category']) || $_POST['article_category'] === 1) {$newArticle_errors['article_category'] = "Missing: Category";}
+
+    if (empty($_POST['article_description']) || $_POST['article_description'] === 1) {
+        $newArticle_errors['article_description'] = "Missing: Description";
+    } elseif (strpos($_POST['article_description'], 'a href="') !== false) {
+        $newArticle_errors['article_description'] = "Links are not allowed in the name or description.";
+    }
 
     foreach ($possible as $elementToCheck) {
         if (isset($_POST[$elementToCheck]) && !empty($_POST[$elementToCheck])) {

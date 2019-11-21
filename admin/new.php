@@ -308,6 +308,7 @@ $options = ['required' => null];
                 <?php
                 } elseif ($media_type === 'email') {
                     if (isset($_POST['publishMediaBtn'])) {
+                        $e_saved = 1;
                         if (empty($_POST['email_subject'])) {
                             $newEmail_errors['email_subject'] = 'Missing: Subject';
                         } else {
@@ -322,9 +323,10 @@ $options = ['required' => null];
 
                         if (empty($newEmail_errors)) {
                             print_r($_POST);
-                            $stmt = $dbpdo->prepare("INSERT INTO `emails` (`email_id`, `email_subject`, `email_message`, `date_added`) VALUES (NULL, :e_subject, :e_msg, current_timestamp())");
+                            $stmt = $dbpdo->prepare("INSERT INTO `emails` (`email_id`, `email_subject`, `email_message`, `save_for_later`, `date_added`) VALUES (NULL, :e_subject, :e_msg, :e_saved, current_timestamp())");
                             $stmt->bindParam(':e_subject', $e_subject, PDO::PARAM_STR);
                             $stmt->bindParam(':e_msg', $e_msg, PDO::PARAM_STR);
+                            $stmt->bindParam(':e_saved', $e_saved, PDO::PARAM_BOOL);
                             if ($stmt->execute()) {
                                 echo 'added';
                                 $new_email_id = $dbpdo->lastInsertId();
@@ -369,7 +371,7 @@ Check out ' . $row['article_name'] . ' or read more articles about ' . $row['cat
                     ?>
                     <hr class="newHr">
                     <p class="contentTypeBtn linkBtn_email linkGeneratorBtn">Link</p>
-                    <input type="submit" name="publishMediaBtn" id="sendEmailBtn" class="adminBtn adminBtn_accent sendEmailBtn" value="Send Email">
+                    <input type="submit" name="publishMediaBtn" id="previewEmailBtn" class="adminBtn adminBtn_accent previewEmailBtn" value="Preview Email">
                 <?php 
                 }
                 ?>

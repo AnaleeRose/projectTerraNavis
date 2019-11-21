@@ -581,7 +581,6 @@ if (linkGeneratorBtn) {
 
 function open_link_gen() {
     if (linkGenBox.classList.contains('linkGenBox_show')) {
-        console.log("esists")
         linkGenBox.classList.remove('linkGenBox_show')
     } else {
         linkGenBox.classList.add('linkGenBox_show')
@@ -610,10 +609,13 @@ function generate_link() {
 }
 
 // ------------------------------------------------------------------------------------------------>
-// email preview
+// email preview page
 // ------------------------------------------------------------------------------------------------>
 
 emailMsg = document.body.querySelector('.emailMsg')
+seeAllWarningBtn = document.body.querySelector('.seeAllWarningBtn')
+leaveWarning = document.body.querySelector('.leaveWarning')
+noLeave = document.body.querySelector('.noLeave')
 
 if (emailMsg) {
     editedMsg = emailMsg.outerHTML;
@@ -624,6 +626,22 @@ if (emailMsg) {
     console.log(editedMsg.slice(start, end));
 
     // console.log(editedMsg_start)
+}
+
+if (seeAllWarningBtn) {
+    seeAllWarningBtn.addEventListener('click', function() {
+        leaveWarning.classList.remove('hidden');
+    })
+    
+    noLeave.addEventListener('click', function() {
+        hideLeaveWarning();
+    })
+}
+
+function hideLeaveWarning() {
+    if (!leaveWarning.classList.contains('hidden')) {
+        leaveWarning.classList.add('hidden');
+    }
 }
 
 

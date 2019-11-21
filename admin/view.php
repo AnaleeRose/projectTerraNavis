@@ -58,6 +58,11 @@ if ($media_type === 'article') {
     exit();
 }
 
+if ($media_type === 'email') {
+	$seeAllColor = 'adminBtn_danger';
+} else {
+	$seeAllColor = 'adminBtn_aqua';
+} 
 // PREVIEW MEDIA ------------------------------------------------------------------------->
 
 require './assets/includes/header.html';
@@ -71,13 +76,19 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
                 <h2 class="adminHeading"><?= ucfirst($view_type) . ' ' . ucfirst($media_type) ?></h2>
                 <div class="cornerLinks">
                 <?php
-                echo '<a href="./all' . ucfirst($media_type)  . 's.php" class="adminBtn adminBtn_aqua seeAll">See All ' . ucfirst($media_type)  . 's</a>';
+                if ($view_type === 'preview') echo '<a href="editEmail.php?email_id=' . $media_id . '" class="adminBtn adminBtn_aqua editEmailLink">Edit Email</a>';
+                echo '<a class="adminBtn ' . $seeAllColor .' seeAll seeAllWarningBtn">See All ' . ucfirst($media_type)  . 's</a>';
                 ?>
                 </div>
             </div>
+            <div class="hidden leaveWarning">
+            	<p>If you leave this page, this email will be saved but not sent. Are you sure you to leave?</p>
+            	<a href="./all<?= ucfirst($media_type);?>s.php" class="adminBtn adminBtn_danger">Yes, save and leave</a>
+            	<a class="adminBtn adminBtn_subtle noLeave">No, return to <?= $media_type;?></a>
+            </div>
             <form class="newMediaForm" method="post">
         <?php
-			if ($media_type === 'article') {
+			if ($media_type === 'article') { // IF ARTICLE  -------------------------------------------------->
 				?>
 				<div class="previewEmailBox">
 					<table class="previewTable">
@@ -111,7 +122,7 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 				?>
 				</div>
 				<?php
-			} elseif ($media_type === 'email') {
+			} elseif ($media_type === 'email') { // ELSEIF EMAIL  -------------------------------------------------->
 				?>
 				<div class="previewEmailBox">
 					<h2 class="adminHeading">Subject:</h2>
@@ -119,6 +130,7 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 					<h2 class="adminHeading">Message: </h2>
 					<p class="emailMsg"><?= $e_msg; ?></p>
 				</div>
+				<a class="adminBtn adminBtn_aqua" id="sendEmailBtn" href="<?= BASE_URL; ?>admin/view.php?view_type=preview&media_type=email&media_id=<?= $media_id; ?>">Send Email</a>
 				<?php
 
 			}

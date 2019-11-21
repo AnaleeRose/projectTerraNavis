@@ -55,7 +55,11 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 			}
 		}
 		echo '>';
-		if ($value) echo $value;
+		if ($value) {
+			echo $value;
+		} else {
+			if (isset($options['value']) && !empty($options['value'])) echo $options['value'];
+		}
 		echo '</textarea>';
 		if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $errors[$name] . ' </p>';
 	}  elseif ($type === 'hidden') {

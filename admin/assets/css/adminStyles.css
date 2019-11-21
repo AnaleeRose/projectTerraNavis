@@ -394,6 +394,134 @@ ul, ol {list-style-type: none;}
             color: var(--brightAqua);
         }
 
+
+/*------------------- link generator ----------------------------->*/
+.linkGenBox {
+    background: var(--brightAqua);
+    border: 4px solid #F0F0F0;
+    border-radius: 2rem;
+    bottom: 5rem;
+    color: #fff;
+    padding: 1rem 3rem 1rem 1.5rem;
+    position: fixed;
+    right: -50rem;
+    transition: right .7s;
+    width: 40rem;
+    z-index: 500;
+}
+
+    .linkGenBox_show {
+        right: -2rem;
+    }
+
+    .dmode .linkGenBox {
+        background: #000000;
+        border: none;
+        color: var(--tanGold);
+    }
+
+.linkGenHeading {
+    font-size: 1.4rem;
+    margin: .7rem 0 1.4rem;
+}
+
+.linkLabel {
+    margin-top: 1.8rem;
+    border-bottom: 1px solid #fff;
+    width: 5rem;
+}
+
+    .dmode .linkLabel {border-color: var(--brown);}
+
+.linkGenInput {
+    border: 2px solid #fff;
+    border-radius: 2rem;
+    padding: .5rem;
+    margin-left: .2rem;
+    max-width: 20rem;
+    min-width: 10rem;
+}
+
+    .linkGenInput:focus {
+        border-color: var(--marigold);
+        outline: none;
+    }
+
+    .dmode .linkGenInput:focus {border-color: var(--marigold);}
+
+    .dmode .linkGenBox, .dmode .linkGenInput {
+        border-color: var(--brown);
+    }
+
+.linkGenBtn {
+    background-color: var(--magenta);
+    box-shadow: 2px 2px 0px #006775;
+    margin: 0;
+    transition: background .1s;
+    width: 7rem; 
+}
+    .dmode .linkGenBtn {
+        background-color: var(--marigold);
+        border: none;
+        box-shadow: 2px 2px 0px #8c6227;
+        color: #fff;
+    }
+
+    .linkGenBox .linkGenBtn:hover, .linkGenBox .linkGenBtn:focus {
+        background: #fff;
+        color: var(--magenta);
+        box-shadow: 1px 1px 0px #006775;
+    }
+
+        .dmode .linkGenBox .linkGenBtn:hover, .dmode .linkGenBox .linkGenBtn:focus {
+            color: var(--marigold);
+            box-shadow: 1px 1px 0px #8c6227;
+        }
+
+.linkGenCloseBtn {
+    cursor: pointer;
+    font-size: 1.7rem;
+    font-weight: bold;
+    position: absolute;
+    right: 4rem;
+    top: 0;
+    /*transform: scaleY(0.9);*/
+}
+
+.linkGenCloseBtn:hover {color: var(--marigold);}
+
+.linkGen_accent {
+    color: #ffdf56;
+}
+
+.linkGenHr {
+    border-color: #fff;
+    margin-left: -.2rem;
+}
+
+    .dmode .linkGenHr {border-color: var(--brown)}
+
+
+.linkGenEmptyError {color: var(--reddish);}
+    .dmode .linkGenEmptyError {color: var(--magenta);}
+
+/*------------------- badges ----------------------------->*/
+
+.badge {
+    background: var(--brightAqua);
+    border-radius: 2rem;
+    color: #fff;
+    font-size: .9rem;
+    padding: .6rem;
+    position: absolute;
+    right: 1.5rem;
+    top: 1rem;
+}
+
+.badge_danger {background: var(--reddish);}
+
+.badge_accent {background: var(--green);}
+
 /*----------------------------------------------------------------------->
 `Login && Register
 ------------------------------------------------------------------------->*/
@@ -880,6 +1008,8 @@ h2.newsfeedHeading {
     z-index: 50;
 }
 
+
+.newsfeedHeading {padding-right: 3rem;}
 .lmode h2.newsfeedHeading {
     color: #101520;
     background: linear-gradient(90deg, #d1d9da 0%, #ffffff 3%, #ffffff 97%, #d1d9da 100%)
@@ -892,8 +1022,10 @@ h2.newsfeedHeading {
 }
 
 .nwBox {
-    margin: 2rem .5rem;
+    /*height: 100%;*/
     padding: 2rem;
+    position: relative;
+    margin: 2rem .5rem;
     max-width: 420px;
 }
 
@@ -901,11 +1033,12 @@ h2.newsfeedHeading {
     .adminHome_fullWidth .nwBox:first-of-type {margin-top: 2rem;}
 .lmode .nwBox {background: #fff;}
 .dmode .nwBox {background: var(--dmodeBlack);}
-.allPage .nwBox {background: var(--greyBG);}
+.dmode .allPage .nwBox {background: var(--greyBG);}
 
 .nwBox .btnBox {
     display: flex;
     justify-content: space-between;
+    margin-top: 1.5rem;
     margin-left: -40px;
     width: 405px;
 }
@@ -916,10 +1049,15 @@ h2.newsfeedHeading {
 }
 
 .nwBox .readEmailBtn {
+    margin: 0 38px 0 2rem;
+    text-align: center;
     width: 6rem;
-    margin-left: 2rem;
 }
 
+.nwBox .dateInfo {color: var(--brightAqua);}
+
+.lmode .nwBox .dateInfo span {color: var(--dmodeBlack);}
+.dmode .nwBox .dateInfo span {color: #fff;}
 
 /*----------------------------------------------------------------------->
 END Newsfeed
@@ -1008,19 +1146,15 @@ END Newsfeed
     margin: 2.5rem auto 2rem;
 }
 
-#publishBtn, #sendEmailBtn {
+#publishBtn, #sendEmailBtn, #previewEmailBtn {
     font-size: 1.5rem;
     margin-top: 2rem;
     width: 12.5rem;
 }
 
-#publishBtn {
-    width: 12.5rem;
-}
-
-#sendEmailBtn {
-    width: 10.5rem;
-}
+#publishBtn {width: 12.5rem;}
+#sendEmailBtn {width: 8.5rem;}
+#previewEmailBtn {width: 13rem;}
 
 .contentTypeList_show {
     margin-bottom: 1rem;
@@ -1179,7 +1313,7 @@ END New Article
 
 
 /*----------------------------------------------------------------------->
-New Email
+New Email & Edit Email
 ------------------------------------------------------------------------->*/
 
 .newMediaForm textarea.contentInput, .newMediaForm .emailInput {
@@ -1196,114 +1330,37 @@ New Email
     margin: 1rem auto;
 }
 
-.linkGenBox {
-    background: var(--brightAqua);
-    border: 4px solid #Fff;
-    border-radius: 2rem;
-    bottom: 5rem;
-    color: #fff;
-    padding: 1rem 3rem 1rem 1.5rem;
-    position: fixed;
-    right: -50rem;
-    transition: right .7s;
-    width: 40rem;
-    z-index: 500;
-}
 
-    .linkGenBox_show {
-        right: -2rem;
-    }
 
-    .dmode .linkGenBox {
-        background: #000000;
-        border: none;
-        color: var(--tanGold);
-    }
-
-.linkGenHeading {
-    font-size: 1.4rem;
-    margin: .7rem 0 1.4rem;
-}
-
-.linkLabel {
-    margin-top: 1.8rem;
-    border-bottom: 1px solid #fff;
+.cornerLinks .editEmailLink {
     width: 5rem;
 }
 
-    .dmode .linkLabel {border-color: var(--brown);}
 
-.linkGenInput {
-    border: 2px solid #fff;
-    border-radius: 2rem;
-    padding: .5rem;
-    margin-left: .2rem;
-    max-width: 20rem;
-    min-width: 10rem;
+.editEmailPage .linkGeneratorBtn {
+    display: block;
+    width: 5rem;
 }
 
-    .linkGenInput:focus {
-        border-color: var(--marigold);
-        outline: none;
-    }
-
-    .dmode .linkGenInput:focus {border-color: var(--marigold);}
-
-    .dmode .linkGenBox, .dmode .linkGenInput {
-        border-color: var(--brown);
-    }
-
-.linkGenBtn {
-    background-color: var(--magenta);
-    box-shadow: 2px 2px 0px #006775;
-    margin: 0;
-    transition: background .1s;
-    width: 7rem; 
-}
-    .dmode .linkGenBtn {
-        background-color: var(--marigold);
-        border: none;
-        box-shadow: 2px 2px 0px #8c6227;
-        color: #fff;
-    }
-
-    .linkGenBox .linkGenBtn:hover, .linkGenBox .linkGenBtn:focus {
-        background: #fff;
-        color: var(--magenta);
-        box-shadow: 1px 1px 0px #006775;
-    }
-
-        .dmode .linkGenBox .linkGenBtn:hover, .dmode .linkGenBox .linkGenBtn:focus {
-            color: var(--marigold);
-            box-shadow: 1px 1px 0px #8c6227;
-        }
-
-.linkGenCloseBtn {
-    cursor: pointer;
-    font-size: 1.7rem;
-    font-weight: bold;
+.leaveWarning {
+    background: var(--greyBG);
+    margin-left: -15rem;
+    padding: 2rem;
     position: absolute;
-    right: 4rem;
-    top: 0;
-    /*transform: scaleY(0.9);*/
+    right: 50%;
+    width: 30rem;
 }
 
-.linkGenCloseBtn:hover {color: var(--marigold);}
-
-.linkGen_accent {
-    color: #ffdf56;
+.leaveWarning p {
+    /*margin-bottom: 2.5rem;*/
 }
 
-.linkGenHr {
-    border-color: #fff;
-    margin-left: -.2rem;
+.leaveWarning a {
+    display: inline-block;
+    margin: 1rem 1.5rem 1rem 0;
+    text-align: center;
+    width: 10rem;
 }
-
-    .dmode .linkGenHr {border-color: var(--brown)}
-
-
-.linkGenEmptyError {color: var(--reddish);}
-    .dmode .linkGenEmptyError {color: var(--magenta);}
 
 /*----------------------------------------------------------------------->
 END New Email
@@ -1367,7 +1424,7 @@ preview
 }
 
 .newMediaHeading .cornerLinks .seeAll {
-    width: 8rem;
+    width: 7rem;
 }
 
 .previewEmailBox {
