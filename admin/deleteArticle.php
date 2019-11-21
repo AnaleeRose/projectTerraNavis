@@ -7,6 +7,7 @@ $user = 'admin';
 require MYSQL; // connect to db
 require './../html/assets/includes/functions.php'; // various functions
 
+
 if (!isset($_GET['article_id'])) {
     require './assets/includes/header.html';
     require './assets/includes/error.php';

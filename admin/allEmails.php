@@ -1,12 +1,15 @@
 <?php
 ob_start();
 session_start();
-// print_r($_SESSION);
+
+require './../html/assets/includes/config.inc.php'; // basic definitions used throughout the site
+check_if_admin(); // toss user back to login page if they're not logged in
+require MYSQL;
+
+
 $pageTitle = 'All Emails';
 $list_all = true;
 $no_articles = true;
-require './../html/assets/includes/config.inc.php'; // basic definitions used throughout the site
-require MYSQL;
 require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms

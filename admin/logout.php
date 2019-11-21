@@ -1,6 +1,5 @@
 <?php
 session_start();
-$pageTitle = 'Logout';
 require './../html/assets/includes/config.inc.php'; // basic definitions used throughout the site
 if (!isset($_SESSION['username'])) {
     $url = BASE_URL . 'admin/';
@@ -10,7 +9,9 @@ if (!isset($_SESSION['username'])) {
 $_SESSION = [];
 session_destroy();
 // setcookie(session_name(), '', time()-3000);
-$page_title = 'Logout';
+
+
+$pageTitle = 'Logout';
 require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="lmode defaultPage">';
 echo DEFAULT_PAGE_BEGIN;

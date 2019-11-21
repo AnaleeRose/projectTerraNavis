@@ -8,9 +8,11 @@ require MYSQL; // connect to db
 require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
 if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php'; // makes it easy to create forms
 require './../html/assets/includes/functions.php'; // various functions
-$media_type = 'article';
+
+
 
 // intialize various variables
+$media_type = 'article';
 $expected = ['article_name', 'article_category', 'article_description', 'imgs'];
 $required = ['article_name', 'article_category'];
 $possible = [];

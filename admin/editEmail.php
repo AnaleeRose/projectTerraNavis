@@ -8,7 +8,7 @@ require './../html/assets/includes/form_functions.inc.php'; // makes it easy to 
 require './../html/assets/includes/functions.php'; 
 $editEmail_errors = [];
 
-
+$pageTitle = 'All Emails';
 function no_email() {
 	ob_end_clean();
     require './assets/includes/header.html';

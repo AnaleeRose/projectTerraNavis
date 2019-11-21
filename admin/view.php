@@ -8,13 +8,15 @@ require MYSQL; // connect to db
 require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
 if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php'; // makes it easy to create forms
 require './../html/assets/includes/functions.php'; // various functions
+
+
+$pageTitle = 'View ' . $_GET['media_type'];
 $view_type = $_GET['view_type'];
 $media_type = $_GET['media_type'];
 $media_id = $_GET['media_id'];
 $article_name = '';
 $article_description = '';
 $category = '';
-
 // PULL FROM DB ------------------------------------------------------------------------->
 if ($media_type === 'article') {
 	$q = "SELECT a.*, category FROM articles a JOIN categories c ON a.article_category = c.category_id WHERE article_id = $media_id";

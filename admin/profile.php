@@ -1,14 +1,15 @@
 <?php
 ob_start();
 session_start();
-// print_r($_SESSION);
-$page_title = 'Profile';
 require './../html/assets/includes/config.inc.php'; // basic definitions used throughout the site
+check_if_admin(); // toss user back to login page if they're not logged in
 $user = 'admin';
 require MYSQL;
-
 require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
 require './../html/assets/includes/functions.php'; // basic functions used throughout the site
+
+
+$pageTitle = 'Profile';
 $login_errors = [];
 define('COLS', 5);
 $pos = 0;
@@ -123,8 +124,8 @@ echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>
                 ?>
                     <a  class="adminBtn adminBtn_switch lightModeBtn"><span class="lightModeBtn_span"></span></a>
                     </form>
-                    <a href="edit_profile_info.php" class="adminBtn adminBtn_subtle editInfoBtn" >Edit Info</a>
-                    <a href="edit_profile_info.php" class="adminBtn adminBtn_subtle changePwdBtn">Change Password</a>
+                    <a href="editInfo.php?edit_type=general" class="adminBtn adminBtn_subtle editInfoBtn" >Edit Info</a>
+                    <a href="editInfo.php?edit_type=changep" class="adminBtn adminBtn_subtle changePwdBtn">Change Password</a>
                     <p class="adminControlsP"><span>Admin Controls</span></p>
                     <a href="register.php" class="adminBtn adminBtn_subtle editAdminsBtn">Create Admin</a>
                     <a href="delete_admin.php" class="adminBtn adminBtn_subtle editAdminsBtn">Delete Admin</a>

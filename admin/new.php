@@ -6,6 +6,8 @@ check_if_admin(); // toss user back to login page if they're not logged in
 require MYSQL; // connect to db
 require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
 require './../html/assets/includes/functions.php'; // various functions
+
+
 $media_type = $_GET['media_type']; // tells it whether to produce the form for emails vs the form for articles
 // build list of expected, required, and possile post values based on media type
 if ($media_type === 'article') {
