@@ -623,16 +623,13 @@ if (emailMsg) {
     emailMsg.outerHTML = editedMsg
     start = editedMsg.search('&lt;a href=') + 13;
     end = editedMsg.search('"&gt;')
-    console.log(editedMsg.slice(start, end));
-
-    // console.log(editedMsg_start)
 }
 
 if (seeAllWarningBtn) {
     seeAllWarningBtn.addEventListener('click', function() {
         leaveWarning.classList.remove('hidden');
     })
-    
+
     noLeave.addEventListener('click', function() {
         hideLeaveWarning();
     })

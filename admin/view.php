@@ -64,7 +64,11 @@ if ($media_type === 'email') {
 	$seeAllColor = 'adminBtn_danger';
 } else {
 	$seeAllColor = 'adminBtn_aqua';
-} 
+}
+
+
+//<td>$article_description;</td>
+
 // PREVIEW MEDIA ------------------------------------------------------------------------->
 
 require './assets/includes/header.html';
@@ -79,13 +83,14 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
                 <div class="cornerLinks">
                 <?php
                 if ($view_type === 'preview') echo '<a href="editEmail.php?email_id=' . $media_id . '" class="adminBtn adminBtn_aqua editEmailLink">Edit Email</a>';
-                echo '<a class="adminBtn ' . $seeAllColor .' seeAll seeAllWarningBtn">See All ' . ucfirst($media_type)  . 's</a>';
+                if ($media_type === 'email') echo '<a class="adminBtn ' . $seeAllColor .' seeAll seeAllWarningBtn">See All ' . ucfirst($media_type)  . 's</a>';
+                if ($media_type === 'article')echo '<a href="all'. ucfirst($media_type) . 's.php" class="adminBtn ' . $seeAllColor .' seeAll">See All ' . ucfirst($media_type)  . 's</a>';
                 ?>
                 </div>
             </div>
             <div class="hidden leaveWarning">
             	<p>If you leave this page, this email will be saved but not sent. Are you sure you to leave?</p>
-            	<a href="./all<?= ucfirst($media_type);?>s.php" class="adminBtn adminBtn_danger">Yes, save and leave</a>
+            	<a href="./all<?= ucfirst($media_type); ?>s.php" class="adminBtn adminBtn_danger">Yes, save and leave</a>
             	<a class="adminBtn adminBtn_subtle noLeave">No, return to <?= $media_type;?></a>
             </div>
             <form class="newMediaForm" method="post">
@@ -96,14 +101,13 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 					<table class="previewTable">
 						<tr>
 							<th align="left">Name: </th>
-							<th align="left">Description: </th>
+							<!-- <th align="left">Description: </th> -->
 							<th align="left">Category: </th>
 							<th align="left">Date Created: </th>
 							<th align="left">Last Modified: </th>
 						</tr>
 						<tr>
 							<td><?= $article_name; ?></td>
-							<td><?= $article_description; ?></td>
 							<td><?= $category; ?></td>
 							<td><?= $date_added; ?></td>
 							<td><?= $last_modified; ?></td>

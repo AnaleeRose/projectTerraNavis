@@ -3,7 +3,7 @@ function create_form_input_e_ver($name, $type, $label = '', $value, $errors = []
     if (!empty($value) && get_magic_quotes_gpc()) $value = stripcslashes($value);
     if (!empty($label)) {
         echo '<label for="' . $name . '"';
-        if (array_key_exists($name, $errors)) echo 'class="text_error"';
+        if (array_key_exists($name, $errors)) echo 'class=""';
         echo '>' . $label . '</label>';
     }
 
@@ -33,7 +33,7 @@ function create_form_input_e_ver($name, $type, $label = '', $value, $errors = []
         }
         echo '>';
 
-        if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $errors[$name] . ' </p>';
+        if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError ">' . $errors[$name] . ' </p>';
 
 // TEXTAREA INPUT ------------------------------------------------------------->
     } elseif ($type === 'textarea') {
@@ -57,7 +57,7 @@ function create_form_input_e_ver($name, $type, $label = '', $value, $errors = []
         echo '>';
         if ($value) echo htmlspecialchars($value);
         echo '</textarea>';
-        if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $errors[$name] . ' </p>';
+        if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError ">' . $errors[$name] . ' </p>';
 // HIDDEN INPUT ------------------------------------------------------------->
     }  elseif ($type === 'hidden') {
         echo '<input type="' . $type . '" name="' . $name . '" id="' . $name . '" class="';

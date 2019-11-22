@@ -5,10 +5,10 @@ require './../html/assets/includes/config.inc.php'; // basic definitions used th
 check_if_admin(); // toss user back to login page if they're not logged in
 require MYSQL; // connect to db
 require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
-require './../html/assets/includes/functions.php'; 
+require './../html/assets/includes/functions.php';
 $editEmail_errors = [];
 
-$pageTitle = 'All Emails';
+$pageTitle = 'Edit Email';
 function no_email() {
 	ob_end_clean();
     require './assets/includes/header.html';

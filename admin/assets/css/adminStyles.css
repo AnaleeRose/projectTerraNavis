@@ -184,7 +184,7 @@ ul, ol {list-style-type: none;}
     padding: 5rem;
     text-align: center;
 }
-    
+
     .errorPage.lmode { background: #fff;}
     .errorPage.dmode {background: var(--dmodeBlack);}
 
@@ -458,7 +458,7 @@ ul, ol {list-style-type: none;}
     box-shadow: 2px 2px 0px #006775;
     margin: 0;
     transition: background .1s;
-    width: 7rem; 
+    width: 7rem;
 }
     .dmode .linkGenBtn {
         background-color: var(--marigold);
@@ -990,7 +990,7 @@ hr {
 
 .backToProfile {
     margin-top: 1rem;
-    width: 7rem;
+    width: 8rem;
 }
 
 .deleteAdminText {
@@ -1032,8 +1032,9 @@ h2.newsfeedHeading {
     padding: 1rem;
     width: 418px;
     margin-top: 0;
-    top: 0;
     margin-left: -1rem;
+    text-align: center;
+    top: 0;
     z-index: 50;
 }
 

@@ -5,7 +5,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 	if ($value && get_magic_quotes_gpc()) $value = stripcslashes($value);
 	if (!empty($label)) {
 		echo '<label for="' . $name . '"';
-		if (array_key_exists($name, $errors)) echo 'class="text_error"';
+		if (array_key_exists($name, $errors)) echo 'class=""';
 		echo '>' . $label . '</label>';
 	}
 
@@ -34,7 +34,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		}
 		echo '>';
 
-		if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $errors[$name] . ' </p>';
+		if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError ">' . $errors[$name] . ' </p>';
 	} elseif ($type === 'textarea') {
 		echo '<textarea name="' . $name . '" id="' . $name . '" class="';
 		if (!empty($options) && is_array($options)) {
@@ -61,7 +61,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 			if (isset($options['value']) && !empty($options['value'])) echo $options['value'];
 		}
 		echo '</textarea>';
-		if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $errors[$name] . ' </p>';
+		if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError ">' . $errors[$name] . ' </p>';
 	}  elseif ($type === 'hidden') {
 		echo '<input type="' . $type . '" name="' . $name . '" id="' . $name . '" class="';
 		if (!empty($options) && is_array($options)) {
