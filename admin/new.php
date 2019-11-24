@@ -148,7 +148,7 @@ $options = ['required' => null];
                 </div>
                 <!-- <a href="new?media_type<?= $media_type ?>&clear=true" class="adminBtn adminBtn_danger">Clear Page</a> -->
             </div>
-            <form class="newMediaForm" method="post">
+            <form class="newMediaForm generalForm" method="post">
             <?php
 
                 if ($media_type === 'article') {
@@ -259,7 +259,7 @@ $options = ['required' => null];
                             exit();
                         }
                     }
-                    
+
                     header('Location: ' . BASE_URL . 'admin/view.php?view_type=read&media_type=article&media_id=' . $article_db_id);
                 } // foreach END
 
@@ -374,7 +374,7 @@ Check out ' . $row['article_name'] . ' or read more articles about ' . $row['cat
                     <hr class="newHr">
                     <p class="contentTypeBtn linkBtn_email linkGeneratorBtn">Link</p>
                     <input type="submit" name="publishMediaBtn" id="previewEmailBtn" class="adminBtn adminBtn_accent previewEmailBtn" value="Preview Email">
-                <?php 
+                <?php
                 }
                 ?>
 

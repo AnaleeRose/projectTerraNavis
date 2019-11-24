@@ -1,7 +1,8 @@
 <?php
+echo '<h2 class="adminheading">base_ver</h2>';
 $numwords = 30;
 
-$q = 'SELECT * FROM `articles` ORDER BY date_added DESC LIMIT 3';
+$q = 'SELECT * FROM `articles` ORDER BY date_added DESC LIMIT 5';
 $r = mysqli_query($dbc, $q);
 if ($r && mysqli_num_rows($r) > 0) {
     while ($row = $r->fetch_assoc()) {
@@ -23,7 +24,7 @@ if ($r && mysqli_num_rows($r) > 0) {
     }
 }
 
-$q = 'SELECT * FROM `emails` ORDER BY date_added DESC LIMIT 3';
+$q = 'SELECT * FROM `emails` ORDER BY date_added DESC LIMIT 5';
 $r = mysqli_query($dbc, $q);
 if ($r && mysqli_num_rows($r) > 0) {
     while ($row = $r->fetch_assoc()) {

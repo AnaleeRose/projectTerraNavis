@@ -4,7 +4,9 @@
 /*colors to inspect ('tan: #dca352', 'reddish: #ab0a3c')''*/
 html {
     font-family: 'Muli', sans-serif;
+        font-size:16px;
     height: 100%;
+    /*my base styles*/
 }
 
 body{
@@ -25,9 +27,17 @@ section{
 
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    margin: 0;
+}
+/*h1 {font-size: 1.5em;}*/
+h2 {font-size: 1.5em;}
+h3 {font-size:  1.3rem;}
+p {margin: 1rem 0;}
 a {text-decoration: none;}
-
 ul, ol {list-style-type: none;}
+fieldset{border: 2px solid #fff;}
 
 :root {
     --green: #4dc312;
@@ -130,6 +140,20 @@ ul, ol {list-style-type: none;}
 
 .bold {font-weight: bold;}
 
+.successHeading {
+    color: var(--green);
+    font-size: 1.6rem;
+    text-align: center;
+    margin-top: 3rem
+}
+
+.lmode .successHeading {color: var(--green);}
+.dmode .successHeading {color: var(--green);}
+
+.generalForm .returnToProfileBtn {
+    margin-top: 1.5rem;
+}
+
 /*------------------- error ----------------------------->*/
 .text_error {
     color: var(--reddish) !important;
@@ -227,7 +251,19 @@ ul, ol {list-style-type: none;}
 
 .loginBtn, .registerBtn, .adminBtn_submit {
     background: linear-gradient(345deg, rgba(77,195,18,1) 0%, rgba(52,130,15,1) 100%);
-    width: 6rem;
+    width: 6.5rem;
+}
+
+.dmode .registerBtn, .dmode .adminBtn_submit {
+    background: none;
+    border: 2px solid var(--green);
+    color: var(--green);
+}
+
+.dmode .registerBtn:hover, .dmode .adminBtn_submit:hover {
+    background: none;
+    border-color: #fff;
+    color: #fff;
 }
 
 .adminBtn_accent {
@@ -301,7 +337,8 @@ ul, ol {list-style-type: none;}
     .lmode .adminBtn_subtle:hover,
     .lmode .adminBtn_accent:hover,
     .lmode .adminBtn_danger:hover,
-    .lmode .adminBtn_aqua:hover
+    .lmode .adminBtn_aqua:hover,
+    .registerBtn:hover
         {
         background: linear-gradient(330deg, rgb(236, 51, 164) 0%, rgb(125, 0, 78) 100%);
     }
@@ -514,8 +551,8 @@ ul, ol {list-style-type: none;}
     font-size: .9rem;
     padding: .6rem;
     position: absolute;
-    right: 1.5rem;
-    top: 1rem;
+    right: 1rem;
+    top: 0;
 }
 
 .badge_danger {background: var(--reddish);}
@@ -525,7 +562,7 @@ ul, ol {list-style-type: none;}
 /*----------------------------------------------------------------------->
 `Login && Register
 ------------------------------------------------------------------------->*/
-.loginDiv, .registerDiv {
+.loginDiv {
     /*background: #fff;*/
     border-radius: 50%;
     display: flex;
@@ -536,6 +573,15 @@ ul, ol {list-style-type: none;}
     width: 90%;
 }
 
+.registerDiv {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 100%
+}
+
+.dmode .registerDiv {background: none;}
+
 .profilePic {
     border: solid 1rem var(--grey);
     border-radius: 50%;
@@ -544,6 +590,10 @@ ul, ol {list-style-type: none;}
     width: 250px;
 }
 
+    .registerDiv .profilePic {
+        height: 200px;
+        width: 200px;
+    }
 
 
 .loginForm, .registerForm {
@@ -594,7 +644,7 @@ ul, ol {list-style-type: none;}
 
 
 .profilePicture {
-    margin: 1rem auto;
+    margin: 0 auto;
 }
 
 .choosePic {
@@ -770,9 +820,9 @@ END Login & Register
     display: block;
         margin: 0 auto;
 }
-    .adminHome .profilePic {
-        border: none;
+    .profilePicDiv .profilePic {
         background: linear-gradient(330deg, rgba(255,209,16,1) 0%, rgba(223,180,0,1) 100%);
+        border: none;
         /*background: linear-gradient(145deg, rgba(207,37,141,1) 0%, rgba(159,7,101,1) 100%);*/
         padding: 1rem;
         display: block;
@@ -998,19 +1048,23 @@ hr {
     margin: 1rem auto;
 }
 
-.editProfileForm .agreeToDelete_label {
+.generalForm .agreeToDelete_label {
     border: none;
-    margin: 0 auto .5rem;
+    margin: 0 auto ;
     padding-right: 2.5rem;
     position: relative;
     width: 25rem;
 }
 
-.editProfileForm .agreeToDelete_input {
+.generalForm .agreeToDelete_input {
     margin-bottom: .4rem;
     position: absolute;
     top: .6rem;
     right: 1rem;
+}
+
+.generalForm hr {
+    margin: 1.5rem auto 1rem;
 }
 
 .verifyError {margin-top: 1rem;}
@@ -1104,11 +1158,12 @@ END Newsfeed
 
 .adminHeading {
     color: var(--brightAqua);
-    font-weight: lighter;
     font-size: 2rem;
+    font-weight: lighter;
+    margin: 1.5rem 0 1rem;
 }
 
-.newMediaForm, .editProfileForm {
+.generalForm {
     display: flex;
     flex-direction: column;
     margin: 1rem auto;
@@ -1120,8 +1175,7 @@ END Newsfeed
 }
 
 
-    .newMediaForm .createInput, .newMediaForm select, .newMediaForm textarea,
-    .editProfileForm .createInput, .editProfileForm select, .editProfileForm textarea {
+    .generalForm .createInput, .generalForm select, .generalForm textarea {
         border: 2px solid var(--aqua);
         border-radius: 2rem;
         color: #000;
@@ -1133,11 +1187,10 @@ END Newsfeed
         width: 100%;
     }
 
-    .newMediaForm select, .editProfileForm select {width: 25rem;}
-    .newMediaForm select option, .editProfileForm select option {color: #000;}
+    .generalForm select {width: 25rem;}
+    .generalForm select option {color: #000;}
 
-    .newMediaForm .textareaInput,
-    .editProfileForm .textareaInput {
+    .generalForm .textareaInput {
         display: block;
         color: #000;
         font: lighter 1rem/1.5 'Muli', sans-serif;
@@ -1161,7 +1214,7 @@ END Newsfeed
     .cornerLinks a {
         margin: 0 0 0 2rem;
         text-align: center;
-        width: 8rem;
+        width: 8.5rem;
     }
 
     /*.cornerLinks a:last-of-type {width: 8rem;}*/
@@ -1250,7 +1303,9 @@ END Newsfeed
 }
 
 
+.generalForm label,
 .newMediaForm label, .newContent label,
+.verifyPwdForm label, .verifyPwdForm label,
 .editProfileForm label, .newContent label {
     border-bottom: 1px solid var(--aqua);
     color: var(--aqua);
@@ -1266,8 +1321,7 @@ END Newsfeed
 
 
 /*fieldset*/
-.newMediaForm fieldset,
-.editProfileForm fieldset {
+.generalForm fieldset {
     border-color: var(--brightAqua);
     border-radius: 2rem;
     padding: .5rem 1rem 4rem;
@@ -1279,7 +1333,8 @@ END Newsfeed
 }
 
 .newMediaForm legend,
-.editProfileForm legend {
+.verifyPwdForm legend,
+.generalForm legend {
     border: 1px solid var(--brightAqua);
     border-radius: 1rem;
     color: var(--brightAqua);
@@ -1325,6 +1380,7 @@ END Newsfeed
 }
 
 .newMediaForm .uploadImgBtn,
+.verifyPwdForm .uploadImgBtn,
 .editProfileForm .uploadImgBtn {
     border: none;
     color: #fff;
@@ -1355,12 +1411,14 @@ New Email & Edit Email
 ------------------------------------------------------------------------->*/
 
 .newMediaForm textarea.contentInput, .newMediaForm .emailInput,
+.verifyPwdForm textarea.contentInput, .verifyPwdForm .emailInput,
 .editProfileForm textarea.contentInput {
     max-width: 40rem;
     min-width: 28rem;
 }
 
 .newMediaForm textarea.contentInput, .newMediaForm textarea.emailInput,
+.verifyPwdForm textarea.contentInput, .verifyPwdForm textarea.emailInput,
 .editProfileForm textarea.contentInput, .editProfileForm textarea.emailInput {
     height: 12rem;
 }
@@ -1463,7 +1521,7 @@ preview
 }
 
 .newMediaHeading .cornerLinks .seeAll {
-    width: 7rem;
+    width: 7.5rem;
 }
 
 .previewEmailBox {
@@ -1537,6 +1595,10 @@ Printed Styles
     margin: 2.5rem 1rem;
 }
 
+.printedOl {
+    list-style-type: decimal;
+}
+
 .printedOl li {
     list-style-type: decimal;
     margin: .8rem 0 .8rem 1.5rem;
@@ -1568,6 +1630,10 @@ Printed Styles
 .printedP {
     margin: 1rem;
     padding: 1rem;
+}
+
+.printedHeading {
+    margin: 1rem .2rem;
 }
 
 /*----------------------------------------------------------------------->

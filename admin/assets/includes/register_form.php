@@ -1,6 +1,6 @@
 <?php
 $ptitle = "Register";
-nd('registerDiv backShadow', 'registerDiv');
+nd('registerDiv', 'registerDiv');
 $options = ['required' => null];
 ?>
 <div class="profilePicture">
@@ -31,7 +31,7 @@ if (isset($register_errors['DoesNotExist'])) {
 }
 ?>
 <form action="register.php" method="post" class="registerForm" style="margin-top: -8rem">
-    <input type="number" name="profilePicChoice" value="1" id="profilePicChoice" class="profilePicChoice hidden">
+    <input type="number" name="profilePicChoice" value="1" id="profilePicChoice" class="profilePicChoice hidden registerPPC">
     <?php
         create_form_input('username', 'text', 'Username', $register_errors, $options);
         notice('required', 'Required');
@@ -44,7 +44,7 @@ if (isset($register_errors['DoesNotExist'])) {
 
     ?>
     <input type="submit" name="registerBtn" id="registerBtn" class="adminBtn registerBtn" value="Register">
-    <a href="index.php" class="adminBtn adminBtn_subtle registerReturnBtn">Return</a>
+    <a href="profile.php" class="adminBtn adminBtn_subtle registerReturnBtn">Return</a>
 </form>
 
 <?php

@@ -18,7 +18,7 @@ $newArticle_errors = [];
         ?>
         <h2 class="adminHeading">New Article</h2>
         <
-        <form class="newArticleForm" method="post">
+        <form class="newArticleForm generalForm" method="post">
         <?php
             $options = ['required' => null, 'placeholder' => 'Name'];
             create_form_input('article_name', 'text', ' ', $newArticle_errors, $options);

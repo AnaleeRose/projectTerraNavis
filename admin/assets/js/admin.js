@@ -281,11 +281,11 @@ function add_to_list(e) {
     btn_clicked = e.srcElement;
     list_name = btn_clicked.getAttribute('data-list-name')
     fieldset = btn_clicked.parentNode;
-    list_max = fieldset.getAttribute("data-max-li");
+    list_max = elementTracker.getAttribute("data-max-li");
     list_type = list_name.substring(0,2);
     list_item_name = list_name + '_li';
     all = document.body.querySelectorAll('.' + list_item_name).length;
-    console.log(list_max);
+    console.log('.' + list_item_name)
     if (all < list_max) {
         num = all + 1;
         individual_name = list_item_name + '_' + num;

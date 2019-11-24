@@ -2,7 +2,7 @@
 $numwords = 30;
 
 if (isset($no_articles) && $no_articles) {
-
+    //do nothing
 } else {
     if (isset($list_all) && $list_all) {
         if (isset($offset)) {
@@ -11,7 +11,7 @@ if (isset($no_articles) && $no_articles) {
             $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 25';
         }
     } else {
-        $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 3';
+        $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 5';
     }
     $r = mysqli_query($dbc, $q);
     if ($r && mysqli_num_rows($r) > 0) {
@@ -34,8 +34,8 @@ if (isset($no_articles) && $no_articles) {
 
         <div class="nwBox backShadow_light">
             <h3 class="newsfeedHeading"><?= $row['article_name'] ?></h3>
-            <?php 
-            if (!empty($row['date_modified']) && (strtotime($row['date_modified']) > strtotime('-3 day'))) echo '<p class="badge badge_accent">New</p>'; 
+            <?php
+            if (!empty($row['date_modified']) && (strtotime($row['date_modified']) > strtotime('-3 day'))) echo '<p class="badge badge_accent">New</p>';
             if (isset($list_all) && $list_all) {
                 echo '<p class="dateInfo">Created: <span>' . $date_added  . '</span></p>';
                 echo '<p class="dateInfo">Modified: <span>' . $date_modified . '</span></p>';
@@ -55,12 +55,12 @@ if (isset($no_articles) && $no_articles) {
 }
 
 if (isset($no_emails) && $no_emails) {
-
+    //do nothing
 } else {
     if (isset($list_all) && $list_all) {
         $q = 'SELECT * FROM `emails` ORDER BY date_added DESC';
     } else {
-        $q = 'SELECT * FROM `emails` ORDER BY date_added DESC LIMIT 3';
+        $q = 'SELECT * FROM `emails` ORDER BY date_added DESC LIMIT 5';
         // $q = 'SELECT * FROM `emails` WHERE save_for_later != 1 ORDER BY date_sent DESC LIMIT 3';
     }
 
@@ -82,8 +82,8 @@ if (isset($no_emails) && $no_emails) {
 
     <div class="nwBox emailBox backShadow_light">
         <h3 class="newsfeedHeading"><?= $row['email_subject'] ?></h3>
-        <?php 
-        if ($row['save_for_later'] === '1') echo '<p class="badge badge_danger">Not Sent</p>'; 
+        <?php
+        if ($row['save_for_later'] === '1') echo '<p class="badge badge_danger">Not Sent</p>';
         if (!empty($row['date_sent']) && (strtotime($row['date_sent']) > strtotime('-3 day'))) echo '<p class="badge badge_accent">New</p>' ;
         if (isset($list_all) && $list_all) {
             echo '<p class="dateInfo">Created: <span>' . $date_added  . '</span></p>';

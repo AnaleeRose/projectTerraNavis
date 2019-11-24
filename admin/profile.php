@@ -25,8 +25,10 @@ if (!isset($_SESSION['uid']) || !isset($_SESSION['email'])) {
 } else {
     if (isset($_POST['saveChangesBtn'])) {
         if ($_SESSION['profilePic_id'] !== $_POST['profilePicChoice'])  {
-            if (!$online) { //purely because its a simpler way, my server doesn't allow stored procedure though ;-;
-                $q = 'CALL updateProfilePic(' . $_POST['profilePicChoice'] . ','  . $_SESSION['uid'] . ')';
+            $q = 'UPDATE `adminuser` SET `profilePic_id` = ' . $_POST['profilePicChoice'] . ' WHERE `adminuser`.`admin_id` = ' . $_SESSION['uid'];
+            $r = mysqli_query($dbc, $q);
+            if ($r) {
+                $q = 'SELECT pic_location FROM profilepictures WHERE profilePic_id = ' . $_POST['profilePicChoice'];
                 $r = mysqli_query($dbc, $q);
                 if ($r) {
                     while ($row = $r->fetch_assoc()) {
@@ -37,34 +39,12 @@ if (!isset($_SESSION['uid']) || !isset($_SESSION['email'])) {
                     while(mysqli_more_results($dbc)) {
                         mysqli_next_result($dbc);
                     }
-                    echo '<span class="hidden formNotice formNotice_success">Changes Were Saved!</span>';
+                    echo '<span class="hidden formNotice formNotice_success">Changes were saved</span>';
                 } else {
-                    require './assets/includes/error.html';
-                    require './assets/includes/footer.html';
-                    exit();
+                echo '<span class="hidden formNotice formNotice_error">Changes could not be saved </span>';
                 }
             } else {
-                $q = 'UPDATE `adminuser` SET `profilePic_id` = ' . $_POST['profilePicChoice'] . ' WHERE `adminuser`.`admin_id` = ' . $_SESSION['uid'];
-                $r = mysqli_query($dbc, $q);
-                if ($r) {
-                    $q = 'SELECT pic_location FROM profilepictures WHERE profilePic_id = ' . $_POST['profilePicChoice'];
-                    $r = mysqli_query($dbc, $q);
-                    if ($r) {
-                        while ($row = $r->fetch_assoc()) {
-                            $newPicLocation = $row['pic_location'];
-                            $_SESSION['profilePic_id'] = $_POST['profilePicChoice'];
-                            $_SESSION['profilePic_Location'] = $newPicLocation;
-                        }
-                        while(mysqli_more_results($dbc)) {
-                            mysqli_next_result($dbc);
-                        }
-                        echo '<span class="hidden formNotice formNotice_success">Changes were saved</span>';
-                    } else {
-                    echo '<span class="hidden formNotice formNotice_error">Changes could not be saved </span>';
-                    }
-                } else {
-                    echo '<span class="hidden formNotice formNotice_error">Changes could not be saved </span>';
-                }
+                echo '<span class="hidden formNotice formNotice_error">Changes could not be saved </span>';
             }
         }
 
@@ -125,8 +105,8 @@ echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>
                 ?>
                     <a  class="adminBtn adminBtn_switch lightModeBtn"><span class="lightModeBtn_span"></span></a>
                     </form>
-                    <a href="editInfo.php?edit_type=general" class="adminBtn adminBtn_subtle editInfoBtn" >Edit Info</a>
-                    <a href="editInfo.php?edit_type=changep" class="adminBtn adminBtn_subtle changePwdBtn">Change Password</a>
+                    <a href="editInfo.php" class="adminBtn adminBtn_subtle editInfoBtn" >Edit Info</a>
+                    <a href="changePassword.php" class="adminBtn adminBtn_subtle changePwdBtn">Change Password</a>
                     <p class="adminControlsP"><span>Admin Controls</span></p>
                     <a href="register.php" class="adminBtn adminBtn_subtle editAdminsBtn">Create Admin</a>
                     <a href="deleteAdmin.php" class="adminBtn adminBtn_subtle editAdminsBtn">Delete Admin</a>

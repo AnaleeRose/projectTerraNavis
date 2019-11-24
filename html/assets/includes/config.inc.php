@@ -13,8 +13,8 @@ if ($online) {
     define('BASE_URL', 'http://bpa-development.savannahskinner.com/');
 } else {
     define('BASE_URI', '/Applications/XAMPP/xamppfiles/htdocs/BPA/');
-    // define('BASE_URL', 'http://localhost:81/BPA/');
-    define('BASE_URL', 'http://localhost/BPA/');
+    define('BASE_URL', 'http://localhost:81/BPA/');
+    // define('BASE_URL', 'http://localhost/BPA/');
 }
 
 define('PDFS_DIR', BASE_URI . 'pdfs/');
@@ -23,7 +23,6 @@ if ($online) {
 } else {
     define('MYSQL', $_SERVER['DOCUMENT_ROOT'] . '/bpa/mysql.inc.php');
 }
-// define('MYSQL', BASE_URL . 'mysql.inc.php');
 
 function error_handler($e_number, $e_message, $e_file, $e_line, $e_vars) {
     $message = "An error occured in script '$e_file' on line '$e_line:\n$e_message\n";
@@ -64,7 +63,6 @@ function check_if_admin() {
         if ($online) {
             header('Location: http://bpa-development.savannahskinner.com/admin/');
         } else {
-            // header('Location: http://localhost:81/bpa/admin/');
             header('Location: ' . BASE_URL . 'admin/');
         }
     }

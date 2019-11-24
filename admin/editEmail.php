@@ -84,7 +84,7 @@ $options = ['required' => null];
                     <a href="./new.php?media_type=email&clear=true" class="adminBtn adminBtn_danger">Clear Changes</a>
                 </div>
                </div>
-            <form class="newMediaForm" method="post">
+            <form class="newMediaForm generalForm" method="post">
 
                 <?php
 				$options = ['required' => null, 'placeholder' => 'Subject', 'maxlength' => 50, 'addtl_classes' => 'emailInput'];

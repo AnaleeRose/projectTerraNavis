@@ -73,6 +73,7 @@ while ($row = $r->fetch_assoc()) {
                 $trackElements[$elemName]['order'] = $currentNum;
 
                 $this_list_num = substr($elemName, 3,1);
+                $list_type = 'ul_li' ;
                 if (substr($elemName, 8,2) === '1') { // check if first in list, if so start a fieldset
                     $trackElements[$elemName]['first_li'] = true;
                     echo '<fieldset data-max=' . $max_lists_on_page . ' class="ul">';
@@ -83,6 +84,7 @@ while ($row = $r->fetch_assoc()) {
                     echo '</legend>';
                 } // unordered list
                 // create the input
+                echo '<label for="' . $elemName . '" class="listItemLabel">List Item ' . substr($elemName, 8,2) . '</label>';
                 echo '<input name="' . $elemName . '" class="' . $elemName . ' ' . substr($elemName, 0,7) . ' list-item createInput" value="' .$elemContents . '" data-content_type_id=7>';
 
                 // if the last li, conclude fieldset
@@ -93,7 +95,7 @@ while ($row = $r->fetch_assoc()) {
                     $listName = $listType . '_' . $listNum;
                     $btnName = $listName . '_btn';
 
-                    echo '<p data-list-name="' . $list_name . '"class="addToListBtn ' . $btnName . '">+</p>';
+                    echo '<p data-list-name="' . $listName . '"class="addToListBtn ' . $btnName . '">+</p>';
                     echo '</fieldset>';
                 } // find the last li item if statement
                 $listAllElements .= $elemName . ',';

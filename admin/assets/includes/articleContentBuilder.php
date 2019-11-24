@@ -10,23 +10,7 @@ while ($row = $r->fetch_assoc()) {
             case strpos($elemName, 'he'): {
             	$heading_num = substr($elemName, 7, 1);
                 $element_class = 'h' . $heading_num;
-                switch ($element_class) {
-                    case 'h2';
-						echo '<' . $element_class . ' class="printedElement printed' . $element_class . '">' . $elemContents . '</' . $element_class .'>';
-                        break;
-
-                    case 'h3';
-						echo '<' . $element_class . ' class="printedElement printed' . $element_class . '">' . $elemContents . '</' . $element_class .'>';
-                        break;
-
-                    case 'h4';
-						echo '<' . $element_class . ' class="printedElement printed' . $element_class . '">' . $elemContents . '</' . $element_class .'>';
-                        break;
-
-                    case 'h5';
-						echo '<' . $element_class . ' class="printedElement printed' . $element_class . '">' . $elemContents . '</' . $element_class .'>';
-                        break;
-                }
+				echo '<' . $element_class . ' class="printedElement printedHeading printed' . $element_class . '">' . $elemContents . '</' . $element_class .'>';
                 break;
             } // heading
 
@@ -37,13 +21,13 @@ while ($row = $r->fetch_assoc()) {
             case (strpos($elemName, 'ul') !== false);
                 if ($row['is_first_li'] === '1') echo '<ul class="printedElement printedUl">';
                 echo '<li>' . $elemContents . '</li>';
-                if ($row['is_last_li'] === '1') echo '</ul>';
+                if ($row['is_last_li'] === '1') echo '</ul data-crap>';
                 break;
 
             case (strpos($elemName, 'ol') !== false);
                 if ($row['is_first_li'] === '1') echo '<ol class="printedElement printedOl">';
                 echo '<li>' . $elemContents . '</li>';
-                if ($row['is_last_li'] === '1') echo '</ol>';
+                if ($row['is_last_li'] === '1') echo '</ol data-crap>';
                 break;
 
             default:

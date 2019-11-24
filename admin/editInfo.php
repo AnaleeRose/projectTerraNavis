@@ -9,49 +9,10 @@ require './../html/assets/includes/functions.php'; // various functions
 
 
 $pageTitle = 'Edit Profile Info';
-$editProfile_errors = [];
-$verifyPwd_errors = [];
 $relogged_in = $_SESSION['relogged_in'];
-$uid =$_SESSION['uid'];
-if (!isset($_GET['edit_type'])) {
-    ob_end_clean();
-    require './assets/includes/header.html';
-    require './assets/includes/error.php';
-    $links = ['Return To Home' => 'index.php'];
-    produce_error_page('Hmm, something is wrong with that link. Please contact our service team to resolve the issue.', $links);
-    require './assets/includes/footer.html';
-    exit();
-} else {
-	$edit_type = $_GET['edit_type'];
-}
-
-
-
-if (isset($_POST['verifyPwdBtn'])) {
-	$pwd = $_POST['pwd'];
-	if (empty($_POST['pwd'])) $verifyPwd_errors['pwd'] = 'Please enter your password';
-	if (empty($verifyPwd_errors)) {
-	    $q = "SELECT info FROM info WHERE admin_id = " . $_SESSION['uid'];
-	    $r = mysqli_query($dbc, $q);
-	    if ($r) {
-	    	$admin_verify_me = mysqli_fetch_row($r);
-	    	if (password_verify($pwd, $admin_verify_me[0])) {
-	    		$_SESSION['relogged_in']= true;
-	    		$relogged_in = $_SESSION['relogged_in'];
-	    	} else {
-	    		$verifyPwd_errors['pwd'] = 'Incorrect password';
-	    	}
-	    } else {
-		    ob_end_clean();
-		    require './assets/includes/header.html';
-		    require './assets/includes/error.php';
-		    $links = ['Return To Home' => 'index.php'];
-		    produce_error_page('Could not connect to the database. Please contact our service team to resolve the issue.', $links);
-		    require './assets/includes/footer.html';
-		    exit();
-	    }
-	}
-}
+$editProfile_errors = [];
+$uid = $_SESSION['uid'];
+require './assets/includes/verifyPassword_init.php';
 
 if (isset($_POST['editInfoBtn']) && $relogged_in) {
 	$run = false;
@@ -119,33 +80,19 @@ echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>
     require './assets/includes/newsfeed_active.php';
     nd('adminMC_Wrapper', 'noDI');
         nd('adminMainContent', 'mainContent');
-        ?>
-        <form class="editProfileForm" method="post">
-        <?php
 if ($relogged_in) {
-	if ($edit_type === 'general') {
+    echo '<h2 class="adminHeading">Edit Your Profile Information</h2>';
+    echo '<form class="editProfileForm generalForm" method="post">';
 		$options = ['required' => null, 'addtl_classes' => '', 'value' => $_SESSION['username']];
 		create_form_input('username', 'text', 'Username', $editProfile_errors, $options);
 
 		$options = ['required' => null, 'addtl_classes' => '', 'value' => $_SESSION['email']];
 		create_form_input('email', 'email', 'Email', $editProfile_errors, $options);
-
-	} elseif ($edit_type === 'changep') {
-
-	}
 	echo '<input type="submit" name="editInfoBtn" class="adminBtn adminBtn_danger" value="Edit Info">';
+    echo '<a href="profile.php" class="adminBtn adminBtn_subtle returnToProfileBtn">Return</a>';
 } else { // please relog in
-?>
-		<h2 class="adminHeading">Please Verify Your Password</h2>
-<?php
-		$options = ['required' => null, 'addtl_classes' => ''];
-		create_form_input('pwd', 'password', 'Password', $verifyPwd_errors, $options);
-		echo '<input type="submit" name="verifyPwdBtn" class="adminBtn adminBtn_danger" value="Verify Password">';
+    require './assets/includes/verifyPassword_form.php';
 }
-?>
-            <a href="profile.php" class="adminBtn adminBtn_aqua backToProfile">Back to Profile</a>
-        </form>
-<?php
 include './assets/includes/adminPage_end.php';
 include './assets/includes/footer.html';
 ?>
