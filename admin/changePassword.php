@@ -75,11 +75,10 @@ if (isset($_POST['changePwdBtn']) && $relogged_in && !$changed) {
 
     // if there are no errors...
     if (empty($changeP_errors)) {
-
         // ...toss that bad boi into the db...
-        $q = "UPDATE `info` SET `info` = '$p' WHERE `admin_id` = " . $uid;
-        $r = mysqli_query($dbc, $q);
-        if ($r) {
+        $stmt = $dbpdo->prepare("UPDATE `info` SET `info` = '$p' WHERE `admin_id` = :admin_id");
+        $stmt->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
+        if ($stmt->execute()) {
             // ...and let them know it was changed!!
             $changed = "Password was changed!";
         } else {
@@ -108,32 +107,46 @@ require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>';
     require './assets/includes/adminMenu.php';
+    // newsfeedContent_active.php shows the most recent articles and emails
     require './assets/includes/newsfeed_active.php';
     nd('adminMC_Wrapper', 'noDI');
         nd('adminMainContent', 'mainContent');
+
+// if they have verified thir password..
 if ($relogged_in) {
     echo '<h2 class="adminHeading">Change Password</h2>';
+    // ...and it has already successfully completed
     if ($changed != false) {
         ?>
         <h3 class="successHeading"><?= $changed; ?></h3>
         <a href="profile.php" class="adminBtn adminBtn_subtle returnToProfileBtn">Return To Profile</a>
         <?php
     } else {
+        // ...and it hasn't already successfully completed, create the changePassword form
         echo '<form class="generalForm" method="post">';
+
+            // options that can be passed to create_form_input, this one gives the inputs a required attribute
             $options = ['required' => null];
 
+            // custom function that make it easier to create common inputs, defined in form_functions.inc.php
             create_form_input('pwd_new', 'password', 'New Password', $changeP_errors, $options);
 
             create_form_input('pwd_conf', 'password', 'Confirm Password', $changeP_errors, $options);
 
-        echo '<input type="submit" name="changePwdBtn" class="adminBtn adminBtn_danger" value="Change Password">';
-        echo '<a href="profile.php" class="adminBtn adminBtn_subtle returnToProfileBtn">Return</a>';
+            ?>
 
-        echo '</form>';
+            <input type="submit" name="changePwdBtn" class="adminBtn adminBtn_danger" value="Change Password">
+            <a href="profile.php" class="adminBtn adminBtn_subtle returnToProfileBtn">Return</a>
+            </form>
+
+            <?php
     }
 
-} else { // please relog in
+} else {
+
+    // grabs the password verification form and stuffins
     require './assets/includes/verifyPassword_form.php';
+
 }
 include './assets/includes/adminPage_end.php';
 include './assets/includes/footer.html';
