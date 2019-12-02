@@ -18,6 +18,7 @@ if ($media_type === 'article') {
     $newArticle_errors = []; //tracks all errors
     $firstLists = []; //
     if (!isset($trackElements)) $trackElements = []; // tracks element id and order
+    $elementOrder = [];
     $at_least_one_element = false;
 
     // generates all possible values for possible list **
@@ -215,7 +216,7 @@ $options = ['required' => null];
                         } else {
                             $this_element_last_li = 0;
                         }
-                        // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_content', $this_element_first_li, $this_element_last_li)";
+                        echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_content', $this_element_first_li, $this_element_last_li)";
 
                         $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content, :elem_first_li, :elem_last_li)");
                         $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
@@ -260,7 +261,7 @@ $options = ['required' => null];
                         }
                     }
 
-                    header('Location: ' . BASE_URL . 'admin/view.php?view_type=read&media_type=article&media_id=' . $article_db_id);
+                    // header('Location: ' . BASE_URL . 'admin/view.php?view_type=read&media_type=article&media_id=' . $article_db_id);
                 } // foreach END
 
                 $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");

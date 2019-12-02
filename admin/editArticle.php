@@ -271,7 +271,13 @@ $options = ['required' => null];
                         if ($stmt->execute()) {
                             echo "<br>_LIGOOD_<br>";
                         } else {
-                            echo '<br>_LIBAD_<br>';
+                            ob_end_clean();
+                            require './assets/includes/header.html';
+                            require './assets/includes/error.php';
+                            $links = ['Return To Home' => 'index.php'];
+                            produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
+                            require './assets/includes/footer.html';
+                            exit();
                         }
 
                     } else {
@@ -287,7 +293,13 @@ $options = ['required' => null];
                         if ($stmt->execute()) {
                             echo "<br>_OTHERGOOD_<br>";
                         } else {
-                            echo '<br>_OTHERBAD_<br>';
+                            ob_end_clean();
+                            require './assets/includes/header.html';
+                            require './assets/includes/error.php';
+                            $links = ['Return To Home' => 'index.php'];
+                            produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
+                            require './assets/includes/footer.html';
+                            exit();
                         }
                     }
                 } // foreach END

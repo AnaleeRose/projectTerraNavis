@@ -302,16 +302,24 @@ function add_to_list(e) {
         btn_clicked.parentNode.insertBefore(label, btn_clicked)
         btn_clicked.parentNode.insertBefore(newListItemInput, btn_clicked)
         elementTracker.value += individual_name + ',';
+        track_elements(individual_name, list_item_name);
     } else {
         create_form_notice('maxElement', 'Maximum number of list items for this list type reached', 'error');
     }
 }
 
-allContentTypeBtns.forEach(function(elem) {
-    elem.addEventListener('click', function(elem) {
-        type_of_element(elem.srcElement);
+allContentTypeBtns.forEach(function(e) {
+    e.addEventListener('click', function(e) {
+        type_of_element(e.srcElement);
     });
 })
+
+
+elementOrder = [];
+function track_elements(individual_name, group_name) {
+    elementOrder.push(individual_name);
+    console.log(elementOrder);
+}
 
 
 function type_of_element(contentBtnClicked) { // determines the type of element and calls the eqquivalent function
