@@ -20,28 +20,47 @@ require './../html/assets/includes/form_functions.inc.php';
 // basic functions used throughout the site
 require './../html/assets/includes/functions.php';
 
+// tells it whether to produce the form for emails vs the form for articles using the variable saved int he url
+$media_type = $_GET['media_type']; 
 
-$media_type = $_GET['media_type']; // tells it whether to produce the form for emails vs the form for articles
-// build list of expected, required, and possile post values based on media type
 if ($media_type === 'article') {
+    // the minimum inputs expected
     $expected = ['article_name', 'article_category', 'article_description', 'imgs'];
-    $required = ['article_name', 'article_category'];
+
+    // the minimum inputs required
+    $required = ['article_name', 'article_category', 'article_description'];
+
+    // all possible inputs (it's a very long list lol, but I wanted to hard code so you can't make up whatever you want an insert it)
     $possible = [];
-    $element_types = ['p', 'heading2', 'heading3', 'heading4', 'heading5', 'hr', 'ul', 'ol']; // we'll build all possible lists from this list l8r
-    $newArticle_errors = []; //tracks all errors
+
+    // we'll build all possible lists from this list l8r
+    $element_types = ['p', 'heading2', 'heading3', 'heading4', 'heading5', 'hr', 'ul', 'ol'];
+
+     //tracks errors
+    $newArticle_errors = [];
     $firstLists = []; //
     if (!isset($trackElements)) $trackElements = []; // tracks element id and order
     $elementOrder = [];
     $at_least_one_element = false;
 
-    // generates all possible values for possible list **
+    // max amount of any element type on the page
     $max_on_page = 5;
+
+    // max amount of either list type on the page
     $max_lists_on_page = 2;
+    // total max of list items, for reasons. Might remove this cap later because it was originally for testing purposes
     $max_li_on_page = 20;
     $list_names;
-    $listAll = [];
+
+    // tracks the last list item so we know when to but the closing tag
     $last = [];
 
+    // lists all possible li names
+    $listAll = [];
+
+
+
+    // generates all possible element names and adds it to the possible array
     foreach ($element_types as $each_element_type) {
         $x = 1;
         if ($each_element_type === 'ul' || $each_element_type === 'ol') {
@@ -59,6 +78,7 @@ if ($media_type === 'article') {
         }
     }
 
+    // checks each list to find the first of the bunch
     foreach ($list_names as $each_list) {
         $first = false;
         $i = 1;
@@ -74,15 +94,16 @@ if ($media_type === 'article') {
     }
 
 } elseif ($media_type === 'email') {
+
+    // the minimum inputs expected
     $expected = ['email_subject', 'email_msg'];
+
+    // the minimum inputs required
     $required = ['email_subject', 'email_msg'];
+
+    //tracks errors
     $newEmail_errors = [];
 }
-
-
-
-
-// END possible list generator **
 
 
 
@@ -129,16 +150,16 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
     $noSpaceElementTracker = str_replace(' ', '', $_POST['elementTracker']);
     $elementsUsed = explode(',', $noSpaceElementTracker);
 
-    // IS IT TIME TO SEND TO DB???? ---------------------------------------------->
 }
 
 
 
 
 
-// PAGE HTML ---------------------------------------------------------------->
+// start creating page...
 require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
+// options that can be passed to create_form_input, this one gives the inputs a required attribute but others do way more
 $options = ['required' => null];
     require './assets/includes/adminMenu.php';
     require './assets/includes/newsfeed_active.php';
@@ -150,15 +171,16 @@ $options = ['required' => null];
                 <h2 class="adminHeading">New <?= ucfirst($media_type) ?></h2>
                 <div class="cornerLinks">
                 <?php
-                if ($media_type === 'article') {
-                    echo '<a href="./new.php?media_type=email" class="adminBtn adminBtn_aqua">Switch To Email</a>';
-                    echo '<a href="./new.php?media_type=article&clear=true" class="adminBtn adminBtn_danger">Clear Page</a>';
+                if ($media_type === 'article') { ?>
+                    <a href="./new.php?media_type=email" class="adminBtn adminBtn_aqua">Switch To Email</a>
+                    <a href="./new.php?media_type=article&clear=true" class="adminBtn adminBtn_danger">Clear Page</a>
+                <?php 
                 } elseif ($media_type === 'email') {
-                    echo '<a href="' . BASE_URL . 'admin/new.php?media_type=email&messageTemplate=true" class="adminBtn adminBtn_aqua templateMsgBtn" id="templateMsgBtn">Insert Template Message</a>';
-                    echo '<a href="./new.php?media_type=article" class="adminBtn adminBtn_aqua">Switch To Article</a>';
-                    echo '<a href="./new.php?media_type=email&clear=true" class="adminBtn adminBtn_danger">Clear Page</a>';
-                }
                 ?>
+                    <a href="<?= BASE_URL; ?>admin/new.php?media_type=email&messageTemplate=true" class="adminBtn adminBtn_aqua templateMsgBtn" id="templateMsgBtn">Insert Template Message</a>
+                    <a href="./new.php?media_type=article" class="adminBtn adminBtn_aqua">Switch To Article</a>
+                    <a href="./new.php?media_type=email&clear=true" class="adminBtn adminBtn_danger">Clear Page</a>
+                <?php } ?>
                 </div>
                 <!-- <a href="new?media_type<?= $media_type ?>&clear=true" class="adminBtn adminBtn_danger">Clear Page</a> -->
             </div>

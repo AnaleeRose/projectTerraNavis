@@ -1,12 +1,5 @@
 <?php
 DEFINE('DB_HOST', 'localhost');
-// // detects if online or offline and adjusts values accouringly
-// $url = $_SERVER['SERVER_NAME'];
-// if (strpos($url,'com') === false) {
-//     $online = false;
-// } else {
-//     $online = true;
-// }
 
 DEFINE('DB_NAME', 'analeerose_bpa');
 

@@ -1,12 +1,78 @@
+/*------------------------------------>Site:------------------>
+---------------------------->Terra Navis Admin Section-------------------->
+-------------------------------------------------------------------->*/
+
+
+
+/*-------------------------------------------------------------------->
+------------------------------>TABLE OF CONTENTS---------------->
+-------------------------------------------------------------------->
+
+use a ` before the name when searching for a section to jump directly to the beginning of it
+
+---------------> Root/Universal Styles
+----------------------> errors & notices
+----------------------> buttons
+----------------------> link generator
+----------------------> badges
+
+---------------> Login && Register
+
+---------------> Homepage
+
+---------------> Profile
+
+---------------> Newsfeed
+
+---------------> All Emails & All Articles & New Article & New Email
+----------------------> New Email & Edit Email
+
+---------------> Delete Article
+
+---------------> View
+
+---------------> Printed Styles
+
+--------------------------------------------------------------->END Contents*/
+
+/*-------------------------------------------------------------------->
+------------------------------>'Color Palette---------------->
+-------------------------------------------------------------------->*/
+
+:root {
+    --green: #4dc312;
+    --reddish: #e03b51;
+    --darkReddish: #9a1d2d;
+    --grey: #3b3535;
+    --aqua: #00A2B8;
+    --brightAqua: #00b7d0;
+    --dmodeBlack: #101520;
+    --marigold: #f9cc0c;
+    --lmodeBoxShadow: #b7b7b7;
+    --greyBG: #353131;
+    --text-grey: #ACACAC;
+    --tanGold: #c79e63;
+    --brown: #563a0e;
+}
+
+
+:root .lmode {--magenta: #d2006b;}
+:root .dmode {
+    --magenta: #df3c50;
+    --aqua: #af936a;
+    --brightAqua: #c79e63;
+}
+
+/*--------------------------------------------------------------->END Color Palette*/
+
 /*----------------------------------------------------------------------->
 `Root/Universal Styles
 ------------------------------------------------------------------------->*/
-/*colors to inspect ('tan: #dca352', 'reddish: #ab0a3c')''*/
+
 html {
     font-family: 'Muli', sans-serif;
-        font-size:16px;
+    font-size:16px;
     height: 100%;
-    /*my base styles*/
 }
 
 body{
@@ -39,30 +105,7 @@ a {text-decoration: none;}
 ul, ol {list-style-type: none;}
 fieldset{border: 2px solid #fff;}
 
-:root {
-    --green: #4dc312;
-    --reddish: #e03b51;
-    --darkReddish: #9a1d2d;
-    --grey: #3b3535;
-    --aqua: #00A2B8;
-    --brightAqua: #00b7d0;
-    --dmodeBlack: #101520;
-    /*--dmodeBlack: #202131;*/
-    --marigold: #f9cc0c;
-    --lmodeBoxShadow: #b7b7b7;
-    --greyBG: #353131;
-    --text-grey: #ACACAC;
-    --tanGold: #c79e63;
-    --brown: #563a0e;
-}
 
-
-:root .lmode {--magenta: #d2006b;}
-:root .dmode {
-    --magenta: #df3c50;
-    --aqua: #af936a;
-    --brightAqua: #c79e63;
-}
 
 .hidden {
     position: absolute;
@@ -154,7 +197,7 @@ fieldset{border: 2px solid #fff;}
     margin-top: 1.5rem;
 }
 
-/*------------------- error ----------------------------->*/
+/*------------------- `errors & notices ----------------------------->*/
 .text_error {
     color: var(--reddish) !important;
 }
@@ -233,7 +276,7 @@ fieldset{border: 2px solid #fff;}
         background: #e05c73;
     }
 
-/*------------------- buttons ----------------------------->*/
+/*------------------- `buttons ----------------------------->*/
 
 .adminBtn {
     background: var(--aqua);
@@ -432,7 +475,7 @@ fieldset{border: 2px solid #fff;}
         }
 
 
-/*------------------- link generator ----------------------------->*/
+/*------------------- `link generator ----------------------------->*/
 .linkGenBox {
     background: var(--brightAqua);
     border: 4px solid #F0F0F0;
@@ -542,7 +585,7 @@ fieldset{border: 2px solid #fff;}
 .linkGenEmptyError {color: var(--reddish);}
     .dmode .linkGenEmptyError {color: var(--magenta);}
 
-/*------------------- badges ----------------------------->*/
+/*------------------- `badges ----------------------------->*/
 
 .badge {
     background: var(--brightAqua);
@@ -558,6 +601,8 @@ fieldset{border: 2px solid #fff;}
 .badge_danger {background: var(--reddish);}
 
 .badge_accent {background: var(--green);}
+
+
 
 /*----------------------------------------------------------------------->
 `Login && Register
@@ -1395,15 +1440,6 @@ END Newsfeed
     position: absolute;
 }
 
-/*----------------------------------------------------------------------->
-New Article
-------------------------------------------------------------------------->*/
-
-
-
-/*----------------------------------------------------------------------->
-END New Article
-------------------------------------------------------------------------->*/
 
 
 /*----------------------------------------------------------------------->
@@ -1472,7 +1508,7 @@ END All Emails & All Articles & New Article & New Email
 
 
 /*----------------------------------------------------------------------->
-delete article
+Delete Article
 ------------------------------------------------------------------------->*/
 
 .deletePage {
@@ -1505,15 +1541,14 @@ delete article
     padding: .5rem .3rem;
 }
 
-
 /*----------------------------------------------------------------------->
-END delete article
+END Delete Article
 ------------------------------------------------------------------------->*/
 
 
 
 /*----------------------------------------------------------------------->
-preview
+View
 ------------------------------------------------------------------------->*/
 
 .previewEmailBox h3.adminHeading {
@@ -1581,7 +1616,7 @@ preview
     }
 
 /*----------------------------------------------------------------------->
-END preview
+END View
 ------------------------------------------------------------------------->*/
 
 

@@ -56,6 +56,7 @@ $last = [];
 
 //tracks all errors
 $newArticle_errors = [];
+
 $firstLists = [];
 
 // lists all elements, without all the extra stuff $trackElements carries
@@ -67,6 +68,7 @@ if (!isset($trackElements)) $trackElements = [];
 // to make sure there's at least one element, don't want an empty article
 $at_least_one_element = false;
 
+// $listAll = [];
 
 // grab the info about this article from the db
 $q = "SELECT * FROM `articles` WHERE article_id = $article_id";
