@@ -1,6 +1,6 @@
 <?php
 require './assets/includes/config.inc.php';
-echo '<br>' . $_SERVER['DOCUMENT_ROOT'] . '<br>';
+$page_title = "Home";
 require './assets/includes/head.php';
 ?>
 

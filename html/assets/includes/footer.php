@@ -8,9 +8,9 @@
                     <label for="email">Join Our Newsletter!</label>
                     <input id="email" name="email" type="email" placeholder="email@example.com">
                     <div class="icons">
-                            <a href="https://www.facebook.com/wddatft/"><img id="fb-icon" src="images/" alt="Facebook Icon"></a>
-                            <a href="https://twitter.com/wddatft"><img id="twitter-icon" src="images/" alt="Twitter Icon"></a>
-                            <a href="https://www.pinterest.com/wddatft/?autologin=true"><img id="pin-icon" src="images/" alt="Pinterest Icon"></a>
+                            <a href="<?= FACEBOOK_LINK; ?>"><img id="fb-icon" src="images/" alt="Facebook Icon"></a>
+                            <a href="<?= TWITTER_LINK; ?>"><img id="twitter-icon" src="images/" alt="Twitter Icon"></a>
+                            <a href="<?= PININTEREST_LINK; ?>"><img id="pin-icon" src="images/" alt="Pinterest Icon"></a>
                     </div>
                 </div>
                 <div id="contact-info">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="email">
                         <img id="email-icon" src="images/" alt="Email Icon">
-                        <p>email@address.com</p>
+                        <p><?= EMAIL_LINK ?></p>
                     </div>
                 </div>
                 <div id="copyright">
