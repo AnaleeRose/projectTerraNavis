@@ -6,7 +6,7 @@
             <li><a href="sustainability.php">Sustainability</a></li>
             <?php 
             // change the title in quotes below to match whatever the page title is on that page, all lower case in the quotes pls
-            // also added the dropdownUl class for the styles that match both (like fo js to target it for special effects!)
+            // also added the dropdownUl class for the styles that match both (like for js to target it for special effects!)
             if (strtolower($page_title) == 'sustainability') { 
             ?>
                 <ul class="sustain dropdownUl">
