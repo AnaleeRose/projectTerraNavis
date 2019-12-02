@@ -25,7 +25,7 @@ $media_type = $_GET['media_type'];
 
 if ($media_type === 'article') {
     // the minimum inputs expected
-    $expected = ['article_name', 'article_category', 'article_description', 'imgs'];
+    $expected = ['article_name', 'article_category', 'article_description', 'img', 'caption'];
 
     // the minimum inputs required
     $required = ['article_name', 'article_category', 'article_description'];
@@ -38,10 +38,13 @@ if ($media_type === 'article') {
 
      //tracks errors
     $newArticle_errors = [];
+    $img_errors = [];
+
     $firstLists = []; //
     if (!isset($trackElements)) $trackElements = []; // tracks element id and order
     $elementOrder = [];
     $at_least_one_element = false;
+    $complete_filename;
 
     // max amount of any element type on the page
     $max_on_page = 5;
@@ -93,6 +96,9 @@ if ($media_type === 'article') {
         }
     }
 
+
+
+
 } elseif ($media_type === 'email') {
 
     // the minimum inputs expected
@@ -107,7 +113,9 @@ if ($media_type === 'article') {
 
 
 
-// CHECK PAGE IF SUBMITTED----------------------------------------------------------->
+
+
+// CHECK PAGE IF SUBMITTED ----------------------------------------------------------->
 if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
     // ERROR HANDLING
     // if a required item is empty, toss an error
@@ -150,6 +158,83 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
     $noSpaceElementTracker = str_replace(' ', '', $_POST['elementTracker']);
     $elementsUsed = explode(',', $noSpaceElementTracker);
 
+    // IMAGE HANDLING ----------------------------------------------------------->
+    if (!empty($_FILES['img']['name']) && !empty(trim($_POST['caption']))) {
+        $permitted = [
+                'image/gif',
+                'image/jpeg',
+                'image/jpg',
+                'image/png'
+            ];
+
+        $max_image_size = 50000;
+        $destination = './assets/imgs/article_imgs/';
+        $imgCaption = $_POST['caption'];
+        $extension = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
+        $extension = strtolower($extension);  
+        try {
+            $checkFile = false;
+            $uploaded = current($_FILES);
+            if (isset($uploaded)) {
+                $cf['name'] = $_FILES['img']['name'];
+                $cf['type'] = $_FILES['img']['type'];
+                $cf['tmp_name'] = $_FILES['img']['tmp_name'];
+                $cf['error'] = $_FILES['img']['error'];
+                $cf['size'] = $_FILES['img']['size'];
+                if ($cf['error'] == 1 || $cf['error'] == 2) {
+                    $img_errors[] = "Something went wrong... Please try again later!";
+                    $checkSize = false;
+                } elseif ($cf['size'] == 0) {
+                    $img_errors[] = $cf['name'] . ' is an empty file.';
+                    $checkSize = false;
+                } elseif ($cf['size'] > $max_image_size) {
+                    $img_errors[] = $cf['name'] . ' exceeds the maximum size
+                        for a file (' . $max_image_size . ').';
+                    $checkSize = false;
+                } else {
+                    $checkSize = true;
+                }
+
+                if (in_array($cf['type'], $permitted)) {
+                    $checkType = true;
+                } else {
+                    if (!empty($_FILES['type'])) {
+                        $img_errors[] = $cf['name'] . ' is not permitted type of file.';
+                    }
+                    $checkType = false;
+                }
+
+                if ($cf['error'] != 0) {
+                    $img_errors[] = "Something went wrong... Please try again later!";
+                    // stop checking if no file submitted
+                    if ($file['error'] != 4) {
+                        $img_errors[] = "Something went wrong... Please try again later! Error code: 4";
+                    }
+                }
+
+                if ($checkSize && $checkType && empty($img_errors)) {
+                    $checkFile = true;
+                    $random_number = rand(0, 10) . rand(0, 10) . rand(0, 9);
+                    $filename = preg_replace('/\s+/', '_', $_POST['article_name']) . '_' . $random_number;
+                    $complete_filename = $filename . '.' .$extension;
+                    $move = move_uploaded_file($cf['tmp_name'], $destination . $complete_filename);
+                    if ($move) {
+                        $img_notices[] = $cf['name'] . ' was uploaded';
+                        $_POST['img_name'] = $complete_filename;
+                    } else {
+                        $img_errors[] = 'Image could not be uploaded. Please contact our service team.';
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+    } else {
+        if (empty($_FILES['img']['name'])) $img_errors[] = 'Missing: Image';
+        if (empty($_POST['caption'])) $newArticle_errors['caption'] = 'Missing: Caption';
+    } 
+
 }
 
 
@@ -184,12 +269,12 @@ $options = ['required' => null];
                 </div>
                 <!-- <a href="new?media_type<?= $media_type ?>&clear=true" class="adminBtn adminBtn_danger">Clear Page</a> -->
             </div>
-            <form class="newMediaForm generalForm" method="post">
+            <form class="newMediaForm generalForm" method="post" enctype="multipart/form-data">
             <?php
 
                 if ($media_type === 'article') {
                     $options = ['required' => null, 'placeholder' => 'Name', 'maxlength' => 50];
-                    create_form_input('article_name', 'text', 'Aricle Name: ', $newArticle_errors, $options);
+                    create_form_input('article_name', 'text', 'Aricle Name', $newArticle_errors, $options);
                     ?>
                     <label for="article_category">Category</label>
                     <select class="categorySelect" required name="article_category" id="article_category">
@@ -208,6 +293,23 @@ $options = ['required' => null];
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
                     $options = ['required' => null, 'placeholder' => 'Description', 'maxlength' => 250];
                     create_form_input('article_description', 'textarea', 'Description', $newArticle_errors, $options);
+                    echo '<div class="imgBox"></div>';
+                    $options = ['required' => null, 'placeholder' => 'Caption', 'maxlength' => 50];
+                    create_form_input('caption', 'text', 'Image Caption', $newArticle_errors, $options);
+                    if (!empty($img_errors)) {
+                        foreach ($img_errors as $key => $value) {
+                            echo '<p class="formNotice formNotice_InlineError">' . $value . ' </p>';
+                        }
+                    }
+
+                    if (!empty($img_notices)) {
+                        foreach ($img_notices as $key => $value) {
+                            echo '<p class="formNotice formNotice_InlineNotice">' . $value . ' </p>';
+                        }
+                    }
+                    echo '<input type="text" class="hidden img_name" name="img_name" ';
+                    if (!empty($complete_filename)) echo 'value="' . $complete_filename . '"';
+                    echo '>';
                     // create_form_input('addThisContent', 'hidden', '', $newArticle_errors);
                 ?>
                 <hr class="newHr">
@@ -217,8 +319,7 @@ $options = ['required' => null];
                     </div>
 <!-- check content if you clicked published and send it on it's way! -->
 <?php
-    if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
-        print_r($trackElements);
+    if (isset($_POST['publishMediaBtn']) && $media_type === 'article' && 1 === 3) {
         if (empty($newArticle_errors) && $at_least_one_element === true) {
             $a_name = $_POST['article_name'];
             $a_description = $_POST['article_description'];
@@ -335,9 +436,9 @@ $options = ['required' => null];
                                 <li><p class="contentPhpBtn" data-contentType="ol" data-content_type_id=8>Ordered List</p></li>
                             </ul>
                         </div>
-                        <label for="imgs" class="contentTypeBtn uploadImgBtn" id="uploadImgBtn" data-content_type_id=10>Image</label>
-                        <small class="imgsNotice">Images will be placed automatically, based upon size</small>
-                <input type="file" name="imgs" class="hidden" id="imgs" onChange="file_funct" data-content_type_id=9>
+                        <label for="img" class="contentTypeBtn uploadImgBtn" id="uploadImgBtn" data-content_type_id=10>Image</label>
+                        <small class="imgNotice">Images will be placed automatically, based upon size</small>
+                <input type="file" name="img" class="hidden" id="img" onChange="file_funct" data-content_type_id=9>
                     </div>
 
 
@@ -360,7 +461,6 @@ $options = ['required' => null];
                         }
 
                         if (empty($newEmail_errors)) {
-                            print_r($_POST);
                             $stmt = $dbpdo->prepare("INSERT INTO `emails` (`email_id`, `email_subject`, `email_message`, `save_for_later`, `date_added`) VALUES (NULL, :e_subject, :e_msg, :e_saved, current_timestamp())");
                             $stmt->bindParam(':e_subject', $e_subject, PDO::PARAM_STR);
                             $stmt->bindParam(':e_msg', $e_msg, PDO::PARAM_STR);

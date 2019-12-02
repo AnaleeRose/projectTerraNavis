@@ -143,4 +143,4 @@ while ($row = $r->fetch_assoc()) {
 // } else {echo 'why';} // foreach END
 
 
-print_r($trackElements);
+// print_r($trackElements);
