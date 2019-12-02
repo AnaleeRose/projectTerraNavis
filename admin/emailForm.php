@@ -1,30 +1,54 @@
 <?php
-ob_start();
-session_start();
-require './../html/assets/includes/config.inc.php'; // basic definitions used throughout the site
-check_if_admin(); // toss user back to login page if they're not logged in
-require MYSQL; // connect to db
-require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
-require './../html/assets/includes/functions.php'; // various functions
+// ----------------------------------------------------------------------------------------------------------->
+// ----------------------------------------------------------------------------------------------------->
+// ---------------------------------------------------------------------------------->
+// NOTE!!!!!!
+// this page is SUPER INCOMPLETE, mostly just testing if I caould send emails to external mail systems on my server...
+// ---------------------------------------------------------------------------------->
+// ----------------------------------------------------------------------------------------------------------->
+// ----------------------------------------------------------------------------------------------------------->
 
+
+// ob_start tells it not to show anything until everything is done loading so I can intterupt it at any time to load an error page without php getting mad about content already on display
+ob_start();
+
+// starts a session lol, aka it tracks information even when you go to a different page within the site
+session_start();
+
+ // config sets up a number of vital defnitions and a few functions too
+require './../html/assets/includes/config.inc.php';
+
+// toss user back to login page if they're not logged in
+check_if_admin();
+
+// connects ya to the db
+require MYSQL;
+
+// makes it easy to create forms
+require './../html/assets/includes/form_functions.inc.php';
+
+// basic functions used throughout the site
+require './../html/assets/includes/functions.php';
+
+
+
+// tracks errors
 $emailForm_errors = [];
 $options = ['required' => null];
 
-// $mail_to_send_to = "name@anydomain.tld" identifies the email address the message will be sent to. It can be any email address, including third-party services like Gmail, Yahoo, etc.
-// $from_email = "from@yourdomain.tld" identifies the email address the message will be sent from. It should be a local email address (created in cPanel)
-// Reply-To: $email" is the email address of the site visitor, assuming they specify one in the "Your email" field of the contact form. This email is then assigned as the "Reply To" address.
-
-
+// for testing puposes, this information is currently hardcoded and sent to me
 $mail_to_send_to = "analeeskinner@gmail.com";
 $from_email = "contact@savannahskinner.com";
 $sendflag = false;
+
+// if there's content to send, give the go ahead to send the email!
 if (!empty($_POST['email']) && !empty($_POST['msg'])) {
-    echo 'not empty';
     $sendflag = true;
 } else {
-    echo 'empty';
+    $emailForm_errors['empty'] = 'empty';
 }
 if ($sendflag) {
+    // create the email and send that bad boi
     $email = $_POST['email'] ;
     $message = $_POST['msg'] ;
     $headers = "From: $from_email" . "\r\n" . "Reply-To: $email" . "\r\n" ;
