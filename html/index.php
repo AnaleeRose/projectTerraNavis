@@ -20,7 +20,7 @@ require './assets/includes/head.php';
 </div>
 ​
 <div id="mainpg-sec2">
-    <h1 class="sec-title">Sustainble Living</h1>
+    <h1 class="sec-title">Sustainable Living</h1>
     <p>There’s green, and then there’s green…. Michael Reynolds dreamed of creating an ultra eco-friendly way of living with his Earthship designs. These principles led to an extreme minimum in waste by using such methods as building with mostly up cycled materials, collecting rain water, using solar and wind energy, implementation of black and grey water systems to feed into outdoor gardens to aid in the growing of ones own food. When all of these concepts are brought together in a single design, you get one of the most eco-friendly home options available to us today.</p>
 </div>
 ​
