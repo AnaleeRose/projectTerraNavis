@@ -117,11 +117,11 @@ while ($row = $r->fetch_assoc()) {
                     echo '</legend>';
                 }
                 // create the input
+                echo '<label for="' . $elemName . '" class="listItemLabel">List Item ' . substr($elemName, 8,2) . '</label>';
                 echo '<input name="' . $elemName . '" class="' . $elemName . ' ' . substr($elemName, 0,7) . ' list-item createInput" value="' . $elemContents . '" data-content_type_id=8>';
 
                 // if the last li, conclude fieldset
                 if (in_array($elemName, $last)) {
-                    $trackElements[$elemName]['content'] = $elemContents;
                     $trackElements[$elemName]['last_li'] = true;
                     $listType = substr($elemName, 0, 2);
                     $listNum = substr($elemName, 3, 1);
@@ -143,3 +143,4 @@ while ($row = $r->fetch_assoc()) {
 // } else {echo 'why';} // foreach END
 
 
+// print_r($trackElements);

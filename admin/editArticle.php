@@ -1,42 +1,81 @@
 <?php
+// ob_start tells it not to show anything until everything is done loading so I can interrupt it at any time to load an error page without php getting mad about content already on display
 ob_start();
+
+// starts a session lol, aka it tracks information even when you go to a different page within the site
 session_start();
-require './../html/assets/includes/config.inc.php'; // basic definitions used throughout the site
-check_if_admin(); // toss user back to login page if they're not logged in
-$user = 'admin';
-require MYSQL; // connect to db
-require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
-if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php'; // makes it easy to create forms
-require './../html/assets/includes/functions.php'; // various functions
+
+ // config sets up a number of vital defnitions and a few functions too
+require './../html/assets/includes/config.inc.php';
+
+// toss user back to login page if they're not logged in
+check_if_admin();
+
+// connects ya to the db
+require MYSQL;
+
+// makes it easy to create forms
+require './../html/assets/includes/form_functions.inc.php';
+
+// basic functions used throughout the site
+require './../html/assets/includes/functions.php';
+
+// makes it easy to create common inputs for this page specifically, we only need it if they haven't clicked the button yet since this code is just to rebuild the article into inputs
+if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php';
 
 
 
-// intialize various variables
+// ------------------------------->intialize various variables
 $media_type = 'article';
+
+// the minimum inputs expected
 $expected = ['article_name', 'article_category', 'article_description', 'imgs'];
-$required = ['article_name', 'article_category'];
+
+// the minimum inputs required
+$required = ['article_name', 'article_category', 'article_description'];
+
+// all possible inputs (it's a very long list lol, but I wanted to hard code so you can't make up whatever you want an insert it)
 $possible = [];
-$element_types = ['p', 'heading2', 'heading3', 'heading4', 'heading5', 'hr', 'ul', 'ol']; // we'll build all possible lists from this list l8r
+
+// we'll build all possible lists from this list l8r
+$element_types = ['p', 'heading2', 'heading3', 'heading4', 'heading5', 'hr', 'ul', 'ol'];
 $article_id = $_GET['article_id'];
 $elementsUsed;
 
+// max amount of any element type on the page
 $max_on_page = 5;
+
+// max amount of either list type on the page
 $max_lists_on_page = 2;
+// total max of list items, for reasons. Might remove this cap later because it was originally for testing purposes
 $max_li_on_page = 20;
 $list_names;
+
+// tracks the last list item so we know when to but the closing tag
 $last = [];
-$newArticle_errors = []; //tracks all errors
-$firstLists = []; //
+
+//tracks all errors
+$newArticle_errors = [];
+
+$firstLists = [];
+
+// lists all elements, without all the extra stuff $trackElements carries
 $listAllElements = '';
-if (!isset($trackElements)) $trackElements = []; // tracks element id and order
+
+// tracks all element ids and order
+if (!isset($trackElements)) $trackElements = [];
+
+// to make sure there's at least one element, don't want an empty article
 $at_least_one_element = false;
 
+// $listAll = [];
 
-
+// grab the info about this article from the db
 $q = "SELECT * FROM `articles` WHERE article_id = $article_id";
 $r = mysqli_query($dbc, $q);
 if ($r && mysqli_num_rows($r) > 0) {
     while ($row = $r->fetch_assoc()) {
+        // set the _post variables if this is the first time loading the page
         if (!isset($_POST['article_name'])) $_POST['article_name'] = $row['article_name'];
         if (!isset($_POST['article_description'])) $_POST['article_description'] = $row['article_description'];
         if (!isset($_POST['article_category']))$_POST['article_category'] = $row['article_category'];
@@ -44,6 +83,7 @@ if ($r && mysqli_num_rows($r) > 0) {
         $date_added = $row['date_added'];
     }
 } else {
+    // if it cant find that article it'll toss an error
     require './assets/includes/header.html';
     require './assets/includes/error.php';
     $links = ['Return To Home' => 'index.php'];
@@ -52,6 +92,7 @@ if ($r && mysqli_num_rows($r) > 0) {
     exit();
 }
 
+// grabs all the list items tied to that article, we'll need to sort these a little differently than the rest
 $q = "SELECT `element_name` FROM `article_content` WHERE article_id = " . $article_id . " && ((content_type = 7) || (content_type = 8))";
 $r = mysqli_query($dbc, $q);
 if ($r && mysqli_num_rows($r) > 0) {
@@ -63,6 +104,7 @@ if ($r && mysqli_num_rows($r) > 0) {
         $listAll[$list_name][] = $elementToCheck;
     }
 } elseif (!$r) {
+    // if the query failed it'll toss an error
     require './assets/includes/header.html';
     require './assets/includes/error.php';
     $links = ['Return To Home' => 'index.php'];
@@ -74,11 +116,11 @@ if ($r && mysqli_num_rows($r) > 0) {
 
 
 
-// generates all possible values for possible list **
-
+// generates all possible element names and adds it to the possible array
 
 foreach ($element_types as $each_element_type) {
     $x = 1;
+    // if it's a list, we'll need to handle it a little differently with it's own while loop
     if ($each_element_type === 'ul' || $each_element_type === 'ol') {
         while ($x <= $max_lists_on_page) {
             $list_name = $each_element_type . '_' . $x;
@@ -92,8 +134,9 @@ foreach ($element_types as $each_element_type) {
             $x++;
         }
     }
-} // builds a list of all possible values
+}
 
+// checks each list to find the first of the bunch
 foreach ($list_names as $each_list) {
     $first = false;
     $i = 1;
@@ -108,10 +151,9 @@ foreach ($list_names as $each_list) {
     }
 }
 
-// END possible list generator **
 
 
-// gathers info on all lists/list items
+// finds the last list item in each list and adds it to a list
 if (!empty($listAll) && is_array($listAll)) {
     foreach ($listAll as $elementToCheck) {
         $last[] = end($elementToCheck);
@@ -138,15 +180,15 @@ if (isset($_POST['publishMediaBtn'])) {
         $newArticle_errors['article_description'] = "Links are not allowed in the name or description.";
     }
 
+    // check each possible element to see if at least one is not empty
     foreach ($possible as $elementToCheck) {
-        if (isset($_POST[$elementToCheck]) && !empty($_POST[$elementToCheck])) {
-            echo $_POST[$elementToCheck];
+        if (isset($_POST[$elementToCheck]) && !empty($_POST[$elementToCheck]) && $at_least_one_element === false) {
             $at_least_one_element = true;
             break;
         }
     }
 
-
+    // if there isn't any content in the article, throw an error
     if ($at_least_one_element === false) {
         $newArticle_errors['article_name'] = "No content in article...";
     }
@@ -165,6 +207,7 @@ if (isset($_POST['publishMediaBtn'])) {
 // PAGE HTML ---------------------------------------------------------------->
 require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
+// options that can be passed to create_form_input, this one gives the inputs a required attribute but others do way more
 $options = ['required' => null];
     require './assets/includes/adminMenu.php';
     require './assets/includes/newsfeed_active.php';
@@ -191,6 +234,7 @@ $options = ['required' => null];
                     <select class="categorySelect" required name="article_category" id="article_category">
                         <option value="" disabled selected>Select Category</option>
                     <?php
+                    // pull all possible categories from the db
                     $q = "SELECT * FROM categories";
                     $r = mysqli_query($dbc, $q);
                     if ($r) {
@@ -201,11 +245,16 @@ $options = ['required' => null];
                         }
                     }
                     echo '</select>';
+
+                    // definition from config.inc.php that creates a required tag
                     echo REQUIRED;
+
+                    // throw an error if something went wrong with the select (create_form_input usually handles this but since this once was made here, it has to create errors here too)
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
                     $options = ['required' => null, 'placeholder' => 'Description', 'maxlength' => 400];
                     create_form_input('article_description', 'textarea', 'Description', $newArticle_errors, $options);
                     echo REQUIRED;
+                    // so we can keep track of when this article was created
                     echo '<input type="text" name="date_added" id="date_added" class="textInput createInput hidden"' ;
                     if (isset($date_added)) echo ' value="' . $date_added . '"';
                     '>';
@@ -214,9 +263,11 @@ $options = ['required' => null];
 <!-- Add content when you click a content link -->
                     <div id="newContent" class="newContent">
                         <?php
+                        // if they have already pushed the button, use the normal element creator
                         if (isset($_POST['publishMediaBtn'])) {
                             require './assets/includes/contentTypeSwitch.php';
                         } else {
+                            // if they HAVENT pushed the button, use the customized version of the element creator
                             require './assets/includes/contentTypeSwitch_edit.php';
                         }
                         ?>
@@ -224,25 +275,30 @@ $options = ['required' => null];
 <!-- check content if you clicked published and send it on it's way! -->
 <?php
     if (isset($_POST['publishMediaBtn'])) {
+        // if u have clickty clicked the button and there's at least one piece of content...
         if (empty($newArticle_errors) && $at_least_one_element === true) {
             $a_name = htmlentities($_POST['article_name']);
             $a_description = htmlentities($_POST['article_description']);
             $a_category = $_POST['article_category'];
+
+            // flags theis article for errors so if something goes wrong later on we can findd this specific article more easily
             $noErrors = 1;
 
             $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, :date_added, CURRENT_TIMESTAMP, :error_flag)");
-            // bind the paramaters
             $stmt->bindParam(':a_name', $a_name, PDO::PARAM_STR);
             $stmt->bindParam(':a_description', $a_description, PDO::PARAM_STR);
             $stmt->bindParam(':a_category', $a_category, PDO::PARAM_INT);
             $stmt->bindParam(':date_added', $date_added, PDO::PARAM_STR);
             $stmt->bindParam(':error_flag', $noErrors, PDO::PARAM_BOOL);
 
-            // // execute the prepared statement
+            // ...attempt to add that bad boi to the db...
             if ($stmt->execute()) {
-                echo 'added';
+                // if all that nonsense worked, grab that shiny new id
                 $article_db_id = $dbpdo->lastInsertId();
+
+                // ...and add each new element...
                 foreach ($trackElements as $this_element_name => $this_element_info) {
+                    // ...and if it's a list item, add it this way
                     if (strpos($this_element_name, 'l') !== false) {
                         $this_element_id = $this_element_info['id'];
                         $this_element_order = $this_element_info['order'];
@@ -268,13 +324,21 @@ $options = ['required' => null];
                         $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
                         $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
 
-                        if ($stmt->execute()) {
-                            echo "<br>_LIGOOD_<br>";
-                        } else {
-                            echo '<br>_LIBAD_<br>';
+                        if (!$stmt->execute()) {
+
+                            // if anything goes wrong, throw an error!
+                            ob_end_clean();
+                            require './assets/includes/header.html';
+                            require './assets/includes/error.php';
+                            $links = ['Return To Home' => 'index.php'];
+                            produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
+                            require './assets/includes/footer.html';
+                            exit();
+
                         }
 
                     } else {
+                        // ...but if it's NOT a list item, add it this way
                         $this_element_id = $this_element_info['id'];
                         $this_element_order = $this_element_info['order'];
                         $this_element_content = $this_element_info['content'];
@@ -284,22 +348,33 @@ $options = ['required' => null];
                         $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
                         $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
                         $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
-                        if ($stmt->execute()) {
-                            echo "<br>_OTHERGOOD_<br>";
-                        } else {
-                            echo '<br>_OTHERBAD_<br>';
+
+                        if (!$stmt->execute()) {
+
+                            // if anything goes wrong, throw an error!
+                            ob_end_clean();
+                            require './assets/includes/header.html';
+                            require './assets/includes/error.php';
+                            $links = ['Return To Home' => 'index.php'];
+                            produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
+                            require './assets/includes/footer.html';
+                            exit();
+
                         }
                     }
                 } // foreach END
 
                 $stmt = $dbpdo->prepare("DELETE FROM articles WHERE article_id = :a_id");
                 $stmt->bindParam(':a_id', $article_id, PDO::PARAM_STR);
+                // ...and if EVERYTHIGN went well, remove that error flag!
                 if ($stmt->execute()) {
                     $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
                     $stmt->bindParam(':a_id', $article_db_id, PDO::PARAM_STR);
                     if ($stmt->execute()) {
                         header('Location: ' . BASE_URL . 'admin/view.php?view_type=view&media_type=article&media_id=' . $article_db_id);
                     } else {
+
+                        // or throw an error, ya know, if something went wrong
                         ob_end_clean();
                         require './assets/includes/header.html';
                         require './assets/includes/error.php';
@@ -308,19 +383,20 @@ $options = ['required' => null];
                         require './assets/includes/footer.html';
                         exit();
                     }
-                // $q = "DELETE FROM articles WHERE article_id = $article_id";
-                // $r = mysqli_query($dbc, $q);
-                // if ($r) {
                 } else {
+
+                    // throw an error, ya know, if something went wrong
                     ob_end_clean();
                     require './assets/includes/header.html';
                     require './assets/includes/error.php';
                     $links = ['Return To Home' => 'index.php'];
-                    produce_error_page('Could not connect to the database, your article may be salvageable. Please contact our service team to resolve the issue.', $links);
+                    produce_error_page('Could not connect to the database, your article may be partially salvageable. Please contact our service team to resolve the issue.', $links);
                     require './assets/includes/footer.html';
                     exit();
                 }
             } else {
+
+                // throw an error, ya know, if something went wrong
                 ob_end_clean();
                 require './assets/includes/header.html';
                 require './assets/includes/error.php';
@@ -361,6 +437,7 @@ $options = ['required' => null];
                     <input type="submit" name="publishMediaBtn" id="publishBtn" class="adminBtn adminBtn_accent publishBtn" value="Edit Article">
                 <?php
                 }
+                // the code below is just putting some important info out where js can grab and work with it!
                 ?>
                 <input type="text" id="elementTracker" name="elementTracker" class="hidden" value="<?php if (isset($_POST['elementTracker'])) {
                     echo $_POST['elementTracker'];

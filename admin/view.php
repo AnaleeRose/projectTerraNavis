@@ -91,7 +91,7 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
             <div class="hidden leaveWarning">
             	<p>If you leave this page, this email will be saved but not sent. Are you sure you to leave?</p>
             	<a href="./all<?= ucfirst($media_type); ?>s.php" class="adminBtn adminBtn_danger">Yes, save and leave</a>
-            	<a class="adminBtn adminBtn_subtle noLeave">No, return to <?= $media_type;?></a>
+            	<a class="adminBtn <?php if ($_SESSION['light_mode'] === 'lmode') {echo 'adminBtn_aqua';} else {echo 'adminBtn_subtle';} ?> noLeave">No, return to <?= $media_type;?></a>
             </div>
             <form class="newMediaForm" method="post">
         <?php

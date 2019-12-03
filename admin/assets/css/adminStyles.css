@@ -1,12 +1,80 @@
+/*------------------------------------>Site:------------------>
+---------------------------->Terra Navis Admin Section-------------------->
+-------------------------------------------------------------------->*/
+
+
+
+/*-------------------------------------------------------------------->
+------------------------------>TABLE OF CONTENTS---------------->
+-------------------------------------------------------------------->
+
+use a ` before the name when searching for a section to jump directly to the beginning of it
+
+---------------> Root/Universal Styles
+----------------------> errors & notices
+----------------------> buttons
+----------------------> link generator
+----------------------> badges
+
+---------------> Login && Register
+
+---------------> Homepage
+
+---------------> Profile
+
+---------------> Newsfeed
+
+---------------> All Emails & All Articles & New Article & New Email
+----------------------> New Email & Edit Email
+
+---------------> Delete Article
+
+---------------> View
+
+---------------> Printed Styles
+
+--------------------------------------------------------------->END Contents*/
+
+/*-------------------------------------------------------------------->
+------------------------------>'Color Palette---------------->
+-------------------------------------------------------------------->*/
+
+:root {
+    --aqua: #00A2B8;
+    --brightAqua: #00b7d0;
+    --brown: #563a0e;
+    --darkReddish: #9a1d2d;
+    --dmodeBlack: #101520;
+    --green: #4dc312;
+    --grey: #3b3535;
+    --greyBG: #353131;
+    --lmodeBoxShadow: #b7b7b7;
+    --marigold: #f9cc0c;
+    --reddish: #e03b51;
+    --text-grey: #ACACAC;
+    --tanGold: #c79e63;
+}
+
+
+:root .lmode {--magenta: #d2006b;}
+:root .dmode {
+    --aqua: #af936a;
+    --brightAqua: #c79e63;
+    --magenta: #df3c50;
+    /*--marigold: #75c8ff;*/
+    /*--tanGold: #a9c9de;*/
+}
+
+/*--------------------------------------------------------------->END Color Palette*/
+
 /*----------------------------------------------------------------------->
 `Root/Universal Styles
 ------------------------------------------------------------------------->*/
-/*colors to inspect ('tan: #dca352', 'reddish: #ab0a3c')''*/
+
 html {
     font-family: 'Muli', sans-serif;
-        font-size:16px;
+    font-size:16px;
     height: 100%;
-    /*my base styles*/
 }
 
 body{
@@ -17,8 +85,10 @@ body{
     #pageWrapper{height: 100%;}
     .lmode {background-color: #ADBCBF;}
     .dmode {
-        background-color: #697071;
+        /*background-color: #20435a;*/
         background-color: #6d4b1d;  /*gold_redo*/
+        /*background: linear-gradient(to right, #b96d81, #420c1b);*/
+
         color: #fff;
     }
 
@@ -39,30 +109,7 @@ a {text-decoration: none;}
 ul, ol {list-style-type: none;}
 fieldset{border: 2px solid #fff;}
 
-:root {
-    --green: #4dc312;
-    --reddish: #e03b51;
-    --darkReddish: #9a1d2d;
-    --grey: #3b3535;
-    --aqua: #00A2B8;
-    --brightAqua: #00b7d0;
-    --dmodeBlack: #101520;
-    /*--dmodeBlack: #202131;*/
-    --marigold: #f9cc0c;
-    --lmodeBoxShadow: #b7b7b7;
-    --greyBG: #353131;
-    --text-grey: #ACACAC;
-    --tanGold: #c79e63;
-    --brown: #563a0e;
-}
 
-
-:root .lmode {--magenta: #d2006b;}
-:root .dmode {
-    --magenta: #df3c50;
-    --aqua: #af936a;
-    --brightAqua: #c79e63;
-}
 
 .hidden {
     position: absolute;
@@ -154,7 +201,7 @@ fieldset{border: 2px solid #fff;}
     margin-top: 1.5rem;
 }
 
-/*------------------- error ----------------------------->*/
+/*------------------- `errors & notices ----------------------------->*/
 .text_error {
     color: var(--reddish) !important;
 }
@@ -176,15 +223,19 @@ fieldset{border: 2px solid #fff;}
         top: 10rem;
     }
 
-        .formNotice_InlineError {
+        .formNotice_InlineError, .formNotice_InlineNotice {
             background-color: rgba(255, 228, 228, 0.82);
             margin: 0 auto 1rem;
         }
 
-        .dmode .formNotice_InlineError {
+            .formNotice_InlineNotice {background-color: var(--aqua);}
+
+        .dmode .formNotice_InlineError, .dmode .formNotice_InlineNotice {
             background-color: var(--reddish);
             color: #fff;
         }
+
+            .dmode .formNotice_InlineNotice {background-color: var(--aqua);}
 
     .formNotice_Required {
         color: var(--aqua);
@@ -233,7 +284,7 @@ fieldset{border: 2px solid #fff;}
         background: #e05c73;
     }
 
-/*------------------- buttons ----------------------------->*/
+/*------------------- `buttons ----------------------------->*/
 
 .adminBtn {
     background: var(--aqua);
@@ -375,7 +426,7 @@ fieldset{border: 2px solid #fff;}
     font-size: 1.2rem;
     font-weight: bold;
     margin: .5rem;
-    padding: .8rem 1.2rem .8rem 3rem;
+    padding: 1rem 1.2rem .8rem 3rem;
     position: relative;
     min-width: 5rem;
     max-width: 10rem;
@@ -432,7 +483,7 @@ fieldset{border: 2px solid #fff;}
         }
 
 
-/*------------------- link generator ----------------------------->*/
+/*------------------- `link generator ----------------------------->*/
 .linkGenBox {
     background: var(--brightAqua);
     border: 4px solid #F0F0F0;
@@ -542,7 +593,7 @@ fieldset{border: 2px solid #fff;}
 .linkGenEmptyError {color: var(--reddish);}
     .dmode .linkGenEmptyError {color: var(--magenta);}
 
-/*------------------- badges ----------------------------->*/
+/*------------------- `badges ----------------------------->*/
 
 .badge {
     background: var(--brightAqua);
@@ -558,6 +609,8 @@ fieldset{border: 2px solid #fff;}
 .badge_danger {background: var(--reddish);}
 
 .badge_accent {background: var(--green);}
+
+
 
 /*----------------------------------------------------------------------->
 `Login && Register
@@ -709,7 +762,7 @@ END Login & Register
 
 .adminHome {
     display: grid;
-    grid-template-columns: 120px 450px auto;
+    grid-template-columns: 130px 450px auto;
     grid-template-areas: '. newsfeedContent adminMainContent';
     height: 100%;
 }
@@ -749,7 +802,7 @@ END Login & Register
     position: fixed;
     top: 0;
     left: 0;
-    width: 120px;
+    width: 130px;
 }
 
     .lmode .adminMenu {background-color: #fff;}
@@ -766,14 +819,16 @@ END Login & Register
 
     .lmode .newsfeedContent {background: linear-gradient(90deg, rgba(0,0,0,0) 0%, #dfe4e8 3%, #dfe4e8 93.5%, rgba(0,0,0,0) 96%);}
     .dmode .newsfeedContent {
-        /*background: linear-gradient(90deg, rgba(242,245,247,0) 0%, #94A1AA 2%, #94A1AA 93.5%, rgba(242,245,247,0) 96%);*/
-        background: linear-gradient(90deg, rgba(242,245,247,0) 0%, #ead0ac 2%, #7d5f34 93.5%, rgba(242,245,247,0) 96%);}  /*gold_redo*/
-
+        /*background: linear-gradient(90deg, rgba(242,245,247,0) 0%, #f9fafa 2%, #546673 93.5%, rgba(242,245,247,0) 96%);*/
+        background: linear-gradient(90deg, rgba(242,245,247,0) 0%, #ead0ac 2%, #7d5f34 93.5%, rgba(242,245,247,0) 96%);  /*gold_redo
+       /*background: linear-gradient(90deg, rgba(247, 242, 244, 0) 0%, #eabdac 2%, #6b0c27 93.5%, rgba(247, 242, 244, 0) 96%);*/
+       /*background: linear-gradient(90deg, rgba(247, 242, 244, 0) 0%, #eabdac 2%, #6b0c27);*/
+   }
 
 
 
 .profilePicThumbLink {
-    margin: 1rem;
+    margin: 1rem .8rem 1rem 1.35rem;
 }
     .profilePicThumb {
         background: linear-gradient(330deg, rgba(255,209,16,1) 0%, rgba(223,180,0,1) 100%);
@@ -822,14 +877,16 @@ END Login & Register
 }
     .profilePicDiv .profilePic {
         background: linear-gradient(330deg, rgba(255,209,16,1) 0%, rgba(223,180,0,1) 100%);
+        
         border: none;
-        /*background: linear-gradient(145deg, rgba(207,37,141,1) 0%, rgba(159,7,101,1) 100%);*/
         padding: 1rem;
         display: block;
         height: 200px;
         margin: 0 auto;
         width: 200px;
     }
+
+    .dmode .profilePicDiv .profilePic {    background: linear-gradient(330deg, var(--marigold) 0%, #eaedee 100%);}
 
     .profileBtn {
         margin: -.7rem auto 0;
@@ -1395,15 +1452,6 @@ END Newsfeed
     position: absolute;
 }
 
-/*----------------------------------------------------------------------->
-New Article
-------------------------------------------------------------------------->*/
-
-
-
-/*----------------------------------------------------------------------->
-END New Article
-------------------------------------------------------------------------->*/
 
 
 /*----------------------------------------------------------------------->
@@ -1440,7 +1488,8 @@ New Email & Edit Email
 }
 
 .leaveWarning {
-    background: var(--greyBG);
+    background: #fff;
+    color: var(--dmodeBlack);
     margin-left: -15rem;
     padding: 2rem;
     position: absolute;
@@ -1448,7 +1497,12 @@ New Email & Edit Email
     width: 30rem;
 }
 
-.leaveWarning p {
+    .dmode .leaveWarning {
+        background: var(--dmodeBlack);
+        color: #fff;
+    }
+
+    .leaveWarning p {
     /*margin-bottom: 2.5rem;*/
 }
 
@@ -1472,7 +1526,7 @@ END All Emails & All Articles & New Article & New Email
 
 
 /*----------------------------------------------------------------------->
-delete article
+Delete Article
 ------------------------------------------------------------------------->*/
 
 .deletePage {
@@ -1505,15 +1559,14 @@ delete article
     padding: .5rem .3rem;
 }
 
-
 /*----------------------------------------------------------------------->
-END delete article
+END Delete Article
 ------------------------------------------------------------------------->*/
 
 
 
 /*----------------------------------------------------------------------->
-preview
+View
 ------------------------------------------------------------------------->*/
 
 .previewEmailBox h3.adminHeading {
@@ -1581,7 +1634,7 @@ preview
     }
 
 /*----------------------------------------------------------------------->
-END preview
+END View
 ------------------------------------------------------------------------->*/
 
 

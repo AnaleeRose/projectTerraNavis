@@ -1,33 +1,69 @@
 <?php
+// ob_start tells it not to show anything until everything is done loading so I can interrupt it at any time to load an error page without php getting mad about content already on display
 ob_start();
+
+// starts a session lol, aka it tracks information even when you go to a different page within the site
 session_start();
-require './../html/assets/includes/config.inc.php'; // basic definitions used throughout the site
-check_if_admin(); // toss user back to login page if they're not logged in
-require MYSQL; // connect to db
-require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
-require './../html/assets/includes/functions.php'; // various functions
 
+ // config sets up a number of vital defnitions and a few functions too
+require './../html/assets/includes/config.inc.php';
 
-$media_type = $_GET['media_type']; // tells it whether to produce the form for emails vs the form for articles
-// build list of expected, required, and possile post values based on media type
+// toss user back to login page if they're not logged in
+check_if_admin();
+
+// connects ya to the db
+require MYSQL;
+
+// makes it easy to create forms
+require './../html/assets/includes/form_functions.inc.php';
+
+// basic functions used throughout the site
+require './../html/assets/includes/functions.php';
+
+// tells it whether to produce the form for emails vs the form for articles using the variable saved int he url
+$media_type = $_GET['media_type']; 
+
 if ($media_type === 'article') {
-    $expected = ['article_name', 'article_category', 'article_description', 'imgs'];
-    $required = ['article_name', 'article_category'];
+    // the minimum inputs expected
+    $expected = ['article_name', 'article_category', 'article_description', 'img', 'caption'];
+
+    // the minimum inputs required
+    $required = ['article_name', 'article_category', 'article_description'];
+
+    // all possible inputs (it's a very long list lol, but I wanted to hard code so you can't make up whatever you want an insert it)
     $possible = [];
-    $element_types = ['p', 'heading2', 'heading3', 'heading4', 'heading5', 'hr', 'ul', 'ol']; // we'll build all possible lists from this list l8r
-    $newArticle_errors = []; //tracks all errors
+
+    // we'll build all possible lists from this list l8r
+    $element_types = ['p', 'heading2', 'heading3', 'heading4', 'heading5', 'hr', 'ul', 'ol'];
+
+     //tracks errors
+    $newArticle_errors = [];
+    $img_errors = [];
+
     $firstLists = []; //
     if (!isset($trackElements)) $trackElements = []; // tracks element id and order
+    $elementOrder = [];
     $at_least_one_element = false;
+    $complete_filename;
 
-    // generates all possible values for possible list **
+    // max amount of any element type on the page
     $max_on_page = 5;
+
+    // max amount of either list type on the page
     $max_lists_on_page = 2;
+    // total max of list items, for reasons. Might remove this cap later because it was originally for testing purposes
     $max_li_on_page = 20;
     $list_names;
-    $listAll = [];
+
+    // tracks the last list item so we know when to but the closing tag
     $last = [];
 
+    // lists all possible li names
+    $listAll = [];
+
+
+
+    // generates all possible element names and adds it to the possible array
     foreach ($element_types as $each_element_type) {
         $x = 1;
         if ($each_element_type === 'ul' || $each_element_type === 'ol') {
@@ -45,6 +81,7 @@ if ($media_type === 'article') {
         }
     }
 
+    // checks each list to find the first of the bunch
     foreach ($list_names as $each_list) {
         $first = false;
         $i = 1;
@@ -59,20 +96,26 @@ if ($media_type === 'article') {
         }
     }
 
+
+
+
 } elseif ($media_type === 'email') {
+
+    // the minimum inputs expected
     $expected = ['email_subject', 'email_msg'];
+
+    // the minimum inputs required
     $required = ['email_subject', 'email_msg'];
+
+    //tracks errors
     $newEmail_errors = [];
 }
 
 
 
 
-// END possible list generator **
 
-
-
-// CHECK PAGE IF SUBMITTED----------------------------------------------------------->
+// CHECK PAGE IF SUBMITTED ----------------------------------------------------------->
 if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
     // ERROR HANDLING
     // if a required item is empty, toss an error
@@ -115,16 +158,93 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
     $noSpaceElementTracker = str_replace(' ', '', $_POST['elementTracker']);
     $elementsUsed = explode(',', $noSpaceElementTracker);
 
-    // IS IT TIME TO SEND TO DB???? ---------------------------------------------->
+    // IMAGE HANDLING ----------------------------------------------------------->
+    if (!empty($_FILES['img']['name']) && !empty(trim($_POST['caption']))) {
+        $permitted = [
+                'image/gif',
+                'image/jpeg',
+                'image/jpg',
+                'image/png'
+            ];
+
+        $max_image_size = 50000;
+        $destination = './assets/imgs/article_imgs/';
+        $imgCaption = $_POST['caption'];
+        $extension = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
+        $extension = strtolower($extension);  
+        try {
+            $checkFile = false;
+            $uploaded = current($_FILES);
+            if (isset($uploaded)) {
+                $cf['name'] = $_FILES['img']['name'];
+                $cf['type'] = $_FILES['img']['type'];
+                $cf['tmp_name'] = $_FILES['img']['tmp_name'];
+                $cf['error'] = $_FILES['img']['error'];
+                $cf['size'] = $_FILES['img']['size'];
+                if ($cf['error'] == 1 || $cf['error'] == 2) {
+                    $img_errors[] = "Something went wrong... Please try again later!";
+                    $checkSize = false;
+                } elseif ($cf['size'] == 0) {
+                    $img_errors[] = $cf['name'] . ' is an empty file.';
+                    $checkSize = false;
+                } elseif ($cf['size'] > $max_image_size) {
+                    $img_errors[] = $cf['name'] . ' exceeds the maximum size
+                        for a file (' . $max_image_size . ').';
+                    $checkSize = false;
+                } else {
+                    $checkSize = true;
+                }
+
+                if (in_array($cf['type'], $permitted)) {
+                    $checkType = true;
+                } else {
+                    if (!empty($_FILES['type'])) {
+                        $img_errors[] = $cf['name'] . ' is not permitted type of file.';
+                    }
+                    $checkType = false;
+                }
+
+                if ($cf['error'] != 0) {
+                    $img_errors[] = "Something went wrong... Please try again later!";
+                    // stop checking if no file submitted
+                    if ($file['error'] != 4) {
+                        $img_errors[] = "Something went wrong... Please try again later! Error code: 4";
+                    }
+                }
+
+                if ($checkSize && $checkType && empty($img_errors)) {
+                    $checkFile = true;
+                    $random_number = rand(0, 10) . rand(0, 10) . rand(0, 9);
+                    $filename = preg_replace('/\s+/', '_', $_POST['article_name']) . '_' . $random_number;
+                    $complete_filename = $filename . '.' .$extension;
+                    $move = move_uploaded_file($cf['tmp_name'], $destination . $complete_filename);
+                    if ($move) {
+                        $img_notices[] = $cf['name'] . ' was uploaded';
+                        $_POST['img_name'] = $complete_filename;
+                    } else {
+                        $img_errors[] = 'Image could not be uploaded. Please contact our service team.';
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+    } else {
+        if (empty($_FILES['img']['name'])) $img_errors[] = 'Missing: Image';
+        if (empty($_POST['caption'])) $newArticle_errors['caption'] = 'Missing: Caption';
+    } 
+
 }
 
 
 
 
 
-// PAGE HTML ---------------------------------------------------------------->
+// start creating page...
 require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
+// options that can be passed to create_form_input, this one gives the inputs a required attribute but others do way more
 $options = ['required' => null];
     require './assets/includes/adminMenu.php';
     require './assets/includes/newsfeed_active.php';
@@ -136,24 +256,25 @@ $options = ['required' => null];
                 <h2 class="adminHeading">New <?= ucfirst($media_type) ?></h2>
                 <div class="cornerLinks">
                 <?php
-                if ($media_type === 'article') {
-                    echo '<a href="./new.php?media_type=email" class="adminBtn adminBtn_aqua">Switch To Email</a>';
-                    echo '<a href="./new.php?media_type=article&clear=true" class="adminBtn adminBtn_danger">Clear Page</a>';
+                if ($media_type === 'article') { ?>
+                    <a href="./new.php?media_type=email" class="adminBtn adminBtn_aqua">Switch To Email</a>
+                    <a href="./new.php?media_type=article&clear=true" class="adminBtn adminBtn_danger">Clear Page</a>
+                <?php 
                 } elseif ($media_type === 'email') {
-                    echo '<a href="' . BASE_URL . 'admin/new.php?media_type=email&messageTemplate=true" class="adminBtn adminBtn_aqua templateMsgBtn" id="templateMsgBtn">Insert Template Message</a>';
-                    echo '<a href="./new.php?media_type=article" class="adminBtn adminBtn_aqua">Switch To Article</a>';
-                    echo '<a href="./new.php?media_type=email&clear=true" class="adminBtn adminBtn_danger">Clear Page</a>';
-                }
                 ?>
+                    <a href="<?= BASE_URL; ?>admin/new.php?media_type=email&messageTemplate=true" class="adminBtn adminBtn_aqua templateMsgBtn" id="templateMsgBtn">Insert Template Message</a>
+                    <a href="./new.php?media_type=article" class="adminBtn adminBtn_aqua">Switch To Article</a>
+                    <a href="./new.php?media_type=email&clear=true" class="adminBtn adminBtn_danger">Clear Page</a>
+                <?php } ?>
                 </div>
                 <!-- <a href="new?media_type<?= $media_type ?>&clear=true" class="adminBtn adminBtn_danger">Clear Page</a> -->
             </div>
-            <form class="newMediaForm generalForm" method="post">
+            <form class="newMediaForm generalForm" method="post" enctype="multipart/form-data">
             <?php
 
                 if ($media_type === 'article') {
                     $options = ['required' => null, 'placeholder' => 'Name', 'maxlength' => 50];
-                    create_form_input('article_name', 'text', 'Aricle Name: ', $newArticle_errors, $options);
+                    create_form_input('article_name', 'text', 'Aricle Name', $newArticle_errors, $options);
                     ?>
                     <label for="article_category">Category</label>
                     <select class="categorySelect" required name="article_category" id="article_category">
@@ -172,6 +293,23 @@ $options = ['required' => null];
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
                     $options = ['required' => null, 'placeholder' => 'Description', 'maxlength' => 250];
                     create_form_input('article_description', 'textarea', 'Description', $newArticle_errors, $options);
+                    echo '<div class="imgBox"></div>';
+                    $options = ['required' => null, 'placeholder' => 'Caption', 'maxlength' => 50];
+                    create_form_input('caption', 'text', 'Image Caption', $newArticle_errors, $options);
+                    if (!empty($img_errors)) {
+                        foreach ($img_errors as $key => $value) {
+                            echo '<p class="formNotice formNotice_InlineError">' . $value . ' </p>';
+                        }
+                    }
+
+                    if (!empty($img_notices)) {
+                        foreach ($img_notices as $key => $value) {
+                            echo '<p class="formNotice formNotice_InlineNotice">' . $value . ' </p>';
+                        }
+                    }
+                    echo '<input type="text" class="hidden img_name" name="img_name" ';
+                    if (!empty($complete_filename)) echo 'value="' . $complete_filename . '"';
+                    echo '>';
                     // create_form_input('addThisContent', 'hidden', '', $newArticle_errors);
                 ?>
                 <hr class="newHr">
@@ -181,8 +319,7 @@ $options = ['required' => null];
                     </div>
 <!-- check content if you clicked published and send it on it's way! -->
 <?php
-    if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
-        print_r($trackElements);
+    if (isset($_POST['publishMediaBtn']) && $media_type === 'article' && 1 === 3) {
         if (empty($newArticle_errors) && $at_least_one_element === true) {
             $a_name = $_POST['article_name'];
             $a_description = $_POST['article_description'];
@@ -215,7 +352,7 @@ $options = ['required' => null];
                         } else {
                             $this_element_last_li = 0;
                         }
-                        // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_content', $this_element_first_li, $this_element_last_li)";
+                        echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_content', $this_element_first_li, $this_element_last_li)";
 
                         $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content, :elem_first_li, :elem_last_li)");
                         $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
@@ -260,7 +397,7 @@ $options = ['required' => null];
                         }
                     }
 
-                    header('Location: ' . BASE_URL . 'admin/view.php?view_type=read&media_type=article&media_id=' . $article_db_id);
+                    // header('Location: ' . BASE_URL . 'admin/view.php?view_type=read&media_type=article&media_id=' . $article_db_id);
                 } // foreach END
 
                 $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
@@ -299,9 +436,9 @@ $options = ['required' => null];
                                 <li><p class="contentPhpBtn" data-contentType="ol" data-content_type_id=8>Ordered List</p></li>
                             </ul>
                         </div>
-                        <label for="imgs" class="contentTypeBtn uploadImgBtn" id="uploadImgBtn" data-content_type_id=10>Image</label>
-                        <small class="imgsNotice">Images will be placed automatically, based upon size</small>
-                <input type="file" name="imgs" class="hidden" id="imgs" onChange="file_funct" data-content_type_id=9>
+                        <label for="img" class="contentTypeBtn uploadImgBtn" id="uploadImgBtn" data-content_type_id=10>Image</label>
+                        <small class="imgNotice">Images will be placed automatically, based upon size</small>
+                <input type="file" name="img" class="hidden" id="img" onChange="file_funct" data-content_type_id=9>
                     </div>
 
 
@@ -324,7 +461,6 @@ $options = ['required' => null];
                         }
 
                         if (empty($newEmail_errors)) {
-                            print_r($_POST);
                             $stmt = $dbpdo->prepare("INSERT INTO `emails` (`email_id`, `email_subject`, `email_message`, `save_for_later`, `date_added`) VALUES (NULL, :e_subject, :e_msg, :e_saved, current_timestamp())");
                             $stmt->bindParam(':e_subject', $e_subject, PDO::PARAM_STR);
                             $stmt->bindParam(':e_msg', $e_msg, PDO::PARAM_STR);

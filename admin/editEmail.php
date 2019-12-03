@@ -1,14 +1,31 @@
 <?php
+// ob_start tells it not to show anything until everything is done loading so I can interrupt it at any time to load an error page without php getting mad about content already on display
 ob_start();
+
+// starts a session lol, aka it tracks information even when you go to a different page within the site
 session_start();
-require './../html/assets/includes/config.inc.php'; // basic definitions used throughout the site
-check_if_admin(); // toss user back to login page if they're not logged in
-require MYSQL; // connect to db
-require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
+
+ // config sets up a number of vital defnitions and a few functions too
+require './../html/assets/includes/config.inc.php';
+
+// toss user back to login page if they're not logged in
+check_if_admin();
+
+// connects ya to the db
+require MYSQL;
+
+// makes it easy to create forms
+require './../html/assets/includes/form_functions.inc.php';
+
+// basic functions used throughout the site
 require './../html/assets/includes/functions.php';
+
+// tracks errors
 $editEmail_errors = [];
 
 $pageTitle = 'Edit Email';
+
+// the same error msg, but I don't have to ype it twice!
 function no_email() {
 	ob_end_clean();
     require './assets/includes/header.html';
@@ -19,14 +36,17 @@ function no_email() {
     exit();
 }
 
+// if the email id exists, set it to an easier name
 if (isset($_GET['email_id']) && !empty($_GET['email_id'])) {
 	$email_id = $_GET['email_id'];
 } else {
+    // if the email id isn't there, throw an error!
 	no_email();
 }
 
 if (isset($_POST['editEmailBtn'])) {
-    $e_saved = 1;
+    // $e_saved = 1;
+    // throws an error if either box is empty
     if (empty($_POST['email_subject'])) {
         $newEmail_errors['email_subject'] = 'Missing: Subject';
     } else {
@@ -39,14 +59,17 @@ if (isset($_POST['editEmailBtn'])) {
         $e_msg = $_POST['email_msg'];
     }
 
+    // if there no errors, toss that into the db and send em to the review page so they can decide whether or not they wanna send it
     if (empty($newEmail_errors)) {
         $stmt = $dbpdo->prepare("UPDATE `emails` SET `email_subject` = :e_subject, `email_message` = :e_msg WHERE `email_id` = :e_id");
         $stmt->bindParam(':e_subject', $e_subject, PDO::PARAM_STR);
         $stmt->bindParam(':e_msg', $e_msg, PDO::PARAM_STR);
         $stmt->bindParam(':e_id', $email_id, PDO::PARAM_INT);
         if ($stmt->execute()) {
+            // if it worked, review that bad boi
             header('Location: view.php?view_type=preview&media_type=email&media_id=' . $email_id);
         } else {
+            // if it fails, throw an error
             ob_end_clean();
             require './assets/includes/header.html';
             require './assets/includes/error.php';
@@ -58,6 +81,7 @@ if (isset($_POST['editEmailBtn'])) {
     }
 }
 
+// grab the details on that email
 $q = "SELECT * FROM emails WHERE email_id = " . $email_id;
 $r = mysqli_query($dbc, $q);
 if ($r) {
@@ -69,9 +93,10 @@ if ($r) {
 	no_email();
 }
 
-
+// start creating the page...
 require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
+// options that can be passed to create_form_input, this one gives the inputs a required attribute but others do way more
 $options = ['required' => null];
     require './assets/includes/adminMenu.php';
     require './assets/includes/newsfeed_active.php';
@@ -94,6 +119,7 @@ $options = ['required' => null];
 
 
 				$options = ['required' => null, 'placeholder' => 'Message | Max 250 characters', 'maxlength' => 250, 'addtl_classes' => 'emailInput'];
+                // if they havent tried to submit yet, set the msg to the db's version
 				if (isset($_POST['email_msg']) && !empty($_POST['email_msg'])) {
 					$options['value'] = $_POST['email_msg'];
 				} else {

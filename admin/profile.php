@@ -1,12 +1,29 @@
 <?php
+// ob_start tells it not to show anything until everything is done loading so I can intterupt it at any time to load an error page without php getting mad about content already on display
 ob_start();
+
+// starts a session lol, aka it tracks information even when you go to a different page within the site
 session_start();
-require './../html/assets/includes/config.inc.php'; // basic definitions used throughout the site
-check_if_admin(); // toss user back to login page if they're not logged in
-$user = 'admin';
+
+ // config sets up a number of vital defnitions and a few functions too
+require './../html/assets/includes/config.inc.php';
+
+// toss user back to login page if they're not logged in
+check_if_admin();
+
+// connects ya to the db
 require MYSQL;
-require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
-require './../html/assets/includes/functions.php'; // basic functions used throughout the site
+
+// makes it easy to create forms
+require './../html/assets/includes/form_functions.inc.php';
+
+// basic functions used throughout the site
+require './../html/assets/includes/functions.php';
+
+// makes it easy to create common inputs for this page specifically, we only need it if they haven't clicked the button yet since this code is just to rebuild the article into inputs
+if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php';
+
+// reset this so they have to login again before attempting to change anything important
 $_SESSION['relogged_in'] = false;
 
 
@@ -15,53 +32,67 @@ $login_errors = [];
 define('COLS', 5);
 $pos = 0;
 $firstRow = true;
+// grab all possible profile pictures
 $q = 'SELECT * FROM profilepictures';
 $getPictures = mysqli_query($dbc, $q);
 if (!$getPictures) {
     $register_errors['profilepictures'] = 'Could not retrieve profile images, defaulting to base image';
 }
-if (!isset($_SESSION['uid']) || !isset($_SESSION['email'])) {
-    header('Location: index.php');
-} else {
-    if (isset($_POST['saveChangesBtn'])) {
-        if ($_SESSION['profilePic_id'] !== $_POST['profilePicChoice'])  {
-            $q = 'UPDATE `adminuser` SET `profilePic_id` = ' . $_POST['profilePicChoice'] . ' WHERE `adminuser`.`admin_id` = ' . $_SESSION['uid'];
-            $r = mysqli_query($dbc, $q);
-            if ($r) {
-                $q = 'SELECT pic_location FROM profilepictures WHERE profilePic_id = ' . $_POST['profilePicChoice'];
-                $r = mysqli_query($dbc, $q);
-                if ($r) {
-                    while ($row = $r->fetch_assoc()) {
-                        $newPicLocation = $row['pic_location'];
-                        $_SESSION['profilePic_id'] = $_POST['profilePicChoice'];
-                        $_SESSION['profilePic_Location'] = $newPicLocation;
-                    }
-                    while(mysqli_more_results($dbc)) {
-                        mysqli_next_result($dbc);
-                    }
-                    echo '<span class="hidden formNotice formNotice_success">Changes were saved</span>';
-                } else {
-                echo '<span class="hidden formNotice formNotice_error">Changes could not be saved </span>';
-                }
-            } else {
-                echo '<span class="hidden formNotice formNotice_error">Changes could not be saved </span>';
-            }
-        }
 
-        if ($_SESSION['light_mode'] !==  $_POST['lightModeInput']) {
-            $q = 'UPDATE `adminuser` SET `light_mode` = "' . $_POST['lightModeInput'] . '" WHERE `adminuser`.`admin_id` = ' . $_SESSION['uid'];
+// if they clickty clicked the submit btn...
+if (isset($_POST['saveChangesBtn'])) {
+    // ...and they changed their image...
+    if ($_SESSION['profilePic_id'] !== $_POST['profilePicChoice'])  {
+        $q = 'UPDATE `adminuser` SET `profilePic_id` = ' . $_POST['profilePicChoice'] . ' WHERE `adminuser`.`admin_id` = ' . $_SESSION['uid'];
+        $r = mysqli_query($dbc, $q);
+        if ($r) {
+            // ...and they can find that pic and pic info...
+            $q = 'SELECT pic_location FROM profilepictures WHERE profilePic_id = ' . $_POST['profilePicChoice'];
             $r = mysqli_query($dbc, $q);
             if ($r) {
-                $_SESSION['light_mode'] = $_POST['lightModeInput'];
-                echo '<span class="hidden formNotice formNotice_success">Changes Were Saved!</span>';
+                while ($row = $r->fetch_assoc()) {
+                    // ...update the session variables!
+                    $newPicLocation = $row['pic_location'];
+                    $_SESSION['profilePic_id'] = $_POST['profilePicChoice'];
+                    $_SESSION['profilePic_Location'] = $newPicLocation;
+                }
+                while(mysqli_more_results($dbc)) {
+                    // releases mysqli, I think? I don't remembet exactly how this works. I had an issue and this fixes it lol
+                    mysqli_next_result($dbc);
+                }
+                echo '<span class="hidden formNotice formNotice_success">Changes were saved</span>';
             } else {
-                require './assets/includes/error.html';
-                require './assets/includes/footer.html';
-                exit();
+            echo '<span class="hidden formNotice formNotice_error">Changes could not be saved </span>';
             }
+        } else {
+            echo '<span class="hidden formNotice formNotice_error">Changes could not be saved </span>';
         }
     }
 
+
+
+    // if they changed their light mode...
+    if ($_SESSION['light_mode'] !==  $_POST['lightModeInput']) {
+
+        // ...update their info...
+        $q = 'UPDATE `adminuser` SET `light_mode` = "' . $_POST['lightModeInput'] . '" WHERE `adminuser`.`admin_id` = ' . $_SESSION['uid'];
+        $r = mysqli_query($dbc, $q);
+        if ($r) {
+
+            // ...and update the session variables
+            $_SESSION['light_mode'] = $_POST['lightModeInput'];
+            echo '<span class="hidden formNotice formNotice_success">Changes Were Saved!</span>';
+        } else {
+            require './assets/includes/error.html';
+            require './assets/includes/footer.html';
+            exit();
+        }
+    }
+}
+
+
+
+// start creating page....
 require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>';
@@ -82,7 +113,6 @@ echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>
                 <table id="chooseThumbTable" class="chooseThumbTable hiddenThumb"> <!-- -->
                     <tr>
                         <?php
-                        // if ($getPictures) {do {
                         while ($row = $getPictures->fetch_assoc()) {
                             if ($pos++ % COLS === 0 && !$firstRow) {
                                 echo '</tr><tr>';
@@ -125,5 +155,4 @@ echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>
 <?php
 include './assets/includes/adminPage_end.php';
 include './assets/includes/footer.html';
-}
 
