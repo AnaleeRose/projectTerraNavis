@@ -1,10 +1,9 @@
-/****************************************************
-===============   Page Information   ================
+/*===============   Page Information   ================
 
-Website Name: Technology Research
-Website URL: site06.wdd.francistuttle.edu/discography/index.html
-Website Author: Jerad Bowles
-Author URL: site06.wdd.francistuttle.edu
+Website Name: Terra Navis Living
+Website URL: terranavisliving.noshinr.com
+Website Author: Francis Tuttle Web Development BPA Team 2019-2020
+Author's URL: http://ftclass.com
 
 ==================   COLOR GUIDE   ==================
 Very Light Grey --------- rgb(220,220,220)     #dcdcdc
@@ -25,15 +24,31 @@ Black ------------------- rgb(0,0,0)           #000000
 ****************************************************/
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 1. CSS Resets & Fonts
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 @font-face {
-    font-family: 'Squealer';
-    src: url('fonts/squealer.ttf') format('truetype');
+    font-family: 'cabin';
+    src: url('fonts/cabin-regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
+}
+@font-face {
+  font-family: 'cabin-bold';
+  src: url('fonts/cabin-bold.otf') format('opentype');
+  font-weight: 800;
+  font-style: 800;
+}
+@font-face {
+  font-family: 'ptsans';
+  src: url('fonts/ptsans.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ptsans-italic';
+  src: url('fonts/ptsans-italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,
 textarea,pre,iframe,div,form,fieldset,hr,h1,h2,h3,h4,h5,h6,button,
@@ -53,9 +68,7 @@ html {box-sizing: border-box;}
 *,*:before,*:after {box-sizing: inherit;}
 iframe {border: 0;}
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 2. Global Styles
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 html {
   cursor: default;
@@ -103,9 +116,7 @@ a:active {color: #f1dd38;}
 li a:hover {color: #f32216;}
 img {max-width: 100%;}
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 3. Header & Nav Styles
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 #header {
   grid-column: 1 / 5;
@@ -143,9 +154,7 @@ img {max-width: 100%;}
 }
 .menu li a:hover {color: #f32216}
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 4. Main Body Content
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 #background {
   border-bottom: 4px solid rgba(243,34,22,.7);
@@ -264,9 +273,7 @@ div > .members:hover {
   padding: .1em 1em 1em;
 }
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 5. Form Styles
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 input, label, textarea {
   display: block;
@@ -455,9 +462,7 @@ input[type=checkbox] {
 	top: 1px;
 }
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 6. Footer Content
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 footer {
   grid-column: 1/5;
@@ -509,9 +514,7 @@ footer {
   padding: 0 0 0 3em;
 }
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 7. @Media Queries
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 @media screen and (max-width: 840px) {
   div > .members {
@@ -547,7 +550,7 @@ footer {
     margin: 2em 0 0 0;
   }
 }
-/* =================================== */
+/* ===== TABLET ============================== */
 @media screen and (max-width: 626px) {
   .comments, #terms {width: 100%;}
   #comments h2 {
@@ -560,18 +563,8 @@ footer {
     margin-bottom: 2em;
   }
 }
-/* =================================== */
-@media screen and (max-width: 570px) {
-  #menu {max-width: 360px;}
-  .menu {
-    display: block;
-    margin: 1em 0 0 2em;
-  }
-  .menu li {margin: .5em 1em;}
-  #about p {padding: 0 10% 2em;}
-  #footerlinks {width: 100%;}
-}
-/* =================================== */
+
+/* ===== MOBILE ============================== */
 @media screen and (max-width: 438px) {
   #albumsA img, #albumsB img {padding: 0;}
   #albumsA, #albumsB {

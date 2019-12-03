@@ -1,9 +1,12 @@
-<?php
-require './assets/includes/config.inc.php';
-$page_title = "Home";
-require './assets/includes/head.php';
-?>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Terra Navis Living</title>
+    <meta name="description" content="Earthship bio-friendly homes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
 <body>
 <!------ Header ------------>
 <?php require './assets/includes/header.php'; ?>
@@ -32,8 +35,7 @@ require './assets/includes/head.php';
 <!------ Footer ------------>
 ​<?php require './assets/includes/footer.php'; ?>
 
-<!-- Collapse -->
-
-
+</body>
+</html>
 
 
