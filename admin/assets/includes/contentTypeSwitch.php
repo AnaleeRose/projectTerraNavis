@@ -2,7 +2,7 @@
 $currentNum = 1;
 if (isset($_POST['publishMediaBtn'])) {
     foreach ($elementsUsed as $content) {
-        if (isset($_POST[$content]) && !empty($_POST[$content])) {
+        if (isset($_POST[$content]) && (!empty($_POST[$content]) || strpos($content, 'l') !== false)) {
             switch ($content) {
                 case strpos($content, 'p'):
                     $trackElements[$content]['content'] = $_POST[$content];
@@ -78,7 +78,8 @@ if (isset($_POST['publishMediaBtn'])) {
                         echo '</legend>';
                     }
                     // create the input
-                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item contentInput" value="' . $_POST[$content] . '" data-content_type_id=7>';
+                    echo '<label for="' . $content . '" class="listItemLabel">List Item ' . substr($content, 8) . '</label>';
+                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item contentInput createInput" value="' . $_POST[$content] . '" data-content_type_id=7>';
 
                     // if the last li, conclude fieldset
                     if (in_array($content, $last)) {
@@ -109,7 +110,8 @@ if (isset($_POST['publishMediaBtn'])) {
                         echo '</legend>';
                     }
                     // create the input
-                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item contentInput" value="' . $_POST[$content] . '" data-content_type_id=8>';
+                    echo '<label for="' . $content . '" class="listItemLabel">List Item ' . substr($content, 8) . '</label>';
+                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item contentInput createInput"  value="' . $_POST[$content] . '" data-content_type_id=8>';
 
                     // if the last li, conclude fieldset
                     if (in_array($content, $last)) {
