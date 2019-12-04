@@ -1,10 +1,9 @@
-/****************************************************
-===============   Page Information   ================
+/*===============   Page Information   ================
 
-Website Name: Technology Research
-Website URL: site06.wdd.francistuttle.edu/discography/index.html
-Website Author: Jerad Bowles
-Author URL: site06.wdd.francistuttle.edu
+Website Name: Terra Navis Living
+Website URL: terranavisliving.noshinr.com
+Website Author: Francis Tuttle Web Development BPA Team 2019-2020
+Author's URL: http://ftclass.com
 
 ==================   COLOR GUIDE   ==================
 Very Light Grey --------- rgb(220,220,220)     #dcdcdc
@@ -25,15 +24,31 @@ Black ------------------- rgb(0,0,0)           #000000
 ****************************************************/
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 1. CSS Resets & Fonts
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 @font-face {
-    font-family: 'Squealer';
-    src: url('fonts/squealer.ttf') format('truetype');
+    font-family: 'cabin';
+    src: url('fonts/cabin-regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
+}
+@font-face {
+  font-family: 'cabin-bold';
+  src: url('fonts/cabin-bold.otf') format('opentype');
+  font-weight: 800;
+  font-style: 800;
+}
+@font-face {
+  font-family: 'ptsans';
+  src: url('fonts/ptsans.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ptsans-italic';
+  src: url('fonts/ptsans-italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,
 textarea,pre,iframe,div,form,fieldset,hr,h1,h2,h3,h4,h5,h6,button,
@@ -53,533 +68,136 @@ html {box-sizing: border-box;}
 *,*:before,*:after {box-sizing: inherit;}
 iframe {border: 0;}
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 2. Global Styles
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 html {
   cursor: default;
-  background-color: #000;
+  background-color: ;
 }
 body {
   display: grid;
   grid-template-columns: 1fr 4fr 4fr 1fr;
-  grid-template-rows: 110px auto;
+  grid-template-rows: auto;
   min-width: 360px;
 }
 h1 {
-  font-size: 3.9em;
-  font-family: 'Squealer';
-  text-align: center;
-  text-shadow: 1px 1px rgba(243,34,22,.7);
-  color: #dcdcdc;
-  padding: .5em 0 0 0;
+
 }
 h2 {
-  font-size: 2em;
-  font-family: 'Squealer';
-  text-align: center;
-  text-shadow: 1px 1px rgba(243,34,22,.7);
-  color: #dcdcdc;
-  padding: .1em 0 0 0;
+
 }
-div {display: block;}
-#background {
-  grid-column: 1 / 5;
-  grid-row: 2 / 3;
-  background: #000;
-  z-index: -1;
-  text-align: center;
+div {
+
 }
-.background {
-  top: 110px;
-  left: 0;
-  width: 100%;
-  text-align: center;
+
+a {
+  cursor: pointer;
 }
-a {cursor: pointer;}
-a:hover {color: #f32216;}
-a:active {color: #f1dd38;}
-li a:hover {color: #f32216;}
-img {max-width: 100%;}
+a:hover {
+  color:;
+}
+a:active {
+  color: ;
+}
+li a:hover {
+  color: ;
+}
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 3. Header & Nav Styles
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
-#header {
-  grid-column: 1 / 5;
-  grid-row: 1 / 2;
-  position: fixed;
-  height: 110px;
-  width: 100%;
-  z-index: 10;
-  background: #000;
-  border-bottom: 4px solid rgba(243,34,22,.7);
+ #header {
+
 }
 .headerlogo {
-  height: 95px;
-  width: 260px;
-  margin: 5px;
-  float: left;
+
 }
-.menu {
-  position: absolute;
-  top: 50%;
-  right: 0;
-}
-.menu li {
-  display: inline;
-  color: #fff;
-  margin: 0 1em;
-  padding: .5em .3em;
-}
-.menu li a {
-  color: #dcdcdc;
-  font-family: 'Squealer';
-  font-size: 1.8em;
-  padding: .3em 0;
-  text-shadow: 1px 1px rgba(243,34,22,.7);
-}
-.menu li a:hover {color: #f32216}
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 4. Main Body Content
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
-#background {
-  border-bottom: 4px solid rgba(243,34,22,.7);
-}
-#about {
-  grid-column: 1 / 5;
-  grid-row: 3 / 4;
-  text-align: center;
-  background: #000;
-  /* border-bottom: 4px solid rgba(243,34,22,.7); */
-}
-#about img {
-  max-width: 750px;
-  width: 100%;
-  padding: 3em 0;
-}
- #about > #brianbio {
-  width: 355px;
-  border: none;
-}
-.bio {text-align: left;}
-#about p {
-  font-size: 1.5em;
-  font-family: Helvetica, Arial, sans-serif;
-  color: #fff;
-  padding: 0 15% 2em;
-}
-#theband {
-  grid-column: 1/5;
-  grid-row: 4/5;
-  background: #000;
-  padding: 2em 0;
-}
-#theband p {
-  font-size: 3.9em;
-  font-family: 'Squealer';
-  text-align: center;
-  text-shadow: 1px 1px rgba(243,34,22,.7);
-  color: #dcdcdc;
-}
-#members {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  grid-column: 1/5;
-  grid-row: 5/6;
-  width: 100%;
-  background: #000;
-  padding: 1em 0 .1em 0;
-  border-bottom: 4px solid rgba(243,34,22,.7);
-}
-.members {
-  margin: .7em 1em 2.5em;
-  padding: 0;
-}
-#members img {
-  width: 225px;
-  height: 225px;
-}
-#members h2 {
-  font-size: 1.5em;
-  font-family: 'Squealer';
-  text-align: center;
-  text-shadow: 1px 1px rgba(243,34,22,.7);
-  color: #dcdcdc;
-}
-div > .members:hover {
-  opacity: 1;
-  font-size: inherit;
-  font-family: 'Squealer';
-  text-align: center;
-  text-shadow: 1px 1px rgba(243,34,22,.7);
-  color: #dcdcdc;
-  box-shadow:inset 0px 0px 0px 3px rgba(243,34,22,.7);
-}
-.text {
-  font-size: 1.4em;
-  margin: 0 0 .2em 0;
-}
-#albums {
-  grid-column: 1/5;
-  grid-row: 6/7;
-  background: #000;
-}
-#albumsA, #albumsB {
-  display: flex;
-  flex-wrap: wrap;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  background: #000;
-  color: #fff;
-  font-size: 1.2em;
-  font-family: Helvetica, Arial, sans-serif;
-}
-#albumsA {
-  grid-column: 1/5;
-  grid-row: 7/8;
-  padding: 1.5em 0 0;
-}
-#albumsB {
-  grid-column: 1/5;
-  grid-row: 8/9;
-  padding: 0 0 3em 0;
-}
-.highwaytohell, .backinblack,
-.tnt, .dirtydeeds {
-  margin: 2em 5px 0;
-  border: 2px solid rgba(128,128,128,.7);
-}
-#albumsA ul, #albumsB ul {margin: .1em 0 0 2em;}
-#albumsA li, #albumsB li {margin: .4em 0;}
-#albumsA img, #albumsB img {
-  min-width: 360px;
-  padding: .1em 1em 1em;
-}
+
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 5. Form Styles
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 input, label, textarea {
-  display: block;
-  font-size: 1.2em;
-  text-align: center;
-  margin: 0 auto;
-  font-family: Helvetica, Arial, sans-serif;
+
 }
 input {
-  text-align: center;
-  line-height: 1.5em;
-  width: 14.5em;
-  border: 2px solid #808080;
-  box-shadow: 2px 2px 5px #808080;
-  border-radius: 7px;
-  margin: 0 0 .7em 0;
+
 }
 label {
-  text-align: left;
-  color: #fff;
-  font-size: 1.2em;
+
 }
 select {
-  display: block;
-  text-align: center;
-  line-height: 2em;
-  height: 3em;
-  border: 2px solid #808080;
-  box-shadow: 2px 2px 5px #808080;
-  border-radius: 7px;
-  margin: 0 1.5em .7em 0;
+
 }
-fieldset {border: none;}
+fieldset {
+
+}
 legend {
-  color: #dcdcdc;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 1.6em;
-  margin: 0 0 .5em 0;
-  text-shadow: 1px 1px rgba(243,34,22,.7);
-}
-#questions {
-  display: block;
-  grid-column: 2/4;
-  grid-row: 2/3;
-  width: 100%;
-  color: #fff;
-  margin: 0 0 5em 0em;
-}
-#questions h1 {
-  text-align: center;
-  max-width: 100%;
-  margin: 0 0 .5em 0;
-}
-#questions h2 {
-  font-size: 2.5em;
-  margin: -.2em 0 .2em 0;
-}
-#firstname, #lastname {width: 275px;}
-#name p {
-  text-align: left;
-  color: #fff;
-  font-size: 1.2em;
-  margin: 2em 0 0 0;
-  font-family: Helvetica, Arial, sans-serif;
-}
-#month, #day, #year {width: 200px;}
-#year {
-  margin: 0 0 5em 0 ;
-}
-#street {width: 400px;}
-#city {width: 250px;}
-#states {
-  width: 250px;
-  text-align: center;
-}
-#zip {
-  width: 200px;
-  margin: 0 0 3em 0 ;
-}
-#tel {width: 250px;}
-#email {
-  width: 300px;
-  /* margin: 1em 0 0 0; */
-}
-#emailtype {width: 100%;}
-#emailtype label {
-  float: left;
-  width: 130px;
-}
-#emailtype input {
-  width: 1em;
-  margin: 2px 0 15px 0;
-  border: 2px solid red;
-}
-#comments h2, #terms h2 {
-  font-size: 1.8em;
-  text-align: left;
-  padding: .5em 0 .3em 0;
-  margin: 2em 0 -10px 205px;
-  font-family: Helvetica, Arial, sans-serif;
-}
-.comments, .terms {
-  width: 550px;
-  height: 150px;
-  margin: 0;
-}
-#terms {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-  overflow-y: scroll;
-  background: #fff;
-  color: #000;
-  width: 550px;
-  height: 200px;
-  font-family: Helvetica, Arial, sans-serif;
-  border: 1px solid #808080;
-}
-#terms h2 {
-  color: #000;
-  font-weight: bold;
-  text-shadow: none;
-  margin: 0 0 .2em 0;
-}
-#terms h3 {
-  font-weight: bold;
-  font-size: 1.2em;
-  margin: 1.5em 0 .5em 0;
-}
-.terms {
-  font-size: 1em;
-  text-align: left;
-  overflow-y: scroll;
-}
-#terms-agree {
-  width: 130px;
-  height: 21px;
-  margin: 0 0 0 220px;
-}
-#terms-agree label {
-  font-size: 1.5em;
-  font-weight: bold;
-  float: left;
-  width: 90px;
-}
-#terms-agree input {
-  float: left;
-  width: 25px;
-  margin: 3px 0 0 13px;
-}
-input[type=checkbox] {
-  transform: scale(1.5);
-  box-shadow: none;
+
 }
 #button {
   display: block;
-  margin: 2.5em 0 0 170px;
-  width: 9em;
-  border-radius: 5px;
-  border: 1px solid #808080;
-  color: #ffffff;
-  font-family: Helvetica,Arial, sans-serif;
-  font-size:1.5em;
-  font-weight:bold;
-  text-align: center;
-  cursor: pointer;
-  padding:10px 40px;
-  background-color:#f24537;
-  text-decoration: none;
-  box-shadow: inset 0px 0px 6px 3px #f5978e;
-  text-shadow:0px 1px 0px #810e05;
+  margin: ;
+  width: ;
+  border-radius: ;
+  border: ;
+  color: ;
+  font-family: ;
+  font-size: ;
+  font-weight: ;
+  text-align: ;
+  cursor: ;
+  padding: ;
+  background-color: ;
+  text-decoration: ;
+  box-shadow: ;
+  text-shadow: ;
   background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
 }
 .myButton {
-  color: #fff;
-  text-align: center;
-  font-family: Helvetica, Arial, sans-serif;
-  text-shadow: 1px 1px rgba(243,34,22,.7);
+  color: ;
+  text-align: ;
+  font-family: ;
+  text-shadow: ;
 }
 #button:hover {
   background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
-	background-color:#c62d1f;
+	background-color:;
 }
-#button:visited {color: #fff;}
+#button:visited {
+  color: ;
+}
 #button:active {
 	position: relative;
-	top: 1px;
+	top: ;
 }
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 6. Footer Content
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 footer {
-  grid-column: 1/5;
-  grid-row: 9/10;
-  height: auto;
-  max-width: 100%;
-  background: #000;
-  border-top: 4px solid #808080;
-}
-#footer {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 1fr;
-  height: auto;
-  margin: 2em 0;
-}
-#footerlinks {
-  grid-column: 1/3;
-  text-align: center;
-  text-decoration: underline;
-  width: 100%;
-}
-.footerlinks li {
-  display: inline;
-  color: #fff;
-  margin: .2em 1em;
-  padding: .5em .3em;
-}
-.footerlinks li a {
-  color: #dcdcdc;
-  font-family: 'Squealer';
-  font-size: 1.8em;
-  padding: .3em 0;
-  text-shadow: 1px 1px rgba(243,34,22,.7);
-  text-decoration: underline;
-}
-.footerlinks li a:hover {color: #f32216}
-#copyright {
-  grid-column: 1/5;
-  grid-row: 10/11;
-  height: 50px;
-  background: #000;
+
 }
 #copyright p {
-  font-size: .9em;
-  font-family: Helvetica, Arial, sans-serif;
-  line-height: 50px;
-  color: #808080;
-  padding: 0 0 0 3em;
+  font-size: ;
+  font-family: ;
+  line-height: ;
+  color: ;
 }
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 7. @Media Queries
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 @media screen and (max-width: 840px) {
-  div > .members {
-    opacity: 1;
-    font-size: inherit;
-    font-family: 'Squealer';
-    text-align: center;
-    text-shadow: 1px 1px rgba(243,34,22,.7);
-    color: #dcdcdc;
-  }
-  .highwaytohell, .backinblack,
-  .tnt, .dirtydeeds {
-    margin: 2em 5px 0;
-    border: 2px solid rgba(128,128,128,.7);
-  }
-  #footerlinks {
-    grid-column: 1/3;
-    width: 550px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  #questions {margin: 0 0 5em 0em;}
-  #questions h1 {font-size: 3em;}
-  #headerlogo {display: none;}
-  #menu {
-    height: 110px;
-    width: 570px;
-    margin: 0 auto;
-  }
-  .menu {
-    position: inherit;
-    word-wrap: normal;
-    margin: 2em 0 0 0;
-  }
+
 }
-/* =================================== */
+ 
+/* ===== TABLET ============================== */
 @media screen and (max-width: 626px) {
-  .comments, #terms {width: 100%;}
-  #comments h2 {
-    margin:0;
-    text-align: center;
-  }
-  #button {margin: 0 auto;}
-  #terms-agree {
-    margin: 0 auto;
-    margin-bottom: 2em;
-  }
+
 }
-/* =================================== */
-@media screen and (max-width: 570px) {
-  #menu {max-width: 360px;}
-  .menu {
-    display: block;
-    margin: 1em 0 0 2em;
-  }
-  .menu li {margin: .5em 1em;}
-  #about p {padding: 0 10% 2em;}
-  #footerlinks {width: 100%;}
-}
-/* =================================== */
+
+
+/* ===== MOBILE ============================== */
 @media screen and (max-width: 438px) {
-  #albumsA img, #albumsB img {padding: 0;}
-  #albumsA, #albumsB {
-    min-width: 360px;
-    width: 100%;
-  }
-  #questions {margin: 0 0 5em 0em;}
-  #street, #email {width: 100%;}
-  .comments {width: 100%;}
-  #footerlinks {width: 320px;}
+
 }

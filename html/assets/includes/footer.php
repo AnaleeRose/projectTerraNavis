@@ -31,5 +31,4 @@
                     <p>&copy; FT BPA Team 2019-2020</p>
                 </div>
     </footer>
-</body>
-</html>
+

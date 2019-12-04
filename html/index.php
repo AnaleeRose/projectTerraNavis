@@ -1,9 +1,12 @@
-<?php
-require './assets/includes/config.inc.php';
-$page_title = "Home";
-require './assets/includes/head.php';
-?>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Terra Navis Living</title>
+    <meta name="description" content="Earthship bio-friendly homes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
 <body>
 <!------ Header ------------>
 <?php require './assets/includes/header.php'; ?>
@@ -16,12 +19,18 @@ require './assets/includes/head.php';
 <!-- Main body content -->
 <div id="mainpg-sec1">
     <h1 class="sec-title">What is an Earthship?</h1>
-    <p>An Earthship is a brand of passive solar earth shelter that is made of both natural and upcycled materials such as earth-packed tires, recycled bottles and reclaimed materials. Pioneered by architect Michael Reynolds, with the goal of creating a home that would do three things. First, it would utilize sustainable architecture, and material indigenous to the local area or recycled materials wherever possible. Second, the homes would rely on natural energy sources and be independent from the “grid”. Third, it would be feasible for a person with no specialized construction skills to build.</p>
+    <p>Earthships are a type of passive solar earth shelter first conceptualized by architect <a href="https://en.wikipedia.org/wiki/Mike_Reynolds_(architect)">Michael Reynolds</a>. They are built with a combination of upcycled and natural resources, like recycled glass bottles, tires packed with earth, and other, reclaimed materials. Reynolds developed the concept to realize three goals:
+        <ul>
+            <li><p>Utilize sustainable architecture and materials which can be recycled or naturally sourced from local environments</p></li>
+            <li><p>Build an "off-the-grid" home that would rely entirely on natural energy sources.</p></li>
+            <li><p>Make the building process feasible for a person without any specialized construction skills.</p></li>
+        </ul>
+    </p>
 </div>
 ​
 <div id="mainpg-sec2">
     <h1 class="sec-title">Sustainable Living</h1>
-    <p>There’s green, and then there’s green…. Michael Reynolds dreamed of creating an ultra eco-friendly way of living with his Earthship designs. These principles led to an extreme minimum in waste by using such methods as building with mostly up cycled materials, collecting rain water, using solar and wind energy, implementation of black and grey water systems to feed into outdoor gardens to aid in the growing of ones own food. When all of these concepts are brought together in a single design, you get one of the most eco-friendly home options available to us today.</p>
+    <p>There’s green, and then there’s <strong>green</strong>! Michael Reynolds dreamed of creating an ultra eco-friendly way of living with his Earthship designs. These principles led to an extreme minimum in waste by using such methods as building with mostly upcycled materials, collecting rain water, using solar and wind energy, implementation of black and grey water systems to feed into outdoor gardens to aid in the growing of ones own food. When all of these concepts are brought together in a single design, you get one of the most eco-friendly home options available to us today.</p>
 </div>
 ​
 <div id="mainpg-sec3">
@@ -32,8 +41,7 @@ require './assets/includes/head.php';
 <!------ Footer ------------>
 ​<?php require './assets/includes/footer.php'; ?>
 
-<!-- Collapse -->
-
-
+</body>
+</html>
 
 
