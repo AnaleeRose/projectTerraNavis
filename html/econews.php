@@ -11,11 +11,6 @@
 <!------ Header ------------>
 <?php require './assets/includes/header.php'; ?>
 
-<!-- Interactive Image -->
-<div id="animatedbg">
-    <img class="animated" src="" alt="animated earthship">
-</div>
-
 <!-- Main body content -->
 <div class="article1">
     <img class="article-img" src="" alt="Article Image">
