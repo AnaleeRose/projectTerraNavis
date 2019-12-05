@@ -16,29 +16,29 @@
 
 <div class="card1">
     <img class="portrait" src="" alt="Portrait">
-    <h2 class="question">Nicholas Ferrari</h2>
-    <h3 class="question">Project Manager & SEO</h3>
+    <h2 class="name">Nicholas Ferrari</h2>
+    <h3 class="role">Project Manager & SEO</h3>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus cras adipiscing enim eu turpis egestas pretium. Ac felis donec et odio pellentesque diam. Aliquam faucibus purus in massa tempor nec feugiat nisl. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Semper feugiat nibh sed pulvinar. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliq.</p>
 </div>
 
 <div class="card2">
     <img class="portrait" src="" alt="Portrait">
-    <h2 class="question">Jerad Bowles</h2>
-    <h3 class="question">Front-end Developer & Content Specialist</h3>
+    <h2 class="name">Jerad Bowles</h2>
+    <h3 class="role">Front-end Developer & Content Specialist</h3>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus cras adipiscing enim eu turpis egestas pretium. Ac felis donec et odio pellentesque diam. Aliquam faucibus purus in massa tempor nec feugiat nisl. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Semper feugiat nibh sed pulvinar. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliq.</p>
 </div>
 
 <div class="card3">
     <img class="portrait" src="" alt="Portrait">
-    <h2 class="question">Savannah Skinner</h2>
-    <h3 class="question">Back-end Developer & UX</h3>
+    <h2 class="name">Savannah Skinner</h2>
+    <h3 class="role">Back-end Developer & UX</h3>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus cras adipiscing enim eu turpis egestas pretium. Ac felis donec et odio pellentesque diam. Aliquam faucibus purus in massa tempor nec feugiat nisl. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Semper feugiat nibh sed pulvinar. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliq.</p>
 </div>
 
 <div class="card4">
     <img class="portrait" src="" alt="Portrait">
-    <h2 class="question">Noshin Rahman</h2>
-    <h3 class="question">Design</h3>
+    <h2 class="name">Noshin Rahman</h2>
+    <h3 class="role">Design</h3>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus cras adipiscing enim eu turpis egestas pretium. Ac felis donec et odio pellentesque diam. Aliquam faucibus purus in massa tempor nec feugiat nisl. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Semper feugiat nibh sed pulvinar. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliq.</p>
 </div>
 

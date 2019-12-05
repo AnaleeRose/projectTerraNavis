@@ -11,9 +11,11 @@
 <!------ Header ------------>
 <?php require './assets/includes/header.php'; ?>
 
+<h1 class="page-title">Resources</h1>
+
 <!-- Main body content -->
 <div class="res-sec1">
-    <h1 class="sec-title">Design and Construction</h1>
+    <h2 class="sec-title">Design and Construction</h2>
     <ul>
         <li><a href="">Resource Name goes here.</a></li>
         <li><a href="">Resource Name goes here.</a></li>
@@ -22,7 +24,7 @@
     </ul>
 </div>
 <div class="res-sec2">
-    <h1 class="sec-title">Materials</h1>
+    <h2 class="sec-title">Materials</h2>
     <ul>
         <li><a href="">Resource Name goes here.</a></li>
         <li><a href="">Resource Name goes here.</a></li>
@@ -31,7 +33,7 @@
     </ul>
 </div>
 <div class="res-sec3">
-    <h1 class="sec-title">News Sources</h1>
+    <h2 class="sec-title">News Sources</h2>
     <ul>
         <li><a href="">Resource Name goes here.</a></li>
         <li><a href="">Resource Name goes here.</a></li>
@@ -40,7 +42,7 @@
     </ul>
 </div>
 <div class="res-sec4">
-    <h1 class="sec-title">Building Codes</h1>
+    <h2 class="sec-title">Building Codes</h2>
     <ul>
         <li><a href="">Resource Name goes here.</a></li>
         <li><a href="">Resource Name goes here.</a></li>
