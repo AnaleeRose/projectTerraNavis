@@ -17,9 +17,6 @@ require MYSQL;
 // makes it easy to create forms
 require './../html/assets/includes/form_functions.inc.php';
 
-// basic functions used throughout the site
-require './../html/assets/includes/functions.php';
-
 // makes it easy to create common inputs for this page specifically, we only need it if they haven't clicked the button yet since this code is just to rebuild the article into inputs
 if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php';
 
@@ -27,6 +24,14 @@ if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions
 
 // ------------------------------->intialize various variables
 $media_type = 'article';
+
+$img_location;
+$complete_filename;
+$resized_filename;
+$img_errors = [];
+
+// basic functions used throughout the site
+require './../html/assets/includes/functions.php';
 
 // the minimum inputs expected
 $expected = ['article_name', 'article_category', 'article_description', 'imgs'];
@@ -80,6 +85,9 @@ if ($r && mysqli_num_rows($r) > 0) {
         if (!isset($_POST['article_description'])) $_POST['article_description'] = $row['article_description'];
         if (!isset($_POST['article_category']))$_POST['article_category'] = $row['article_category'];
         if (!isset($_POST['date_added'])) $_POST['date_added'] = $row['date_added'];
+        if (!isset($_POST['img_location']) && !empty($row['img_location'])) $_POST['img_location'] = $row['img_location'];
+        if (isset($_POST['img_location'])) $img_location = $_POST['img_location'];
+
         $date_added = $row['date_added'];
     }
 } else {
@@ -254,10 +262,39 @@ $options = ['required' => null];
                     $options = ['required' => null, 'placeholder' => 'Description', 'maxlength' => 400];
                     create_form_input('article_description', 'textarea', 'Description', $newArticle_errors, $options);
                     echo REQUIRED;
-                    // so we can keep track of when this article was created
-                    echo '<input type="text" name="date_added" id="date_added" class="textInput createInput hidden"' ;
+
+                    // // so we can keep track of when this article was created
+                    echo '<input type="text" name="date_added" id="date_added" class="textInput createInput hidden" ';
                     if (isset($date_added)) echo ' value="' . $date_added . '"';
-                    '>';
+                    echo '>';
+
+
+                    $options = ['required' => null, 'placeholder' => 'Caption', 'maxlength' => 50];
+                    create_form_input('caption', 'text', 'Image Caption', $newArticle_errors, $options);
+                    if (!empty($img_errors)) {
+                        foreach ($img_errors as $key => $value) {
+                            echo '<p class="formNotice formNotice_InlineError">' . $value . ' </p>';
+                        }
+                    }
+
+                    if (!empty($img_notices)) {
+                        foreach ($img_notices as $key => $value) {
+                            echo '<p class="formNotice formNotice_InlineNotice">' . $value . ' </p>';
+                        }
+                    }
+
+                    echo '<div class="imgBox">';
+                    if (!empty($img_location)) {
+                        ?>
+                        <input type="text" class="img_location hidden" name="img_location" value="<?=$img_location;?>">
+                        <img class="showNewImg" src="<?=$img_location;?>" alt="temp_alt">
+                        <?php
+                    }
+                    echo '</div>';
+
+                    echo '<input type="text" class="hidden img_name" name="img_name" ';
+                    if (!empty($resized_filename)) echo 'value="' . $resized_filename . '"';
+                    echo '>';
                 ?>
                 <hr class="newHr">
 <!-- Add content when you click a content link -->

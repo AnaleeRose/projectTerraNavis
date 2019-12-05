@@ -648,34 +648,20 @@ img_input = document.body.querySelector('#imgs');
 img_box = document.body.querySelector('.imgBox');
 
 function loadFile(e) {
-    console.log(e);
-    new_img = document.createElement('img');
-    new_img.src = URL.createObjectURL(e.target.files[0]);
-    new_img.classList.add('showNewImg');
-    if (article_name) {
-        new_img.setAttribute('alt', article_name.value);
+    checkIfImgExists = document.body.querySelector('.showNewImg')
+    if (checkIfImgExists == null) {
+        new_img = document.createElement('img');
+        new_img.src = URL.createObjectURL(e.target.files[0]);
+        new_img.classList.add('showNewImg');
+        if (article_name) {
+            new_img.setAttribute('alt', article_name.value);
+        }
+        img_box.appendChild(new_img);
+    } else {
+        num = e.target.files.length - 1
+        checkIfImgExists.src = URL.createObjectURL(e.target.files[num]);
     }
-    img_box.appendChild(new_img);
 }
-// if (document.body.querySelector('#imgs')) {
-//     imgs_btn.addEventListener('click', function(e) {
-//         file_funct(e);
-//     });
-
-// }
-
-// function file_funct(e) {
-//     console.log('clicked!')
-//     x = 0;
-//     file_list = document.body.querySelector('#imgs').files
-//     amount_of_files = document.body.querySelector('#imgs').files.length
-//     if (amount_of_files > 0) {
-//         while (x <= amount_of_files) {
-//             console.log(file_list[x])
-//             x++;
-//         }
-//     }
-// }
 
 // ------------------------------------------------------------------------------------------------>
 // popup contentTypeBtns

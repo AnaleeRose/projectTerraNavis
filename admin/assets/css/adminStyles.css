@@ -218,7 +218,7 @@ input.hidden {
 
 
     .formNotice_Error {
-        background-color: #d7394e;
+        background-color: var(--reddish);
         color: #fff;
         cursor: pointer;
         font-size: 1.5rem;
@@ -228,7 +228,8 @@ input.hidden {
     }
 
         .formNotice_InlineError, .formNotice_InlineNotice {
-            background-color: rgba(255, 228, 228, 0.82);
+            background-color: var(--reddish);
+            color: #fff;
             margin: 0 auto 1rem;
         }
 
@@ -1383,8 +1384,6 @@ END Newsfeed
     width: 10rem;
 }
 
-
-
 /*fieldset*/
 .generalForm fieldset {
     border-color: var(--brightAqua);
@@ -1538,16 +1537,13 @@ END Newsfeed
 }
 
     .imgBox .showNewImg {
-        margin: 1rem auto;
         border: .5rem solid var(--brightAqua);
         border-radius: 4px;
+        height: 400px
+        margin: 1rem auto;
+        width: 600px;
     }
 
-
-.showNewImg {
-    width: 100%;
-    /*width: 30vw;*/
-}
 
 .elementDeleteBtn {
     color: rgba(0,0,0,0);

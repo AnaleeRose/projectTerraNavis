@@ -17,11 +17,25 @@ require MYSQL;
 // makes it easy to create forms
 require './../html/assets/includes/form_functions.inc.php';
 
-// basic functions used throughout the site
-require './../html/assets/includes/functions.php';
+
+// tracked random number
+$random_num;
+if (!isset($_SESSION['random_num'])) {
+    $_SESSION['random_num'] = rand(0, 9) . rand(0, 9) . rand(0, 9);
+}
+$random_num = $_SESSION['random_num'];
+
 
 // tells it whether to produce the form for emails vs the form for articles using the variable saved int he url
 $media_type = $_GET['media_type']; 
+
+$img_location;
+$complete_filename;
+$resized_filename;
+$img_errors = [];
+
+// basic functions used throughout the site
+require './../html/assets/includes/functions.php';
 
 if ($media_type === 'article') {
     // the minimum inputs expected
@@ -38,13 +52,11 @@ if ($media_type === 'article') {
 
      //tracks errors
     $newArticle_errors = [];
-    $img_errors = [];
 
     $firstLists = []; //
     if (!isset($trackElements)) $trackElements = []; // tracks element id and order
     $at_least_one_element = false;
-    $complete_filename;
-    $img_location;
+
 
     // max amount of any element type on the page
     $max_on_page = 5;
@@ -158,15 +170,14 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
 
     // IMAGE HANDLING ----------------------------------------------------------->
     if (!empty($_FILES['img']['name']) && !empty(trim($_POST['caption'])) && (!isset($_POST['img_location']) || empty($_POST['img_location']))) {
-        require './assets/includes/imageUploader.inc.php';
     } else {
         if (empty($_FILES['img']['name'])) $img_errors[] = 'Missing: Image';
         if (empty($_POST['caption'])) $newArticle_errors['caption'] = 'Missing: Caption';
     } 
 
-    } elseif (isset(($_POST['img_location'])) && !empty($_POST['img_location'])) {
-        $img_location = $_POST['img_location'];
-    }
+} elseif (isset(($_POST['img_location'])) && !empty($_POST['img_location'])) {
+    $img_location = $_POST['img_location'];
+}
 
 
 
@@ -221,17 +232,15 @@ $options = ['required' => null];
                         }
                     }
                     echo '</select>';
+                    // definition from config.inc.php that creates a required tag
+                    echo REQUIRED;
+
+                    
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
                     $options = ['required' => null, 'placeholder' => 'Description', 'maxlength' => 250];
                     create_form_input('article_description', 'textarea', 'Description', $newArticle_errors, $options);
-                    echo '<div class="imgBox">';
-                    if (!empty($img_location)) {
-                        ?>
-                        <input type="text" class="img_location hidden" name="img_location" value="<?=$img_location;?>">
-                        <img class="showNewImg" src="<?=$img_location;?>" alt="temp_alt">
-                        <?php
-                    }
-                    echo '</div>';
+                    echo REQUIRED;
+
                     $options = ['required' => null, 'placeholder' => 'Caption', 'maxlength' => 50];
                     create_form_input('caption', 'text', 'Image Caption', $newArticle_errors, $options);
                     if (!empty($img_errors)) {
@@ -245,8 +254,18 @@ $options = ['required' => null];
                             echo '<p class="formNotice formNotice_InlineNotice">' . $value . ' </p>';
                         }
                     }
+
+                    echo '<div class="imgBox">';
+                    if (!empty($img_location)) {
+                        ?>
+                        <input type="text" class="img_location hidden" name="img_location" value="<?=$img_location;?>">
+                        <img class="showNewImg" src="<?=$img_location;?>" alt="temp_alt">
+                        <?php
+                    }
+                    echo '</div>';
+
                     echo '<input type="text" class="hidden img_name" name="img_name" ';
-                    if (!empty($complete_filename)) echo 'value="' . $complete_filename . '"';
+                    if (!empty($resized_filename)) echo 'value="' . $resized_filename . '"';
                     echo '>';
                     // create_form_input('addThisContent', 'hidden', '', $newArticle_errors);
                 ?>
@@ -301,27 +320,27 @@ $options = ['required' => null];
                             } else {
                                 $this_element_last_li = 0;
                             }
-                            echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_content', $this_element_first_li, $this_element_last_li)" . '<br><br>';
+                            // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_content', $this_element_first_li, $this_element_last_li)" . '<br><br>';
 
-                            // $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content, :elem_first_li, :elem_last_li)");
-                            // $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
-                            // $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
-                            // $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
-                            // $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
-                            // $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
-                            // $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
-                            // $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
-                            // if ($stmt->execute()) {
-                            //     echo "<br>_LILILILIGOOD_<br>";
-                            // } else {
-                            //     ob_end_clean();
-                            //     require './assets/includes/header.html';
-                            //     require './assets/includes/error.php';
-                            //     $links = ['Return To Home' => 'index.php'];
-                            //     produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
-                            //     require './assets/includes/footer.html';
-                            //     exit();
-                            // }
+                            $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content, :elem_first_li, :elem_last_li)");
+                            $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
+                            $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
+                            $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
+                            $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
+                            $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
+                            $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
+                            $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
+                            if ($stmt->execute()) {
+                                echo "<br>_LILILILIGOOD_<br>";
+                            } else {
+                                ob_end_clean();
+                                require './assets/includes/header.html';
+                                require './assets/includes/error.php';
+                                $links = ['Return To Home' => 'index.php'];
+                                produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
+                                require './assets/includes/footer.html';
+                                exit();
+                            }
                         }
                     } else {
                         if (!empty($_POST['this_element_name']) && 1===3) {
@@ -394,7 +413,7 @@ $options = ['required' => null];
                             </ul>
                         </div>
                         <label for="img" class="contentTypeBtn uploadImgBtn" id="uploadImgBtn" data-content_type_id=10>Image</label>
-                        <small class="imgNotice autoImgNotice">Image will be placed automatically, limit one</small>
+                        <small class="imgNotice autoImgNotice">Image should be 600x400px or larger png, jpg, or gif file, limit one.</small>
                 <input type="file" name="img" class="hidden" id="img" onChange="loadFile(event)" data-content_type_id=9>
                     </div>
 
