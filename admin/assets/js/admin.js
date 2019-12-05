@@ -14,6 +14,7 @@ var lightModeInput = document.body.querySelector(".lightModeInput");
 var profileInfo1 = document.body.querySelector(".profileInfo:first-of-type");
 var elementTracker = document.body.querySelector('#elementTracker');
 var imgs_notice = document.body.querySelector('.imgsNotice');
+var publishBtn = document.body.querySelector('#publishBtn');
 
 
 if (document.body.querySelector("#serverLightMode")) {
@@ -185,6 +186,7 @@ function create_form_notice(name, notice_text, form_notice_type) {
 var allContentTypeBtns = document.body.querySelectorAll(".contentPhpBtn");
 var addThisContent = document.body.querySelector("#addThisContent");
 var newContentDiv = document.body.querySelector("#newContent");
+var allElementDeleteBtns = document.body.querySelector("#newContent");
 if (elementTracker) {
     var max_on_page = elementTracker.getAttribute('data-general-max');
     var max_li_elements = elementTracker.getAttribute('data-max-li')
@@ -208,8 +210,9 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
         input.setAttribute('placeholder', label_name);
         input.setAttribute('data-content-type-id',data_content_id);
         input.setAttribute('value', individual_name);
-        newContentDiv.appendChild(input)
+
     } else {
+        
         label = document.createElement('label');
         labelName = document.createTextNode(label_name);
         label.setAttribute('for', individual_name);
@@ -227,7 +230,20 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
         input.setAttribute('id', individual_name);
         input.setAttribute('placeholder', label_name);
         input.setAttribute('data-content-type-id', data_content_id);
-        newContentDiv.appendChild(input);
+
+
+        elementDeleteBtn = document.createElement('p')
+        elementDeleteBtn.addEventListener('click', function(e){
+            let elementToDelete = e.srcElement.classList[1].substring(4);
+            type_of_element(elementToDelete, true, e.srcElement);
+        }) 
+        elementDeleteBtn.classList = ''
+        elementDeleteBtn.innerHTML = ''
+        elementDeleteBtn.classList.add('elementDeleteBtn', 'EDB_' + individual_name);
+        elementDeleteBtn.appendChild(document.createTextNode('Delete ' + type_of_input[0].toUpperCase() + type_of_input.slice(1)))
+
+        newContentDiv.appendChild(input)
+        label.appendChild(elementDeleteBtn);
     }
 
 }
@@ -322,174 +338,344 @@ function track_elements(individual_name, group_name) {
 }
 
 
-function type_of_element(contentBtnClicked) { // determines the type of element and calls the eqquivalent function
-    contentType = contentBtnClicked.getAttribute('data-contentType');
-    elementName = contentType + ','
-    switch (contentType) {
-        case 'p':
-            all = document.body.querySelectorAll(".paragraph");
-            num = all.length + 1
-            individualName = 'p_' + num;
-            placeholder = 'Paragraph';
-            if (all.length < max_on_page) {
-                create_element('textarea', 'paragraph', 'Paragraph', individualName, 1)
-            } else {
-                create_form_notice('maxElement', 'Maximum number of paragraphs reached', 'error');
-            }
-            elementTracker.value += individualName + ',';
-            break;
+function type_of_element(contentBtnClicked, deleteElement = false, e = null) { // determines the type of element and calls the eqquivalent function
+
+    if (deleteElement === false) {
+        noHiddenElements = true
+        contentType = contentBtnClicked.getAttribute('data-contentType');
+        elementName = contentType + ','
+        switch (contentType) {
+            case 'p':
+                all = document.body.querySelectorAll(".paragraph");
+                all.forEach(function(thisElement) {
+                    if (thisElement.classList.contains('hidden') && noHiddenElements === true) {
+                        elementName = thisElement.getAttribute('name')
+
+                        label = document.body.querySelector('label[for="' + elementName + '"]')
+                        label.parentNode.removeChild(label)
+                        newContentDiv.appendChild(label)
+                        label.classList.remove('hidden')
+
+                        thisElement.parentNode.removeChild(thisElement)
+                        newContentDiv.appendChild(thisElement)
+                        thisElement.classList.remove('hidden')
+
+                        noHiddenElements = false;
+
+                        c_elementTracker = elementTracker.getAttribute('value')
+                        elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                    }
+                })
+                if (noHiddenElements === true) {
+                    num = all.length + 1
+                    individualName = 'p_' + num;
+                    placeholder = 'Paragraph';
+                    if (all.length < max_on_page) {
+                        create_element('textarea', 'paragraph', 'Paragraph', individualName, 1)
+                    } else {
+                        create_form_notice('maxElement', 'Maximum number of paragraphs reached', 'error');
+                    }
+                    c_elementTracker = elementTracker.getAttribute('value')
+                    elementTracker.setAttribute('value', c_elementTracker + individualName + ',');
+                }
+
+                break;
 
 
-        case 'h2':
-            headingNum = contentType.substring(1,2);
-            element_class = '.heading' + headingNum
-            all = document.body.querySelectorAll(element_class);
-            amount_on_page = all.length + 1;
-            individualName = 'heading' + headingNum + '_'  + amount_on_page;
-            label_placeholder_name = 'Heading ' + headingNum
-            element_name = 'heading' + headingNum
-            if (all.length < max_on_page) {
-                create_element('text', element_name, label_placeholder_name, individualName, 2)
-            } else {
-                create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
-            }
-            elementTracker.value += individualName + ',';
-            break;
+            case 'h2':
+                headingNum = contentType.substring(1,2);
+                element_class = '.heading' + headingNum
+                all = document.body.querySelectorAll(element_class);
+                all.forEach(function(thisElement) {
+                    if (thisElement.classList.contains('hidden') && noHiddenElements === true) {
+                        elementName = thisElement.getAttribute('name')
+
+                        label = document.body.querySelector('label[for="' + elementName + '"]')
+                        label.parentNode.removeChild(label)
+                        newContentDiv.appendChild(label)
+                        label.classList.remove('hidden')
+
+                        thisElement.parentNode.removeChild(thisElement)
+                        newContentDiv.appendChild(thisElement)
+                        thisElement.classList.remove('hidden')
+
+                        noHiddenElements = false;
+
+                        c_elementTracker = elementTracker.getAttribute('value')
+                        elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                    }
+                })
+                if (noHiddenElements === true) {
+                    amount_on_page = all.length + 1;
+                    individualName = 'heading' + headingNum + '_'  + amount_on_page;
+                    label_placeholder_name = 'Heading ' + headingNum
+                    element_name = 'heading' + headingNum
+                    if (all.length < max_on_page) {
+                        create_element('text', element_name, label_placeholder_name, individualName, 2)
+                    } else {
+                        create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
+                    }
+                    c_elementTracker = elementTracker.getAttribute('value')
+                    elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                }
+                break;
 
 
-        case 'h3':
-            headingNum = contentType.substring(1,2);
-            element_class = '.heading' + headingNum
-            all = document.body.querySelectorAll(element_class);
-            amount_on_page = all.length + 1;
-            individualName = 'heading' + headingNum + '_'  + amount_on_page;
-            label_placeholder_name = 'Heading ' + headingNum
-            element_name = 'heading' + headingNum
-            if (all.length < max_on_page) {
-                create_element('text', element_name, label_placeholder_name, individualName, 3)
-            } else {
-                create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
-            }
-            elementTracker.value += individualName + ',';
-            break;
+            case 'h3':
+                headingNum = contentType.substring(1,2);
+                element_class = '.heading' + headingNum
+                all = document.body.querySelectorAll(element_class);
+                all.forEach(function(thisElement) {
+                    if (thisElement.classList.contains('hidden') && noHiddenElements === true) {
+                        elementName = thisElement.getAttribute('name')
+
+                        label = document.body.querySelector('label[for="' + elementName + '"]')
+                        label.parentNode.removeChild(label)
+                        newContentDiv.appendChild(label)
+                        label.classList.remove('hidden')
+
+                        thisElement.parentNode.removeChild(thisElement)
+                        newContentDiv.appendChild(thisElement)
+                        thisElement.classList.remove('hidden')
+
+                        noHiddenElements = false;
+
+                        c_elementTracker = elementTracker.getAttribute('value')
+                        elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                    }
+                })
+                if (noHiddenElements === true) {
+                    amount_on_page = all.length + 1;
+                    individualName = 'heading' + headingNum + '_'  + amount_on_page;
+                    label_placeholder_name = 'Heading ' + headingNum
+                    element_name = 'heading' + headingNum
+                    if (all.length < max_on_page) {
+                        create_element('text', element_name, label_placeholder_name, individualName, 3)
+                    } else {
+                        create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
+                    }
+                    c_elementTracker = elementTracker.getAttribute('value')
+                    elementTracker.setAttribute('value', c_elementTracker + elementName + ',');;
+                }
+                break;
 
 
-        case 'h4':
-            headingNum = contentType.substring(1,2);
-            element_class = '.heading' + headingNum
-            all = document.body.querySelectorAll(element_class);
-            amount_on_page = all.length + 1;
-            individualName = 'heading' + headingNum + '_'  + amount_on_page;
-            label_placeholder_name = 'Heading ' + headingNum
-            element_name = 'heading' + headingNum
-            if (all.length < max_on_page) {
-                create_element('text', element_name, label_placeholder_name, individualName, 4)
-            } else {
-                create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
-            }
-            elementTracker.value += individualName + ',';
-            break;
+            case 'h4':
+                headingNum = contentType.substring(1,2);
+                element_class = '.heading' + headingNum
+                all = document.body.querySelectorAll(element_class);
+                all.forEach(function(thisElement) {
+                    if (thisElement.classList.contains('hidden') && noHiddenElements === true) {
+                        elementName = thisElement.getAttribute('name')
+
+                        label = document.body.querySelector('label[for="' + elementName + '"]')
+                        label.parentNode.removeChild(label)
+                        newContentDiv.appendChild(label)
+                        label.classList.remove('hidden')
+
+                        thisElement.parentNode.removeChild(thisElement)
+                        newContentDiv.appendChild(thisElement)
+                        thisElement.classList.remove('hidden')
+
+                        noHiddenElements = false;
+
+                        c_elementTracker = elementTracker.getAttribute('value')
+                        elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                    }
+                })
+                if (noHiddenElements === true) {
+                    amount_on_page = all.length + 1;
+                    individualName = 'heading' + headingNum + '_'  + amount_on_page;
+                    label_placeholder_name = 'Heading ' + headingNum
+                    element_name = 'heading' + headingNum
+                    if (all.length < max_on_page) {
+                        create_element('text', element_name, label_placeholder_name, individualName, 4)
+                    } else {
+                        create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
+                    }
+                    c_elementTracker = elementTracker.getAttribute('value')
+                    elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                }
+                break;
 
 
-        case 'h5':
-            headingNum = contentType.substring(1,2);
-            element_class = '.heading' + headingNum
-            all = document.body.querySelectorAll(element_class);
-            amount_on_page = all.length + 1;
-            individualName = 'heading' + headingNum + '_'  + amount_on_page;
-            label_placeholder_name = 'Heading ' + headingNum
-            element_name = 'heading' + headingNum
-            if (all.length < max_on_page) {
-                create_element('text', element_name, label_placeholder_name, individualName, 5)
-            } else {
-                create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
-            }
-            elementTracker.value += individualName + ',';
-            break;
+            case 'h5':
+                headingNum = contentType.substring(1,2);
+                element_class = '.heading' + headingNum
+                all = document.body.querySelectorAll(element_class);
+                all.forEach(function(thisElement) {
+                    if (thisElement.classList.contains('hidden') && noHiddenElements === true) {
+                        elementName = thisElement.getAttribute('name')
 
-        case 'hr':
-            element_class = '.hr';
-            all = document.body.querySelectorAll(element_class);
-            amount_on_page = all.length + 1;
-            individualName = 'hr' + '_'  + amount_on_page;
-            element_name = 'hr'
-            label_placeholder_name = 'none';
-            if (all.length < max_on_page) {
-                create_element('hr', element_name, label_placeholder_name, individualName, 6)
-            } else {
-                create_form_notice('maxElement', 'Maximum number of hr reached', 'error');
-            }
-            elementTracker.value += individualName + ',';
-            break;
+                        label = document.body.querySelector('label[for="' + elementName + '"]')
+                        label.parentNode.removeChild(label)
+                        newContentDiv.appendChild(label)
+                        label.classList.remove('hidden')
+
+                        thisElement.parentNode.removeChild(thisElement)
+                        newContentDiv.appendChild(thisElement)
+                        thisElement.classList.remove('hidden')
+
+                        noHiddenElements = false;
+
+                        c_elementTracker = elementTracker.getAttribute('value')
+                        elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                    }
+                })
+                if (noHiddenElements === true) {
+                    amount_on_page = all.length + 1;
+                    individualName = 'heading' + headingNum + '_'  + amount_on_page;
+                    label_placeholder_name = 'Heading ' + headingNum
+                    element_name = 'heading' + headingNum
+                    if (all.length < max_on_page) {
+                        create_element('text', element_name, label_placeholder_name, individualName, 5)
+                    } else {
+                        create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
+                    }
+                    c_elementTracker = elementTracker.getAttribute('value')
+                    elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                }
+                break;
+
+            case 'hr':
+                element_class = '.hr';
+                all = document.body.querySelectorAll(element_class);
+                all.forEach(function(thisElement) {
+                    if (thisElement.classList.contains('hidden') && noHiddenElements === true) {
+                        elementName = thisElement.getAttribute('name')
+
+                        label = document.body.querySelector('label[for="' + elementName + '"]')
+                        label.parentNode.removeChild(label)
+                        newContentDiv.appendChild(label)
+                        label.classList.remove('hidden')
+
+                        thisElement.parentNode.removeChild(thisElement)
+                        newContentDiv.appendChild(thisElement)
+                        thisElement.classList.remove('hidden')
+
+                        noHiddenElements = false;
+
+                        c_elementTracker = elementTracker.getAttribute('value')
+                        elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                    }
+                })
+                if (noHiddenElements === true) {
+                    amount_on_page = all.length + 1;
+                    individualName = 'hr' + '_'  + amount_on_page;
+                    element_name = 'hr'
+                    label_placeholder_name = 'none';
+                    if (all.length < max_on_page) {
+                        create_element('hr', element_name, label_placeholder_name, individualName, 6)
+                    } else {
+                        create_form_notice('maxElement', 'Maximum number of hr reached', 'error');
+                    }
+                    c_elementTracker = elementTracker.getAttribute('value')
+                    elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                }
+                break;
 
 
-        case 'ul':
-            listType = contentType.substring(0,1);
-            element_type = listType + 'l'
-            element_class = '.' + element_type
-            all = document.body.querySelectorAll('.' + element_type);
-            thisNum = all.length + 1;
-            individualName = element_type + '_'  + thisNum;
-            if (listType === 'u') {
-                label_placeholder_name = 'Unordered List '
-            } else if (listType === 'o') {
-                label_placeholder_name = 'Ordered List '
-            }
-            if (all.length < max_list_elements) {
-                create_list('text', element_type, label_placeholder_name, individualName, 5);
-            } else {
-                create_form_notice('maxElement', 'Maximum number of unordered lists reached', 'error');
-            }
-            break;
+            case 'ul':
+                listType = contentType.substring(0,1);
+                element_type = listType + 'l'
+                element_class = '.' + element_type
+                all = document.body.querySelectorAll('.' + element_type);
+                thisNum = all.length + 1;
+                individualName = element_type + '_'  + thisNum;
+                if (listType === 'u') {
+                    label_placeholder_name = 'Unordered List '
+                } else if (listType === 'o') {
+                    label_placeholder_name = 'Ordered List '
+                }
+                if (all.length < max_list_elements) {
+                    create_list('text', element_type, label_placeholder_name, individualName, 5);
+                } else {
+                    create_form_notice('maxElement', 'Maximum number of unordered lists reached', 'error');
+                }
+                break;
 
-        case 'ol':
-            listType = contentType.substring(0,1);
-            element_type = listType + 'l'
-            element_class = '.' +  element_type
-            all = document.body.querySelectorAll('.' + element_type);
-            thisNum = all.length + 1;
-            individualName = element_type + '_'  + thisNum;
-            if (listType === 'u') {
-                label_placeholder_name = 'Unordered List ';
-            } else if (listType === 'o') {
-                label_placeholder_name = 'Ordered List ';
-            }
-            if (all.length < max_list_elements) {
-                create_list('text', element_type, label_placeholder_name, individualName, 5);
-            } else {
-                create_form_notice('maxElement', 'Maximum number of ordered lists reached', 'error');
-            }
-            break;
+            case 'ol':
+                listType = contentType.substring(0,1);
+                element_type = listType + 'l'
+                element_class = '.' +  element_type
+                all = document.body.querySelectorAll('.' + element_type);
+                thisNum = all.length + 1;
+                individualName = element_type + '_'  + thisNum;
+                if (listType === 'u') {
+                    label_placeholder_name = 'Unordered List ';
+                } else if (listType === 'o') {
+                    label_placeholder_name = 'Ordered List ';
+                }
+                if (all.length < max_list_elements) {
+                    create_list('text', element_type, label_placeholder_name, individualName, 5);
+                } else {
+                    create_form_notice('maxElement', 'Maximum number of ordered lists reached', 'error');
+                }
+                break;
 
-        default:
-            console.log('mistake ' + contentType);
-            break;
+            default:
+                console.log('mistake ' + contentType);
+                break;
+        }
+    } else if (deleteElement === true) {
+        elementToDelete = document.querySelector('.' + contentBtnClicked) ;
+        elementName = elementToDelete.getAttribute('name')
+        label = document.body.querySelector('label[for="' + elementName + '"]')
+
+
+        label.classList.add('hidden_elem', 'hidden')
+        elementToDelete.classList.add('hidden_elem', 'hidden')
+        elementToDelete.innerText = ''
+        // e.classList.add('hidden_elem', 'hidden')
+        et_c_value = elementTracker.getAttribute('value')
+        if (et_c_value.includes(elementName)) {
+            et_n_value = et_c_value.replace(elementName+',', '')
+            elementTracker.setAttribute('value', et_n_value)
+        }
+        // e.classList.add('hidden_elem')
+        // e.parentNode.removeChild(e)
+        // elementToDelete.classList.add('hidden_elem')
+        // elementToDelete.parentNode.removeChild(elementToDelete)
+        // label.classList.add('hidden_elem')
+        // label.parentNode.removeChild(label)
     }
 }
 
 
 my_count_of_files = 0;
 imgs_btn = document.body.querySelector('#uploadImgBtn')
-img_input = document.body.querySelector('#imgs')
-if (document.body.querySelector('#imgs')) {
-    imgs_btn.addEventListener('click', function(e) {
-        file_funct(e);
-    });
+img_input = document.body.querySelector('#imgs');
+img_box = document.body.querySelector('.imgBox');
 
-}
-
-function file_funct(e) {
-    console.log('clicked!')
-    x = 0;
-    file_list = document.body.querySelector('#imgs').files
-    amount_of_files = document.body.querySelector('#imgs').files.length
-    if (amount_of_files > 0) {
-        while (x <= amount_of_files) {
-            console.log(file_list[x])
-            x++;
-        }
+function loadFile(e) {
+    console.log(e);
+    new_img = document.createElement('img');
+    new_img.src = URL.createObjectURL(e.target.files[0]);
+    new_img.classList.add('showNewImg');
+    if (article_name) {
+        new_img.setAttribute('alt', article_name.value);
     }
+    img_box.appendChild(new_img);
 }
+// if (document.body.querySelector('#imgs')) {
+//     imgs_btn.addEventListener('click', function(e) {
+//         file_funct(e);
+//     });
+
+// }
+
+// function file_funct(e) {
+//     console.log('clicked!')
+//     x = 0;
+//     file_list = document.body.querySelector('#imgs').files
+//     amount_of_files = document.body.querySelector('#imgs').files.length
+//     if (amount_of_files > 0) {
+//         while (x <= amount_of_files) {
+//             console.log(file_list[x])
+//             x++;
+//         }
+//     }
+// }
 
 // ------------------------------------------------------------------------------------------------>
 // popup contentTypeBtns
@@ -524,7 +710,9 @@ function popup_btn(btn) {
         btn.parentNode.classList.remove("headerContentTypeList_show");
         thisList.classList.add("showList");
         thisList.classList.remove("hidden");
-        imgs_notice.style.bottom = '-4.2rem';
+        if (imgs_notice) {
+            imgs_notice.style.bottom = '-4.2rem';
+        }
     }
 
 }

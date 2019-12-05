@@ -42,9 +42,9 @@ if ($media_type === 'article') {
 
     $firstLists = []; //
     if (!isset($trackElements)) $trackElements = []; // tracks element id and order
-    $elementOrder = [];
     $at_least_one_element = false;
     $complete_filename;
+    $img_location;
 
     // max amount of any element type on the page
     $max_on_page = 5;
@@ -113,8 +113,6 @@ if ($media_type === 'article') {
 
 
 
-
-
 // CHECK PAGE IF SUBMITTED ----------------------------------------------------------->
 if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
     // ERROR HANDLING
@@ -137,7 +135,7 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
     // gathers info on all lists/list items
     foreach ($possible as $elementToCheck) {
         if (strpos($elementToCheck, 'l') !== false) {
-            if (isset($_POST[$elementToCheck]) && !empty($_POST[$elementToCheck])) {
+            if (isset($_POST[$elementToCheck])) {
                 $list_type = substr($elementToCheck, 0, 2);
                 $list_num = substr($elementToCheck, 3, 1);
                 $list_name = $list_type . '_' . $list_num;
@@ -159,83 +157,16 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
     $elementsUsed = explode(',', $noSpaceElementTracker);
 
     // IMAGE HANDLING ----------------------------------------------------------->
-    if (!empty($_FILES['img']['name']) && !empty(trim($_POST['caption']))) {
-        $permitted = [
-                'image/gif',
-                'image/jpeg',
-                'image/jpg',
-                'image/png'
-            ];
-
-        $max_image_size = 50000;
-        $destination = './assets/imgs/article_imgs/';
-        $imgCaption = $_POST['caption'];
-        $extension = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
-        $extension = strtolower($extension);  
-        try {
-            $checkFile = false;
-            $uploaded = current($_FILES);
-            if (isset($uploaded)) {
-                $cf['name'] = $_FILES['img']['name'];
-                $cf['type'] = $_FILES['img']['type'];
-                $cf['tmp_name'] = $_FILES['img']['tmp_name'];
-                $cf['error'] = $_FILES['img']['error'];
-                $cf['size'] = $_FILES['img']['size'];
-                if ($cf['error'] == 1 || $cf['error'] == 2) {
-                    $img_errors[] = "Something went wrong... Please try again later!";
-                    $checkSize = false;
-                } elseif ($cf['size'] == 0) {
-                    $img_errors[] = $cf['name'] . ' is an empty file.';
-                    $checkSize = false;
-                } elseif ($cf['size'] > $max_image_size) {
-                    $img_errors[] = $cf['name'] . ' exceeds the maximum size
-                        for a file (' . $max_image_size . ').';
-                    $checkSize = false;
-                } else {
-                    $checkSize = true;
-                }
-
-                if (in_array($cf['type'], $permitted)) {
-                    $checkType = true;
-                } else {
-                    if (!empty($_FILES['type'])) {
-                        $img_errors[] = $cf['name'] . ' is not permitted type of file.';
-                    }
-                    $checkType = false;
-                }
-
-                if ($cf['error'] != 0) {
-                    $img_errors[] = "Something went wrong... Please try again later!";
-                    // stop checking if no file submitted
-                    if ($file['error'] != 4) {
-                        $img_errors[] = "Something went wrong... Please try again later! Error code: 4";
-                    }
-                }
-
-                if ($checkSize && $checkType && empty($img_errors)) {
-                    $checkFile = true;
-                    $random_number = rand(0, 10) . rand(0, 10) . rand(0, 9);
-                    $filename = preg_replace('/\s+/', '_', $_POST['article_name']) . '_' . $random_number;
-                    $complete_filename = $filename . '.' .$extension;
-                    $move = move_uploaded_file($cf['tmp_name'], $destination . $complete_filename);
-                    if ($move) {
-                        $img_notices[] = $cf['name'] . ' was uploaded';
-                        $_POST['img_name'] = $complete_filename;
-                    } else {
-                        $img_errors[] = 'Image could not be uploaded. Please contact our service team.';
-                    }
-                }
-            }
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-
+    if (!empty($_FILES['img']['name']) && !empty(trim($_POST['caption'])) && (!isset($_POST['img_location']) || empty($_POST['img_location']))) {
+        require './assets/includes/imageUploader.inc.php';
     } else {
         if (empty($_FILES['img']['name'])) $img_errors[] = 'Missing: Image';
         if (empty($_POST['caption'])) $newArticle_errors['caption'] = 'Missing: Caption';
     } 
 
-}
+    } elseif (isset(($_POST['img_location'])) && !empty($_POST['img_location'])) {
+        $img_location = $_POST['img_location'];
+    }
 
 
 
@@ -293,7 +224,14 @@ $options = ['required' => null];
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
                     $options = ['required' => null, 'placeholder' => 'Description', 'maxlength' => 250];
                     create_form_input('article_description', 'textarea', 'Description', $newArticle_errors, $options);
-                    echo '<div class="imgBox"></div>';
+                    echo '<div class="imgBox">';
+                    if (!empty($img_location)) {
+                        ?>
+                        <input type="text" class="img_location hidden" name="img_location" value="<?=$img_location;?>">
+                        <img class="showNewImg" src="<?=$img_location;?>" alt="temp_alt">
+                        <?php
+                    }
+                    echo '</div>';
                     $options = ['required' => null, 'placeholder' => 'Caption', 'maxlength' => 50];
                     create_form_input('caption', 'text', 'Image Caption', $newArticle_errors, $options);
                     if (!empty($img_errors)) {
@@ -319,81 +257,95 @@ $options = ['required' => null];
                     </div>
 <!-- check content if you clicked published and send it on it's way! -->
 <?php
-    if (isset($_POST['publishMediaBtn']) && $media_type === 'article' && 1 === 3) {
+    if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
         if (empty($newArticle_errors) && $at_least_one_element === true) {
             $a_name = $_POST['article_name'];
             $a_description = $_POST['article_description'];
             $a_category = $_POST['article_category'];
             $noErrors = 1;
-            $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :error_flag)");
+            if (!empty($img_location)) {
+                // echo "INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_location, error_flag) VALUES (NULL, $a_name, $a_description, $a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, $img_location, 1)";
+                $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_location, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :img_location, :error_flag)");
+            } else {
+                // echo "INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_location, error_flag) VALUES (NULL, $a_name, $a_description, $a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, 1)";
+                $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_location, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, :error_flag)");
+            } 
+
             // bind the paramaters
             $stmt->bindParam(':a_name', $a_name, PDO::PARAM_STR);
             $stmt->bindParam(':a_description', $a_description, PDO::PARAM_STR);
             $stmt->bindParam(':a_category', $a_category, PDO::PARAM_INT);
+            if (!empty($img_location)) {
+                $stmt->bindParam(':img_location', $img_location, PDO::PARAM_STR);
+            }
             $stmt->bindParam(':error_flag', $noErrors, PDO::PARAM_BOOL);
 
             // execute the prepared statement
-            if ($stmt->execute()) {
-                echo 'added';
+            if (1==1)  {
+            // if ($stmt->execute())  {
                 $article_db_id = $dbpdo->lastInsertId();
                 foreach ($trackElements as $this_element_name => $this_element_info) {
                     if (strpos($this_element_name, 'l') !== false) {
-                        $this_element_id = $this_element_info['id'];
-                        $this_element_order = $this_element_info['order'];
-                        $this_element_content = $this_element_info['content'];
-                        if (isset($this_element_info['first_li'])) {
-                            $this_element_first_li = 1;
-                        } else {
-                            $this_element_first_li = 0;
-                        }
+                        if (empty($_POST[$this_element_name])) {
+                            $this_element_id = $this_element_info['id'];
+                            $this_element_order = $this_element_info['order'];
+                            $this_element_content = '::empty::';
+                            if (isset($this_element_info['first_li'])) {
+                                $this_element_first_li = 1;
+                            } else {
+                                $this_element_first_li = 0;
+                            }
 
-                        if (isset($this_element_info['last_li'])) {
-                            $this_element_last_li = 1;
-                        } else {
-                            $this_element_last_li = 0;
-                        }
-                        echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_content', $this_element_first_li, $this_element_last_li)";
+                            if (isset($this_element_info['last_li'])) {
+                                $this_element_last_li = 1;
+                            } else {
+                                $this_element_last_li = 0;
+                            }
+                            echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_content', $this_element_first_li, $this_element_last_li)" . '<br><br>';
 
-                        $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content, :elem_first_li, :elem_last_li)");
-                        $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
-                        $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
-                        $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
-                        if ($stmt->execute()) {
-                            echo "<br>_LILILILIGOOD_<br>";
-                        } else {
-                            ob_end_clean();
-                            require './assets/includes/header.html';
-                            require './assets/includes/error.php';
-                            $links = ['Return To Home' => 'index.php'];
-                            produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
-                            require './assets/includes/footer.html';
-                            exit();
+                            // $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content, :elem_first_li, :elem_last_li)");
+                            // $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
+                            // $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
+                            // $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
+                            // $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
+                            // $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
+                            // $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
+                            // $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
+                            // if ($stmt->execute()) {
+                            //     echo "<br>_LILILILIGOOD_<br>";
+                            // } else {
+                            //     ob_end_clean();
+                            //     require './assets/includes/header.html';
+                            //     require './assets/includes/error.php';
+                            //     $links = ['Return To Home' => 'index.php'];
+                            //     produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
+                            //     require './assets/includes/footer.html';
+                            //     exit();
+                            // }
                         }
                     } else {
-                        $this_element_id = $this_element_info['id'];
-                        $this_element_order = $this_element_info['order'];
-                        $this_element_content = $this_element_info['content'];
-                        // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, $this_element_name, $this_element_content)";
-                        $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content)");
-                        $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
-                        $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
-                        $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
-                        if ($stmt->execute()) {
-                            echo "<br>_OTHERGOOD_<br>";
-                        } else {
-                            ob_end_clean();
-                            require './assets/includes/header.html';
-                            require './assets/includes/error.php';
-                            $links = ['Return To Home' => 'index.php'];
-                            produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
-                            require './assets/includes/footer.html';
-                            exit();
+                        if (!empty($_POST['this_element_name']) && 1===3) {
+                            $this_element_id = $this_element_info['id'];
+                            $this_element_order = $this_element_info['order'];
+                            $this_element_content = $this_element_info['content'];
+                            // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, $this_element_name, $this_element_content)" . '<br><br>';
+                            $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content)");
+                            $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
+                            $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
+                            $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
+                            $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
+                            $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
+                            if ($stmt->execute()) {
+                                echo "<br>_OTHERGOOD_<br>";
+                            } else {
+                                ob_end_clean();
+                                require './assets/includes/header.html';
+                                require './assets/includes/error.php';
+                                $links = ['Return To Home' => 'index.php'];
+                                produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
+                                require './assets/includes/footer.html';
+                                exit();
+                            }
                         }
                     }
 
@@ -414,7 +366,12 @@ $options = ['required' => null];
 
             } //stmt execute END
         } // no errors, contents exists check END
+        // echo '<br>';
+        // echo '<br>';
+        // print_r($_POST);
     }// btn was pushed END
+
+
 ?>
                     <div class="contentTypes">
                         <p data-contentType="p" class="contentTypeBtn contentPhpBtn" data-content_type_id=1>Paragraph</p>
@@ -437,8 +394,8 @@ $options = ['required' => null];
                             </ul>
                         </div>
                         <label for="img" class="contentTypeBtn uploadImgBtn" id="uploadImgBtn" data-content_type_id=10>Image</label>
-                        <small class="imgNotice">Images will be placed automatically, based upon size</small>
-                <input type="file" name="img" class="hidden" id="img" onChange="file_funct" data-content_type_id=9>
+                        <small class="imgNotice autoImgNotice">Image will be placed automatically, limit one</small>
+                <input type="file" name="img" class="hidden" id="img" onChange="loadFile(event)" data-content_type_id=9>
                     </div>
 
 
@@ -522,7 +479,7 @@ Check out ' . $row['article_name'] . ' or read more articles about ' . $row['cat
                 <p class="linkLabel">Link URL</p>
                 <p class="linkGenInput linkHref" id="linkHrek" contenteditable="true">https://www.mylink.com</p>
                 <p class="linkGenBtn adminBtn adminBtn_aqua" id="linkGenBtn">Generate Link</p>
-                <p class="linkNote linkNote_subtle">Note: Links should only be used in the main content. They should not be used in the name or description of an article.</p>
+                <!-- <p class="linkNote linkNote_subtle">Note: Links should only be used in the main content. They should not be used in the name or description of an article.</p> -->
                 <div class="generatorInstructions hidden">
                 <h4>Here's your link: </h4>
                 <hr class="linkGenHr">
