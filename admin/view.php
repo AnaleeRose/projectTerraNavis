@@ -74,7 +74,7 @@ if ($media_type === 'email') {
 // PREVIEW MEDIA ------------------------------------------------------------------------->
 
 require './assets/includes/header.html';
-echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
+echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . ' viewPage">';
     require './assets/includes/adminMenu.php';
     require './assets/includes/newsfeed_active.php';
     nd('adminMC_Wrapper', 'noDI');
@@ -95,11 +95,10 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
             	<a href="./all<?= ucfirst($media_type); ?>s.php" class="adminBtn adminBtn_danger">Yes, save and leave</a>
             	<a class="adminBtn <?php if ($_SESSION['light_mode'] === 'lmode') {echo 'adminBtn_aqua';} else {echo 'adminBtn_subtle';} ?> noLeave">No, return to <?= $media_type;?></a>
             </div>
-            <form class="newMediaForm" method="post">
         <?php
 			if ($media_type === 'article') { // IF ARTICLE  -------------------------------------------------->
 				?>
-				<div class="previewEmailBox">
+				<div class="previewArticleBox">
 					<table class="previewTable">
 						<tr>
 							<th align="left">Name: </th>
@@ -121,26 +120,39 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 				$r = mysqli_query($dbc, $q);
 				if ($r) {
 					?>
-					<div class="printedArticle>">
-					<h3 class="adminHeading printedHeading"><?= $article_name; ?></h3>
-					<img class="viewImg" src="<?= $img_location; ?>" alt="<?= $article_name; ?>">
-					<p class="printedCaption" ><?= $caption; ?></p>
-				<?php
-					require './assets/includes/articleContentBuilder.php';
-					echo '</div>';
-				}
-				?>
+					<h3 class="adminHeading printedHeading articleNameHeading"><?= $article_name; ?></h3>
+					<h4 class="categoryHeading"><?= $category; ?></h4>
+					<div class="printedArticle>" id="printedArticle">
+						<div class="viewImgBox">
+							<img class="viewImg" src="<?= $img_location; ?>" alt="<?= $article_name; ?>">
+							<p class="printedCaption" ><?= $caption; ?></p>
+						</div>
+						<div class="articleContent">
+					<?php
+						require './assets/includes/articleContentBuilder.php';
+						echo '</div>';
+					}
+					?>
+						</div>
+					</div>
+					<div class="articleFooter">
+						<p>Want to read more articles in the <a class="categoryLink" href="../html/index.php"><?= $category; ?></a> category?</p>
+					</div>
 				</div>
 				<?php
 			} elseif ($media_type === 'email') { // ELSEIF EMAIL  -------------------------------------------------->
 				?>
 				<div class="previewEmailBox">
-					<h2 class="adminHeading">Subject:</h2>
-					<h2 class="adminHeading emailSubject"><?= $e_subject; ?></h2>
-					<h2 class="adminHeading">Message: </h2>
-					<p class="emailMsg"><?= $e_msg; ?></p>
+	            	<!-- <form class="newMediaForm" method="post"> -->
+					<div class="previewEmailBox">
+						<h2 class="adminHeading">Subject:</h2>
+						<h2 class="adminHeading emailSubject"><?= $e_subject; ?></h2>
+						<h2 class="adminHeading">Message: </h2>
+						<p class="emailMsg"><?= $e_msg; ?></p>
+					</div>
+					<a class="adminBtn adminBtn_aqua" id="sendEmailBtn" href="<?= BASE_URL; ?>admin/view.php?view_type=preview&media_type=email&media_id=<?= $media_id; ?>">Send Email</a>
+					<!-- </form> -->
 				</div>
-				<a class="adminBtn adminBtn_aqua" id="sendEmailBtn" href="<?= BASE_URL; ?>admin/view.php?view_type=preview&media_type=email&media_id=<?= $media_id; ?>">Send Email</a>
 				<?php
 
 			}

@@ -60,10 +60,12 @@ if (isset($_POST['changePwdBtn']) && $relogged_in && !$changed) {
 
             }
         } else {
+
             // if the password does NOT match the regEx rules, throw an error
             $changeP_errors['pwd_new'] = 'Password does not meet requirements';
 
         }
+        
     } else {
 
         // if they didnt even enter a password, throw an error
