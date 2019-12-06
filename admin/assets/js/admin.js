@@ -210,6 +210,10 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
         input.setAttribute('placeholder', label_name);
         input.setAttribute('data-content-type-id',data_content_id);
         input.setAttribute('value', individual_name);
+        
+        c_elementTracker = elementTracker.getAttribute('value')
+        elementTracker.setAttribute('value', c_elementTracker + individual_name + ',');
+        console.log(individual_name + ', | ' + elementTracker.getAttribute('value'))
 
     } else {
         
@@ -244,6 +248,10 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
 
         newContentDiv.appendChild(input)
         label.appendChild(elementDeleteBtn);
+
+        c_elementTracker = elementTracker.getAttribute('value')
+        elementTracker.setAttribute('value', c_elementTracker + individual_name + ',');
+        console.log(individual_name + ', | ' + elementTracker.getAttribute('value'))
     }
 
 }
@@ -318,7 +326,7 @@ function add_to_list(e) {
         btn_clicked.parentNode.insertBefore(label, btn_clicked)
         btn_clicked.parentNode.insertBefore(newListItemInput, btn_clicked)
         elementTracker.value += individual_name + ',';
-        track_elements(individual_name, list_item_name);
+        track_li_elements(individual_name, list_item_name);
     } else {
         create_form_notice('maxElement', 'Maximum number of list items for this list type reached', 'error');
     }
@@ -332,7 +340,7 @@ allContentTypeBtns.forEach(function(e) {
 
 
 elementOrder = [];
-function track_elements(individual_name, group_name) {
+function track_li_elements(individual_name, group_name) {
     elementOrder.push(individual_name);
     console.log(elementOrder);
 }
@@ -362,8 +370,8 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
 
                         noHiddenElements = false;
 
-                        c_elementTracker = elementTracker.getAttribute('value')
-                        elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                        // c_elementTracker = elementTracker.getAttribute('value')
+                        // elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
                     }
                 })
                 if (noHiddenElements === true) {
@@ -375,8 +383,8 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
                     } else {
                         create_form_notice('maxElement', 'Maximum number of paragraphs reached', 'error');
                     }
-                    c_elementTracker = elementTracker.getAttribute('value')
-                    elementTracker.setAttribute('value', c_elementTracker + individualName + ',');
+                    // c_elementTracker = elementTracker.getAttribute('value')
+                    // elementTracker.setAttribute('value', c_elementTracker + individualName + ',');
                 }
 
                 break;
@@ -401,8 +409,8 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
 
                         noHiddenElements = false;
 
-                        c_elementTracker = elementTracker.getAttribute('value')
-                        elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                        // c_elementTracker = elementTracker.getAttribute('value')
+                        // elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
                     }
                 })
                 if (noHiddenElements === true) {
@@ -415,8 +423,8 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
                     } else {
                         create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
                     }
-                    c_elementTracker = elementTracker.getAttribute('value')
-                    elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                    // c_elementTracker = elementTracker.getAttribute('value')
+                    // elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
                 }
                 break;
 
@@ -440,8 +448,8 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
 
                         noHiddenElements = false;
 
-                        c_elementTracker = elementTracker.getAttribute('value')
-                        elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                        // c_elementTracker = elementTracker.getAttribute('value')
+                        // elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
                     }
                 })
                 if (noHiddenElements === true) {
@@ -454,8 +462,8 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
                     } else {
                         create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
                     }
-                    c_elementTracker = elementTracker.getAttribute('value')
-                    elementTracker.setAttribute('value', c_elementTracker + elementName + ',');;
+                    // c_elementTracker = elementTracker.getAttribute('value')
+                    // elementTracker.setAttribute('value', c_elementTracker + elementName + ',');;
                 }
                 break;
 
@@ -479,8 +487,8 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
 
                         noHiddenElements = false;
 
-                        c_elementTracker = elementTracker.getAttribute('value')
-                        elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                        // c_elementTracker = elementTracker.getAttribute('value')
+                        // elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
                     }
                 })
                 if (noHiddenElements === true) {
@@ -493,8 +501,8 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
                     } else {
                         create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
                     }
-                    c_elementTracker = elementTracker.getAttribute('value')
-                    elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                    // c_elementTracker = elementTracker.getAttribute('value')
+                    // elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
                 }
                 break;
 
@@ -518,8 +526,8 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
 
                         noHiddenElements = false;
 
-                        c_elementTracker = elementTracker.getAttribute('value')
-                        elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                        // c_elementTracker = elementTracker.getAttribute('value')
+                        // elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
                     }
                 })
                 if (noHiddenElements === true) {
@@ -532,8 +540,8 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
                     } else {
                         create_form_notice('maxElement', 'Maximum number of headings reached', 'error');
                     }
-                    c_elementTracker = elementTracker.getAttribute('value')
-                    elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                    // c_elementTracker = elementTracker.getAttribute('value')
+                    // elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
                 }
                 break;
 
@@ -555,8 +563,8 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
 
                         noHiddenElements = false;
 
-                        c_elementTracker = elementTracker.getAttribute('value')
-                        elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                        // c_elementTracker = elementTracker.getAttribute('value')
+                        // elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
                     }
                 })
                 if (noHiddenElements === true) {
@@ -569,8 +577,8 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
                     } else {
                         create_form_notice('maxElement', 'Maximum number of hr reached', 'error');
                     }
-                    c_elementTracker = elementTracker.getAttribute('value')
-                    elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                    // c_elementTracker = elementTracker.getAttribute('value')
+                    // elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
                 }
                 break;
 

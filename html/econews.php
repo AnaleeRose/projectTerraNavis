@@ -10,6 +10,7 @@
 <body>
 <!------ Header ------------>
 <?php require './assets/includes/header.php'; ?>
+<?php require './assets/includes/form_functions.inc.php'; ?>
 
 <h1 class="page-title">Eco-News!</h1>
 

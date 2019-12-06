@@ -2,6 +2,7 @@
 $currentNum = 1;
 if (isset($_POST['publishMediaBtn'])) {
     foreach ($elementsUsed as $content) {
+        print_r($content);
         if (isset($_POST[$content]) && (!empty($_POST[$content]) || strpos($content, 'l') !== false)) {
             switch ($content) {
                 case strpos($content, 'p'):
@@ -13,6 +14,7 @@ if (isset($_POST['publishMediaBtn'])) {
                     break;
 
                 case strpos($content, 'he'): {
+                    echo 'is a heading';
                     $trackElements[$content]['content'] = $_POST[$content];
                     $heading_num = substr($content, 7, 1);
                     // echo '<p class="formNotice formNotice_Error">' . $content . '</p>';
@@ -131,7 +133,30 @@ if (isset($_POST['publishMediaBtn'])) {
                     break;
             }
             $currentNum++;
-        }
+        } 
+        // } else {
+        //     if (empty($_POST[$content])) {
+        //         echo '<br>';
+        //         echo 'empty';
+        //         echo '<br>';
+        //     }
+
+        //     if (!isset($_POST[$content])) {
+        //         echo '<br>';
+        //         echo 'not isset';
+        //         echo '<br>';
+        //     }
+
+        //     if (strpos($content, 'l') !== false) {
+        //         echo '<br>';
+        //         echo 'is li';
+        //         echo '<br>';
+        //     } else {
+        //         echo '<br>';
+        //         echo 'is not li';
+        //         echo '<br>';
+        //     }
+        // }
     }
 }
 

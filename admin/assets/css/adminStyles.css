@@ -1172,8 +1172,10 @@ h2.newsfeedHeading {
     padding: 2rem;
     position: relative;
     margin: 2rem .5rem;
-    max-width: 420px;
+    width: 420px;
 }
+
+.newsfeedContent
 
     .nwBox:first-of-type {margin-top: 4rem;}
     .adminHome_fullWidth .nwBox:first-of-type {margin-top: 2rem;}
@@ -1461,6 +1463,8 @@ END Newsfeed
     ------------------------------------------------------------------------->*/
 
     .newMediaForm textarea.contentInput, .newMediaForm .emailInput,
+    .lmode .generalForm textarea,
+    .dmode .generalForm textarea,
     .verifyPwdForm textarea.contentInput, .verifyPwdForm .emailInput,
     .editProfileForm textarea.contentInput {
         max-width: 40rem;
@@ -1468,9 +1472,11 @@ END Newsfeed
     }
 
     .newMediaForm textarea.contentInput, .newMediaForm textarea.emailInput,
+    .lmode .generalForm textarea,
+    .dmode .generalForm textarea,
     .verifyPwdForm textarea.contentInput, .verifyPwdForm textarea.emailInput,
     .editProfileForm textarea.contentInput, .editProfileForm textarea.emailInput {
-        height: 12rem;
+        height: 14rem;
     }
 
     .linkBtn_email {
@@ -1629,10 +1635,130 @@ END Delete Article
 ------------------------------------------------------------------------->*/
 
 
-
 /*----------------------------------------------------------------------->
-View
+`Printed & View Page Styles
 ------------------------------------------------------------------------->*/
+
+.articleContent {
+    padding: 0 1rem;
+}
+
+.printedElement {
+    line-height: 2;
+}
+
+.viewImgBox {
+    display: flex;
+    height: 500px;
+    flex-direction: column;
+    float: left;
+    position: relative;
+    width: 700px;
+}
+
+.viewImg {
+    border-radius: 1rem;
+    margin: 0 auto 2rem;
+}
+
+.printedCaption {
+    bottom: 0;
+    display: inline-block;
+    float: left;
+    left: 2rem;
+    margin: 0 0 1rem;
+    padding: 1rem 3.7rem 1.5rem 4rem;
+    position: absolute;
+    width: 541px;
+}
+
+    .printedCaption:after {
+        bottom: 0;
+        content: '';
+        left: 3.4rem;
+        padding: 1px 265px;
+        position: absolute;
+        background: var(--brightAqua);
+    }
+
+
+.viewPage .printedArticle a, .viewPage .articleFooter a {
+    border-radius: 2rem;
+    color: var(--brightAqua);
+    padding: 0 .25rem;
+    position: relative;
+    /*text-decoration: underline;*/
+    transition: color .5s;
+}
+
+    .viewPage .printedArticle a:before, .viewPage .articleFooter a:before {
+        background: var(--green);
+        bottom: 0;
+        content: '';
+        left: 0;
+        padding: 1px 0;
+        position: absolute;
+        transition: padding .5s;
+    }
+        .viewPage .printedArticle a:hover:before {
+            padding: 1px 3rem;
+        }
+
+        .viewPage .articleFooter a:hover:before {
+            padding: 1px 2.24rem;
+        }
+
+    .viewPage .printedArticle a:hover, .viewPage .articleFooter a:hover {
+        color: var(--green);
+    }
+
+
+/*headings and footer*/
+.printedHeading {
+    margin: 2rem .2rem 0;
+}
+
+.articleNameHeading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.categoryHeading {
+    color: var(--brightAqua);
+    font-weight: normal;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.articleFooter {
+    margin: 1rem .5rem;
+}
+
+.articleFooter p {
+    text-align: right;
+}
+
+.articleFooter a {
+    color: var(--brightAqua)
+}
+
+
+
+/*content*/
+.printedP {
+    margin: 0rem 1rem .5rem;
+    padding: 1rem;
+}
+
+.printedElement a {
+    color: var(--magenta);
+}
+
+    .printedElement a:hover {
+        color: var(--brightAqua)
+    }
 
 .previewEmailBox h3.adminHeading {
     font-size: 1.7rem;
@@ -1699,18 +1825,6 @@ View
     }
 
 
-
-/*----------------------------------------------------------------------->
-END View
-------------------------------------------------------------------------->*/
-
-
-
-/*----------------------------------------------------------------------->
-Printed Styles
-------------------------------------------------------------------------->*/
-
-
 .printedOl, .printedUl {
     margin: 2.5rem 1rem;
 }
@@ -1739,36 +1853,10 @@ Printed Styles
     margin-left: .5rem;
 }
 
-.printedElement a {
-    color: var(--magenta);
-}
 
-    .printedElement a:hover {
-        color: var(--brightAqua)
-    }
 
-.printedP {
-    margin: 1rem;
-    padding: 1rem;
-}
 
-.printedHeading {
-    margin: 1rem .2rem 2rem;
-}
 
-.printedCaption {
-    display: inline-block;
-    float: left;
-    margin: 0;
-    padding: 0 3.7rem 2rem 3rem;
-    width: 541px;
-}
-
-.viewImg {
-    border-radius: 1rem;
-    float: left;
-    margin: 0 2rem 2rem 1rem;
-}
 
 /*----------------------------------------------------------------------->
 END Printed Styles
