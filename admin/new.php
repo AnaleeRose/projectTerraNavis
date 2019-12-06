@@ -11,7 +11,8 @@ require './../html/assets/includes/config.inc.php';
 // toss user back to login page if they're not logged in
 check_if_admin();
 
-// connects ya to the db
+// connects ya to the db as admin for delete priveleges
+$user = 'admin';
 require MYSQL;
 
 // makes it easy to create forms
@@ -25,11 +26,15 @@ if (!isset($_SESSION['random_num'])) {
 }
 $random_num = $_SESSION['random_num'];
 
+$pageTitle = 'New Article';
+
+
 
 // tells it whether to produce the form for emails vs the form for articles using the variable saved int he url
 $media_type = $_GET['media_type']; 
 
 $img_location;
+$img_name;
 $complete_filename;
 $resized_filename;
 $img_errors = [];
@@ -59,12 +64,12 @@ if ($media_type === 'article') {
 
 
     // max amount of any element type on the page
-    $max_on_page = 5;
+    $max_on_page = 10;
 
     // max amount of either list type on the page
-    $max_lists_on_page = 2;
+    $max_lists_on_page = 3;
     // total max of list items, for reasons. Might remove this cap later because it was originally for testing purposes
-    $max_li_on_page = 20;
+    $max_li_on_page = 25;
     $list_names;
 
     // tracks the last list item so we know when to but the closing tag
@@ -169,16 +174,11 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
     $elementsUsed = explode(',', $noSpaceElementTracker);
 
     // IMAGE HANDLING ----------------------------------------------------------->
-    if (!empty($_FILES['img']['name']) && !empty(trim($_POST['caption'])) && (!isset($_POST['img_location']) || empty($_POST['img_location']))) {
-    } else {
-        if (empty($_FILES['img']['name'])) $img_errors[] = 'Missing: Image';
-        if (empty($_POST['caption'])) $newArticle_errors['caption'] = 'Missing: Caption';
-    } 
+    if (empty($_POST['caption'])) $newArticle_errors['caption'] = 'Missing: Caption';
 
 } elseif (isset(($_POST['img_location'])) && !empty($_POST['img_location'])) {
     $img_location = $_POST['img_location'];
 }
-
 
 
 
@@ -235,13 +235,13 @@ $options = ['required' => null];
                     // definition from config.inc.php that creates a required tag
                     echo REQUIRED;
 
-                    
+
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
                     $options = ['required' => null, 'placeholder' => 'Description', 'maxlength' => 250];
                     create_form_input('article_description', 'textarea', 'Description', $newArticle_errors, $options);
                     echo REQUIRED;
 
-                    $options = ['required' => null, 'placeholder' => 'Caption', 'maxlength' => 50];
+                    $options = ['required' => null, 'placeholder' => 'Caption', 'maxlength' => 100];
                     create_form_input('caption', 'text', 'Image Caption', $newArticle_errors, $options);
                     if (!empty($img_errors)) {
                         foreach ($img_errors as $key => $value) {
@@ -265,7 +265,7 @@ $options = ['required' => null];
                     echo '</div>';
 
                     echo '<input type="text" class="hidden img_name" name="img_name" ';
-                    if (!empty($resized_filename)) echo 'value="' . $resized_filename . '"';
+                    if (!empty($img_name)) echo 'value="' . $img_name . '"';
                     echo '>';
                     // create_form_input('addThisContent', 'hidden', '', $newArticle_errors);
                 ?>
@@ -276,78 +276,75 @@ $options = ['required' => null];
                     </div>
 <!-- check content if you clicked published and send it on it's way! -->
 <?php
-    if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
-        if (empty($newArticle_errors) && $at_least_one_element === true) {
-            $a_name = $_POST['article_name'];
-            $a_description = $_POST['article_description'];
+if (empty($_POST['img_name'])) $newArticle_errors['article_name'] = "Missing: Image";
+if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
+        // if u have clickty clicked the button and there's at least one piece of content and there's no issues with the image...
+        if (empty($newArticle_errors) && empty($img_errors) && $at_least_one_element === true) {
+            $a_name = htmlentities($_POST['article_name']);
+            $a_description = htmlentities($_POST['article_description']);
+            $a_caption = htmlentities($_POST['caption']);
             $a_category = $_POST['article_category'];
+
+            // flags this article for errors so if something goes wrong later on we can findd this specific article more easily
             $noErrors = 1;
-            if (!empty($img_location)) {
-                // echo "INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_location, error_flag) VALUES (NULL, $a_name, $a_description, $a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, $img_location, 1)";
-                $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_location, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :img_location, :error_flag)");
-            } else {
-                // echo "INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_location, error_flag) VALUES (NULL, $a_name, $a_description, $a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, 1)";
-                $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_location, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, :error_flag)");
-            } 
+            $dbpdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+            $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_name, caption, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :img_name, :a_caption, :error_flag)");
 
             // bind the paramaters
             $stmt->bindParam(':a_name', $a_name, PDO::PARAM_STR);
             $stmt->bindParam(':a_description', $a_description, PDO::PARAM_STR);
             $stmt->bindParam(':a_category', $a_category, PDO::PARAM_INT);
-            if (!empty($img_location)) {
-                $stmt->bindParam(':img_location', $img_location, PDO::PARAM_STR);
-            }
+            $stmt->bindParam(':img_name', $img_name, PDO::PARAM_STR);
+            $stmt->bindParam(':a_caption', $a_caption, PDO::PARAM_STR);
             $stmt->bindParam(':error_flag', $noErrors, PDO::PARAM_BOOL);
 
             // execute the prepared statement
-            if (1==1)  {
-            // if ($stmt->execute())  {
+            // if (1==1)  {
+            if ($stmt->execute()) {
                 $article_db_id = $dbpdo->lastInsertId();
                 foreach ($trackElements as $this_element_name => $this_element_info) {
-                    if (strpos($this_element_name, 'l') !== false) {
-                        if (empty($_POST[$this_element_name])) {
-                            $this_element_id = $this_element_info['id'];
-                            $this_element_order = $this_element_info['order'];
-                            $this_element_content = '::empty::';
-                            if (isset($this_element_info['first_li'])) {
-                                $this_element_first_li = 1;
-                            } else {
-                                $this_element_first_li = 0;
-                            }
+                    if ((strpos($this_element_name, 'ul') !== false) || (strpos($this_element_name, 'ol') !== false)) {
+                        $this_element_id = $this_element_info['id'];
+                        $this_element_order = $this_element_info['order'];
+                        if (empty($_POST[$this_element_name]))  $this_element_content = '::empty::';
+                        if (isset($this_element_info['first_li'])) {
+                            $this_element_first_li = 1;
+                        } else {
+                            $this_element_first_li = 0;
+                        }
 
-                            if (isset($this_element_info['last_li'])) {
-                                $this_element_last_li = 1;
-                            } else {
-                                $this_element_last_li = 0;
-                            }
-                            // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_content', $this_element_first_li, $this_element_last_li)" . '<br><br>';
+                        if (isset($this_element_info['last_li'])) {
+                            $this_element_last_li = 1;
+                        } else {
+                            $this_element_last_li = 0;
+                        }
+                        // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_content', $this_element_first_li, $this_element_last_li)" . '<br><br>';
 
-                            $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content, :elem_first_li, :elem_last_li)");
-                            $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
-                            $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
-                            $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
-                            $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
-                            $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
-                            $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
-                            $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
-                            if ($stmt->execute()) {
-                                echo "<br>_LILILILIGOOD_<br>";
-                            } else {
-                                ob_end_clean();
-                                require './assets/includes/header.html';
-                                require './assets/includes/error.php';
-                                $links = ['Return To Home' => 'index.php'];
-                                produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
-                                require './assets/includes/footer.html';
-                                exit();
-                            }
+                        $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content, :elem_first_li, :elem_last_li)");
+                        $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
+                        $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
+                        $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
+                        $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
+                        $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
+                        $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
+                        $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
+                        if ($stmt->execute()) {
+                            echo "<br>_LILILILIGOOD_<br>";
+                        } else {
+                            ob_end_clean();
+                            require './assets/includes/header.html';
+                            require './assets/includes/error.php';
+                            $links = ['Return To Home' => 'index.php'];
+                            produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
+                            require './assets/includes/footer.html';
+                            exit();
                         }
                     } else {
-                        if (!empty($_POST['this_element_name']) && 1===3) {
+                        if (!empty($_POST[$this_element_name])) {
                             $this_element_id = $this_element_info['id'];
                             $this_element_order = $this_element_info['order'];
-                            $this_element_content = $this_element_info['content'];
-                            // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, $this_element_name, $this_element_content)" . '<br><br>';
+                            $this_element_content = htmlentities($this_element_info['content']);
+                            // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_name', '$this_element_content')" . '<br><br>';
                             $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content)");
                             $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
                             $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
@@ -368,7 +365,7 @@ $options = ['required' => null];
                         }
                     }
 
-                    // header('Location: ' . BASE_URL . 'admin/view.php?view_type=read&media_type=article&media_id=' . $article_db_id);
+                    header('Location: ' . BASE_URL . 'admin/view.php?view_type=read&media_type=article&media_id=' . $article_db_id);
                 } // foreach END
 
                 $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
@@ -384,11 +381,8 @@ $options = ['required' => null];
                 }
 
             } //stmt execute END
-        } // no errors, contents exists check END
-        // echo '<br>';
-        // echo '<br>';
-        // print_r($_POST);
-    }// btn was pushed END
+        }// no errors, contents exists check END
+}// btn was pushed END
 
 
 ?>

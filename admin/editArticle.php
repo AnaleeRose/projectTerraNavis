@@ -11,7 +11,8 @@ require './../html/assets/includes/config.inc.php';
 // toss user back to login page if they're not logged in
 check_if_admin();
 
-// connects ya to the db
+// connects ya to the db as admin for delete priveleges
+$user = 'admin';
 require MYSQL;
 
 // makes it easy to create forms
@@ -24,8 +25,10 @@ if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions
 
 // ------------------------------->intialize various variables
 $media_type = 'article';
+$pageTitle = 'Edit Article';
 
 $img_location;
+$img_name;
 $complete_filename;
 $resized_filename;
 $img_errors = [];
@@ -48,12 +51,12 @@ $article_id = $_GET['article_id'];
 $elementsUsed;
 
 // max amount of any element type on the page
-$max_on_page = 5;
+$max_on_page = 10;
 
 // max amount of either list type on the page
-$max_lists_on_page = 2;
+$max_lists_on_page = 3;
 // total max of list items, for reasons. Might remove this cap later because it was originally for testing purposes
-$max_li_on_page = 20;
+$max_li_on_page = 25;
 $list_names;
 
 // tracks the last list item so we know when to but the closing tag
@@ -85,10 +88,13 @@ if ($r && mysqli_num_rows($r) > 0) {
         if (!isset($_POST['article_description'])) $_POST['article_description'] = $row['article_description'];
         if (!isset($_POST['article_category']))$_POST['article_category'] = $row['article_category'];
         if (!isset($_POST['date_added'])) $_POST['date_added'] = $row['date_added'];
-        if (!isset($_POST['img_location']) && !empty($row['img_location'])) $_POST['img_location'] = $row['img_location'];
-        if (isset($_POST['img_location'])) $img_location = $_POST['img_location'];
-
-        $date_added = $row['date_added'];
+        if (!isset($_POST['caption'])) $_POST['caption'] = $row['caption'];
+        if (!isset($_POST['img_name'])) $_POST['img_name'] = $row['img_name'];
+        if (isset($_POST['img_name'])) {
+            $img_name = $_POST['img_name'];
+            echo $img_name;
+            $img_location = $_POST['img_name'];
+        }
     }
 } else {
     // if it cant find that article it'll toss an error
@@ -230,7 +236,7 @@ $options = ['required' => null];
                 ?>
                 </div>
             </div>
-            <form class="newMediaForm generalForm" method="post">
+            <form class="newMediaForm generalForm"  method="post" enctype="multipart/form-data">
             <?php
 
                 if ($media_type === 'article') {
@@ -265,11 +271,11 @@ $options = ['required' => null];
 
                     // // so we can keep track of when this article was created
                     echo '<input type="text" name="date_added" id="date_added" class="textInput createInput hidden" ';
-                    if (isset($date_added)) echo ' value="' . $date_added . '"';
+                    if (isset($_POST['date_added'])) echo ' value="' . $_POST['date_added'] . '"';
                     echo '>';
 
 
-                    $options = ['required' => null, 'placeholder' => 'Caption', 'maxlength' => 50];
+                    $options = ['required' => null, 'placeholder' => 'Caption', 'maxlength' => 100];
                     create_form_input('caption', 'text', 'Image Caption', $newArticle_errors, $options);
                     if (!empty($img_errors)) {
                         foreach ($img_errors as $key => $value) {
@@ -284,16 +290,14 @@ $options = ['required' => null];
                     }
 
                     echo '<div class="imgBox">';
-                    if (!empty($img_location)) {
-                        ?>
-                        <input type="text" class="img_location hidden" name="img_location" value="<?=$img_location;?>">
-                        <img class="showNewImg" src="<?=$img_location;?>" alt="temp_alt">
-                        <?php
-                    }
+                    ?>
+                    <input type="text" class="img_location hidden" name="img_location" value="<?=$_POST['img_name'];?>">
+                    <img class="showNewImg" src="<?=IMG_PATH . $_POST['img_name'];?>" alt="temp_alt">
+                    <?php
                     echo '</div>';
 
                     echo '<input type="text" class="hidden img_name" name="img_name" ';
-                    if (!empty($resized_filename)) echo 'value="' . $resized_filename . '"';
+                    echo 'value="' . $_POST['img_name'] . '"';
                     echo '>';
                 ?>
                 <hr class="newHr">
@@ -312,20 +316,25 @@ $options = ['required' => null];
 <!-- check content if you clicked published and send it on it's way! -->
 <?php
     if (isset($_POST['publishMediaBtn'])) {
-        // if u have clickty clicked the button and there's at least one piece of content...
-        if (empty($newArticle_errors) && $at_least_one_element === true) {
+        // if u have clickty clicked the button and there's at least one piece of content and there's no issues with the image...
+        if (empty($newArticle_errors) && empty($img_errors) && $at_least_one_element === true) {
             $a_name = htmlentities($_POST['article_name']);
             $a_description = htmlentities($_POST['article_description']);
+            $a_caption = htmlentities($_POST['caption']);
             $a_category = $_POST['article_category'];
 
-            // flags theis article for errors so if something goes wrong later on we can findd this specific article more easily
+            // flags this article for errors so if something goes wrong later on we can findd this specific article more easily
             $noErrors = 1;
+            $dbpdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+            $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_name, caption, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, :date_added, CURRENT_TIMESTAMP, :img_name, :a_caption, :error_flag)");
 
-            $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, :date_added, CURRENT_TIMESTAMP, :error_flag)");
+            // bind the paramaters
             $stmt->bindParam(':a_name', $a_name, PDO::PARAM_STR);
             $stmt->bindParam(':a_description', $a_description, PDO::PARAM_STR);
             $stmt->bindParam(':a_category', $a_category, PDO::PARAM_INT);
-            $stmt->bindParam(':date_added', $date_added, PDO::PARAM_STR);
+            $stmt->bindParam(':img_name', $_POST['img_name'], PDO::PARAM_STR);
+            $stmt->bindParam(':a_caption', $a_caption, PDO::PARAM_STR);
+            $stmt->bindParam(':date_added', $_POST['date_added']);
             $stmt->bindParam(':error_flag', $noErrors, PDO::PARAM_BOOL);
 
             // ...attempt to add that bad boi to the db...
@@ -336,10 +345,10 @@ $options = ['required' => null];
                 // ...and add each new element...
                 foreach ($trackElements as $this_element_name => $this_element_info) {
                     // ...and if it's a list item, add it this way
-                    if (strpos($this_element_name, 'l') !== false) {
+                    if ((strpos($this_element_name, 'ul') !== false) || (strpos($this_element_name, 'ol') !== false)) {
                         $this_element_id = $this_element_info['id'];
                         $this_element_order = $this_element_info['order'];
-                        $this_element_content = $this_element_info['content'];
+                        if (empty($_POST[$this_element_name]))  $this_element_content = '::empty::';
                         if (isset($this_element_info['first_li'])) {
                             $this_element_first_li = 1;
                         } else {
@@ -395,7 +404,7 @@ $options = ['required' => null];
                             $links = ['Return To Home' => 'index.php'];
                             produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
                             require './assets/includes/footer.html';
-                            exit();
+                            exit(); 
 
                         }
                     }
@@ -403,7 +412,7 @@ $options = ['required' => null];
 
                 $stmt = $dbpdo->prepare("DELETE FROM articles WHERE article_id = :a_id");
                 $stmt->bindParam(':a_id', $article_id, PDO::PARAM_STR);
-                // ...and if EVERYTHIGN went well, remove that error flag!
+                // ...and if EVERYTHING went well, remove that error flag!
                 if ($stmt->execute()) {
                     $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
                     $stmt->bindParam(':a_id', $article_db_id, PDO::PARAM_STR);
@@ -432,15 +441,16 @@ $options = ['required' => null];
                     exit();
                 }
             } else {
+                print_r($dbpdo->errorInfo());
 
                 // throw an error, ya know, if something went wrong
-                ob_end_clean();
-                require './assets/includes/header.html';
-                require './assets/includes/error.php';
-                $links = ['Return To Home' => 'index.php'];
-                produce_error_page('Could not connect to the database. Please contact our service team to resolve the issue.', $links);
-                require './assets/includes/footer.html';
-                exit();
+                // ob_end_clean();
+                // require './assets/includes/header.html';
+                // require './assets/includes/error.php';
+                // $links = ['Return To Home' => 'index.php'];
+                // produce_error_page('Could not connect to the database. Please contact our service team to resolve the issue.', $links);
+                // require './assets/includes/footer.html';
+                // exit();
             } //stmt execute END
     } // no errors, contents exists check END
 } // btn was pushed END
@@ -467,7 +477,7 @@ $options = ['required' => null];
                         </div>
                         <label for="imgs" class="contentTypeBtn uploadImgBtn" id="uploadImgBtn" data-content_type_id=9>Image</label>
                         <small class="imgsNotice">Images will be placed automatically, based upon size</small>
-                <input type="file" name="imgs" class="hidden" id="imgs" onChange="file_funct" data-content_type_id=9>
+                <input type="file" name="imgs" class="hidden" id="imgs" onChange="loadFile(event)" data-content_type_id=9>
                     </div>
 
 

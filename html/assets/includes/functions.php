@@ -33,6 +33,17 @@ class DirnameFilter extends FilesystemRegexFilter {
     }
 }
 
+function pullImage($filename) {
+	$directory = new RecursiveDirectoryIterator(IMG_PATH);
+	$filter = new DirnameFilter($directory, '/^(?!\.Trash)/'); 
+	$filter = new FilenameFilter($filter, '/^(?:' . $filename . ')$/');
+	foreach (new RecursiveIteratorIterator($filter) as $file) {
+	    if (preg_match('/\.(?:gif|png|jpg|jpeg)$/i', $file)) {
+	        $GLOBALS['img_location'] = $file;
+	        $GLOBALS['img_name'] = $filename;
+	    }
+	}
+}
 
 
 // img uploader ----------------------------------------------------------------------------------------------------->
@@ -101,62 +112,62 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 		            $move = move_uploaded_file($cf['tmp_name'], $destination . $complete_filename);
 					list($c_width, $c_height, $c_type, $c_attr) = getimagesize($destination . $complete_filename);
 					$size_confirmation = false;
+					$resize = true;
 					if ($c_width > 500 && $c_height > 300) {
-						echo 'confirmed size';
 						$size_confirmation = true;
+						if (($c_width > 600 && $c_height > 400) && ($c_width < 800 && $c_height < 600)) {
+							$resize = false;
+						}
 					} else {
-						echo 'cap';
 						$img_errors[] = 'Image is too small, please upload a larger version';
 					}
 		            if ($move && $size_confirmation) {
-		            	echo ' resized dat boi';
 						$pic_name_location = $destination . $complete_filename;
+						if ($extension == 'jpeg') $extension = 'jpg';
 						switch ($extension) {
 							case 'png': 
+								$resized_filename = 'resized_' . $complete_filename;
 								$create_img = imagecreatefrompng($pic_name_location);
 								$resize_img = imagescale($create_img, $img_width, $img_height);
-								$resized_filename = 'resized_' . $complete_filename;
 								$newName = $destination . $resized_filename;
 								imagepng($resize_img, $newName, 9);
 								if (file_exists($destination . $complete_filename)) {
 									unlink($destination . $complete_filename);
 								}
+								imagedestroy($resize_img);
 								break;
 
 							case 'gif': 
+								$resized_filename = 'resized_' . $complete_filename;
 								$create_img = imagecreatefromgif($pic_name_location);
 								$resize_img = imagescale($create_img, $img_width, $img_height);
 								$resized_filename = 'resized_' . $complete_filename;
 								$newName = $destination . $resized_filename;
-								imagegif($resize_img, $newName, 9);
+								imagegif($resize_img, $newName);
 								if (file_exists($destination . $complete_filename)) {
 									unlink($destination . $complete_filename);
 								}
+								imagedestroy($resize_img);
 								break;
 
 							case 'jpg': 
+								$resized_filename = 'resized_' . $complete_filename;
 								$create_img = imagecreatefromjpeg($pic_name_location);
 								$resize_img = imagescale($create_img, $img_width, $img_height);
-								$resized_filename = 'resized_' . $complete_filename;
 								$newName = $destination . $resized_filename;
-								imagejpeg($resize_img, $newName, 9);
+								imagejpeg($resize_img, $newName, 100);
 								if (file_exists($destination . $complete_filename)) {
 									unlink($destination . $complete_filename);
 								}
+								imagedestroy($resize_img);
 								break;
 
-							default: $img_errors[] = 'Unknown picture type: ' . $pic_type ; break;
+							default: $img_errors[] = 'Unknown picture type: ' . $extension ; break;
 						}
 
 						if (empty($img_errors)) {
-							$directory = new RecursiveDirectoryIterator('./assets/imgs/article_imgs');
-							$filter = new DirnameFilter($directory, '/^(?!\.Trash)/'); 
-							$filter = new FilenameFilter($filter, '/^(?:' . $resized_filename . ')$/');
-							foreach (new RecursiveIteratorIterator($filter) as $file) {
-							    if (preg_match('/\.(?:gif|png|jpg|jpeg)$/i', $file)) {
-							        $img_location = $file;
-							    }
-							}
+							pullImage($resized_filename);
+							if (empty($img_location)) $img_errors[] = 'Something went wrong while uploading that image. Please contact our service team.';
 						}
 
 		                $img_notices[] = $cf['name'] . ' was uploaded';
@@ -168,11 +179,15 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 		            }
 		        }
 		    }
-			if (empty($img_location)) $img_errors[] = 'Image could not be uploaded. Please contact our service team.';
 		} catch (Exception $e) {
 		    echo $e->getMessage();
 		}
 	}
+}
+
+
+if (isset($pageTitle) && strtolower($pageTitle) === 'edit article' && !isset($_POST['publishMediaBtn']) && isset($img_name)) {
+	pullImage($img_name);
 }
 
 

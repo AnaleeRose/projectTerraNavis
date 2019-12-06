@@ -8,7 +8,8 @@ session_start();
  // config sets up a number of vital defnitions and a few functions too
 require './../html/assets/includes/config.inc.php';
 
-// connects ya to the db
+// connects ya to the db as admin for delete priveleges
+$user = 'admin';
 require MYSQL;
 
 // a few useful functions used through the site
@@ -31,7 +32,7 @@ if (!isset($_GET['article_id'])) {
 // make sure that article exists, if it doesnt toss an error
 $q = "SELECT * FROM articles WHERE article_id = $article_id";
 $r = mysqli_query($dbc, $q);
-if (mysqli_num_rows($r) === 0) {
+if (mysqli_num_rows($r) === 0 && !isset($_GET['delete'])) {
     ob_end_clean();
     require './assets/includes/header.html';
     require './assets/includes/error.php';
@@ -74,6 +75,7 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'true') {
 	    require './assets/includes/footer.html';
 	    exit();
     }
+
 }
 
 // start creating the page...

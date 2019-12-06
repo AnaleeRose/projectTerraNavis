@@ -87,3 +87,4 @@ define('EMAIL_LINK', 'terranavisliving@gmail.com');
 define('TWITTER_LINK', 'https://twitter.com/wddatft');
 define('FACEBOOK_LINK', 'https://www.facebook.com/wddatft');
 define('PININTEREST_LINK', 'terranavisliving@gmail.com');
+define('IMG_PATH', './assets/imgs/article_imgs/');

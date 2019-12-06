@@ -1,7 +1,7 @@
 <?php
 while ($row = $r->fetch_assoc()) {
     $elemName = $row['element_name'];
-    $elemContents = $row['content'];
+    $elemContents = nl2br($row['content']);
         switch ($elemName) {
             case strpos($elemName, 'p'):
 					echo '<p class="printedElement printedP">' . $elemContents . '</p>';

@@ -28,6 +28,8 @@ if ($media_type === 'article') {
 			$category = $row['category'];
 			$date_added = $row['date_added'];
 			$last_modified = $row['date_modified'];
+			$img_location = IMG_PATH . $row['img_name'];
+			$caption = $row['caption'];
 		}
 
 	} else {
@@ -121,6 +123,8 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 					?>
 					<div class="printedArticle>">
 					<h3 class="adminHeading printedHeading"><?= $article_name; ?></h3>
+					<img class="viewImg" src="<?= $img_location; ?>" alt="<?= $article_name; ?>">
+					<p class="printedCaption" ><?= $caption; ?></p>
 				<?php
 					require './assets/includes/articleContentBuilder.php';
 					echo '</div>';

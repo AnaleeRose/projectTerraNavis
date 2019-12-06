@@ -653,6 +653,8 @@ function loadFile(e) {
         new_img = document.createElement('img');
         new_img.src = URL.createObjectURL(e.target.files[0]);
         new_img.classList.add('showNewImg');
+        new_img.style.width = '600px';
+        new_img.style.height = '400px';
         if (article_name) {
             new_img.setAttribute('alt', article_name.value);
         }
@@ -660,6 +662,8 @@ function loadFile(e) {
     } else {
         num = e.target.files.length - 1
         checkIfImgExists.src = URL.createObjectURL(e.target.files[num]);
+        checkIfImgExists.style.width = '600px';
+        checkIfImgExists.style.height = '400px';
     }
 }
 

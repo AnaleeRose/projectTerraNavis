@@ -8,7 +8,6 @@ if (isset($_POST['publishMediaBtn'])) {
                     $trackElements[$content]['content'] = $_POST[$content];
                     $trackElements[$content]['id'] = 1;
                     $trackElements[$content]['order'] = $currentNum;
-                    // echo "Paragrah: " . $content;
                     $options = ['placeholder' => 'Paragraph | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes'=>'Paragraph contentInput', 'required' => null, 'data-content_type_id' => 1];
                     create_form_input($content, 'textarea', 'Paragraph', $newArticle_errors, $options);
                     break;
