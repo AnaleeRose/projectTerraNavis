@@ -18,8 +18,6 @@
 <!-- Main body content -->
 <h1 id="contact">Contact Us</h1>
 
-
-
 <div class="contact-icons">
     <h2 class="name">Connect With Us!</h2>
     <a href="<?= FACEBOOK_LINK; ?>"><img id="fb-icon" src="images/" alt="Facebook Icon"></a>
