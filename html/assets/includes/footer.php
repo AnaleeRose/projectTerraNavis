@@ -24,7 +24,7 @@
                     </div>
                     <div class="email">
                         <img id="email-icon" src="images/" alt="Email Icon">
-                        <p><?= EMAIL_LINK ?></p>
+                        <p><?= EMAIL_LINK; ?></p>
                     </div>
                 </div>
                 <div id="copyright">

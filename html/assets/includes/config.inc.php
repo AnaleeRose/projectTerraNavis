@@ -1,4 +1,5 @@
 <?php
+
 // grabs the url
 $url = $_SERVER['SERVER_NAME'];
 
@@ -86,5 +87,7 @@ function check_if_admin() {
 define('EMAIL_LINK', 'terranavisliving@gmail.com');
 define('TWITTER_LINK', 'https://twitter.com/wddatft');
 define('FACEBOOK_LINK', 'https://www.facebook.com/wddatft');
-define('PININTEREST_LINK', 'terranavisliving@gmail.com');
+define('PININTEREST_LINK', 'idk_what_a_pininterest_link_looks_like');
 define('IMG_PATH', './assets/imgs/article_imgs/');
+define('IMG_PATH_HTML', '../admin/assets/imgs/article_imgs/');
+

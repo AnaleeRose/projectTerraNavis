@@ -9,7 +9,13 @@
 </head>
 <body>
 <!------ Header ------------>
-<?php require './assets/includes/header.php'; ?>
+<?php
+
+$page = 'sustain';
+
+require './assets/includes/header.php';
+
+?>
 
 <!-- Main body content -->
 <img class="title-img" src="" alt="Page Title Image">

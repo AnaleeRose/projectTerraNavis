@@ -1,3 +1,4 @@
+<?php require './assets/includes/config.inc.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

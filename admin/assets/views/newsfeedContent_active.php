@@ -6,14 +6,11 @@ if (isset($no_articles) && $no_articles) {
 } else {
     if (isset($list_all) && $list_all) {
         if (isset($offset)) {
-    echo 'all articles offsey';
             $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 25 OFFSET ' . $OFFSET;
         } else {
-    echo 'all articles 35';
             $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 25';
         }
     } else {
-    echo 'all articles base';
         $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 5';
     }
     $r = mysqli_query($dbc, $q);
@@ -59,8 +56,6 @@ if (isset($no_articles) && $no_articles) {
             <?php
             }
         }
-    } else {
-        echo '$R';
     }
 }
 

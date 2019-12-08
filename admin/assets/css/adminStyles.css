@@ -1194,19 +1194,40 @@ h2.newsfeedHeading {
     margin-top: 1.5rem;
 }
 
+
 .nwBox .editBtn, .nwBox .deleteBtn {
     margin: 0 auto;
 }
 
-.nwBox .readEmailBtn {
-    margin: 0 38px 0 2rem;
+.nwBox .adminBtn {
+    margin-left: 0;
+    margin-right: 10px;
     text-align: center;
+    width: 100%;
 }
 
 
-.nwBox .adminBtn {
-    margin-right: 10px;
-    width: 100%;
+.nwBox .readEmailBtn {
+    margin-top: 0;
+    width: 100px;
+/*    margin: 0 38px 0 2rem;
+    text-align: center;*/
+}
+
+
+
+.nwBox .editBtn {
+    width: 6rem;
+    width: 300px;
+}
+.nwBox .deleteBtn {
+    width: 7.5rem;
+    width: 400px;
+}
+
+.nwBox .viewBtn {
+    width: 7.5rem;
+    width: 300px;
 }
 
 .nwBox .dateInfo {color: var(--brightAqua);}
