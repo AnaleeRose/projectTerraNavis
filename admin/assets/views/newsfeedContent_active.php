@@ -6,11 +6,14 @@ if (isset($no_articles) && $no_articles) {
 } else {
     if (isset($list_all) && $list_all) {
         if (isset($offset)) {
-            $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 25 OFFSET ' . $ofset;
+    echo 'all articles offsey';
+            $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 25 OFFSET ' . $OFFSET;
         } else {
+    echo 'all articles 35';
             $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 25';
         }
     } else {
+    echo 'all articles base';
         $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 5';
     }
     $r = mysqli_query($dbc, $q);
@@ -43,6 +46,11 @@ if (isset($no_articles) && $no_articles) {
             ?>
             <p class="newsfeedDescription"><?= $article_description ?></p>
             <div class="btnBox">
+                <?php
+                if (isset($list_all) && $list_all) {
+                ?>
+                <a href="view.php?view_type=read&media_type=article&media_id=<?php echo $row['article_id']; ?>"" class="adminBtn adminBtn_aqua viewBtn">View Article</a>
+                <?php } ?>
                 <a href="editArticle.php?<?php echo 'article_id=' . $row['article_id']?>" class="adminBtn adminBtn_accent editBtn">Edit Article</a>
                 <a href="deleteArticle.php?<?php echo 'article_id=' . $row['article_id']?>" class="adminBtn adminBtn_danger deleteBtn">Delete Article</a>
             </div>
@@ -51,6 +59,8 @@ if (isset($no_articles) && $no_articles) {
             <?php
             }
         }
+    } else {
+        echo '$R';
     }
 }
 

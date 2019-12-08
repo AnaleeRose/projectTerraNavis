@@ -119,7 +119,7 @@ fieldset{border: 2px solid #fff;}
 input.hidden {
     height: 1px;
 }
- 
+
 .backShadow {box-shadow: 5px 15px 15px #3b3535;}
 .backShadow_light {box-shadow: 5px 10px 10px #a9b5b7;}
 .dmode .backShadow_light {
@@ -882,7 +882,7 @@ END Login & Register
 }
     .profilePicDiv .profilePic {
         background: linear-gradient(330deg, rgba(255,209,16,1) 0%, rgba(223,180,0,1) 100%);
-        
+
         border: none;
         padding: 1rem;
         display: block;
@@ -1172,7 +1172,12 @@ h2.newsfeedHeading {
     padding: 2rem;
     position: relative;
     margin: 2rem .5rem;
-    width: 420px;
+    max-width: 420px;
+}
+
+.adminMainContent .nwBox {
+    max-width: none;
+    width: 445px;
 }
 
 .newsfeedContent
@@ -1187,19 +1192,21 @@ h2.newsfeedHeading {
     display: flex;
     justify-content: space-between;
     margin-top: 1.5rem;
-    margin-left: -40px;
-    width: 405px;
 }
 
-.nwBox .editBtn {
-    margin: .9rem auto 0;
-    width: 5.5rem;
+.nwBox .editBtn, .nwBox .deleteBtn {
+    margin: 0 auto;
 }
 
 .nwBox .readEmailBtn {
     margin: 0 38px 0 2rem;
     text-align: center;
-    width: 6rem;
+}
+
+
+.nwBox .adminBtn {
+    margin-right: 10px;
+    width: 100%;
 }
 
 .nwBox .dateInfo {color: var(--brightAqua);}
@@ -1649,7 +1656,7 @@ END Delete Article
 
 .viewImgBox {
     display: flex;
-    height: 500px;
+    height: 520px;
     flex-direction: column;
     float: left;
     position: relative;
@@ -1666,7 +1673,7 @@ END Delete Article
     display: inline-block;
     float: left;
     left: 2rem;
-    margin: 0 0 1rem;
+    margin: 0 0 2.3rem;
     padding: 1rem 3.7rem 1.5rem 4rem;
     position: absolute;
     width: 541px;
@@ -1693,19 +1700,16 @@ END Delete Article
 
     .viewPage .printedArticle a:before, .viewPage .articleFooter a:before {
         background: var(--green);
-        bottom: 0;
+        bottom: -1px;
         content: '';
         left: 0;
         padding: 1px 0;
         position: absolute;
         transition: padding .5s;
     }
-        .viewPage .printedArticle a:hover:before {
-            padding: 1px 3rem;
-        }
 
-        .viewPage .articleFooter a:hover:before {
-            padding: 1px 2.24rem;
+        .viewPage .articleFooter a:hover:before, .viewPage .printedArticle a:hover:before {
+            padding: 1px 50.5%;
         }
 
     .viewPage .printedArticle a:hover, .viewPage .articleFooter a:hover {

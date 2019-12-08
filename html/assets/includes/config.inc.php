@@ -18,8 +18,8 @@ if ($online) {
     define('BASE_URL', 'http://bpa-development.savannahskinner.com/');
 } else {
     define('BASE_URI', '/Applications/XAMPP/xamppfiles/htdocs/BPA/');
-    // define('BASE_URL', 'http://localhost:81/BPA/');
-    define('BASE_URL', 'http://localhost/BPA/');
+    define('BASE_URL', 'http://localhost:81/BPA/');
+    // define('BASE_URL', 'http://localhost/BPA/');
 }
 
 
@@ -34,7 +34,7 @@ if ($online) {
 // error handler, prints out a message with as much info as possible but only if we're offline.
 function error_handler($e_number, $e_message, $e_file, $e_line, $e_vars) {
     $message = "An error occured in script '$e_file' on line '$e_line:\n$e_message\n";
-    $message .= "<pre>" .print_r(debug_backtrace(), 1) . "</pre>\n";
+    $message .= "<pre>" . print_r(debug_backtrace(), 1) . "</pre>\n";
     if (!LIVE) {
         echo '<div class="alert alert-danger">' . nl2br($message) . '</div>';
     } else {

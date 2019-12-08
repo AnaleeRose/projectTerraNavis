@@ -2,7 +2,6 @@
 $currentNum = 1;
 if (isset($_POST['publishMediaBtn'])) {
     foreach ($elementsUsed as $content) {
-        print_r($content);
         if (isset($_POST[$content]) && (!empty($_POST[$content]) || strpos($content, 'l') !== false)) {
             switch ($content) {
                 case strpos($content, 'p'):
@@ -133,7 +132,7 @@ if (isset($_POST['publishMediaBtn'])) {
                     break;
             }
             $currentNum++;
-        } 
+        }
         // } else {
         //     if (empty($_POST[$content])) {
         //         echo '<br>';
@@ -161,3 +160,4 @@ if (isset($_POST['publishMediaBtn'])) {
 }
 
 
+print_r($trackElements);
