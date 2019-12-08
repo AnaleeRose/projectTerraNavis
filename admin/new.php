@@ -31,7 +31,7 @@ $pageTitle = 'New Article';
 
 
 // tells it whether to produce the form for emails vs the form for articles using the variable saved int he url
-$media_type = $_GET['media_type']; 
+$media_type = $_GET['media_type'];
 
 $img_location;
 $img_name;
@@ -137,6 +137,12 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
     if (empty($_POST['article_name'])) $newArticle_errors['article_name'] = "Missing: Name";
     if (empty($_POST['article_category']) || $_POST['article_category'] === 1) $newArticle_errors['article_category'] = "Missing: Category";
     if (empty($_POST['article_description']) || $_POST['article_description'] === 1) $newArticle_errors['article_description'] = "Missing: Description";
+    if (empty(trim($_POST['img_name']))) {
+        $img_errors[] = 'Please add an image';
+    } else {
+        echo 'oh noes, no image!';
+    }
+
     foreach ($possible as $elementToCheck) {
         if (isset($_POST[$elementToCheck]) && !empty($_POST[$elementToCheck])) {
             $at_least_one_element = true;
@@ -186,6 +192,7 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
 // start creating page...
 require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
+
 // options that can be passed to create_form_input, this one gives the inputs a required attribute but others do way more
 $options = ['required' => null];
     require './assets/includes/adminMenu.php';
@@ -201,7 +208,7 @@ $options = ['required' => null];
                 if ($media_type === 'article') { ?>
                     <a href="./new.php?media_type=email" class="adminBtn adminBtn_aqua">Switch To Email</a>
                     <a href="./new.php?media_type=article&clear=true" class="adminBtn adminBtn_danger">Clear Page</a>
-                <?php 
+                <?php
                 } elseif ($media_type === 'email') {
                 ?>
                     <a href="<?= BASE_URL; ?>admin/new.php?media_type=email&messageTemplate=true" class="adminBtn adminBtn_aqua templateMsgBtn" id="templateMsgBtn">Insert Template Message</a>
@@ -276,11 +283,13 @@ $options = ['required' => null];
                     </div>
 <!-- check content if you clicked published and send it on it's way! -->
 <?php
-if (empty($_POST['img_name'])) $newArticle_errors['article_name'] = "Missing: Image";
+
 if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
     echo '<br>';
     print_r($_POST);
     echo '<br>';
+
+
         // if u have clickty clicked the button and there's at least one piece of content and there's no issues with the image...
         if (empty($newArticle_errors) && empty($img_errors) && $at_least_one_element === true) {
             $a_name = htmlentities($_POST['article_name']);
@@ -306,10 +315,16 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
             if ($stmt->execute()) {
                 $article_db_id = $dbpdo->lastInsertId();
                 foreach ($trackElements as $this_element_name => $this_element_info) {
+
                     if ((strpos($this_element_name, 'ul') !== false) || (strpos($this_element_name, 'ol') !== false)) {
                         $this_element_id = $this_element_info['id'];
                         $this_element_order = $this_element_info['order'];
-                        if (empty($_POST[$this_element_name]))  $this_element_content = '::empty::';
+                        if (empty($_POST[$this_element_name])) {
+                                $this_element_content = '::empty::';
+                        } else {
+                                $this_element_content = $_POST[$this_element_name];
+                        }
+
                         if (isset($this_element_info['first_li'])) {
                             $this_element_first_li = 1;
                         } else {
@@ -324,70 +339,71 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
                         // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_content', $this_element_first_li, $this_element_last_li)" . '<br><br>';
 
                         $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content, :elem_first_li, :elem_last_li)");
-                        // $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
-                        // $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
-                        // $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
-                        // $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
-                        // $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
-                        // $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
-                        // $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
-                        // if ($stmt->execute()) {
-                        //     echo "<br>_LILILILIGOOD_<br>";
-                        // } else {
-                        //     ob_end_clean();
-                        //     require './assets/includes/header.html';
-                        //     require './assets/includes/error.php';
-                        //     $links = ['Return To Home' => 'index.php'];
-                        //     produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
-                        //     require './assets/includes/footer.html';
-                        //     exit();
-                        // }
+                        $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
+                        $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
+                        $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
+                        $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
+                        $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
+                        $stmt->bindParam(':elem_first_li', $this_element_first_li, PDO::PARAM_INT);
+                        $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
+                        if ($stmt->execute()) {
+                            echo "<br>_LILILILIGOOD_<br>";
+                        } else {
+                            ob_end_clean();
+                            require './assets/includes/header.html';
+                            require './assets/includes/error.php';
+                            $links = ['Return To Home' => 'index.php'];
+                            produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
+                            require './assets/includes/footer.html';
+                            exit();
+                        }
                     } else {
-                        echo 'craoo';
+
                         if (!empty($_POST[$this_element_name])) {
                             $this_element_id = $this_element_info['id'];
                             $this_element_order = $this_element_info['order'];
                             $this_element_content = htmlentities($this_element_info['content']);
-                            echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_name', '$this_element_content')" . '<br><br>';
-                            // $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content)");
-                            // $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
-                            // $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
-                            // $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
-                            // $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
-                            // $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
-                            // if ($stmt->execute()) {
-                            //     echo "<br>_OTHERGOOD_<br>";
-                            // } else {
-                            //     ob_end_clean();
-                            //     require './assets/includes/header.html';
-                            //     require './assets/includes/error.php';
-                            //     $links = ['Return To Home' => 'index.php'];
-                            //     produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
-                            //     require './assets/includes/footer.html';
-                            //     exit();
-                            // }
+                            // echo "INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, $article_db_id, $this_element_id, $this_element_order, '$this_element_name', '$this_element_content')" . '<br><br>';
+                            $stmt = $dbpdo->prepare("INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`) VALUES (NULL, :a_db_id, :elem_id, :elem_order, :elem_name, :elem_content)");
+                            $stmt->bindParam(':a_db_id', $article_db_id, PDO::PARAM_INT);
+                            $stmt->bindParam(':elem_id', $this_element_id, PDO::PARAM_INT);
+                            $stmt->bindParam(':elem_order', $this_element_order, PDO::PARAM_INT);
+                            $stmt->bindParam(':elem_name', $this_element_name, PDO::PARAM_STR);
+                            $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
+                            if ($stmt->execute()) {
+                                echo "<br>_OTHERGOOD_<br>";
+                            } else {
+                                ob_end_clean();
+                                require './assets/includes/header.html';
+                                require './assets/includes/error.php';
+                                $links = ['Return To Home' => 'index.php'];
+                                produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
+                                require './assets/includes/footer.html';
+                                exit();
+                            }
                         } else {
                             echo 'empty';
                         }
-                    } 
+                    }
 
-                    // header('Location: ' . BASE_URL . 'admin/view.php?view_type=read&media_type=article&media_id=' . $article_db_id);
                 } // foreach END
 
-                // $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
-                // $stmt->bindParam(':a_id', $article_db_id, PDO::PARAM_STR);
-                // if (!$stmt->execute()) {
-                //     ob_end_clean();
-                //     require './assets/includes/header.html';
-                //     require './assets/includes/error.php';
-                //     $links = ['Return To Home' => 'index.php'];
-                //     produce_error_page('Could not connect to the database, your article may be salvageable. Please contact our service team to resolve the issue.', $links);
-                //     require './assets/includes/footer.html';
-                //     exit();
-                // }
+                $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
+                $stmt->bindParam(':a_id', $article_db_id, PDO::PARAM_STR);
+                if (!$stmt->execute()) {
+                    ob_end_clean();
+                    require './assets/includes/header.html';
+                    require './assets/includes/error.php';
+                    $links = ['Return To Home' => 'index.php'];
+                    produce_error_page('Could not connect to the database, your article may be salvageable. Please contact our service team to resolve the issue.', $links);
+                    require './assets/includes/footer.html';
+                    exit();
+                } else {
+                    header('Location: ' . BASE_URL . 'admin/view.php?view_type=read&media_type=article&media_id=' . $article_db_id);
+                }
 
             } //stmt execute END
-        }// no errors, contents exists check END
+        } // no errors, contents exists check END
 }// btn was pushed END
 
 

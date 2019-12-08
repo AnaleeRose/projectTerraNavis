@@ -74,6 +74,16 @@ if ($media_type === 'email') {
 // PREVIEW MEDIA ------------------------------------------------------------------------->
 
 require './assets/includes/header.html';
+echo '<script>';
+?>
+window.addEventListener('load', (event) => {
+    allUl = document.querySelectorAll('.printedUl')
+    if (allUl.length > 0) {
+        allUl[0].style.clear = 'both';
+    }
+})
+<?php
+echo '</script>';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . ' viewPage">';
     require './assets/includes/adminMenu.php';
     require './assets/includes/newsfeed_active.php';

@@ -35,7 +35,7 @@ class DirnameFilter extends FilesystemRegexFilter {
 
 function pullImage($filename) {
 	$directory = new RecursiveDirectoryIterator(IMG_PATH);
-	$filter = new DirnameFilter($directory, '/^(?!\.Trash)/'); 
+	$filter = new DirnameFilter($directory, '/^(?!\.Trash)/');
 	$filter = new FilenameFilter($filter, '/^(?:' . $filename . ')$/');
 	foreach (new RecursiveIteratorIterator($filter) as $file) {
 	    if (preg_match('/\.(?:gif|png|jpg|jpeg)$/i', $file)) {
@@ -60,7 +60,7 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 		$destination = './assets/imgs/article_imgs/';
 		$imgCaption = $_POST['caption'];
 		$extension = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);
-		$extension = strtolower($extension);  
+		$extension = strtolower($extension);
 		try {
 		    $checkFile = false;
 		    $uploaded = current($_FILES);
@@ -70,7 +70,7 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 		        $cf['tmp_name'] = $_FILES['img']['tmp_name'];
 		        $cf['error'] = $_FILES['img']['error'];
 		        $cf['size'] = $_FILES['img']['size'];
-		        
+
 
 		        if ($cf['error'] == 1 || $cf['error'] == 2) {
 		            $img_errors[] = "Something went wrong... Please try again later!";
@@ -125,7 +125,7 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 						$pic_name_location = $destination . $complete_filename;
 						if ($extension == 'jpeg') $extension = 'jpg';
 						switch ($extension) {
-							case 'png': 
+							case 'png':
 								$resized_filename = 'resized_' . $complete_filename;
 								$create_img = imagecreatefrompng($pic_name_location);
 								$resize_img = imagescale($create_img, $img_width, $img_height);
@@ -137,7 +137,7 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 								imagedestroy($resize_img);
 								break;
 
-							case 'gif': 
+							case 'gif':
 								$resized_filename = 'resized_' . $complete_filename;
 								$create_img = imagecreatefromgif($pic_name_location);
 								$resize_img = imagescale($create_img, $img_width, $img_height);
@@ -150,7 +150,7 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 								imagedestroy($resize_img);
 								break;
 
-							case 'jpg': 
+							case 'jpg':
 								$resized_filename = 'resized_' . $complete_filename;
 								$create_img = imagecreatefromjpeg($pic_name_location);
 								$resize_img = imagescale($create_img, $img_width, $img_height);
@@ -167,7 +167,7 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 
 						if (empty($img_errors)) {
 							pullImage($resized_filename);
-							if (empty($img_location)) $img_errors[] = 'Something went wrong while uploading that image. Please contact our service team.';
+							if (empty($img_location) || empty($img_name)) $img_errors[] = 'Something went wrong while uploading that image. Please contact our service team.';
 						}
 
 		                $img_notices[] = $cf['name'] . ' was uploaded';
