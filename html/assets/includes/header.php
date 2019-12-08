@@ -4,10 +4,10 @@
         <ul class="main-nav">
             <li><a href="index.php">Home</a></li>
             <li><a href="sustainability.php">Sustainability</a></li>
-            <?php 
+            <?php
             // change the title in quotes below to match whatever the page title is on that page, all lower case in the quotes pls
             // also added the dropdownUl class for the styles that match both (like for js to target it for special effects!)
-            if (strtolower($page_title) == 'sustainability') { 
+            if (isset($page_title) && strtolower($page_title) == 'sustainability') {
             ?>
                 <ul class="sustain dropdownUl">
                     <li><a href="#renew-energy">Renewable Energy</a></li>
@@ -19,9 +19,9 @@
 
             <li><a href="construction.php">Construction</a></li>
 
-            <?php 
+            <?php
             // change the title in quotes below to match whatever the page title is on that page, all lower case in the quotes pls
-            if (strtolower($page_title) == 'construction') { 
+            if (isset($page_title) && strtolower($page_title) == 'construction') {
             ?>
                 <ul class="construction dropdownUl">
                     <li><a href="#design">Design</a></li>
