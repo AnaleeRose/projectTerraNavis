@@ -15,6 +15,9 @@ require MYSQL;
 // a few useful functions used through the site
 require './../html/assets/includes/functions.php';
 
+// creates a back button
+include './assets/includes/backBtn.inc.php';
+
 
 // if there is no article id from the url, something went wrong so toss them an error
 if (!isset($_GET['article_id'])) {

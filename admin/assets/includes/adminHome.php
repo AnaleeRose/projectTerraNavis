@@ -25,7 +25,7 @@
                 <a href="./allArticles.php" class="allArticles">See All Articles</a>
                 <a href="./newEmail.php" class="newEmail">Create New Email</a>
                 <a href="./newArticle.php" class="newArticle">Create New Article</a>
-                <a href="http://localhost:81/BPA/admin/view.php?view_type=read&media_type=article&media_id=57" class="">View Template Article</a>
+                <!-- <a href="http://localhost:81/BPA/admin/view.php?view_type=read&media_type=article&media_id=57" class="">View Template Article</a> -->
 
             <?php ed();
         ed();

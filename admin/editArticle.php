@@ -21,6 +21,9 @@ require './../html/assets/includes/form_functions.inc.php';
 // makes it easy to create common inputs for this page specifically, we only need it if they haven't clicked the button yet since this code is just to rebuild the article into inputs
 if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php';
 
+// creates a back button
+include './assets/includes/backBtn.inc.php';
+
 
 
 // ------------------------------->intialize various variables

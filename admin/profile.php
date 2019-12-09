@@ -20,11 +20,16 @@ require './../html/assets/includes/form_functions.inc.php';
 // basic functions used throughout the site
 require './../html/assets/includes/functions.php';
 
+// creates a back button
+include './assets/includes/backBtn.inc.php';
+
+
 // makes it easy to create common inputs for this page specifically, we only need it if they haven't clicked the button yet since this code is just to rebuild the article into inputs
 if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php';
 
 // reset this so they have to login again before attempting to change anything important
 $_SESSION['relogged_in'] = false;
+
 
 
 $pageTitle = 'Profile';

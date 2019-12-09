@@ -30,8 +30,13 @@ $pageTitle = 'New Article';
 
 
 
+
+
 // tells it whether to produce the form for emails vs the form for articles using the variable saved int he url
 $media_type = $_GET['media_type'];
+
+// creates a back button
+include './assets/includes/backBtn.inc.php';
 
 $img_location;
 $img_name;
@@ -285,11 +290,6 @@ $options = ['required' => null];
 <?php
 
 if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
-    echo '<br>';
-    print_r($_POST);
-    echo '<br>';
-
-
         // if u have clickty clicked the button and there's at least one piece of content and there's no issues with the image...
         if (empty($newArticle_errors) && empty($img_errors) && $at_least_one_element === true) {
             $a_name = htmlentities($_POST['article_name']);

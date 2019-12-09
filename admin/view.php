@@ -1,22 +1,46 @@
 <?php
+// ob_start tells it not to show anything until everything is done loading so I can interrupt it at any time to load an error page without php getting mad about content already on display
 ob_start();
+
+// starts a session lol, aka it tracks information even when you go to a different page within the site
 session_start();
-require './../html/assets/includes/config.inc.php'; // basic definitions used throughout the site
-check_if_admin(); // toss user back to login page if they're not logged in
-$user = 'admin';
-require MYSQL; // connect to db
-require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
-if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php'; // makes it easy to create forms
-require './../html/assets/includes/functions.php'; // various functions
+
+ // config sets up a number of vital defnitions and a few functions too
+require './../html/assets/includes/config.inc.php';
+
+// toss user back to login page if they're not logged in
+check_if_admin();
+// connects ya to the db
+require MYSQL;
+
+// makes it easy to create forms
+require './../html/assets/includes/form_functions.inc.php';
+if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php';
+
+// basic functions used throughout the site
+require './../html/assets/includes/functions.php';
+
+// creates a back button
+include './assets/includes/backBtn.inc.php';
+
 
 
 $pageTitle = 'View ' . $_GET['media_type'];
 $view_type = $_GET['view_type'];
 $media_type = $_GET['media_type'];
 $media_id = $_GET['media_id'];
+$emailForm_errors = [];
+
+if (isset($_POST['sendEmail'])) {
+	$send = true;
+} else {
+	$send = false;
+}
+
 $article_name = '';
 $article_description = '';
 $category = '';
+$bcc_headers = '';
 // PULL FROM DB ------------------------------------------------------------------------->
 if ($media_type === 'article') {
 	$q = "SELECT a.*, category FROM articles a JOIN categories c ON a.article_category = c.category_id WHERE article_id = $media_id";
@@ -51,8 +75,69 @@ if ($media_type === 'article') {
 			$date_created = $row['date_added'];
 			$date_sent = $row['date_sent'];
 		}
+
+		if (!empty($e_subject) && $send) {
+			$q = "SELECT * FROM email_list";
+			$r = mysqli_query($dbc, $q);
+			if ($r) {
+				$e_msg = '<html><body><p>' . $e_msg . '</p></body></html>';
+				$e_msg = str_replace("\n\r", "</p>\n<p>", $e_msg);
+				$first = true;
+				while ($row = $r->fetch_assoc()) {
+					$email = $row['email'];
+					if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+						if ($first) {
+							$first = false;
+							$bcc_headers .= $email;
+						} else {
+							$bcc_headers .= ',' . $email;
+						}
+					}
+				}
+
+				if (strlen($bcc_headers) > 5) {
+					if (isset($_POST['yourEmail']) && filter_var($_POST['yourEmail'], FILTER_VALIDATE_EMAIL)) {
+						$bcc_headers .= ',' . $_POST['yourEmail'];
+					} elseif (!filter_var($_POST['yourEmail'], FILTER_VALIDATE_EMAIL)) {
+						$emailForm_errors['yourEmail'] = 'Invalid Email';
+					}
+					if (empty($emailForm_errors)) {
+						$mail_to_send_to = "kaiasnowfall@gmail.com";
+						$from_email = "savannah@savannahskinner.com";
+					    $headers = "MIME-Version: 1.0" . "\r\n" . "Content-type:text/html;charset=UTF-8" . "\r\n" . "From: $from_email" . "\r\n" . 'Bcc:' .$bcc_headers . "\r\n";
+					    $a = mail( $mail_to_send_to, $e_subject, $e_msg, $headers);
+					    if ($a) {
+					        print("Message was sent");
+							$emailForm_errors['yourEmail'] = 'Message was sent';
+					    	// echo '<br>';
+					    	// echo '<br>';
+					    	// echo $mail_to_send_to;
+					    	// echo '<br>';
+					    	// echo $e_subject;
+					    	// echo '<br>';
+					    	// echo $e_msg;
+					    	// echo '<br>';
+					    	// echo $headers;
+					    	// echo '<br>';
+
+					    } else {
+							$emailForm_errors['yourEmail'] = 'Message could not be sent, lemme know this happened and please screenshot the page. I need to know how and why it broke.';
+					    }
+					}
+				}
+			}
+		}
+	} else { // if no email with that id
+	    ob_end_clean();
+	    require './assets/includes/header.html';
+	    require './assets/includes/error.php';
+	    $links = ['Return To Home' => 'index.php', 'See All Articles' => 'allArticles.php'];
+	    produce_error_page('That link doesn\'t exist. Please contact our service team to resolve the issue.', $links);
+	    require './assets/includes/footer.html';
+	    exit();
 	}
-} else {
+
+} else { // if no emails
     ob_end_clean();
     require './assets/includes/header.html';
     require './assets/includes/error.php';
@@ -153,15 +238,22 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . ' viewPage">';
 			} elseif ($media_type === 'email') { // ELSEIF EMAIL  -------------------------------------------------->
 				?>
 				<div class="previewEmailBox">
-	            	<!-- <form class="newMediaForm" method="post"> -->
+					<form method="post" class="generalForm">
 					<div class="previewEmailBox">
 						<h2 class="adminHeading">Subject:</h2>
 						<h2 class="adminHeading emailSubject"><?= $e_subject; ?></h2>
 						<h2 class="adminHeading">Message: </h2>
-						<p class="emailMsg"><?= $e_msg; ?></p>
+
+						<div class="emailMsg">
+							<p class="emailP"><?= str_replace("\n\r", "</p>\n<p class=\"emailP\">", $e_msg) ?></p>
+						</div>
+							<?php 
+							create_form_input('yourEmail', 'email', 'Your Email', $emailForm_errors);
+							?>
 					</div>
-					<a class="adminBtn adminBtn_aqua" id="sendEmailBtn" href="<?= BASE_URL; ?>admin/view.php?view_type=preview&media_type=email&media_id=<?= $media_id; ?>">Send Email</a>
-					<!-- </form> -->
+					<!-- <a class="adminBtn adminBtn_aqua" id="sendEmailBtn" href="<?= BASE_URL; ?>admin/view.php?view_type=view&media_type=email&media_id=<?= $media_id; ?>&send=true">Send Email</a> -->
+					<input type="submit" name="sendEmail" class="adminBtn adminBtn_aqua" id="sendEmailBtn" href="<?= BASE_URL; ?>admin/view.php?view_type=view&media_type=email&media_id=<?= $media_id; ?>&send=true" value="Send Email">
+					</form>
 				</div>
 				<?php
 

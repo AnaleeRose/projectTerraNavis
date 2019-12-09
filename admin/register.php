@@ -6,7 +6,9 @@ check_if_admin(); // toss user back to login page if they're not logged in
 require MYSQL;
 require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
 require './../html/assets/includes/functions.php'; // basic functions used throughout the site
-// pull all current profile choices
+
+// creates a back button
+include './assets/includes/backBtn.inc.php';
 
 
 $pageTitle = 'Register';
