@@ -20,6 +20,12 @@ require './../html/assets/includes/form_functions.inc.php';
 // basic functions used throughout the site
 require './../html/assets/includes/functions.php';
 
+// creates a back button
+include './assets/includes/backBtn.inc.php';
+
+
+
+
 // tracks errors
 $editEmail_errors = [];
 
@@ -87,7 +93,7 @@ $r = mysqli_query($dbc, $q);
 if ($r) {
 	while ($row = $r->fetch_assoc()) {
 		$email_subject = $row['email_subject'];
-		$email_msg = $row['email_message'];
+		$email_msg = htmlentities($row['email_message']);
 	}
 } else {
 	no_email();

@@ -30,6 +30,9 @@ require './../html/assets/includes/form_functions.inc.php';
 // basic functions used throughout the site
 require './../html/assets/includes/functions.php';
 
+// creates a back button
+include './assets/includes/backBtn.inc.php';
+
 
 
 // tracks errors
@@ -37,8 +40,8 @@ $emailForm_errors = [];
 $options = ['required' => null];
 
 // for testing puposes, this information is currently hardcoded and sent to me
-$mail_to_send_to = "analeeskinner@gmail.com";
-$from_email = "contact@savannahskinner.com";
+$mail_to_send_to = "kaiasnowfall@gmail.com";
+$from_email = "savannah@savannahskinner.com";
 $sendflag = false;
 
 // if there's content to send, give the go ahead to send the email!
@@ -51,7 +54,7 @@ if ($sendflag) {
     // create the email and send that bad boi
     $email = $_POST['email'] ;
     $message = $_POST['msg'] ;
-    $headers = "From: $from_email" . "\r\n" . "Reply-To: $email" . "\r\n" ;
+    $headers = "From: $from_email" . "\r\n" . "Reply-To: $email" . "\r\n" . $bcc_headers;
     $a = mail( $mail_to_send_to, "Message from a contact form", $message, $headers );
     if ($a)
     {

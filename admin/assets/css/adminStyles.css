@@ -1134,6 +1134,7 @@ END Profile
 `Newsfeed
 ------------------------------------------------------------------------->*/
 
+
 h2.newsfeedHeading {
     padding-left: 1rem;
     position: fixed;
@@ -1168,7 +1169,7 @@ h2.newsfeedHeading {
     max-width: 420px;
 }
 
-.adminMainContent .nwBox {
+.allPage .nwBox {
     max-width: none;
     width: 445px;
 }
@@ -1211,16 +1212,16 @@ h2.newsfeedHeading {
 
 .nwBox .editBtn {
     width: 6rem;
-    width: 300px;
+    width: 210px;
 }
 .nwBox .deleteBtn {
     width: 7.5rem;
-    width: 400px;
+    width: 235px;
 }
 
 .nwBox .viewBtn {
     width: 7.5rem;
-    width: 300px;
+    width: 200px;
 }
 
 .nwBox .dateInfo {color: var(--brightAqua);}
@@ -1328,7 +1329,7 @@ END Newsfeed
 }
 
 #publishBtn {width: 12.5rem;}
-#sendEmailBtn {width: 8.5rem;}
+#sendEmailBtn {width: 10rem;}
 #previewEmailBtn {width: 13rem;}
 
 .contentTypeList_show {

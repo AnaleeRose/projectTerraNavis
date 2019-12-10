@@ -20,6 +20,8 @@ require './../html/assets/includes/form_functions.inc.php';
 // basic functions used throughout the site
 require './../html/assets/includes/functions.php';
 
+// creates a back button
+include './assets/includes/backBtn.inc.php';
 
 
 

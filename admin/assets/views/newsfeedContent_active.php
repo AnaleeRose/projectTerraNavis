@@ -13,6 +13,7 @@ if (isset($no_articles) && $no_articles) {
     } else {
         $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 5';
     }
+    // echo $q;
     $r = mysqli_query($dbc, $q);
     if ($r && mysqli_num_rows($r) > 0) {
         while ($row = $r->fetch_assoc()) {
