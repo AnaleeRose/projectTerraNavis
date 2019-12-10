@@ -18,10 +18,8 @@ require MYSQL;
 require './../html/assets/includes/form_functions.inc.php';
 
 // basic functions used throughout the site
-require './../html/assets/includes/functions.php';
+require './../html/assets/includes/functions.inc.php';
 
-// creates a back button
-include './assets/includes/backBtn.inc.php';
 
 
 // makes it easy to create common inputs for this page specifically, we only need it if they haven't clicked the button yet since this code is just to rebuild the article into inputs
@@ -101,8 +99,8 @@ if (isset($_POST['saveChangesBtn'])) {
 require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>';
-    require './assets/includes/adminMenu.php';
-    require './assets/includes/newsfeed_active.php';
+    require './assets/includes/adminMenu.inc.php';
+    require './assets/includes/newsfeed_active.inc.php';
     nd('adminMC_Wrapper', 'noDI');
         nd('adminMainContent', 'mainContent');
             nd('profilePicDiv', 'noID');
@@ -158,6 +156,6 @@ echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>
         ed(); ?>
 
 <?php
-include './assets/includes/adminPage_end.php';
+include './assets/includes/adminPage_end.inc.php';
 include './assets/includes/footer.html';
 

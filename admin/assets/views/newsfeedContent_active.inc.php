@@ -47,9 +47,9 @@ if (isset($no_articles) && $no_articles) {
                 <?php
                 if (isset($list_all) && $list_all) {
                 ?>
-                <a href="view.php?view_type=read&media_type=article&media_id=<?php echo $row['article_id']; ?>"" class="adminBtn adminBtn_aqua viewBtn">View Article</a>
+                <a href="view.php?view_type=read&media_type=article&media_id=<?php echo $row['article_id']; ?>" class="adminBtn adminBtn_aqua viewBtn">View Article</a>
                 <?php } ?>
-                <a href="editArticle.php?<?php echo 'article_id=' . $row['article_id']?>" class="adminBtn adminBtn_accent editBtn">Edit Article</a>
+                <a href="editArticle.php?<?php echo 'article_id=' . $row['article_id']?>" class="adminBtn adminBtn_aqua editBtn">Edit Article</a>
                 <a href="deleteArticle.php?<?php echo 'article_id=' . $row['article_id']?>" class="adminBtn adminBtn_danger deleteBtn">Delete Article</a>
             </div>
         </div>
@@ -102,7 +102,7 @@ if (isset($no_emails) && $no_emails) {
             <?php
             if ($row['save_for_later'] === '1') {
                 ?>
-            <a href="editEmail.php?email_id=<?= $row['email_id']; ?>" class="adminBtn adminBtn_danger readEmailBtn">Edit Email</a>
+                <a href="editEmail.php?email_id=<?= $row['email_id']; ?>" class="adminBtn adminBtn_danger readEmailBtn">Edit Email</a>
                 <?php
             }
             ?>

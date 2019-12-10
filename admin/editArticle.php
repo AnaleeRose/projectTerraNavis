@@ -21,9 +21,6 @@ require './../html/assets/includes/form_functions.inc.php';
 // makes it easy to create common inputs for this page specifically, we only need it if they haven't clicked the button yet since this code is just to rebuild the article into inputs
 if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php';
 
-// creates a back button
-include './assets/includes/backBtn.inc.php';
-
 
 
 // ------------------------------->intialize various variables
@@ -37,7 +34,7 @@ $resized_filename;
 $img_errors = [];
 
 // basic functions used throughout the site
-require './../html/assets/includes/functions.php';
+require './../html/assets/includes/functions.inc.php';
 
 // the minimum inputs expected
 $expected = ['article_name', 'article_category', 'article_description', 'imgs'];
@@ -95,14 +92,13 @@ if ($r && mysqli_num_rows($r) > 0) {
         if (!isset($_POST['img_name'])) $_POST['img_name'] = $row['img_name'];
         if (isset($_POST['img_name'])) {
             $img_name = $_POST['img_name'];
-            echo $img_name;
             $img_location = $_POST['img_name'];
         }
     }
 } else {
     // if it cant find that article it'll toss an error
     require './assets/includes/header.html';
-    require './assets/includes/error.php';
+    require './assets/includes/error.inc.php';
     $links = ['Return To Home' => 'index.php'];
     produce_error_page('There\'s no record of that article. Please contact our service team to resolve the issue.', $links);
     require './assets/includes/footer.html';
@@ -123,7 +119,7 @@ if ($r && mysqli_num_rows($r) > 0) {
 } elseif (!$r) {
     // if the query failed it'll toss an error
     require './assets/includes/header.html';
-    require './assets/includes/error.php';
+    require './assets/includes/error.inc.php';
     $links = ['Return To Home' => 'index.php'];
     produce_error_page('Something is wrong with the database. Please contact our service team to resolve the issue.', $links);
     require './assets/includes/footer.html';
@@ -226,9 +222,10 @@ require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 // options that can be passed to create_form_input, this one gives the inputs a required attribute but others do way more
 $options = ['required' => null];
-    require './assets/includes/adminMenu.php';
-    require './assets/includes/newsfeed_active.php';
+    require './assets/includes/adminMenu.inc.php';
+    require './assets/includes/newsfeed_active.inc.php';
     nd('adminMC_Wrapper', 'noDI');
+        echo BACK_BTN;
         nd('newMedia', 'noID');
             ?>
             <div class="newMediaHeading editPage">
@@ -309,10 +306,10 @@ $options = ['required' => null];
                         <?php
                         // if they have already pushed the button, use the normal element creator
                         if (isset($_POST['publishMediaBtn'])) {
-                            require './assets/includes/contentTypeSwitch.php';
+                            require './assets/includes/contentTypeSwitch.inc.php';
                         } else {
                             // if they HAVENT pushed the button, use the customized version of the element creator
-                            require './assets/includes/contentTypeSwitch_edit.php';
+                            require './assets/includes/contentTypeSwitch_edit.inc.php';
                         }
                         ?>
                     </div>
@@ -378,7 +375,7 @@ $options = ['required' => null];
                             // if anything goes wrong, throw an error!
                             ob_end_clean();
                             require './assets/includes/header.html';
-                            require './assets/includes/error.php';
+                            require './assets/includes/error.inc.php';
                             $links = ['Return To Home' => 'index.php'];
                             produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
                             require './assets/includes/footer.html';
@@ -403,11 +400,11 @@ $options = ['required' => null];
                             // if anything goes wrong, throw an error!
                             ob_end_clean();
                             require './assets/includes/header.html';
-                            require './assets/includes/error.php';
+                            require './assets/includes/error.inc.php';
                             $links = ['Return To Home' => 'index.php'];
                             produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
                             require './assets/includes/footer.html';
-                            exit(); 
+                            exit();
 
                         }
                     }
@@ -426,7 +423,7 @@ $options = ['required' => null];
                         // or throw an error, ya know, if something went wrong
                         ob_end_clean();
                         require './assets/includes/header.html';
-                        require './assets/includes/error.php';
+                        require './assets/includes/error.inc.php';
                         $links = ['Return To Home' => 'index.php'];
                         produce_error_page('Could not connect to the database, your article may be salvageable. Please contact our service team to resolve the issue.', $links);
                         require './assets/includes/footer.html';
@@ -437,7 +434,7 @@ $options = ['required' => null];
                     // throw an error, ya know, if something went wrong
                     ob_end_clean();
                     require './assets/includes/header.html';
-                    require './assets/includes/error.php';
+                    require './assets/includes/error.inc.php';
                     $links = ['Return To Home' => 'index.php'];
                     produce_error_page('Could not connect to the database, your article may be partially salvageable. Please contact our service team to resolve the issue.', $links);
                     require './assets/includes/footer.html';

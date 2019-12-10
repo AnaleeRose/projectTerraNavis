@@ -18,10 +18,8 @@ require MYSQL;
 require './../html/assets/includes/form_functions.inc.php';
 
 // basic functions used throughout the site
-require './../html/assets/includes/functions.php';
+require './../html/assets/includes/functions.inc.php';
 
-// creates a back button
-include './assets/includes/backBtn.inc.php';
 
 
 
@@ -31,7 +29,7 @@ $pageTitle = 'Delete Admin';
 $relogged_in = $_SESSION['relogged_in'];
 
 // sets up a few variables for the password verification page
-require './assets/includes/verifyPassword_init.php';
+require './assets/includes/verifyPassword_init.inc.php';
 
 // tracks errors
 $deleteAdmin_errors = [];
@@ -52,13 +50,13 @@ if (isset($_POST['deleteAdminBtn']) && $relogged_in && isset($_POST['agreeToDele
         if ($stmt->execute()) {
             // ...delete that admin and let em know it went well
     		ob_end_clean();
-			require './assets/views/adminDeleted.php';
+			require './assets/views/adminDeleted.inc.php';
     		exit();
         } else {
             // if they couldn't delete it, throw an error
 		    ob_end_clean();
 		    require './assets/includes/header.html';
-		    require './assets/includes/error.php';
+		    require './assets/includes/error.inc.php';
 		    $links = ['Return To Home' => 'index.php'];
 		    produce_error_page('Could not delete from the database. Please contact our service team to resolve the issue.', $links);
 		    require './assets/includes/footer.html';
@@ -88,9 +86,10 @@ if (isset($_POST['deleteAdminBtn']) && $relogged_in && isset($_POST['agreeToDele
 require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>';
-    require './assets/includes/adminMenu.php';
-    require './assets/includes/newsfeed_active.php';
+    require './assets/includes/adminMenu.inc.php';;
+    require './assets/includes/newsfeed_active.inc.php';
     nd('adminMC_Wrapper', 'noDI');
+        echo BACK_BTN;
         nd('adminMainContent', 'mainContent');
         ?>
         <?php
@@ -142,9 +141,9 @@ if ($relogged_in) {
 } else {
 
     // if they haven't verified their password, have them do so
-    require './assets/includes/verifyPassword_form.php';
+    require './assets/includes/verifyPassword_form.inc.php';
 }
 
-include './assets/includes/adminPage_end.php';
+include './assets/includes/adminPage_end.inc.php';
 include './assets/includes/footer.html';
 ?>

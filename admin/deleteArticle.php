@@ -13,16 +13,15 @@ $user = 'admin';
 require MYSQL;
 
 // a few useful functions used through the site
-require './../html/assets/includes/functions.php';
+require './../html/assets/includes/functions.inc.php';
 
-// creates a back button
-include './assets/includes/backBtn.inc.php';
+
 
 
 // if there is no article id from the url, something went wrong so toss them an error
 if (!isset($_GET['article_id'])) {
     require './assets/includes/header.html';
-    require './assets/includes/error.php';
+    require './assets/includes/error.inc.php';
     $links = ['Return To Home' => 'index.php'];
     produce_error_page('Hmm, seems like the link is wrong. Please contact our service team to resolve the issue.', $links);
     require './assets/includes/footer.html';
@@ -38,7 +37,7 @@ $r = mysqli_query($dbc, $q);
 if (mysqli_num_rows($r) === 0 && !isset($_GET['delete'])) {
     ob_end_clean();
     require './assets/includes/header.html';
-    require './assets/includes/error.php';
+    require './assets/includes/error.inc.php';
     $links = ['Return To Home' => 'index.php'];
     produce_error_page('That article doesn\'t seem to exist. Please contact our service team to resolve the issue.', $links);
     require './assets/includes/footer.html';
@@ -65,14 +64,14 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'true') {
         // make sure it was deleted
         if (mysqli_num_rows($r) == 0) {
             ob_end_clean();
-            require './assets/views/articleDeleted.php';
+            require './assets/views/articleDeleted.inc.php';
             exit();
         }
     } else {
         // if it didn't work, throw an error
         ob_end_clean();
 	    require './assets/includes/header.html';
-	    require './assets/includes/error.php';
+	    require './assets/includes/error.inc.php';
 	    $links = ['Return To Home' => 'index.php', 'See All Articles' => 'allArticles.php'];
 	    produce_error_page('Article could not be deleted. Please contact our service team to resolve the issue.', $links);
 	    require './assets/includes/footer.html';
@@ -84,8 +83,8 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'true') {
 // start creating the page...
 require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
-    require './assets/includes/adminMenu.php';
-    require './assets/includes/newsfeed_active.php';
+    require './assets/includes/adminMenu.inc.php';
+    require './assets/includes/newsfeed_active.inc.php';
     echo '<div class="adminMC_Wrapper">';
     	echo '<div class="deletePage">';
 ?>

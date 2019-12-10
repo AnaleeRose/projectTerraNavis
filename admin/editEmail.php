@@ -18,10 +18,7 @@ require MYSQL;
 require './../html/assets/includes/form_functions.inc.php';
 
 // basic functions used throughout the site
-require './../html/assets/includes/functions.php';
-
-// creates a back button
-include './assets/includes/backBtn.inc.php';
+require './../html/assets/includes/functions.inc.php';
 
 
 
@@ -35,7 +32,7 @@ $pageTitle = 'Edit Email';
 function no_email() {
 	ob_end_clean();
     require './assets/includes/header.html';
-    require './assets/includes/error.php';
+    require './assets/includes/error.inc.php';
     $links = ['Return To Home' => 'index.php'];
     produce_error_page('That email doesn\'t exist. Please contact our service team to resolve the issue.', $links);
     require './assets/includes/footer.html';
@@ -78,7 +75,7 @@ if (isset($_POST['editEmailBtn'])) {
             // if it fails, throw an error
             ob_end_clean();
             require './assets/includes/header.html';
-            require './assets/includes/error.php';
+            require './assets/includes/error.inc.php';
             $links = ['Return To Home' => 'index.php'];
             produce_error_page('Could not connect to the database, your email may be salvageable. Please contact our service team to resolve the issue.', $links);
             require './assets/includes/footer.html';
@@ -104,9 +101,10 @@ require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 // options that can be passed to create_form_input, this one gives the inputs a required attribute but others do way more
 $options = ['required' => null];
-    require './assets/includes/adminMenu.php';
-    require './assets/includes/newsfeed_active.php';
+    require './assets/includes/adminMenu.inc.php';
+    require './assets/includes/newsfeed_active.inc.php';
     nd('adminMC_Wrapper editEmail', 'noDI');
+        echo BACK_BTN;
         nd('editEmailPage', 'noID');
             ?>
             <div class="newMediaHeading">

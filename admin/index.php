@@ -15,11 +15,7 @@ require MYSQL;
 require './../html/assets/includes/form_functions.inc.php';
 
 // a few useful functions used through the site
-require './../html/assets/includes/functions.php';
-
-// creates a back button
-include './assets/includes/backBtn.inc.php';
-
+require './../html/assets/includes/functions.inc.php';
 
 
 
@@ -38,11 +34,11 @@ $login_errors = [];
 
 if (isset($_SESSION['uid']) && isset($_SESSION['email'])) {
     // if they're already logged in, show them the homepage
-    require './assets/includes/adminHome.php';
+    require './assets/includes/adminHome.inc.php';
 } else {
     // if they're not logged in, show them the login page
     require './assets/includes/login_form.inc.php';
-    require './assets/includes/login.php';
+    require './assets/includes/login.inc.php';
 }
 ?>
 

@@ -18,10 +18,9 @@ require MYSQL;
 require './../html/assets/includes/form_functions.inc.php';
 
 // basic functions used throughout the site
-require './../html/assets/includes/functions.php';
+require './../html/assets/includes/functions.inc.php';
 
-// creates a back button
-include './assets/includes/backBtn.inc.php';
+
 
 
 $pageTitle = 'Change Password';
@@ -36,7 +35,7 @@ $changed = false;
 $uid = $_SESSION['uid'];
 
 // sets up a few variables for the password verification page
-require './assets/includes/verifyPassword_init.php';
+require './assets/includes/verifyPassword_init.inc.php';
 
 // if they have clicked submit, verified their password, and the password has not already been changed
 if (isset($_POST['changePwdBtn']) && $relogged_in && !$changed) {
@@ -67,7 +66,7 @@ if (isset($_POST['changePwdBtn']) && $relogged_in && !$changed) {
             $changeP_errors['pwd_new'] = 'Password does not meet requirements';
 
         }
-        
+
     } else {
 
         // if they didnt even enter a password, throw an error
@@ -92,7 +91,7 @@ if (isset($_POST['changePwdBtn']) && $relogged_in && !$changed) {
             ob_end_clean();
 
             require './assets/includes/header.html';
-            require './assets/includes/error.php';
+            require './assets/includes/error.inc.php';
             $links = ['Return To Home' => 'index.php'];
             produce_error_page('Could not connect to the database, your article could not be uploaded. Please contact our service team to resolve the issue.', $links);
             require './assets/includes/footer.html';
@@ -110,9 +109,9 @@ require './assets/includes/header.html';
 // loads the page in lmode or dmode depending on their settings
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>';
-    require './assets/includes/adminMenu.php';
+    require './assets/includes/adminMenu.inc.php';
     // newsfeedContent_active.php shows the most recent articles and emails
-    require './assets/includes/newsfeed_active.php';
+    require './assets/includes/newsfeed_active.inc.php';
     nd('adminMC_Wrapper', 'noDI');
         nd('adminMainContent', 'mainContent');
 
@@ -149,9 +148,9 @@ if ($relogged_in) {
 } else {
 
     // grabs the password verification form and stuffins
-    require './assets/includes/verifyPassword_form.php';
+    require './assets/includes/verifyPassword_form.inc.php';
 
 }
-include './assets/includes/adminPage_end.php';
+include './assets/includes/adminPage_end.inc.php';
 include './assets/includes/footer.html';
 ?>

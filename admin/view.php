@@ -18,10 +18,7 @@ require './../html/assets/includes/form_functions.inc.php';
 if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php';
 
 // basic functions used throughout the site
-require './../html/assets/includes/functions.php';
-
-// creates a back button
-include './assets/includes/backBtn.inc.php';
+require './../html/assets/includes/functions.inc.php';
 
 
 
@@ -59,7 +56,7 @@ if ($media_type === 'article') {
 	} else {
         ob_end_clean();
         require './assets/includes/header.html';
-        require './assets/includes/error.php';
+        require './assets/includes/error.inc.php';
         $links = ['Return To Home' => 'index.php'];
         produce_error_page('That article doesn\'t exist. Please contact our service team to resolve the issue.', $links);
         require './assets/includes/footer.html';
@@ -130,7 +127,7 @@ if ($media_type === 'article') {
 	} else { // if no email with that id
 	    ob_end_clean();
 	    require './assets/includes/header.html';
-	    require './assets/includes/error.php';
+	    require './assets/includes/error.inc.php';
 	    $links = ['Return To Home' => 'index.php', 'See All Articles' => 'allArticles.php'];
 	    produce_error_page('That link doesn\'t exist. Please contact our service team to resolve the issue.', $links);
 	    require './assets/includes/footer.html';
@@ -140,7 +137,7 @@ if ($media_type === 'article') {
 } else { // if no emails
     ob_end_clean();
     require './assets/includes/header.html';
-    require './assets/includes/error.php';
+    require './assets/includes/error.inc.php';
     $links = ['Return To Home' => 'index.php', 'See All Articles' => 'allArticles.php'];
     produce_error_page('That link doesn\'t exist. Please contact our service team to resolve the issue.', $links);
     require './assets/includes/footer.html';
@@ -170,9 +167,10 @@ window.addEventListener('load', (event) => {
 <?php
 echo '</script>';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . ' viewPage">';
-    require './assets/includes/adminMenu.php';
-    require './assets/includes/newsfeed_active.php';
+    require './assets/includes/adminMenu.inc.php';
+    require './assets/includes/newsfeed_active.inc.php';
     nd('adminMC_Wrapper', 'noDI');
+        echo BACK_BTN;
         nd('newMedia', 'noID');
         ?>
             <div class="newMediaHeading">
@@ -224,7 +222,7 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . ' viewPage">';
 						</div>
 						<div class="articleContent">
 					<?php
-						require './assets/includes/articleContentBuilder.php';
+						require './assets/includes/articleContentBuilder.inc.php';
 						echo '</div>';
 					}
 					?>
@@ -247,7 +245,7 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . ' viewPage">';
 						<div class="emailMsg">
 							<p class="emailP"><?= str_replace("\n\r", "</p>\n<p class=\"emailP\">", $e_msg) ?></p>
 						</div>
-							<?php 
+							<?php
 							create_form_input('yourEmail', 'email', 'Your Email', $emailForm_errors);
 							?>
 					</div>

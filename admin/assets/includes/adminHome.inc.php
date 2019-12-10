@@ -1,11 +1,12 @@
 <?php
     // grabs the admin menu
-    require './assets/includes/adminMenu.php';
+    require './assets/includes/adminMenu.inc.php';
     // grabs the newsfeed include, further explained there. Basically it pulls the most recent articles and emails
-    require './assets/includes/newsfeed_active.php';
+    require './assets/includes/newsfeed_active.inc.php';
 
     // nd stands for new div, aka when i don't want to intterupt php just to add a new div but also don't want to type ot the whole div using echo
     nd('adminMC_Wrapper', 'noID');
+        echo BACK_BTN;
         nd('adminMainContent', 'mainContent');
             nd('profilePicDiv', 'noID');
                 // create profile img and grab either the user's selected img or the default
@@ -32,7 +33,7 @@
         ?>
         <?php
 // grabs the special footer for the homepage, orignally i had themhere but the div they close are created in an include and it's confusing to see more closing divs than opening ones
-include './assets/includes/adminPage_end.php';
+include './assets/includes/adminPage_end.inc.php';
 
 // grabs the footer
 include './assets/includes/footer.html';

@@ -1,4 +1,5 @@
 <?php
+
 function nd($class, $id) {
     if (($class !== 'noClass') && ($id !== 'noID')) {
         echo '<div class="' . $class . '" id="'. $id . '">';

@@ -120,6 +120,32 @@ input.hidden {
     height: 1px;
 }
 
+
+.backBtn {
+    background: var(--brightAqua);
+    border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    font-size: 2rem;
+    left: -2rem;
+    padding: .75rem;
+    position: absolute;
+    top: 1rem;
+    transform: scale(-1, 1);
+    z-index: 60;
+}
+
+    .backBtn:hover {
+        background: #fff;
+        color: var(--brightAqua);
+    }
+
+.allPage .backBtn {
+    left: 1rem;
+    top: 1rem;
+
+}
+
 .backShadow {box-shadow: 5px 15px 15px #3b3535;}
 .backShadow_light {box-shadow: 5px 10px 10px #a9b5b7;}
 .dmode .backShadow_light {

@@ -18,7 +18,7 @@ require MYSQL;
 require './../html/assets/includes/form_functions.inc.php';
 
 // basic functions used throughout the site
-require './../html/assets/includes/functions.php';
+require './../html/assets/includes/functions.inc.php';
 
 // creates a back button
 include './assets/includes/backBtn.inc.php';
@@ -36,7 +36,7 @@ $editProfile_errors = [];
 $uid = $_SESSION['uid'];
 
 // sets up a few variables for the password verification page
-require './assets/includes/verifyPassword_init.php';
+require './assets/includes/verifyPassword_init.inc.php';
 
 // if they have clicked submit and verified their password...
 if (isset($_POST['editInfoBtn']) && $relogged_in) {
@@ -107,7 +107,7 @@ if (isset($_POST['editInfoBtn']) && $relogged_in) {
             // throw an error if something went wrong
 		    ob_end_clean();
 		    require './assets/includes/header.html';
-		    require './assets/includes/error.php';
+		    require './assets/includes/error.inc.php';
 		    $links = ['Return To Home' => 'index.php'];
 		    produce_error_page('Could not edit the database. Please contact our service team to resolve the issue.', $links);
 		    require './assets/includes/footer.html';
@@ -121,8 +121,8 @@ if (isset($_POST['editInfoBtn']) && $relogged_in) {
 require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>';
-    require './assets/includes/adminMenu.php';
-    require './assets/includes/newsfeed_active.php';
+    require './assets/includes/adminMenu.inc.php';
+    require './assets/includes/newsfeed_active.inc.php';
     nd('adminMC_Wrapper', 'noDI');
         nd('adminMainContent', 'mainContent');
 if ($relogged_in) {
@@ -138,6 +138,6 @@ if ($relogged_in) {
 } else { // please relog in
     require './assets/includes/verifyPassword_form.php';
 }
-include './assets/includes/adminPage_end.php';
+include './assets/includes/adminPage_end.inc.php';
 include './assets/includes/footer.html';
 ?>

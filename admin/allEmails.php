@@ -18,10 +18,9 @@ require MYSQL;
 require './../html/assets/includes/form_functions.inc.php';
 
 // basic functions used throughout the site
-require './../html/assets/includes/functions.php';
+require './../html/assets/includes/functions.inc.php';
 
 // creates a back button
-include './assets/includes/backBtn.inc.php';
 
 
 
@@ -39,16 +38,17 @@ $no_articles = true;
 
 
 // start creating the page...
-    require './assets/includes/adminMenu.php';
+    require './assets/includes/adminMenu.inc.php';
     nd('adminMC_Wrapper allPage', 'noID');
+        echo BACK_BTN;
         nd('adminMainContent', 'mainContent');
 
             // newsfeedContent_active.php shows the most recent articles and emails
-            include './assets/views/newsfeedContent_active.php';
+            include './assets/views/newsfeedContent_active.inc.php';
 
         ed();
     ed();
 
-include './assets/includes/adminPage_end.php';
+include './assets/includes/adminPage_end.inc.php';
 include './assets/includes/footer.html';
 

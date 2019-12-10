@@ -5,7 +5,7 @@ require './../html/assets/includes/config.inc.php'; // basic definitions used th
 check_if_admin(); // toss user back to login page if they're not logged in
 require MYSQL;
 require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
-require './../html/assets/includes/functions.php'; // basic functions used throughout the site
+require './../html/assets/includes/functions.inc.php'; // basic functions used throughout the site
 
 // creates a back button
 include './assets/includes/backBtn.inc.php';
@@ -14,13 +14,13 @@ include './assets/includes/backBtn.inc.php';
 $pageTitle = 'Register';
 require './assets/includes/header.html';
 $relogged_in = $_SESSION['relogged_in'];
-require './assets/includes/verifyPassword_init.php';
+require './assets/includes/verifyPassword_init.inc.php';
 
 
 if ($relogged_in) {
     echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
-    require './assets/includes/adminMenu.php';
-        require './assets/includes/newsfeed_active.php';
+    require './assets/includes/adminMenu.inc.php';
+        require './assets/includes/newsfeed_active.inc.php';
             nd('adminMC_Wrapper', 'noDI');
                 nd('adminMainContent', 'mainContent');
     define('COLS', 5);
@@ -92,7 +92,7 @@ if ($relogged_in) {
                     $q = "INSERT INTO `info` (`pwd_id`, `admin_id`, `info`) VALUES (NULL, $last_id, '$p')";
                     $r = mysqli_query($dbc, $q);
                     if ($r) {
-                        include './assets/includes/registered.php';
+                        include './assets/includes/registered.inc.php';
                         exit();
                     } else {
                         include './assets/includes/error.html';
@@ -116,16 +116,16 @@ if ($relogged_in) {
             }
         }
     }
-    require_once './assets/includes/register_form.php';
+    require_once './assets/includes/register_form.inc.php';
                 ed();
         ed();
 } else {
     echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . ' verifyPwdRegisterPage">';
-    require './assets/includes/adminMenu.php';
-    require './assets/includes/newsfeed_active.php';
+    require './assets/includes/adminMenu.inc.php';
+    require './assets/includes/newsfeed_active.inc.php';
         nd('adminMC_Wrapper', 'noDI');
             nd('adminMainContent', 'mainContent');
-                require './assets/includes/verifyPassword_form.php';
+                require './assets/includes/verifyPassword_form.inc.php';
             ed();
         ed();
 }

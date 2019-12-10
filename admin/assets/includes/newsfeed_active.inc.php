@@ -5,5 +5,5 @@ require_once MYSQL;
 
 nd('newsfeedContent', 'noID');
     echo '<h2 class="newsfeedHeading">Recent Articles & Emails</h2>';
-    require './assets/views/newsfeedContent_active.php';
+    require './assets/views/newsfeedContent_active.inc.php';
 ed();

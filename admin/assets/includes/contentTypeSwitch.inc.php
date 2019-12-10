@@ -13,7 +13,6 @@ if (isset($_POST['publishMediaBtn'])) {
                     break;
 
                 case strpos($content, 'he'): {
-                    echo 'is a heading';
                     $trackElements[$content]['content'] = $_POST[$content];
                     $heading_num = substr($content, 7, 1);
                     // echo '<p class="formNotice formNotice_Error">' . $content . '</p>';
@@ -160,4 +159,3 @@ if (isset($_POST['publishMediaBtn'])) {
 }
 
 
-print_r($trackElements);
