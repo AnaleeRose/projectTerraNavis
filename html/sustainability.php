@@ -13,7 +13,7 @@
 
 $page = 'sustain';
 
-require './assets/includes/header.php';
+require './assets/includes/header.inc.php';
 
 ?>
 
@@ -42,7 +42,7 @@ require './assets/includes/header.php';
     </div>
 
 <!------ Footer ------------>
-​<?php require './assets/includes/footer.php'; ?>
+​<?php require './assets/includes/footer.inc.php'; ?>
 
 </body>
 </html>

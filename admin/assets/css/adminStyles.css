@@ -659,6 +659,14 @@ input.hidden {
 
 .dmode .registerDiv {background: none;}
 
+.allProfilePics {
+    align-items: center;
+    justify-content: center;
+    flex-flow: wrap;
+    margin: 1rem auto;
+    width: 80%;
+}
+
 .profilePic {
     border: solid 1rem var(--grey);
     border-radius: 50%;
@@ -750,11 +758,11 @@ input.hidden {
     z-index: -50;
 }
 
-.chooseThumbTable {
-    margin: 1rem auto;
-}
+.chooseThumbTable {margin: 1rem auto;}
 
-.chooseThumbTable_anim,  .updateThumbTable_anim{
+.chooseThumbTable * {height: 1px;}
+
+.chooseThumbTable_anim,  .updateThumbTable_anim {
     position: relative;
     top: 0;
     transition: top .5s ease-in-out, opacity .5s ease-in-out;
@@ -762,13 +770,14 @@ input.hidden {
     z-index: 2;
 }
 
-
+.chooseThumbTable_anim *,  .updateThumbTable_anim * {height: none;}
 
 .chooseThumb {
     border-radius: 50%;
     cursor: pointer;
     width: 100px;
     height: 100px;
+    margin: 0 .5rem;
 }
 
 a.registerReturnBtn, a.registerReturnBtn {
@@ -1006,6 +1015,7 @@ END Homepage
 }
 
     .profileInfo:first-of-type {
+        margin-top: 3rem;
         transition: margin-top .5s ease-in-out;
         width: 275px;
     }

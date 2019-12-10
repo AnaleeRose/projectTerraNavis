@@ -113,26 +113,20 @@ echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>
                 echo '">';
                 ?>
                 <a class="adminBtn adminBtn_accent changePicBtn">Change Picture</a>
-                <table id="chooseThumbTable" class="chooseThumbTable hiddenThumb"> <!-- -->
-                    <tr>
+<!-- where it goes... -->
+                <div id="chooseThumbTable" class="chooseThumbTable hiddenThumb"> <!-- -->
+                    <div class="allProfilePics">
                         <?php
+                        $x = 0;
                         while ($row = $getPictures->fetch_assoc()) {
-                            if ($pos++ % COLS === 0 && !$firstRow) {
-                                echo '</tr><tr>';
-                            }
-                            $firstRow = false;
-                            ?>
-                        <td><img src="<?= 'assets/profilePictures/' . $row['pic_location']; ?>" alt="<?= str_replace('_', ' ', $row['pic_name']); ?>" class="chooseThumb" data-id="<?= $row['profilePic_id'] ?>"></td>
-                    <?php } ;
-                        while ($pos++ % COLS) {
-                            echo '<td>&nbsp;</td>';
-                        }
-                    ?>
-                    </tr>
-                </table>
+                        ?>
+                            <img src="<?= 'assets/profilePictures/' . $row['pic_location']; ?>" alt="<?= str_replace('_', ' ', $row['pic_name']); ?>" class="chooseThumb" data-id="<?= $row['profilePic_id'] ?>">
+                        <?php } ?>
+                    </div>
+                </div>
 
                 <?php
-                echo '<p class="muted profileInfo" style="margin-top: -5rem;"><span>' . ucfirst($_SESSION['username']) . '</span></p>';
+                echo '<p class="muted profileInfo"><span>' . ucfirst($_SESSION['username']) . '</span></p>';
                 echo '<p class="muted profileInfo"><span>' . $_SESSION['email'] . '</span></p>';
                 nd("pbtnDiv","noID");
                 ?>

@@ -9,7 +9,7 @@
 </head>
 <body>
 <!------ Header ------------>
-<?php require './assets/includes/header.php'; ?>
+<?php require './assets/includes/header.inc.php'; ?>
 
 <h1 class="page-title">Resources</h1>
 
@@ -53,7 +53,7 @@
 
 
 <!------ Footer ------------>
-​<?php require './assets/includes/footer.php'; ?>
+​<?php require './assets/includes/footer.inc.php'; ?>
 
 </body>
 </html>

@@ -7,8 +7,6 @@ require MYSQL;
 require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
 require './../html/assets/includes/functions.inc.php'; // basic functions used throughout the site
 
-// creates a back button
-include './assets/includes/backBtn.inc.php';
 
 
 $pageTitle = 'Register';

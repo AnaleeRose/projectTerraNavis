@@ -48,15 +48,15 @@ if (choosePicBtn) {
             changePicBtn.innerText = "Change Picture";
             changePicBtn.style.width = null;
             thumbTable.classList.remove('updateThumbTable_anim');
-            profileInfo1.style.marginTop = '-5rem';
+            profileInfo1.style.marginTop = null;
             if (serverLightMode === currentLightMode) {
-                saveChangesBtn.classList.remove('saveChangesBtn_hidden');
+                saveChangesBtn.classList.add('saveChangesBtn_hidden');
             }
         } else {
             changePicBtn.innerText = "Cancel";
             changePicBtn.style.width = "3.5rem";
             thumbTable.classList.add('updateThumbTable_anim');
-            profileInfo1.style.marginTop = null;
+            profileInfo1.style.marginTop = '15rem';
             if (serverLightMode === currentLightMode) {
                 saveChangesBtn.classList.remove('saveChangesBtn_hidden');
             }
@@ -210,13 +210,13 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
         input.setAttribute('placeholder', label_name);
         input.setAttribute('data-content-type-id',data_content_id);
         input.setAttribute('value', individual_name);
-        
+
         c_elementTracker = elementTracker.getAttribute('value')
         elementTracker.setAttribute('value', c_elementTracker + individual_name + ',');
         console.log(individual_name + ', | ' + elementTracker.getAttribute('value'))
 
     } else {
-        
+
         label = document.createElement('label');
         labelName = document.createTextNode(label_name);
         label.setAttribute('for', individual_name);
@@ -240,7 +240,7 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
         elementDeleteBtn.addEventListener('click', function(e){
             let elementToDelete = e.srcElement.classList[1].substring(4);
             type_of_element(elementToDelete, true, e.srcElement);
-        }) 
+        })
         elementDeleteBtn.classList = ''
         elementDeleteBtn.innerHTML = ''
         elementDeleteBtn.classList.add('elementDeleteBtn', 'EDB_' + individual_name);
