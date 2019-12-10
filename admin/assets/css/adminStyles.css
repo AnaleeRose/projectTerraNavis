@@ -131,16 +131,9 @@ input.hidden {
 
 .defaultPage {
     background-color: #fff;
-    background-image: url(../imgs/organicBG.svg);
-    background-repeat: no-repeat;
-    background-position: -400% 50%;
-    background-size: 110%;
-    margin: 9rem 0;
-    max-width: 600px;
-    padding: 2rem 5% 3rem;
-    max-height: 100vh;
-    overflow: hidden;
-    /*width: 90%;*/
+    margin: 5% auto;
+    padding: 2rem 0 3rem;
+    width: 320px;
 }
 
 .defaultDiv {
