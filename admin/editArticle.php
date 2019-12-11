@@ -348,7 +348,11 @@ $options = ['required' => null];
                     if ((strpos($this_element_name, 'ul') !== false) || (strpos($this_element_name, 'ol') !== false)) {
                         $this_element_id = $this_element_info['id'];
                         $this_element_order = $this_element_info['order'];
-                        if (empty($_POST[$this_element_name]))  $this_element_content = '::empty::';
+                        if (empty($_POST[$this_element_name])) {
+                                $this_element_content = '::empty::';
+                        } else {
+                                $this_element_content = $_POST[$this_element_name];
+                        }
                         if (isset($this_element_info['first_li'])) {
                             $this_element_first_li = 1;
                         } else {

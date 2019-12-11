@@ -98,11 +98,11 @@ if (isset($no_emails) && $no_emails) {
         ?>
         <p class="newsfeedDescription"><?= $email_message ?></p>
         <div class="btnBox">
-            <a href="view.php?view_type=read&media_type=email&media_id=<?= $row['email_id']; ?>" class="adminBtn adminBtn_accent readEmailBtn">Read Email</a>
+            <a href="view.php?view_type=read&media_type=email&media_id=<?= $row['email_id']; ?>" class="adminBtn adminBtn_aqua readEmailBtn">Read Email</a>
             <?php
             if ($row['save_for_later'] === '1') {
                 ?>
-                <a href="editEmail.php?email_id=<?= $row['email_id']; ?>" class="adminBtn adminBtn_danger readEmailBtn">Edit Email</a>
+                <a href="editEmail.php?email_id=<?= $row['email_id']; ?>" class="adminBtn adminBtn_accent adminBtn_accent_alt readEmailBtn">Edit Email</a>
                 <?php
             }
             ?>

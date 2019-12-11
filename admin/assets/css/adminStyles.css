@@ -120,6 +120,11 @@ input.hidden {
     height: 1px;
 }
 
+.hiddenText {
+    position: absolute;
+    left: 1000rem;
+}
+
 
 .backBtn {
     background: var(--brightAqua);
@@ -352,7 +357,7 @@ input.hidden {
     z-index: 10;
 }
 
-    .lmode .adminBtn_accent {box-shadow: 1px 3px 2px var(--lmodeBoxShadow);}
+    .lmode .adminBtn_accent, .readEmailBtn, .editBtn {box-shadow: 1px 3px 2px var(--lmodeBoxShadow);}
 
 .adminBtn_aqua {
     background: var(--brightAqua);
@@ -378,9 +383,8 @@ input.hidden {
     z-index: 10;
 }
 
-.adminBtn_danger {
-    background: linear-gradient(340deg, rgba(231,66,88,1) 0%, rgba(147,23,39,1) 100%);
-}
+.adminBtn_danger {background: linear-gradient(340deg, rgba(231,66,88,1) 0%, rgba(147,23,39,1) 100%);}
+.adminBtn_accent_alt {background: var(--magenta);}
 
     .lmode .adminBtn_danger {box-shadow: 1px 3px 2px var(--lmodeBoxShadow);}
     .lmode .adminBtn_subtle {background: linear-gradient(330deg, rgb(74, 68, 68) 26%, rgba(33,19,19,1) 100%);}
@@ -1610,12 +1614,12 @@ END Newsfeed
 
 .elementDeleteBtn {
     color: rgba(0,0,0,0);
-    /*color: var(--reddish);*/
     cursor: pointer;
     display: inline-block;
     font-size: .1rem;
     height: 1.5rem;
     position: absolute;
+    overflow: hidden;
     right: -18rem;
     top: -1rem;
 }

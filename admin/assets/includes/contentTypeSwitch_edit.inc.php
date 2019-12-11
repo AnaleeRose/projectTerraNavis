@@ -7,12 +7,13 @@ while ($row = $r->fetch_assoc()) {
     $elemName = $row['element_name'];
     // echo 'e: ' . $elemName;
     $elemContents = htmlspecialchars($row['content']);
+    $options = [];
         switch ($row['element_name']) {
             case strpos($elemName, 'p'):
                 $trackElements[$elemName]['content'] = $elemContents;
                 $trackElements[$elemName]['id'] = 1;
                 $trackElements[$elemName]['order'] = $currentNum;
-                $options = ['placeholder' => 'Paragraph | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes'=>'Paragraph createInput', 'required' => null, 'data-content_type_id' => 1];
+                $options = ['placeholder' => 'Paragraph | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes'=>'Paragraph createInput', 'required' => null, 'data-content_type_id' => 1, 'deleteable'];
                 create_form_input_e_ver($elemName, 'textarea', 'Paragraph', $elemContents, $newArticle_errors, $options);
                 $listAllElements .= $elemName . ',';
                 break;

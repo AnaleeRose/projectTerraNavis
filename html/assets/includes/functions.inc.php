@@ -175,8 +175,6 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 		                $_POST['img_name'] = $resized_filename;
 		                $_POST['img_location'] = $destination . $resized_filename;
 
-		                require './assets/includes/imageBrowser.inc.php';
-
 		            }
 		        }
 		    }

@@ -244,7 +244,10 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
         elementDeleteBtn.classList = ''
         elementDeleteBtn.innerHTML = ''
         elementDeleteBtn.classList.add('elementDeleteBtn', 'EDB_' + individual_name);
-        elementDeleteBtn.appendChild(document.createTextNode('Delete ' + type_of_input[0].toUpperCase() + type_of_input.slice(1)))
+        span = document.createElement('span')
+        span.classList.add('hiddenText')
+        span.appendChild(document.createTextNode('Delete ' + type_of_input[0].toUpperCase() + type_of_input.slice(1)))
+        elementDeleteBtn.appendChild(span);
 
         newContentDiv.appendChild(input)
         label.appendChild(elementDeleteBtn);

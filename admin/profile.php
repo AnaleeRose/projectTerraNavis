@@ -102,6 +102,7 @@ echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>
     require './assets/includes/adminMenu.inc.php';
     require './assets/includes/newsfeed_active.inc.php';
     nd('adminMC_Wrapper', 'noDI');
+        echo BACK_BTN;
         nd('adminMainContent', 'mainContent');
             nd('profilePicDiv', 'noID');
                 echo '<img class="profilePic" src="assets/profilePictures/';

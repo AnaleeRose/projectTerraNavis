@@ -4,7 +4,10 @@ function create_form_input_e_ver($name, $type, $label = '', $value, $errors = []
     if (!empty($label)) {
         echo '<label for="' . $name . '"';
         if (array_key_exists($name, $errors)) echo 'class=""';
-        echo '>' . $label . '</label>';
+        echo '>' . $label;
+        if (array_key_exists('deleteable', $options)) echo 'class=""';
+        echo '<p class="elementDeleteBtn EDB_' . $name . '"><span class="hiddenText">Delete ' . strtoupper($label) . '</span></p>';
+        echo '</label>';
     }
 
 // NORMAL INPUT ------------------------------------------------------------->

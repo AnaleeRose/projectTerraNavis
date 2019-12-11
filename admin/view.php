@@ -95,32 +95,29 @@ if ($media_type === 'article') {
 				if (strlen($bcc_headers) > 5) {
 					if (isset($_POST['yourEmail']) && filter_var($_POST['yourEmail'], FILTER_VALIDATE_EMAIL)) {
 						$bcc_headers .= ',' . $_POST['yourEmail'];
-					} elseif (!filter_var($_POST['yourEmail'], FILTER_VALIDATE_EMAIL)) {
+					} elseif (!empty($_POST['yourEmail']) && !filter_var($_POST['yourEmail'], FILTER_VALIDATE_EMAIL)) {
 						$emailForm_errors['yourEmail'] = 'Invalid Email';
 					}
 					if (empty($emailForm_errors)) {
-						$mail_to_send_to = "kaiasnowfall@gmail.com";
-						$from_email = "savannah@savannahskinner.com";
-					    $headers = "MIME-Version: 1.0" . "\r\n" . "Content-type:text/html;charset=UTF-8" . "\r\n" . "From: $from_email" . "\r\n" . 'Bcc:' .$bcc_headers . "\r\n";
-					    $a = mail( $mail_to_send_to, $e_subject, $e_msg, $headers);
-					    if ($a) {
-					        print("Message was sent");
-							$emailForm_errors['yourEmail'] = 'Message was sent';
-					    	// echo '<br>';
-					    	// echo '<br>';
-					    	// echo $mail_to_send_to;
-					    	// echo '<br>';
-					    	// echo $e_subject;
-					    	// echo '<br>';
-					    	// echo $e_msg;
-					    	// echo '<br>';
-					    	// echo $headers;
-					    	// echo '<br>';
-
-					    } else {
-							$emailForm_errors['yourEmail'] = 'Message could not be sent, lemme know this happened and please screenshot the page. I need to know how and why it broke.';
-					    }
-					}
+                        $q = "UPDATE `emails` SET `save_for_later` = '0', `date_sent` = NOW() WHERE email_id = $media_id";
+                        $r = mysqli_query($dbc, $q);
+                        if ($r) {
+    						$mail_to_send_to = "kaiasnowfall@gmail.com";
+                                $r = mysqli_query($dbc, $q);
+    						$from_email = "savannah@savannahskinner.com";
+    					    $headers = "MIME-Version: 1.0" . "\r\n" . "Content-type:text/html;charset=UTF-8" . "\r\n" . "From: $from_email" . "\r\n" . 'Bcc:' .$bcc_headers . "\r\n";
+    					    $a = mail( $mail_to_send_to, $e_subject, $e_msg, $headers);
+    					    if ($a) {
+                                $previewEmail_errors['notice'] = 'Message was sent!';
+    					    } else {
+    							$previewEmail_errors[] = 'Message could not be sent. Please contact our service team.';
+    					    }
+                        } else {
+                            $previewEmail_errors[] = 'Message could not be sent, the database could not be reached. Please contact our service team.';
+                        }
+					} else {
+                        print_r($emailForm_errors);
+                    }
 				}
 			}
 		}
@@ -246,6 +243,15 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . ' viewPage">';
 							<p class="emailP"><?= str_replace("\n\r", "</p>\n<p class=\"emailP\">", $e_msg) ?></p>
 						</div>
 							<?php
+                            if (isset($previewEmail_errors) && !empty($previewEmail_errors)) {
+                                foreach ($previewEmail_errors as $key => $value) {
+                                    if ($key === 'notice') {
+                                        echo '<p class="formNotice formNotice_success">' . $value . '</p>';
+                                    } else {
+                                        echo '<p class="formNotice formNotice_InlineError">' . $value . '</p>';
+                                    }
+                                }
+                            }
 							create_form_input('yourEmail', 'email', 'Your Email', $emailForm_errors);
 							?>
 					</div>
