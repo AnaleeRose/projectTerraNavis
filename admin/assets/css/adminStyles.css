@@ -1912,7 +1912,10 @@ END Delete Article
     margin-left: .5rem;
 }
 
-
+.returnToHomeBtn {
+    font-size: 1.2rem;
+    width: 9.5rem;
+}
 
 
 

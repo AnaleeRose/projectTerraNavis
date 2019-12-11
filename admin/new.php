@@ -490,7 +490,7 @@ Check out ' . $row['article_name'] . ' or read more articles about ' . $row['cat
                     // ----------------------------------------------------------------------------->
                     $options = ['required' => null, 'placeholder' => 'Subject', 'maxlength' => 50, 'addtl_classes' => 'emailInput'];
                     create_form_input('email_subject', 'text', 'Subject', $newEmail_errors, $options);
-                    $options = ['required' => null, 'placeholder' => 'Message | Max 250 characters', 'maxlength' => 250, 'addtl_classes' => 'emailInput'];
+                    $options = ['required' => null, 'placeholder' => 'Message | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes' => 'emailInput'];
                     create_form_input('email_msg', 'textarea', 'Message', $newEmail_errors, $options);
                     ?>
                     <hr class="newHr">

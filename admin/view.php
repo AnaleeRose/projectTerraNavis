@@ -34,6 +34,7 @@ if (isset($_POST['sendEmail'])) {
 	$send = false;
 }
 
+$sent = false;
 $article_name = '';
 $article_description = '';
 $category = '';
@@ -106,9 +107,11 @@ if ($media_type === 'article') {
                                 $r = mysqli_query($dbc, $q);
     						$from_email = "savannah@savannahskinner.com";
     					    $headers = "MIME-Version: 1.0" . "\r\n" . "Content-type:text/html;charset=UTF-8" . "\r\n" . "From: $from_email" . "\r\n" . 'Bcc:' .$bcc_headers . "\r\n";
-    					    $a = mail( $mail_to_send_to, $e_subject, $e_msg, $headers);
-    					    if ($a) {
-                                $previewEmail_errors['notice'] = 'Message was sent!';
+    					    $send = mail( $mail_to_send_to, $e_subject, $e_msg, $headers);
+                            // $a = false;
+    					    if ($send) {
+                                // $previewEmail_errors['notice'] = 'Message was sent!';
+                                $sent = true;
     					    } else {
     							$previewEmail_errors[] = 'Message could not be sent. Please contact our service team.';
     					    }
@@ -256,7 +259,11 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . ' viewPage">';
 							?>
 					</div>
 					<!-- <a class="adminBtn adminBtn_aqua" id="sendEmailBtn" href="<?= BASE_URL; ?>admin/view.php?view_type=view&media_type=email&media_id=<?= $media_id; ?>&send=true">Send Email</a> -->
-					<input type="submit" name="sendEmail" class="adminBtn adminBtn_aqua" id="sendEmailBtn" href="<?= BASE_URL; ?>admin/view.php?view_type=view&media_type=email&media_id=<?= $media_id; ?>&send=true" value="Send Email">
+                    <?php if (!$sent) { ?>
+					   <input type="submit" name="sendEmail" class="adminBtn adminBtn_aqua" id="sendEmailBtn" href="<?= BASE_URL; ?>admin/view.php?view_type=view&media_type=email&media_id=<?= $media_id; ?>&send=true" value="Send Email">
+                    <?php } elseif ($sent) {?>
+                        <a class="adminBtn adminBtn_aqua returnToHomeBtn" href="index.php">Return To Home</a>
+                    <?php } ?>
 					</form>
 				</div>
 				<?php
