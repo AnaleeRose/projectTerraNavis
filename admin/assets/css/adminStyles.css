@@ -815,7 +815,7 @@ END Login & Register
     padding: 1rem;
 }
 
-    .lmode .adminMC_Wrapper {background-color: #F0F0F0;}
+    .lmode .adminMC_Wrapper {background: #F0F0F0;background-color: #f1ffff;}
     .dmode .adminMC_Wrapper {background-color: var(--dmodeBlack);}
 
 .adminMainContent {
@@ -842,7 +842,7 @@ END Login & Register
     width: 130px;
 }
 
-    .lmode .adminMenu {background-color: #fff;}
+    .lmode .adminMenu {background: #fff;background: #f1ffff;}
     .dmode .adminMenu {background-color: var(--dmodeBlack);}
 
 .newsfeedContent {
