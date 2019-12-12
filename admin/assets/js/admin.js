@@ -15,7 +15,9 @@ var profileInfo1 = document.body.querySelector(".profileInfo:first-of-type");
 var elementTracker = document.body.querySelector('#elementTracker');
 var imgs_notice = document.body.querySelector('.imgsNotice');
 var publishBtn = document.body.querySelector('#publishBtn');
-
+var menuBtn = document.body.querySelector('.menuBtn');
+var menuBtnSvg_open = document.body.querySelector('.menuBtnSvg_open');
+var menuBtnSvg_close = document.body.querySelector('.menuBtnSvg_close');
 
 if (document.body.querySelector("#serverLightMode")) {
     var serverLightMode = document.body.querySelector("#serverLightMode").innerText;
@@ -29,6 +31,30 @@ var formNotices = document.body.querySelectorAll(".formNotice");
 list = [];
 allValid = false;
 
+
+if (menuBtn) {
+    adminMenu = document.body.querySelector('.adminMenu');
+    adminMenu.style.transition = 'left .5s ease-in-out';
+    menuBtn.style.transition = 'left .5s ease-in-out';
+    
+    menuBtn.addEventListener('click', function() {
+        adminMenu = document.body.querySelector('.adminMenu');
+        if (menuBtn.classList.contains('c_open')) {
+            adminMenu.style.left = null;
+            menuBtn.classList.remove('c_open')
+            menuBtn.style.left = null;
+            menuBtnSvg_close.style.width = '.1px';
+            menuBtnSvg_open.style.width = null;
+
+        } else {
+            adminMenu.style.left = '0';
+            menuBtn.classList.add('c_open')
+            menuBtn.style.left = '84vw';
+            menuBtnSvg_close.style.width = '27.033px';
+            menuBtnSvg_open.style.width = '.1px';
+        }
+    })
+}
 
 
 if (preexistingDeleteBtns.length > 0) {
@@ -46,11 +72,13 @@ if (preexistingDeleteBtns.length > 0) {
 if (choosePicBtn) {
     choosePicBtn.addEventListener('click', function(){
         if (thumbTable.classList.contains('chooseThumbTable_anim')) {
-            thumbTable.classList.remove('chooseThumbTable_anim');
-            registerForm.style.marginTop = '-8rem';
-        } else {
-            thumbTable.classList.add('chooseThumbTable_anim');
             registerForm.style.marginTop = null;
+            thumbTable.classList.remove('chooseThumbTable_anim');
+            thumbTable.classList.add('hiddenThumb');
+        } else {
+            registerForm.style.marginTop = '1rem';
+            thumbTable.classList.add('chooseThumbTable_anim');
+            thumbTable.classList.remove('hiddenThumb');
         }
     });
 } else if (changePicBtn) {
@@ -224,7 +252,7 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
 
         c_elementTracker = elementTracker.getAttribute('value')
         elementTracker.setAttribute('value', c_elementTracker + individual_name + ',');
-        console.log(individual_name + ', | ' + elementTracker.getAttribute('value'))
+        // console.log(individual_name + ', | ' + elementTracker.getAttribute('value'))
 
     } else {
 
@@ -265,7 +293,7 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
 
         c_elementTracker = elementTracker.getAttribute('value')
         elementTracker.setAttribute('value', c_elementTracker + individual_name + ',');
-        console.log(individual_name + ', | ' + elementTracker.getAttribute('value'))
+        // console.log(individual_name + ', | ' + elementTracker.getAttribute('value'))
     }
 
 }
@@ -323,7 +351,6 @@ function add_to_list(e) {
     list_type = list_name.substring(0,2);
     list_item_name = list_name + '_li';
     all = document.body.querySelectorAll('.' + list_item_name).length;
-    console.log('.' + list_item_name)
     if (all < list_max) {
         num = all + 1;
         individual_name = list_item_name + '_' + num;
@@ -356,7 +383,6 @@ allContentTypeBtns.forEach(function(e) {
 elementOrder = [];
 function track_li_elements(individual_name, group_name) {
     elementOrder.push(individual_name);
-    console.log(elementOrder);
 }
 
 
@@ -372,6 +398,8 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
                 all.forEach(function(thisElement) {
                     if (thisElement.classList.contains('hidden') && noHiddenElements === true) {
                         elementName = thisElement.getAttribute('name')
+                        elementName = elementName.substring(0, elementName.length - 10);
+                        console.log("name fixed: " + elementName)
 
                         label = document.body.querySelector('label[for="' + elementName + '"]')
                         label.parentNode.removeChild(label)
@@ -641,7 +669,6 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
         }
     } else if (deleteElement === true) {
         elementToDelete = document.querySelector('.' + contentBtnClicked) ;
-        console.log(contentBtnClicked + ' | ' + elementToDelete)
         elementName = elementToDelete.getAttribute('name')
         label = document.body.querySelector('label[for="' + elementName + '"]')
 
@@ -655,6 +682,7 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
             et_n_value = et_c_value.replace(elementName+',', '')
             elementTracker.setAttribute('value', et_n_value)
         }
+        elementName = elementName + '_destroyed';
     }
 }
 
@@ -794,13 +822,11 @@ function generate_link() {
     linkName = document.querySelector('.linkName').innerText
     linkHref = document.querySelector('.linkHref').innerText
     if (linkName.trim() === '' || linkHref.trim() === '') {
-        console.log('empty');
         linkGenEmptyError.classList.remove('hidden')
         if (!generatorInstructionsBox.classList.contains('hidden')) {
             generatorInstructionsBox.classList.add('hidden')
         }
     } else {
-        console.log('<a href="'+linkHref+'">'+linkName+'</a>');
         if (!linkGenEmptyError.classList.contains('hidden')) {
             linkGenEmptyError.classList.add('hidden')
         }

@@ -493,7 +493,6 @@ Check out ' . $row['article_name'] . ' or read more articles about ' . $row['cat
                     $options = ['required' => null, 'placeholder' => 'Message | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes' => 'emailInput'];
                     create_form_input('email_msg', 'textarea', 'Message', $newEmail_errors, $options);
                     ?>
-                    <hr class="newHr">
                     <p class="contentTypeBtn linkBtn_email linkGeneratorBtn">Link</p>
                     <input type="submit" name="publishMediaBtn" id="previewEmailBtn" class="adminBtn adminBtn_accent previewEmailBtn" value="Preview Email">
                 <?php

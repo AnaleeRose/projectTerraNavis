@@ -48,8 +48,8 @@ if ($media_type === 'article') {
 			$article_name = $row['article_name'];
 			$article_description = $row['article_description'];
 			$category = $row['category'];
-			$date_added = $row['date_added'];
-			$last_modified = $row['date_modified'];
+			$date_added =  date("F j, Y g:i a", strtotime($row["date_added"]));
+			$last_modified = date("F j, Y g:i a", strtotime($row["date_modified"]));
 			$img_location = IMG_PATH . $row['img_name'];
 			$caption = $row['caption'];
 		}
@@ -228,6 +228,7 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . ' viewPage">';
 					?>
 						</div>
 					</div>
+					<hr class="newHr">
 					<div class="articleFooter">
 						<p>Want to read more articles in the <a class="categoryLink" href="../html/index.php"><?= $category; ?></a> category?</p>
 					</div>

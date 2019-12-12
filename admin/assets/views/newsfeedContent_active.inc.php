@@ -67,6 +67,7 @@ function create_article($a_num) {
     ?>
 
     <div class="nwBox backShadow_light">
+        <h4 class="mediaType">Article</h4>
         <h3 class="newsfeedHeading"><?= $this_article['article_name'] ?></h3>
         <?php
         if (!empty($this_article['date_modified']) && (strtotime($this_article['date_modified']) > strtotime('-3 day'))) echo '<p class="badge badge_accent">New</p>';
@@ -112,6 +113,7 @@ function create_email($e_num) {
     ?>
 
         <div class="nwBox emailBox backShadow_light">
+            <h4 class="mediaType">Email</h4>
             <h3 class="newsfeedHeading"><?= $this_email['email_subject'] ?></h3>
             <?php
             if ($this_email['save_for_later'] === '1') echo '<p class="badge badge_danger">Not Sent</p>';

@@ -7,30 +7,22 @@ $options = ['required' => null];
     <img class="profilePic" src="assets/profilePictures/basic.jpg">
     <p class="choosePic">Choose Profile Picture</p>
 </div>
-    <table id="chooseThumbTable" class="chooseThumbTable hiddenThumb">
-        <tr>
+    <div id="chooseThumbTable" class="chooseThumbTable hiddenThumb">
+        <div class="allProfilePics">
             <?php
-            // if ($getPictures) {do {
+            $x = 0;
             while ($row = $getPictures->fetch_assoc()) {
-                if ($pos++ % COLS === 0 && !$firstRow) {
-                    echo '</tr><tr>';
-                }
-                $firstRow = false;
-                ?>
-            <td><img src="<?= 'assets/profilePictures/' . $row['pic_location']; ?>" alt="<?= str_replace('_', ' ', $row['pic_name']); ?>" class="chooseThumb" data-id="<?= $row['profilePic_id'] ?>"></td>
-        <?php } ;
-            while ($pos++ % COLS) {
-                echo '<td>&nbsp;</td>';
-            }
-        ?>
-        </tr>
-    </table>
+            ?>
+                <img src="<?= './assets/profilePictures/' . $row['pic_location']; ?>" alt="<?= str_replace('_', ' ', $row['pic_name']); ?>" class="chooseThumb" data-id="<?= $row['profilePic_id'] ?>">
+            <?php } ?>
+        </div>
+    </div>
 <?php
 if (isset($register_errors['DoesNotExist'])) {
     echo '<p class="formNotice formNotice_Error">' . $register_errors['DoesNotExist'] . '</p>';
 }
 ?>
-<form action="register.php" method="post" class="registerForm" style="margin-top: -8rem">
+<form action="register.php" method="post" class="registerForm">
     <input type="number" name="profilePicChoice" value="1" id="profilePicChoice" class="profilePicChoice hidden registerPPC">
     <?php
         create_form_input('username', 'text', 'Username', $register_errors, $options);

@@ -1,5 +1,5 @@
 <?php
-$ptitle = "Login";
+$pageTitle = "Login";
 nd('loginDiv', 'loginDiv');
 $options = ['required' => null];
 

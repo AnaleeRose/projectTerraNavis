@@ -148,7 +148,6 @@ input.hidden {
 .allPage .backBtn {
     left: 8.5rem;
     top: 2rem;
-
 }
 
 .backShadow {box-shadow: 5px 15px 15px #3b3535;}
@@ -164,15 +163,19 @@ input.hidden {
     background-color: #fff;
     margin: 5% auto;
     padding: 2rem 0 3rem;
-    width: 320px;
+    width: 90vw;
 }
 
 .defaultDiv {
     background: none;
     border-radius: 10rem;
     padding: 2rem 3rem 3rem;
+    margin: 0 auto;
 }
 
+.defaultPage .adminHeading {
+    text-align: center;
+}
 
 .muted {
     color: rgba(0,0,0,.7);
@@ -648,7 +651,7 @@ input.hidden {
     border-radius: 50%;
     display: flex;
     flex-direction: column;
-    margin-top: -2rem;
+    margin: -2rem auto;
     max-width: 700px;
     min-width: 320px;
     width: 90%;
@@ -667,8 +670,6 @@ input.hidden {
     align-items: center;
     justify-content: center;
     flex-flow: wrap;
-    margin: 1rem auto;
-    width: 80%;
 }
 
 .profilePic {
@@ -691,7 +692,10 @@ input.hidden {
     margin: 1rem auto;
 }
 
-.registerForm {transition: margin-top .6s ease-in-out;}
+.registerForm {
+    margin-top: -1rem;
+    transition: margin-top .5s ease-out;
+}
 
     .loginForm label, .registerForm label {
         font: bold 1.1rem 'Muli', sans-serif;
@@ -766,11 +770,13 @@ input.hidden {
 
 .chooseThumbTable * {height: 1px;}
 
-.chooseThumbTable_anim,  .updateThumbTable_anim {
+.chooseThumbTable_anim, .profilePicDiv .updateThumbTable_anim {
     position: relative;
+    opacity: 1;
     top: 0;
     transition: top .5s ease-in-out, opacity .5s ease-in-out;
-    opacity: 1;
+    width: 80%;
+    max-width: 800px;
     z-index: 2;
 }
 
@@ -781,13 +787,15 @@ input.hidden {
     cursor: pointer;
     width: 100px;
     height: 100px;
-    margin: 0 .5rem;
+    margin: 0 .8rem .8rem;
 }
 
 a.registerReturnBtn, a.registerReturnBtn {
     margin: 1rem auto 0;
     width: 3.5rem;
 }
+
+
 
 /*----------------------------------------------------------------------->
 END Login & Register
@@ -815,7 +823,7 @@ END Login & Register
     padding: 1rem;
 }
 
-    .lmode .adminMC_Wrapper {background: #F0F0F0;background-color: #f1ffff;}
+    .lmode .adminMC_Wrapper {background-color: #f1ffff;background: #F0F0F0;}
     .dmode .adminMC_Wrapper {background-color: var(--dmodeBlack);}
 
 .adminMainContent {
@@ -842,7 +850,7 @@ END Login & Register
     width: 130px;
 }
 
-    .lmode .adminMenu {background: #fff;background: #f1ffff;}
+    .lmode .adminMenu {background: #f1ffff;background: #fff;}
     .dmode .adminMenu {background-color: var(--dmodeBlack);}
 
 .newsfeedContent {
@@ -914,7 +922,6 @@ END Login & Register
 }
     .profilePicDiv .profilePic {
         background: linear-gradient(330deg, rgba(255,209,16,1) 0%, rgba(223,180,0,1) 100%);
-
         border: none;
         padding: 1rem;
         display: block;
@@ -923,7 +930,7 @@ END Login & Register
         width: 200px;
     }
 
-    .dmode .profilePicDiv .profilePic {    background: linear-gradient(330deg, var(--marigold) 0%, #eaedee 100%);}
+    /*.dmode .profilePicDiv .profilePic {background: linear-gradient(330deg, var(--marigold) 0%, #eaedee 100%);}*/
 
     .profileBtn {
         margin: -.7rem auto 0;
@@ -939,26 +946,9 @@ END Login & Register
         /*.dmode .profileBtn:hover, .dmode .changePicBtn:hover {background: linear-gradient(330deg, var(--darkReddish) 0%, #4a0b13 100%); }*/
 
 
-.mainLinks {
-    display: flex;
-    flex-direction: column;
-}
-    .mainLinks a {
-        color: var(--aqua);
-        font-size: 2.2rem;
-        padding: 2rem ;
-        margin: 1rem auto;
-        text-align: center;
-        text-decoration: none;
-        width: 400px;
-    }
+    .mainLinks {display: none;}
 
-    .mainLinks a:hover {
-        color: var(--magenta);
-    }
-
-
-    .mainLinks a::before {
+/*    .mainLinks a::before {
         content: '';
         width: 5px;
         height: 5px;
@@ -983,7 +973,7 @@ END Login & Register
     .mainLinks .newArticle::before {
         padding: 16px 42px;
         background: url(../imgs/newArticle.svg);
-    }
+    }*/
 
 
 
@@ -1042,6 +1032,12 @@ END Homepage
     display: inline-block;
     margin: .5rem auto;
 
+}
+
+.forgotPwdBtn {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    width: 11.5rem;
 }
 
 .changePwdBtn {
@@ -1200,8 +1196,12 @@ h2.newsfeedHeading {
     background: linear-gradient(90deg, #060606 0%, #101520  3%, #101520  97%, #060606 100%);
 }
 
+.allPage .adminHeading {
+    display: block;
+    margin-left: 7rem;
+} 
+
 .nwBox {
-    /*height: 100%;*/
     padding: 2rem;
     position: relative;
     margin: 2rem .5rem;
@@ -1213,9 +1213,12 @@ h2.newsfeedHeading {
     width: 445px;
 }
 
-.newsfeedContent
+.nwBox .mediaType {
+    color: var(--brightAqua);
+    margin: -.2rem 0 .75rem;
+}
 
-    .nwBox:first-of-type {margin-top: 4rem;}
+    .newsfeedContent .nwBox:first-of-type {margin-top: 4rem;}
     .adminHome_fullWidth .nwBox:first-of-type {margin-top: 2rem;}
 .lmode .nwBox {background: #fff;}
 .dmode .nwBox {background: var(--dmodeBlack);}
@@ -1618,28 +1621,12 @@ END Newsfeed
     font-size: .1rem;
     height: 1.5rem;
     position: absolute;
-    overflow: hidden;
+    overflow: visible;
     right: -18rem;
     top: -1rem;
 }
 
 /*.elementDeleteBtn:before {
-    background: var(--reddish);
-    border-radius: 50%;
-    color: #fff;
-    content: 'x';
-    cursor: pointer;
-    font-size: 1rem;
-    transform: scaleX(1.1);
-    line-height: 1.2;
-    left: -.65rem;
-    position: absolute;
-    top: 0px;
-    width: 1.2rem;
-}
-*/
-
-.elementDeleteBtn:before {
     color: var(--reddish);
     content: 'x';
     cursor: pointer;
@@ -1647,7 +1634,29 @@ END Newsfeed
     font-weight: bold;
     padding: 1rem;
     transform: scaleX(1.1);
+}*/
+
+.elementDeleteBtn:before {
+    background: url(../imgs/deleteBtn.svg);
+    background-position: 7px 10px;
+    background-repeat: no-repeat;
+    background-size: 1.4rem;
+    content: ' ';
+    cursor: pointer;
+    height: 2rem;
+    width: 2rem;
+    padding: 1rem;
+    position: relative;
+    top: 1rem;
+    left: 0;
 }
+
+    .elementDeleteBtn:hover:before {
+        background: url(../imgs/deleteBtn_hover.svg);
+        background-position: 7px 10px;
+        background-repeat: no-repeat;
+        background-size: 1.4rem;
+    }
 
 
 /*----------------------------------------------------------------------->
@@ -1921,4 +1930,332 @@ END Delete Article
 
 /*----------------------------------------------------------------------->
 END Printed Styles
+------------------------------------------------------------------------->*/
+
+
+
+/*----------------------------------------------------------------------->
+`Media Queries
+------------------------------------------------------------------------->*/
+
+
+@media only screen and (max-width: 600px) {
+    .backBtn {
+        overflow:hidden;
+    }
+    .backArrow {
+        position: absolute;
+        top: -1000rem;
+    }
+    .adminHome {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas: 'adminMainContent';
+        height: 100%;
+    }
+
+    .newsfeedContent {
+        height: .5rem;
+        left: -130rem;
+        position: absolute;
+        width: .5rem;
+    }
+
+    .adminMenu {
+        left: -100vw;
+        position: fixed;
+        overflow: visible;
+        width: 100vw;
+        z-index: 80;
+    }
+
+    .menuBtn {
+        cursor: pointer;
+        padding-left: 1rem;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 85;
+    }
+        .menuBtn svg {
+            stroke: var(--brightAqua);
+        }
+
+        .menuBtnSvg_close {
+            width: ;
+            width: .1px;
+        }
+        .menuBtnSvg_open{width:25.645px;}
+
+    .adminMC_Wrapper {
+        padding: 0;
+        height: 100%;
+        max-width: 100vw;
+    }
+
+    .profileInfo, .adminControlsP {
+        width: 275px;
+    }
+
+    .hiddenThumb {
+        top: -10rem;
+    }
+
+    .profilePicThumb {
+        height: auto; 
+        margin-top: 0;
+        padding: .8rem;
+        width: 9rem;
+    }
+
+    .profilePicThumbLink {display: flex;}
+
+    .menuLinks {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+            'homeBtn homeBtn'
+            'newEmailBtn newArticleBtn'
+            'allEmailsBtn allArticlesBtn'
+            'logoutBtn logoutBtn';
+    }
+
+    .menuLinks a, .menuLinks .homeBtn, .menuLinks .logoutBtn {
+        border-radius: 0;
+        box-sizing: border-box;
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 200;
+        margin: 0;
+        padding: 1.1rem 0; 
+        text-align: center;
+        width: 100%;
+    }
+
+        .menuLinks .homeBtn {grid-area: homeBtn;}
+        .menuLinks .logoutBtn {grid-area: logoutBtn;}
+
+        .menuLinks .newEmailBtn {
+            border-right: .2rem solid var(--marigold);
+            border-bottom: .2rem solid var(--marigold);
+            grid-area: newEmailBtn;
+        }
+
+        .menuLinks .newArticleBtn {
+            border-left: .2rem solid var(--marigold);
+            border-bottom: .2rem solid var(--marigold);
+            grid-area: newArticleBtn;
+        }
+
+        .menuLinks .allEmailsBtn {
+            border-right: .2rem solid var(--marigold);
+            border-top: .2rem solid var(--marigold);
+            grid-area: allEmailsBtn;
+        }
+
+        .menuLinks .allArticlesBtn {
+            border-left: .2rem solid var(--marigold);
+            border-top: .2rem solid var(--marigold);
+            grid-area: allArticlesBtn;
+        }
+
+        .menuLinks .newEmailBtn, .menuLinks .newArticleBtn, .menuLinks .allEmailsBtn, .menuLinks .allArticlesBtn {
+            border-color: var(--dmodeBlack);
+
+        }
+
+    .menuLinks .adminBtn_aqua {
+        display: inline-block;
+        padding: 3rem 0; 
+        width: 50vw;
+    }
+
+    .mainLinks {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+    .mainLinks a {
+        color: var(--aqua);
+        font-size: 2.2rem;
+        padding: 2rem ;
+        margin: 1rem auto;
+        text-align: center;
+        text-decoration: none;
+        /*width: 400px;*/
+    }
+
+    .mainLinks a:hover {
+        color: var(--magenta);
+    }
+
+    .lmode .mainLinks a {
+        background: rgba(12, 205, 249, 0.05);
+        border-radius: 5rem;
+    }
+
+    .newMedia {
+        padding: 1rem 0;
+        width: 100vw;
+        min-height: calc(100vh - 2rem);
+    }
+    
+    .newMediaHeading {
+        display: block;
+    }
+    
+    .adminHeading {
+        margin: 4rem auto 1rem;
+        max-width: calc(100vw - 1rem);
+        text-align: center;
+    }
+
+        .previewEmailBox .adminHeading {
+            margin: .5rem 0 1rem;
+        }
+
+    .cornerLinks {
+        flex-direction: column;
+        margin: 0 auto;
+        width: calc(100vw - 1rem);
+    }
+    
+    .cornerLinks a {
+        margin: 1rem auto;
+    }
+
+    .generalForm {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem auto;
+        padding: 0;
+    }
+
+    .newMediaForm textarea.contentInput .newMediaForm .emailInput,
+    .lmode .generalForm textarea, .dmode .generalForm textarea,
+    .verifyPwdForm textarea.contentInput, .verifyPwdForm .emailInput,
+    .editProfileForm textarea.contentInput,
+    .generalForm select, .generalForm .createInput, .generalForm textarea {
+        max-width: calc(100vw - 100px);
+        min-width: 220px;
+    }
+
+    .generalForm select, .generalForm .createInput:not(.list-item), .generalForm textarea {
+        margin-bottom: 2.5rem;
+    }
+
+    .generalForm fieldset {
+        max-width: calc(100vw - 50px);
+        min-width: 220px;
+    }
+
+    .imgBox .showNewImg {
+        width: 80vw;
+    }
+
+    .elementDeleteBtn {right: -4rem;}
+
+    #publishBtn {margin-top:0;}
+    #sendEmailBtn, #previewEmailBtn {margin-bottom: 2rem;}
+    
+    .allPage .adminHeading {
+        display: block;
+        margin-left: 0;
+        text-align: center;
+    } 
+
+    .allPage .nwBox {
+        max-width: calc(100vw - 50px);
+        width: 100%;
+    }
+
+    .nwBox .btnBox {flex-direction: column;}
+    .nwBox .btnBox a {margin-bottom: 1rem;}
+    .nwBox .btnBox a:last-of-type {margin-bottom: 0;}
+
+    .allPage .backBtn {
+        position: absolute;
+        left: -100rem;
+    }
+
+
+    .previewEmailBox {
+        padding: 0;
+    }
+
+    .seeAll {
+        position: absolute;
+        top: -100rem;
+    }
+
+    .previewEmailBox .emailSubject {
+        padding: 0;
+        margin: .4rem auto 2.5rem;
+    }
+
+    .emailMsg {
+        margin-bottom: 2.5rem;
+    }
+
+    table, thead, tbody, th, td, tr { 
+        display: block; 
+    }
+
+    th {
+        position: absolute;
+        left: -1000rem;
+    }
+
+    td:nth-of-type(1):before,
+    td:nth-of-type(2):before,
+    td:nth-of-type(3):before,
+    td:nth-of-type(4):before {color: var(--aqua);}
+
+    td:nth-of-type(1):before {content: 'Name: ';}
+    td:nth-of-type(2):before {content: 'Category: ';}
+    td:nth-of-type(3):before {content: 'Date Created: ';}
+    td:nth-of-type(4):before {content: 'Last Modified: ';}
+
+    .previewTable th:first-of-type, .previewTable td:first-of-type {
+        padding: 1rem 1.5rem;
+    }
+
+    .viewImgBox, .viewImg, .printedCaption {width: 90vw;}
+
+    .viewImgBox {
+        height: 300px;
+        margin: 0 5vw 2rem;
+    }
+
+    .printedCaption {
+        float: clear;
+        left: 0;
+        padding: 1rem;
+    }
+
+    .printedCaption:after {
+        left: 1rem;
+        padding: 1px 40vw;
+    }
+
+    .newMediaForm .uploadImgBtn{
+        margin: 1.5rem.5rem;
+    }
+
+    .verifyPwdForm {min-height: calc(100vh - 7rem);}
+    .editProfileForm, .changePForm {min-height: calc(100vh - 13rem);}
+    .deleteAdminForm { min-height: calc(100vh - 16.2rem);}
+    .generalForm .agreeToDelete_label {width: calc(100vw - 100px);;}
+    .deleteAdminText {text-align: center;}
+
+    .chooseThumbTable_anim, .profilePicDiv .updateThumbTable_anim {
+        width: 95%;
+        margin: 2rem auto .5rem;
+    }
+
+}
+
+
+/*----------------------------------------------------------------------->
+END Media Queries
 ------------------------------------------------------------------------->*/

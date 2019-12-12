@@ -20,9 +20,6 @@ require './../html/assets/includes/form_functions.inc.php';
 // basic functions used throughout the site
 require './../html/assets/includes/functions.inc.php';
 
-// creates a back button
-include './assets/includes/backBtn.inc.php';
-
 
 
 $pageTitle = 'Edit Profile Info';
@@ -136,7 +133,7 @@ if ($relogged_in) {
 	echo '<input type="submit" name="editInfoBtn" class="adminBtn adminBtn_danger" value="Edit Info">';
     echo '<a href="profile.php" class="adminBtn adminBtn_subtle returnToProfileBtn">Return</a>';
 } else { // please relog in
-    require './assets/includes/verifyPassword_form.php';
+    require './assets/includes/verifyPassword_form.inc.php';
 }
 include './assets/includes/adminPage_end.inc.php';
 include './assets/includes/footer.html';

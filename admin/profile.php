@@ -32,8 +32,6 @@ $_SESSION['relogged_in'] = false;
 
 $pageTitle = 'Profile';
 $login_errors = [];
-define('COLS', 5);
-$pos = 0;
 $firstRow = true;
 $changes = [];
 // grab all possible profile pictures

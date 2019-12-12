@@ -1,11 +1,25 @@
 <?php
+// ob_start tells it not to show anything until everything is done loading so I can interrupt it at any time to load an error page without php getting mad about content already on display
 ob_start();
+
+// starts a session lol, aka it tracks information even when you go to a different page within the site
 session_start();
-require './../html/assets/includes/config.inc.php'; // basic definitions used throughout the site
-check_if_admin(); // toss user back to login page if they're not logged in
+
+ // config sets up a number of vital defnitions and a few functions too
+require './../html/assets/includes/config.inc.php';
+
+// toss user back to login page if they're not logged in
+check_if_admin();
+
+// connects ya to the db
 require MYSQL;
-require './../html/assets/includes/form_functions.inc.php'; // makes it easy to create forms
-require './../html/assets/includes/functions.inc.php'; // basic functions used throughout the site
+
+// makes it easy to create forms
+require './../html/assets/includes/form_functions.inc.php';
+
+// basic functions used throughout the site
+require './../html/assets/includes/functions.inc.php';
+
 
 
 
@@ -21,8 +35,6 @@ if ($relogged_in) {
         require './assets/includes/newsfeed_active.inc.php';
             nd('adminMC_Wrapper', 'noDI');
                 nd('adminMainContent', 'mainContent');
-    define('COLS', 5);
-    $pos = 0;
     $firstRow = true;
     $q = 'SELECT * FROM profilepictures';
     $getPictures = mysqli_query($dbc, $q);

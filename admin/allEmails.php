@@ -41,6 +41,7 @@ $no_articles = true;
     require './assets/includes/adminMenu.inc.php';
     nd('adminMC_Wrapper allPage', 'noID');
         echo BACK_BTN;
+        	echo '<h2 class="adminHeading">All Emails</h2>';
         nd('adminMainContent', 'mainContent');
 
             // newsfeedContent_active.php shows the most recent articles and emails

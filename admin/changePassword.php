@@ -126,7 +126,7 @@ if ($relogged_in) {
         <?php
     } else {
         // ...and it hasn't already successfully completed, create the changePassword form
-        echo '<form class="generalForm" method="post">';
+        echo '<form class="generalForm changePForm" method="post">';
 
             // options that can be passed to create_form_input, this one gives the inputs a required attribute
             $options = ['required' => null];
