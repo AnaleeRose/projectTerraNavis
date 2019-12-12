@@ -116,13 +116,13 @@ $options = ['required' => null];
             <form class="newMediaForm generalForm" method="post">
 
                 <?php
-				$options = ['required' => null, 'placeholder' => 'Subject', 'maxlength' => 50, 'addtl_classes' => 'emailInput'];
+				$options = ['required' => null, 'placeholder' => 'Subject | Max 75 characters', 'maxlength' => 75, 'addtl_classes' => 'emailInput'];
 
 				$options['value'] = $email_subject;
 				create_form_input('email_subject', 'text', 'Subject', $editEmail_errors, $options);
 
 
-				$options = ['required' => null, 'placeholder' => 'Message | Max 250 characters', 'maxlength' => 250, 'addtl_classes' => 'emailInput'];
+				$options = ['required' => null, 'placeholder' => 'Message | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes' => 'emailInput'];
                 // if they havent tried to submit yet, set the msg to the db's version
 				if (isset($_POST['email_msg']) && !empty($_POST['email_msg'])) {
 					$options['value'] = $_POST['email_msg'];
