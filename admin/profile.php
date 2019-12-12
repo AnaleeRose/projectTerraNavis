@@ -35,12 +35,16 @@ $login_errors = [];
 define('COLS', 5);
 $pos = 0;
 $firstRow = true;
+$changes = [];
 // grab all possible profile pictures
 $q = 'SELECT * FROM profilepictures';
 $getPictures = mysqli_query($dbc, $q);
 if (!$getPictures) {
     $register_errors['profilepictures'] = 'Could not retrieve profile images, defaulting to base image';
 }
+
+$successPhrase = '<p class="formNotice formNotice_InlineNotice" style="width:10rem">Changes were saved</p>';
+$errorPhrase = '<p class="formNotice formNotice_InlineNotice" style="width:13rem">Changes could not be saved</p>';
 
 // if they clickty clicked the submit btn...
 if (isset($_POST['saveChangesBtn'])) {
@@ -60,15 +64,14 @@ if (isset($_POST['saveChangesBtn'])) {
                     $_SESSION['profilePic_Location'] = $newPicLocation;
                 }
                 while(mysqli_more_results($dbc)) {
-                    // releases mysqli, I think? I don't remembet exactly how this works. I had an issue and this fixes it lol
                     mysqli_next_result($dbc);
                 }
-                echo '<span class="hidden formNotice formNotice_success">Changes were saved</span>';
+                if (!isset($changes['success'])) $changes['success'] = $successPhrase;
             } else {
-            echo '<span class="hidden formNotice formNotice_error">Changes could not be saved </span>';
+                if (!isset($changes['error'])) $changes['error'] = $errorPhrase;
             }
         } else {
-            echo '<span class="hidden formNotice formNotice_error">Changes could not be saved </span>';
+            if (!isset($changes['error'])) $changes['error'] = $errorPhrase;
         }
     }
 
@@ -84,11 +87,9 @@ if (isset($_POST['saveChangesBtn'])) {
 
             // ...and update the session variables
             $_SESSION['light_mode'] = $_POST['lightModeInput'];
-            echo '<span class="hidden formNotice formNotice_success">Changes Were Saved!</span>';
+            if (!isset($changes['success'])) $changes['success'] = $successPhrase;
         } else {
-            require './assets/includes/error.html';
-            require './assets/includes/footer.html';
-            exit();
+            if (!isset($changes['error'])) $changes['error'] = $errorPhrase;
         }
     }
 }
@@ -129,6 +130,11 @@ echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>
                 <?php
                 echo '<p class="muted profileInfo"><span>' . ucfirst($_SESSION['username']) . '</span></p>';
                 echo '<p class="muted profileInfo"><span>' . $_SESSION['email'] . '</span></p>';
+                if (!empty($changes)) {
+                    foreach ($changes as $key => $value) {
+                        echo $value;
+                    }
+                }
                 nd("pbtnDiv","noID");
                 ?>
                     <a  class="adminBtn adminBtn_switch lightModeBtn"><span class="lightModeBtn_span"></span></a>

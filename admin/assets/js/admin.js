@@ -22,6 +22,7 @@ if (document.body.querySelector("#serverLightMode")) {
     var currentLightMode = serverLightMode;
 }
 
+var preexistingDeleteBtns = document.body.querySelectorAll('.elementDeleteBtn')
 var requiredInputs = document.body.querySelectorAll(".requiredInput");
 var allThumbnails = document.body.querySelectorAll(".chooseThumb");
 var formNotices = document.body.querySelectorAll(".formNotice");
@@ -29,6 +30,16 @@ list = [];
 allValid = false;
 
 
+
+if (preexistingDeleteBtns.length > 0) {
+    preexistingDeleteBtns.forEach(function(e){
+        e.addEventListener('click', function(e){
+            let elementToDelete = e.srcElement.classList[1].substring(4);
+            type_of_element(elementToDelete, true, e.srcElement);
+        })
+    })
+
+}
 
 
 // choose profile picture button
@@ -48,7 +59,7 @@ if (choosePicBtn) {
             changePicBtn.innerText = "Change Picture";
             changePicBtn.style.width = null;
             thumbTable.classList.remove('updateThumbTable_anim');
-            profileInfo1.style.marginTop = null;
+            // profileInfo1.style.marginTop = null;
             if (serverLightMode === currentLightMode) {
                 saveChangesBtn.classList.add('saveChangesBtn_hidden');
             }
@@ -56,7 +67,7 @@ if (choosePicBtn) {
             changePicBtn.innerText = "Cancel";
             changePicBtn.style.width = "3.5rem";
             thumbTable.classList.add('updateThumbTable_anim');
-            profileInfo1.style.marginTop = '15rem';
+            // profileInfo1.style.marginTop = '15rem';
             if (serverLightMode === currentLightMode) {
                 saveChangesBtn.classList.remove('saveChangesBtn_hidden');
             }
@@ -171,7 +182,7 @@ function create_form_notice(name, notice_text, form_notice_type) {
     let content = document.createTextNode(notice_text)
     name.appendChild(content);
     document.body.appendChild(name);
-    let ml = 'margin-left: -' + name.offsetWidth/2 + 'px';
+    let ml = 'margin-left: -' + name.offsetWidth/2 + 'px;z-index:75;';
     name.setAttribute('style', ml);
     name.addEventListener('click', function() {
         name.parentNode.removeChild(name);
@@ -630,6 +641,7 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
         }
     } else if (deleteElement === true) {
         elementToDelete = document.querySelector('.' + contentBtnClicked) ;
+        console.log(contentBtnClicked + ' | ' + elementToDelete)
         elementName = elementToDelete.getAttribute('name')
         label = document.body.querySelector('label[for="' + elementName + '"]')
 
@@ -643,12 +655,6 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
             et_n_value = et_c_value.replace(elementName+',', '')
             elementTracker.setAttribute('value', et_n_value)
         }
-        // e.classList.add('hidden_elem')
-        // e.parentNode.removeChild(e)
-        // elementToDelete.classList.add('hidden_elem')
-        // elementToDelete.parentNode.removeChild(elementToDelete)
-        // label.classList.add('hidden_elem')
-        // label.parentNode.removeChild(label)
     }
 }
 

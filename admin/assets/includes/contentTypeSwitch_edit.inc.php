@@ -7,13 +7,14 @@ while ($row = $r->fetch_assoc()) {
     $elemName = $row['element_name'];
     // echo 'e: ' . $elemName;
     $elemContents = htmlspecialchars($row['content']);
-    $options = [];
         switch ($row['element_name']) {
             case strpos($elemName, 'p'):
                 $trackElements[$elemName]['content'] = $elemContents;
                 $trackElements[$elemName]['id'] = 1;
                 $trackElements[$elemName]['order'] = $currentNum;
-                $options = ['placeholder' => 'Paragraph | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes'=>'Paragraph createInput', 'required' => null, 'data-content_type_id' => 1, 'deleteable'];
+
+                $options = [];
+                $options = ['placeholder' => 'Paragraph | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes'=>'Paragraph createInput ' . $elemName, 'required' => null, 'data-content_type_id' => 1, 'deleteable'];
                 create_form_input_e_ver($elemName, 'textarea', 'Paragraph', $elemContents, $newArticle_errors, $options);
                 $listAllElements .= $elemName . ',';
                 break;
@@ -23,9 +24,12 @@ while ($row = $r->fetch_assoc()) {
                 $heading_num = substr($elemName, 7, 1);
                 $element_class = 'h' . $heading_num;
                 $element_name = 'Heading ' . $heading_num;
+
+                $options = [];
                 $options['maxlength'] = 100;
                 $options['placeholder'] = $element_name . ' | Max 150 characters ';
-                $options['addtl_classes'] = $element_class . ' createInput';
+                $options['addtl_classes'] = $element_class . ' createInput ' . $elemName;
+
                 switch ($element_class) {
                     case 'h2';
                         $trackElements[$elemName]['id'] = 2;
@@ -61,7 +65,8 @@ while ($row = $r->fetch_assoc()) {
                 $trackElements[$elemName]['id'] = 6;
                 $trackElements[$elemName]['order'] = $currentNum;
 
-                $options['addtl_classes'] = 'hr createInput';
+                $options = [];
+                $options['addtl_classes'] = 'hr createInput ' . $elemName;
                 $options['data-content_type_id'] = 6;
                 echo '<hr class="newHr">';
                 create_form_input_e_ver($elemName, 'hidden', '', $elemContents, $newArticle_errors, $options);

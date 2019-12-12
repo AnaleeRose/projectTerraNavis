@@ -132,10 +132,10 @@ input.hidden {
     color: #fff;
     display: inline-block;
     font-size: 2rem;
-    left: -2rem;
+    left: 34.65rem;
     padding: .75rem;
-    position: absolute;
-    top: 1rem;
+    position: fixed;
+    top: 2rem;
     transform: scale(-1, 1);
     z-index: 60;
 }
@@ -146,8 +146,8 @@ input.hidden {
     }
 
 .allPage .backBtn {
-    left: 1rem;
-    top: 1rem;
+    left: 8.5rem;
+    top: 2rem;
 
 }
 
@@ -357,7 +357,7 @@ input.hidden {
     z-index: 10;
 }
 
-    .lmode .adminBtn_accent, .readEmailBtn, .editBtn {box-shadow: 1px 3px 2px var(--lmodeBoxShadow);}
+    .lmode .adminBtn_accent, .lmode .readEmailBtn, .lmode .editBtn {box-shadow: 1px 3px 2px var(--lmodeBoxShadow);}
 
 .adminBtn_aqua {
     background: var(--brightAqua);
@@ -774,7 +774,7 @@ input.hidden {
     z-index: 2;
 }
 
-.chooseThumbTable_anim *,  .updateThumbTable_anim * {height: none;}
+.chooseThumbTable_anim *,  .updateThumbTable_anim * {height: auto;}
 
 .chooseThumb {
     border-radius: 50%;
@@ -1176,7 +1176,6 @@ END Profile
 
 
 h2.newsfeedHeading {
-    padding-left: 1rem;
     position: fixed;
     display: block;
     padding: 1rem;
@@ -1252,16 +1251,16 @@ h2.newsfeedHeading {
 
 .nwBox .editBtn {
     width: 6rem;
-    width: 210px;
+    /*width: 210px;*/
 }
 .nwBox .deleteBtn {
     width: 7.5rem;
-    width: 235px;
+    /*width: 235px;*/
 }
 
 .nwBox .viewBtn {
     width: 7.5rem;
-    width: 200px;
+    /*width: 200px;*/
 }
 
 .nwBox .dateInfo {color: var(--brightAqua);}
