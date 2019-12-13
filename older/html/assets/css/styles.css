@@ -1,0 +1,205 @@
+/*===============   Page Information   ================
+Website Name: Terra Navis Living
+Website URL: terranavisliving.noshinr.com
+Website Author: Francis Tuttle Web Development BPA Team 2019-2020
+Author's URL: http://ftclass.com
+
+==================   COLOR GUIDE   ==================
+Brown ----------------------- rgb(77, 53, 28)              #614527
+Light Brown ---------------- rgb(220, 207, 192)        #e3d8cc
+Dark Blue ------------------ rgb(16, 47, 84)               #0f3e66
+Light Blue ------------------ rgb(214, 219, 224)         #dee2e6
+Dark Green ---------------- rgb(98, 94, 43)              #75713c
+Light Green ---------------- rgb(216, 219, 185)        #dfe2c6
+Very Light Green --------- rgb(228, 228, 220)        #e9e9e3
+Dark Red ------------------- rgb(189, 71, 42)            #ce5e3a
+Light Red ------------------- rgb(246, 228, 224)        #f9eae6
+
+===============   TABLE OF CONTENTS   ===============
+1. CSS Resets & Fonts
+2. Global Styles
+3. Header & Nav Styles
+4. Main Body Content
+5. Form Styles
+6. Footer Content
+7. @Media Queries
+****************************************************/
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+1. CSS Resets & Fonts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+@font-face {
+    font-family: 'cabin';
+    src: url('fonts/cabin-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+  font-family: 'cabin-bold';
+  src: url('fonts/cabin-bold.otf') format('opentype');
+  font-weight: 800;
+  font-style: 800;
+}
+@font-face {
+  font-family: 'ptsans';
+  src: url('fonts/ptsans.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ptsans-italic';
+  src: url('fonts/ptsans-italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,
+textarea,pre,iframe,div,form,fieldset,hr,h1,h2,h3,h4,h5,h6,button,
+input,select,textarea {
+    margin: 0;
+    padding: 0;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+ul, li, a {
+  list-style: none;
+  text-decoration: none;
+}
+html {box-sizing: border-box;}
+*,*:before,*:after {box-sizing: inherit;}
+iframe {border: 0;}
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+2. Global Styles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+html {
+  cursor: default;
+  background-color: ;
+}
+body {
+  display: grid;
+  grid-template-columns: 1fr 4fr 4fr 1fr;
+  grid-template-rows: auto;
+  min-width: 360px;
+}
+h1 {
+
+}
+h2 {
+
+}
+div {
+
+}
+
+a {
+  cursor: pointer;
+}
+a:hover {
+  color: ;
+}
+a:active {
+  color: ;
+}
+li a:hover {
+  color: ;
+}
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+3. Header & Nav Styles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+ #header {
+
+}
+.headerlogo {
+
+}
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+4. Main Body Content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+5. Form Styles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+input, label, textarea {
+
+}
+input {
+
+}
+label {
+
+}
+select {
+
+}
+fieldset {
+
+}
+legend {
+
+}
+#button {
+  display: block;
+  margin: ;
+  width: ;
+  border-radius: ;
+  border: ;
+  color: ;
+  font-family: ;
+  font-size: ;
+  font-weight: ;
+  text-align: ;
+  cursor: ;
+  padding: ;
+  background-color: ;
+  text-decoration: ;
+  box-shadow: ;
+  text-shadow: ;
+  background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+}
+.myButton {
+  color: ;
+  text-align: ;
+  font-family: ;
+  text-shadow: ;
+}
+#button:hover {
+  background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+	background-color:;
+}
+#button:visited {
+  color: ;
+}
+#button:active {
+	position: relative;
+	top: ;
+}
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+6. Footer Content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+footer {
+
+}
+#copyright p {
+  font-size: ;
+  font-family: ;
+  line-height: ;
+  color: ;
+}
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+7. @Media Queries
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+@media screen and (max-width: 840px) {
+
+}
+ 
+/* ===== TABLET ============================== */
+@media screen and (max-width: 626px) {
+
+}
+
+
+/* ===== MOBILE ============================== */
+@media screen and (max-width: 438px) {
+
+}

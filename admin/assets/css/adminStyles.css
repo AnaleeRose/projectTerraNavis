@@ -646,16 +646,57 @@ input.hidden {
 /*----------------------------------------------------------------------->
 `Login && Register
 ------------------------------------------------------------------------->*/
+.loginPage {
+    /*border: .3rem solid var(--brightAqua);*/
+    box-shadow: 3px 4px 9px var(--aqua);
+    border-radius: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: 
+    'heading heading'
+    'img form';
+    height: 80vh;
+    margin: 5vw auto 10vw;
+    width: 80vw;
+    max-height: 500px;
+    max-width: 1000px;
+}
+
 .loginDiv {
-    /*background: #fff;*/
-    border-radius: 50%;
+    /*border-bottom: .6rem solid var(--brightAqua);*/
     display: flex;
+    grid-area: form;
     flex-direction: column;
-    margin: -2rem auto;
+    margin: auto;
     max-width: 700px;
-    min-width: 320px;
     width: 90%;
 }
+
+.login_profilePic {
+    border-right: .4rem solid var(--brightAqua);
+    display: block;
+    grid-area: img;
+    padding: 1rem 0 2.75rem 2rem;
+    position: relative;
+    width: 100%;
+}
+
+.loginHeading {
+    border-bottom: .4rem solid var(--brightAqua);
+    color: var(--brightAqua);
+    grid-area: heading;
+    font-size: 2rem;
+    font-weight: lighter;
+    margin: 2rem 4rem -1px;
+    padding: .5rem;
+}
+
+.forgotPBtn {
+    margin-top: 1.5rem;
+    text-align: center;
+    width: 8rem;
+}
+
 
 .registerDiv {
     background: #fff;
@@ -667,9 +708,6 @@ input.hidden {
 .dmode .registerDiv {background: none;}
 
 .allProfilePics {
-    align-items: center;
-    justify-content: center;
-    flex-flow: wrap;
 }
 
 .profilePic {
@@ -771,12 +809,12 @@ input.hidden {
 .chooseThumbTable * {height: 1px;}
 
 .chooseThumbTable_anim, .profilePicDiv .updateThumbTable_anim {
-    position: relative;
+    max-width: 800px;
     opacity: 1;
+    position: relative;
     top: 0;
     transition: top .5s ease-in-out, opacity .5s ease-in-out;
     width: 80%;
-    max-width: 800px;
     z-index: 2;
 }
 
@@ -785,10 +823,17 @@ input.hidden {
 .chooseThumb {
     border-radius: 50%;
     cursor: pointer;
-    width: 100px;
-    height: 100px;
+    width: .1px;
+    height: 1px;
     margin: 0 .8rem .8rem;
 }
+
+.chooseThumbTable_anim .chooseThumb,  .updateThumbTable_anim .chooseThumb {
+    height: 100px;
+    width: 100px;
+}
+
+
 
 a.registerReturnBtn, a.registerReturnBtn {
     margin: 1rem auto 0;
@@ -1939,7 +1984,41 @@ END Printed Styles
 ------------------------------------------------------------------------->*/
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1200px) {
+
+    .dmode {background-color: var(--dmodeBlack);}
+    .lmode {background-color: #F0F0F0;}
+
+    .loginPage {
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        max-height: none;
+        margin: 5vh auto;
+        padding: .5rem;
+    }
+
+    .loginDiv {
+        padding-bottom: 3rem;
+    }
+
+    .login_profilePic {
+        border: .6rem solid var(--brightAqua);
+        border-radius: 50%;
+        padding: .2rem;
+        margin: 2rem auto 1rem;
+        max-width: 200px;   
+    }
+
+    .loginHeading {
+        border: none;
+        margin: 0 auto 0;
+        text-align: center;
+    }
+
+
+    .loginForm .createInput, .registerForm .createInput {width: 215px;}
+
     .backBtn {
         overflow:hidden;
     }
@@ -1992,6 +2071,39 @@ END Printed Styles
         height: 100%;
         max-width: 100vw;
     }
+
+    .chooseThumbTable_anim, .profilePicDiv .updateThumbTable_anim {
+        height: 100px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+        .chooseThumbTable_anim::-webkit-scrollbar, .profilePicDiv .updateThumbTable_anim::-webkit-scrollbar {display: none;}
+        .bouncingArrow {
+            animation: arrow_bounce .75s infinite;
+            display: inline-block;
+            color: var(--brightAqua);
+            font-size: 4rem;
+            padding: 2px 5px 5px;
+            position: absolute;
+            top: 0;
+            transform: scaleY(.8);
+            right: 1vw;
+        }
+
+        .chooseThumbTable_anim:hover .bouncingArrow, .profilePicDiv .updateThumbTable_anim:hover .bouncingArrow {opacity: 0;}
+
+        @keyframes arrow_bounce {
+            0% {right: 1vw;}
+            50% {right: 4vw;}
+            100% {right: 1vw;}
+        }
+
+    .allProfilePics {
+        display: flex;
+        flex-direction: row;
+    }
+
 
     .profileInfo, .adminControlsP {
         width: 275px;
@@ -2173,7 +2285,7 @@ END Printed Styles
     .nwBox .btnBox a {margin-bottom: 1rem;}
     .nwBox .btnBox a:last-of-type {margin-bottom: 0;}
 
-    .allPage .backBtn {
+    .backBtn, .allPage .backBtn {
         position: absolute;
         left: -100rem;
     }
@@ -2241,11 +2353,12 @@ END Printed Styles
     .newMediaForm .uploadImgBtn{
         margin: 1.5rem.5rem;
     }
-
+/*
     .verifyPwdForm {min-height: calc(100vh - 7rem);}
     .editProfileForm, .changePForm {min-height: calc(100vh - 13rem);}
     .deleteAdminForm { min-height: calc(100vh - 16.2rem);}
-    .generalForm .agreeToDelete_label {width: calc(100vw - 100px);;}
+    .generalForm .agreeToDelete_label {width: calc(100vw - 100px);}
+    .registerDiv, .profilePicDiv {min-height: calc(100vh - 5rem);}*/
     .deleteAdminText {text-align: center;}
 
     .chooseThumbTable_anim, .profilePicDiv .updateThumbTable_anim {
@@ -2254,6 +2367,11 @@ END Printed Styles
     }
 
 }
+
+@media only screen and (min-width: 750px) and (max-width: 1200px) {
+    .lmode {background: blue}
+}
+
 
 
 /*----------------------------------------------------------------------->

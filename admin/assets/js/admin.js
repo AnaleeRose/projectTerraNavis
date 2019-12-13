@@ -70,13 +70,31 @@ if (preexistingDeleteBtns.length > 0) {
 
 // choose profile picture button
 if (choosePicBtn) {
+    bouncingArrow = document.body.querySelector('.bouncingArrow');
+    if (screen.width < 750) {
+        bouncingArrow.classList.remove('hidden')
+    }
+
     choosePicBtn.addEventListener('click', function(){
         if (thumbTable.classList.contains('chooseThumbTable_anim')) {
             registerForm.style.marginTop = null;
+            if (window.innerWidth <= 750) {
+                thumbTable.style.overflowX = null;
+            }
             thumbTable.classList.remove('chooseThumbTable_anim');
             thumbTable.classList.add('hiddenThumb');
         } else {
+            thumbTable.addEventListener('scroll', function(){
+                bouncingArrow = document.body.querySelector('.bouncingArrow');
+                if (bouncingArrow) {
+                    bouncingArrow.parentNode.removeChild(bouncingArrow)
+                }
+            })
+
             registerForm.style.marginTop = '1rem';
+            if (window.innerWidth <= 750) {
+                thumbTable.style.overflowX = 'scroll';
+            }
             thumbTable.classList.add('chooseThumbTable_anim');
             thumbTable.classList.remove('hiddenThumb');
         }
@@ -86,21 +104,32 @@ if (choosePicBtn) {
         if (thumbTable.classList.contains('updateThumbTable_anim')) {
             changePicBtn.innerText = "Change Picture";
             changePicBtn.style.width = null;
+            if (window.innerWidth <= 750) {
+                thumbTable.style.overflowX = null;
+            }
             thumbTable.classList.remove('updateThumbTable_anim');
-            // profileInfo1.style.marginTop = null;
             if (serverLightMode === currentLightMode) {
                 saveChangesBtn.classList.add('saveChangesBtn_hidden');
             }
         } else {
             changePicBtn.innerText = "Cancel";
             changePicBtn.style.width = "3.5rem";
+            if (window.innerWidth <= 750) {
+                thumbTable.style.overflowX = 'scroll';
+            }
             thumbTable.classList.add('updateThumbTable_anim');
-            // profileInfo1.style.marginTop = '15rem';
             if (serverLightMode === currentLightMode) {
                 saveChangesBtn.classList.remove('saveChangesBtn_hidden');
             }
         }
     });
+
+    thumbTable.addEventListener('scroll', function(){
+        bouncingArrow = document.body.querySelector('.bouncingArrow');
+        if (bouncingArrow) {
+            bouncingArrow.parentNode.removeChild(bouncingArrow)
+        }
+    })
 }
 
 
@@ -790,24 +819,11 @@ if (linkGeneratorBtn) {
         }
     })
 
-    // linkNameInput.addEventListener('keyup', function(){
-    //     if (linkNameInput.innerText === '') {
-    //         linkNameInput.innerText = linkNameSampleText;
-    //     }
-    // });
-
     linkHrefInput.addEventListener('click', function(){
         if (linkHrefInput.innerText === linkHrefSampleText) {
             linkHrefInput.innerText = '';
         }
     })
-
-    // linkHrefInput.addEventListener('keyup', function(){
-    //     if (linkHrefInput.innerText === '') {
-    //         linkHrefInput.innerText = linkHrefSampleText;
-    //     }
-    // });
-
 }
 
 function open_link_gen() {
@@ -876,15 +892,4 @@ function hideLeaveWarning() {
 // ------------------------------------------------------------------------------------------------>
 
 activate_list_btns();
-
-
-
-
-
-
-
-
-
-
-
 

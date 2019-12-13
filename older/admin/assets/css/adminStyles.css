@@ -1,9 +1,79 @@
+/*------------------------------------>Site:------------------>
+---------------------------->Terra Navis Admin Section-------------------->
+-------------------------------------------------------------------->*/
+
+
+
+/*-------------------------------------------------------------------->
+------------------------------>TABLE OF CONTENTS---------------->
+-------------------------------------------------------------------->
+
+use a ` before the name when searching for a section to jump directly to the beginning of it
+
+---------------> Root/Universal Styles
+----------------------> errors & notices
+----------------------> buttons
+----------------------> link generator
+----------------------> badges
+
+---------------> Login && Register
+
+---------------> Homepage
+
+---------------> Profile
+
+---------------> Newsfeed
+
+---------------> All Emails & All Articles & New Article & New Email
+----------------------> New Email & Edit Email
+
+---------------> Delete Article
+
+---------------> View
+
+---------------> Printed Styles
+
+--------------------------------------------------------------->END Contents*/
+
+/*-------------------------------------------------------------------->
+------------------------------>'Color Palette---------------->
+-------------------------------------------------------------------->*/
+
+:root {
+    --aqua: #00A2B8;
+    --brightAqua: #00b7d0;
+    --brown: #563a0e;
+    --darkReddish: #9a1d2d;
+    --dmodeBlack: #101520;
+    --green: #4dc312;
+    --grey: #3b3535;
+    --greyBG: #353131;
+    --lmodeBoxShadow: #b7b7b7;
+    --marigold: #f9cc0c;
+    --reddish: #e03b51;
+    --text-grey: #ACACAC;
+    --tanGold: #c79e63;
+}
+
+
+:root .lmode {--magenta: #d2006b;}
+:root .dmode {
+    --aqua: #af936a;
+    --brightAqua: #c79e63;
+    --magenta: #df3c50;
+    /*--marigold: #75c8ff;*/
+    /*--tanGold: #a9c9de;*/
+}
+
+/*--------------------------------------------------------------->END Color Palette*/
+
 /*----------------------------------------------------------------------->
 `Root/Universal Styles
 ------------------------------------------------------------------------->*/
-/*colors to inspect ('tan: #dca352', 'reddish: #ab0a3c')''*/
+
 html {
     font-family: 'Muli', sans-serif;
+    font-size:16px;
     height: 100%;
 }
 
@@ -15,8 +85,10 @@ body{
     #pageWrapper{height: 100%;}
     .lmode {background-color: #ADBCBF;}
     .dmode {
-        background-color: #697071;
+        /*background-color: #20435a;*/
         background-color: #6d4b1d;  /*gold_redo*/
+        /*background: linear-gradient(to right, #b96d81, #420c1b);*/
+
         color: #fff;
     }
 
@@ -25,37 +97,57 @@ section{
 
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    margin: 0;
+}
+/*h1 {font-size: 1.5em;}*/
+h2 {font-size: 1.5em;}
+h3 {font-size:  1.3rem;}
+p {margin: 1rem 0;}
 a {text-decoration: none;}
-
 ul, ol {list-style-type: none;}
-
-:root {
-    --green: #4dc312;
-    --reddish: #e03b51;
-    --dark-reddish: #9a1d2d;
-    --grey: #3b3535;
-    --aqua: #00A2B8;
-    --bright-aqua: #00b7d0;
-    --dmodeBlack: #101520;
-    /*--dmodeBlack: #202131;*/
-    --marigold: #f9cc0c;
-    /*--greyBG: #282838;*/
-    --greyBG: #353131;
-    --text-grey: #ACACAC;
-    --tanGold: #c79e63;
-}
+fieldset{border: 2px solid #fff;}
 
 
-:root .lmode {--magenta: #d2006b;}
-:root .dmode {
-    --magenta: #df3c50;
-    --aqua: #af936a;
-    --bright-aqua: #c79e63;
-}
 
 .hidden {
     position: absolute;
     top: -9000rem;
+}
+
+input.hidden {
+    height: 1px;
+}
+
+.hiddenText {
+    position: absolute;
+    left: 1000rem;
+}
+
+
+.backBtn {
+    background: var(--brightAqua);
+    border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    font-size: 2rem;
+    left: 34.65rem;
+    padding: .75rem;
+    position: fixed;
+    top: 2rem;
+    transform: scale(-1, 1);
+    z-index: 60;
+}
+
+    .backBtn:hover {
+        background: #fff;
+        color: var(--brightAqua);
+    }
+
+.allPage .backBtn {
+    left: 8.5rem;
+    top: 2rem;
 }
 
 .backShadow {box-shadow: 5px 15px 15px #3b3535;}
@@ -69,24 +161,21 @@ ul, ol {list-style-type: none;}
 
 .defaultPage {
     background-color: #fff;
-    background-image: url(../imgs/organicBG.svg);
-    background-repeat: no-repeat;
-    background-position: -400% 50%;
-    background-size: 110%;
-    margin: 9rem 0;
-    max-width: 600px;
-    padding: 2rem 5% 3rem;
-    max-height: 100vh;
-    overflow: hidden;
-    /*width: 90%;*/
+    margin: 5% auto;
+    padding: 2rem 0 3rem;
+    width: 90vw;
 }
 
 .defaultDiv {
     background: none;
     border-radius: 10rem;
     padding: 2rem 3rem 3rem;
+    margin: 0 auto;
 }
 
+.defaultPage .adminHeading {
+    text-align: center;
+}
 
 .muted {
     color: rgba(0,0,0,.7);
@@ -127,10 +216,25 @@ ul, ol {list-style-type: none;}
     100%{background-position:0% 50%}
 }
 
+.bold {font-weight: bold;}
 
-/*------------------- error ----------------------------->*/
+.successHeading {
+    color: var(--green);
+    font-size: 1.6rem;
+    text-align: center;
+    margin-top: 3rem
+}
+
+.lmode .successHeading {color: var(--green);}
+.dmode .successHeading {color: var(--green);}
+
+.generalForm .returnToProfileBtn {
+    margin-top: 1.5rem;
+}
+
+/*------------------- `errors & notices ----------------------------->*/
 .text_error {
-    color: var(--reddish);
+    color: var(--reddish) !important;
 }
 
 .formNotice{
@@ -141,7 +245,7 @@ ul, ol {list-style-type: none;}
 
 
     .formNotice_Error {
-        background-color: #d7394e;
+        background-color: var(--reddish);
         color: #fff;
         cursor: pointer;
         font-size: 1.5rem;
@@ -150,15 +254,20 @@ ul, ol {list-style-type: none;}
         top: 10rem;
     }
 
-        .formNotice_InlineError {
-            background-color: rgba(255, 228, 228, 0.82);
+        .formNotice_InlineError, .formNotice_InlineNotice {
+            background-color: var(--reddish);
+            color: #fff;
             margin: 0 auto 1rem;
         }
 
-        .dmode .formNotice_InlineError {
+            .formNotice_InlineNotice {background-color: var(--brightAqua);}
+
+        .dmode .formNotice_InlineError, .dmode .formNotice_InlineNotice {
             background-color: var(--reddish);
             color: #fff;
         }
+
+            .dmode .formNotice_InlineNotice {background-color: var(--brightAqua);}
 
     .formNotice_Required {
         color: var(--aqua);
@@ -178,10 +287,36 @@ ul, ol {list-style-type: none;}
 
 .errorPage {
     color: var(--reddish);
-    margin: 1rem auto;
+    height: 100vh;
+    padding: 5rem;
+    text-align: center;
 }
 
-/*------------------- buttons ----------------------------->*/
+    .errorPage.lmode { background: #fff;}
+    .errorPage.dmode {background: var(--dmodeBlack);}
+
+    .errorText {
+        color: var(--dmodeBlack);
+        margin: 1rem 0 1.5rem;
+    }
+
+        .errorText.dmode {color: #fff;}
+
+    .errorBtnContainer {
+        direction: flex;
+        flex-direction: column;
+    }
+
+    .errorBtnContainer a {
+        margin: 1rem auto;
+        width: 9rem;
+    }
+
+    .errorBtnContainer a:hover {
+        background: #e05c73;
+    }
+
+/*------------------- `buttons ----------------------------->*/
 
 .adminBtn {
     background: var(--aqua);
@@ -195,9 +330,23 @@ ul, ol {list-style-type: none;}
     text-decoration: none;
 }
 
+    .lmode .adminBtn_accent:hover, .lmode .adminBtn_danger:hover {box-shadow: 0px 1.5px 2px var(--lmodeBoxShadow);}
+
 .loginBtn, .registerBtn, .adminBtn_submit {
     background: linear-gradient(345deg, rgba(77,195,18,1) 0%, rgba(52,130,15,1) 100%);
-    width: 6rem;
+    width: 6.5rem;
+}
+
+.dmode .registerBtn, .dmode .adminBtn_submit {
+    background: none;
+    border: 2px solid var(--green);
+    color: var(--green);
+}
+
+.dmode .registerBtn:hover, .dmode .adminBtn_submit:hover {
+    background: none;
+    border-color: #fff;
+    color: #fff;
 }
 
 .adminBtn_accent {
@@ -211,8 +360,10 @@ ul, ol {list-style-type: none;}
     z-index: 10;
 }
 
+    .lmode .adminBtn_accent, .lmode .readEmailBtn, .lmode .editBtn {box-shadow: 1px 3px 2px var(--lmodeBoxShadow);}
+
 .adminBtn_aqua {
-    background: var(--bright-aqua);
+    background: var(--brightAqua);
     display: block;
     font-weight: 600;
     margin: 0 auto;
@@ -235,9 +386,10 @@ ul, ol {list-style-type: none;}
     z-index: 10;
 }
 
-.adminBtn_danger {
-    background: linear-gradient(340deg, rgba(231,66,88,1) 0%, rgba(147,23,39,1) 100%);
-}
+.adminBtn_danger {background: linear-gradient(340deg, rgba(231,66,88,1) 0%, rgba(147,23,39,1) 100%);}
+.adminBtn_accent_alt {background: var(--magenta);}
+
+    .lmode .adminBtn_danger {box-shadow: 1px 3px 2px var(--lmodeBoxShadow);}
     .lmode .adminBtn_subtle {background: linear-gradient(330deg, rgb(74, 68, 68) 26%, rgba(33,19,19,1) 100%);}
 
     .dmode .adminBtn_subtle,
@@ -267,7 +419,8 @@ ul, ol {list-style-type: none;}
     .lmode .adminBtn_subtle:hover,
     .lmode .adminBtn_accent:hover,
     .lmode .adminBtn_danger:hover,
-    .lmode .adminBtn_aqua:hover
+    .lmode .adminBtn_aqua:hover,
+    .registerBtn:hover
         {
         background: linear-gradient(330deg, rgb(236, 51, 164) 0%, rgb(125, 0, 78) 100%);
     }
@@ -304,7 +457,7 @@ ul, ol {list-style-type: none;}
     font-size: 1.2rem;
     font-weight: bold;
     margin: .5rem;
-    padding: .8rem 1.2rem .8rem 3rem;
+    padding: 1rem 1.2rem .8rem 3rem;
     position: relative;
     min-width: 5rem;
     max-width: 10rem;
@@ -312,12 +465,14 @@ ul, ol {list-style-type: none;}
     text-align: center;
     white-space: nowrap
 }
+    .lmode .contentTypeBtn {box-shadow: 1px 3px 2px var(--lmodeBoxShadow);}
 
     .contentTypeBtn:hover {
         background: #fff;
         color: var(--marigold);
     }
 
+        .lmode .contentTypeBtn:hover {box-shadow: 0px 1.5px 2px var(--lmodeBoxShadow);}
         .contentTypeBtn:hover:before {
             color: var(--marigold);
         }
@@ -346,30 +501,175 @@ ul, ol {list-style-type: none;}
         }
 
     .contentTypes > .contentTypeBtn:last-of-type {
-        background: var(--bright-aqua);
+        background: var(--brightAqua);
     }
 
         .contentTypes > .contentTypeBtn:last-of-type:hover {
             background: #fff;
-            color: var(--bright-aqua);
+            color: var(--brightAqua);
         }
 
         .contentTypes > .contentTypeBtn:last-of-type:hover:before {
-            color: var(--bright-aqua);
+            color: var(--brightAqua);
         }
+
+
+/*------------------- `link generator ----------------------------->*/
+.linkGenBox {
+    background: var(--brightAqua);
+    border: 4px solid #F0F0F0;
+    border-radius: 2rem;
+    bottom: 5rem;
+    color: #fff;
+    padding: 1rem 3rem 1rem 1.5rem;
+    position: fixed;
+    right: -50rem;
+    transition: right .7s;
+    width: 40rem;
+    z-index: 500;
+}
+
+    .linkGenBox_show {
+        right: -2rem;
+    }
+
+    .dmode .linkGenBox {
+        background: #000000;
+        border: none;
+        color: var(--tanGold);
+    }
+
+.linkGenHeading {
+    font-size: 1.4rem;
+    margin: .7rem 0 1.4rem;
+}
+
+.linkLabel {
+    margin-top: 1.8rem;
+    border-bottom: 1px solid #fff;
+    width: 5rem;
+}
+
+    .dmode .linkLabel {border-color: var(--brown);}
+
+.linkGenInput {
+    border: 2px solid #fff;
+    border-radius: 2rem;
+    padding: .5rem;
+    margin-left: .2rem;
+    max-width: 20rem;
+    min-width: 10rem;
+}
+
+    .linkGenInput:focus {
+        border-color: var(--marigold);
+        outline: none;
+    }
+
+    .dmode .linkGenInput:focus {border-color: var(--marigold);}
+
+    .dmode .linkGenBox, .dmode .linkGenInput {
+        border-color: var(--brown);
+    }
+
+.linkGenBtn {
+    background-color: var(--magenta);
+    box-shadow: 2px 2px 0px #006775;
+    margin: 0;
+    transition: background .1s;
+    width: 7rem;
+}
+    .dmode .linkGenBtn {
+        background-color: var(--marigold);
+        border: none;
+        box-shadow: 2px 2px 0px #8c6227;
+        color: #fff;
+    }
+
+    .linkGenBox .linkGenBtn:hover, .linkGenBox .linkGenBtn:focus {
+        background: #fff;
+        color: var(--magenta);
+        box-shadow: 1px 1px 0px #006775;
+    }
+
+        .dmode .linkGenBox .linkGenBtn:hover, .dmode .linkGenBox .linkGenBtn:focus {
+            color: var(--marigold);
+            box-shadow: 1px 1px 0px #8c6227;
+        }
+
+.linkGenCloseBtn {
+    cursor: pointer;
+    font-size: 1.7rem;
+    font-weight: bold;
+    position: absolute;
+    right: 4rem;
+    top: 0;
+    /*transform: scaleY(0.9);*/
+}
+
+.linkGenCloseBtn:hover {color: var(--marigold);}
+
+.linkGen_accent {
+    color: #ffdf56;
+}
+
+.linkGenHr {
+    border-color: #fff;
+    margin-left: -.2rem;
+}
+
+    .dmode .linkGenHr {border-color: var(--brown)}
+
+
+.linkGenEmptyError {color: var(--reddish);}
+    .dmode .linkGenEmptyError {color: var(--magenta);}
+
+/*------------------- `badges ----------------------------->*/
+
+.badge {
+    background: var(--brightAqua);
+    border-radius: 2rem;
+    color: #fff;
+    font-size: .9rem;
+    padding: .6rem;
+    position: absolute;
+    right: 1rem;
+    top: 0;
+}
+
+.badge_danger {background: var(--reddish);}
+
+.badge_accent {background: var(--green);}
+
+
 
 /*----------------------------------------------------------------------->
 `Login && Register
 ------------------------------------------------------------------------->*/
-.loginDiv, .registerDiv {
+.loginDiv {
     /*background: #fff;*/
     border-radius: 50%;
     display: flex;
     flex-direction: column;
-    margin-top: -2rem;
+    margin: -2rem auto;
     max-width: 700px;
     min-width: 320px;
     width: 90%;
+}
+
+.registerDiv {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 100%
+}
+
+.dmode .registerDiv {background: none;}
+
+.allProfilePics {
+    align-items: center;
+    justify-content: center;
+    flex-flow: wrap;
 }
 
 .profilePic {
@@ -380,6 +680,10 @@ ul, ol {list-style-type: none;}
     width: 250px;
 }
 
+    .registerDiv .profilePic {
+        height: 200px;
+        width: 200px;
+    }
 
 
 .loginForm, .registerForm {
@@ -388,7 +692,10 @@ ul, ol {list-style-type: none;}
     margin: 1rem auto;
 }
 
-.registerForm {transition: margin-top .6s ease-in-out;}
+.registerForm {
+    margin-top: -1rem;
+    transition: margin-top .5s ease-out;
+}
 
     .loginForm label, .registerForm label {
         font: bold 1.1rem 'Muli', sans-serif;
@@ -430,7 +737,7 @@ ul, ol {list-style-type: none;}
 
 
 .profilePicture {
-    margin: 1rem auto;
+    margin: 0 auto;
 }
 
 .choosePic {
@@ -459,31 +766,36 @@ ul, ol {list-style-type: none;}
     z-index: -50;
 }
 
-.chooseThumbTable {
-    margin: 1rem auto;
-}
+.chooseThumbTable {margin: 1rem auto;}
 
-.chooseThumbTable_anim,  .updateThumbTable_anim{
+.chooseThumbTable * {height: 1px;}
+
+.chooseThumbTable_anim, .profilePicDiv .updateThumbTable_anim {
     position: relative;
+    opacity: 1;
     top: 0;
     transition: top .5s ease-in-out, opacity .5s ease-in-out;
-    opacity: 1;
+    width: 80%;
+    max-width: 800px;
     z-index: 2;
 }
 
-
+.chooseThumbTable_anim *,  .updateThumbTable_anim * {height: auto;}
 
 .chooseThumb {
     border-radius: 50%;
     cursor: pointer;
     width: 100px;
     height: 100px;
+    margin: 0 .8rem .8rem;
 }
 
 a.registerReturnBtn, a.registerReturnBtn {
     margin: 1rem auto 0;
     width: 3.5rem;
 }
+
+
 
 /*----------------------------------------------------------------------->
 END Login & Register
@@ -495,7 +807,7 @@ END Login & Register
 
 .adminHome {
     display: grid;
-    grid-template-columns: 120px 450px auto;
+    grid-template-columns: 130px 450px auto;
     grid-template-areas: '. newsfeedContent adminMainContent';
     height: 100%;
 }
@@ -511,7 +823,7 @@ END Login & Register
     padding: 1rem;
 }
 
-    .lmode .adminMC_Wrapper {background-color: #F0F0F0;}
+    .lmode .adminMC_Wrapper {background-color: #f1ffff;background: #F0F0F0;}
     .dmode .adminMC_Wrapper {background-color: var(--dmodeBlack);}
 
 .adminMainContent {
@@ -526,7 +838,7 @@ END Login & Register
     }
     .lmode .adminMainContent {background-color: #fff;}
     .lmode .adminHome_fullWidth .adminMainContent {background: none;}
-    .dmode .adminMainContent {background-color: var(--greyBG);}
+    .dmode .adminMainContent {background: none;}
 
 .adminMenu {
     background: #fff;
@@ -535,10 +847,10 @@ END Login & Register
     position: fixed;
     top: 0;
     left: 0;
-    width: 120px;
+    width: 130px;
 }
 
-    .lmode .adminMenu {background-color: #fff;}
+    .lmode .adminMenu {background: #f1ffff;background: #fff;}
     .dmode .adminMenu {background-color: var(--dmodeBlack);}
 
 .newsfeedContent {
@@ -552,14 +864,16 @@ END Login & Register
 
     .lmode .newsfeedContent {background: linear-gradient(90deg, rgba(0,0,0,0) 0%, #dfe4e8 3%, #dfe4e8 93.5%, rgba(0,0,0,0) 96%);}
     .dmode .newsfeedContent {
-        /*background: linear-gradient(90deg, rgba(242,245,247,0) 0%, #94A1AA 2%, #94A1AA 93.5%, rgba(242,245,247,0) 96%);*/
-        background: linear-gradient(90deg, rgba(242,245,247,0) 0%, #ead0ac 2%, #7d5f34 93.5%, rgba(242,245,247,0) 96%);}  /*gold_redo*/
-
+        /*background: linear-gradient(90deg, rgba(242,245,247,0) 0%, #f9fafa 2%, #546673 93.5%, rgba(242,245,247,0) 96%);*/
+        background: linear-gradient(90deg, rgba(242,245,247,0) 0%, #ead0ac 2%, #7d5f34 93.5%, rgba(242,245,247,0) 96%);  /*gold_redo
+       /*background: linear-gradient(90deg, rgba(247, 242, 244, 0) 0%, #eabdac 2%, #6b0c27 93.5%, rgba(247, 242, 244, 0) 96%);*/
+       /*background: linear-gradient(90deg, rgba(247, 242, 244, 0) 0%, #eabdac 2%, #6b0c27);*/
+   }
 
 
 
 .profilePicThumbLink {
-    margin: 1rem;
+    margin: 1rem .8rem 1rem 1.35rem;
 }
     .profilePicThumb {
         background: linear-gradient(330deg, rgba(255,209,16,1) 0%, rgba(223,180,0,1) 100%);
@@ -576,7 +890,7 @@ END Login & Register
     }
 
     .dmode .profilePicThumb:hover {
-        background: var(--dark-reddish);
+        background: var(--darkReddish);
     }
 
 .menuLinks {
@@ -606,16 +920,17 @@ END Login & Register
     display: block;
         margin: 0 auto;
 }
-    .adminHome .profilePic {
-        border: none;
+    .profilePicDiv .profilePic {
         background: linear-gradient(330deg, rgba(255,209,16,1) 0%, rgba(223,180,0,1) 100%);
-        /*background: linear-gradient(145deg, rgba(207,37,141,1) 0%, rgba(159,7,101,1) 100%);*/
+        border: none;
         padding: 1rem;
         display: block;
         height: 200px;
         margin: 0 auto;
         width: 200px;
     }
+
+    /*.dmode .profilePicDiv .profilePic {background: linear-gradient(330deg, var(--marigold) 0%, #eaedee 100%);}*/
 
     .profileBtn {
         margin: -.7rem auto 0;
@@ -628,29 +943,12 @@ END Login & Register
             color: var(--marigold);
         }
         .dmode .profileBtn:hover, .dmode .changePicBtn:hover  {background: var(--dmodeBlack);}
-        /*.dmode .profileBtn:hover, .dmode .changePicBtn:hover {background: linear-gradient(330deg, var(--dark-reddish) 0%, #4a0b13 100%); }*/
+        /*.dmode .profileBtn:hover, .dmode .changePicBtn:hover {background: linear-gradient(330deg, var(--darkReddish) 0%, #4a0b13 100%); }*/
 
 
-.mainLinks {
-    display: flex;
-    flex-direction: column;
-}
-    .mainLinks a {
-        color: var(--aqua);
-        font-size: 2.2rem;
-        padding: 2rem ;
-        margin: 1rem auto;
-        text-align: center;
-        text-decoration: none;
-        width: 400px;
-    }
+    .mainLinks {display: none;}
 
-    .mainLinks a:hover {
-        color: var(--magenta);
-    }
-
-
-    .mainLinks a::before {
+/*    .mainLinks a::before {
         content: '';
         width: 5px;
         height: 5px;
@@ -675,7 +973,9 @@ END Login & Register
     .mainLinks .newArticle::before {
         padding: 16px 42px;
         background: url(../imgs/newArticle.svg);
-    }
+    }*/
+
+
 
 
 /*----------------------------------------------------------------------->
@@ -709,13 +1009,14 @@ END Homepage
 }
 
     .profileInfo:first-of-type {
+        margin-top: 3rem;
         transition: margin-top .5s ease-in-out;
         width: 275px;
     }
-    
+
     .profileInfo span, .adminControlsP span {padding:0 10px;}
     .lmode .profileInfo span, .lmode .adminControlsP span {background: #fff;}
-    .dmode .profileInfo span, .dmode .adminControlsP span {background: var(--greyBG);}
+    .dmode .profileInfo span, .dmode .adminControlsP span {background: var(--dmodeBlack);}
     .dmode .profileInfo, .dmode .adminControlsP {
         color: #b7ada2;
         border-color: #b7ada2;
@@ -731,6 +1032,12 @@ END Homepage
     display: inline-block;
     margin: .5rem auto;
 
+}
+
+.forgotPwdBtn {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    width: 11.5rem;
 }
 
 .changePwdBtn {
@@ -822,6 +1129,37 @@ hr {
     }
 }
 
+.backToProfile {
+    margin-top: 1rem;
+    width: 8rem;
+}
+
+.deleteAdminText {
+    font-size: 1.1rem;
+    margin: 1rem auto;
+}
+
+.generalForm .agreeToDelete_label {
+    border: none;
+    margin: 0 auto ;
+    padding-right: 2.5rem;
+    position: relative;
+    width: 25rem;
+}
+
+.generalForm .agreeToDelete_input {
+    margin-bottom: .4rem;
+    position: absolute;
+    top: .6rem;
+    right: 1rem;
+}
+
+.generalForm hr {
+    margin: 1.5rem auto 1rem;
+}
+
+.verifyError {margin-top: 1rem;}
+
 
 /*----------------------------------------------------------------------->
 END Profile
@@ -832,23 +1170,21 @@ END Profile
 `Newsfeed
 ------------------------------------------------------------------------->*/
 
-/*h2.newsfeedHeading {
-    color: var(--dmodeBlack);
-    padding-left: 1rem;
-}*/
 
 h2.newsfeedHeading {
-    padding-left: 1rem;
     position: fixed;
     display: block;
     padding: 1rem;
     width: 418px;
     margin-top: 0;
-    top: 0;
     margin-left: -1rem;
+    text-align: center;
+    top: 0;
     z-index: 50;
 }
 
+
+.newsfeedHeading {padding-right: 3rem;}
 .lmode h2.newsfeedHeading {
     color: #101520;
     background: linear-gradient(90deg, #d1d9da 0%, #ffffff 3%, #ffffff 97%, #d1d9da 100%)
@@ -860,34 +1196,80 @@ h2.newsfeedHeading {
     background: linear-gradient(90deg, #060606 0%, #101520  3%, #101520  97%, #060606 100%);
 }
 
+.allPage .adminHeading {
+    display: block;
+    margin-left: 7rem;
+}
+
 .nwBox {
-    margin: 2rem .5rem;
     padding: 2rem;
+    position: relative;
+    margin: 2rem .5rem;
     max-width: 420px;
 }
 
-    .nwBox:first-of-type {margin-top: 4rem;}
+.allPage .nwBox {
+    max-width: none;
+    width: 445px;
+}
+
+.nwBox .mediaType {
+    color: var(--brightAqua);
+    margin: -.2rem 0 .75rem;
+}
+
+    .newsfeedContent .nwBox:first-of-type {margin-top: 4rem;}
     .adminHome_fullWidth .nwBox:first-of-type {margin-top: 2rem;}
 .lmode .nwBox {background: #fff;}
 .dmode .nwBox {background: var(--dmodeBlack);}
+.dmode .allPage .nwBox {background: var(--greyBG);}
 
 .nwBox .btnBox {
     display: flex;
     justify-content: space-between;
-    margin-left: -40px;
-    width: 405px;
+    margin-top: 1.5rem;
 }
 
-.nwBox .editBtn {
-    margin: .9rem auto 0;
-    width: 5.5rem;
+
+.nwBox .editBtn, .nwBox .deleteBtn {
+    margin: 0 auto;
 }
+
+.nwBox .adminBtn {
+    margin-left: 0;
+    margin-right: 10px;
+    text-align: center;
+    width: 100%;
+}
+
 
 .nwBox .readEmailBtn {
-    width: 6rem;
-    margin-left: 2rem;
+    margin-top: 0;
+    width: 100px;
+/*    margin: 0 38px 0 2rem;
+    text-align: center;*/
 }
 
+
+
+.nwBox .editBtn {
+    width: 6rem;
+    /*width: 210px;*/
+}
+.nwBox .deleteBtn {
+    width: 7.5rem;
+    /*width: 235px;*/
+}
+
+.nwBox .viewBtn {
+    width: 7.5rem;
+    /*width: 200px;*/
+}
+
+.nwBox .dateInfo {color: var(--brightAqua);}
+
+.lmode .nwBox .dateInfo span {color: var(--dmodeBlack);}
+.dmode .nwBox .dateInfo span {color: #fff;}
 
 /*----------------------------------------------------------------------->
 END Newsfeed
@@ -903,19 +1285,25 @@ END Newsfeed
 }
 
 .adminHeading {
-    color: var(--bright-aqua);
-    font-weight: lighter;
+    color: var(--brightAqua);
     font-size: 2rem;
+    font-weight: lighter;
+    margin: 1.5rem 0 1rem;
 }
 
-.newMediaForm {
+.generalForm {
     display: flex;
     flex-direction: column;
     margin: 1rem auto;
     padding: 1rem 2rem ;
 }
 
-    .newMediaForm .createInput, .newMediaForm select, .newMediaForm textarea {
+.editProfileForm input {
+    text-align: center;
+}
+
+
+    .generalForm .createInput, .generalForm select, .generalForm textarea {
         border: 2px solid var(--aqua);
         border-radius: 2rem;
         color: #000;
@@ -927,10 +1315,10 @@ END Newsfeed
         width: 100%;
     }
 
-    .newMediaForm select {width: 25rem;}
-    .newMediaForm select option {color: #000;}
+    .generalForm select {width: 25rem;}
+    .generalForm select option {color: #000;}
 
-    .newMediaForm .textareaInput {
+    .generalForm .textareaInput {
         display: block;
         color: #000;
         font: lighter 1rem/1.5 'Muli', sans-serif;
@@ -954,37 +1342,37 @@ END Newsfeed
     .cornerLinks a {
         margin: 0 0 0 2rem;
         text-align: center;
-        width: 8rem;
+        width: 8.5rem;
     }
 
-    .cornerLinks a:last-of-type {
-        width: 5.5rem;
+    /*.cornerLinks a:last-of-type {width: 8rem;}*/
+    .newPage .cornerLinks a:last-of-type {width: 5.5rem;}
+
+    #templateMsgBtn {
+        width: 12rem;
     }
 
 .contentTypes {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 2rem;
+    margin: 2rem 2rem 4rem;
+    position: relative;
 }
 
 .newHr {
     margin: 2.5rem auto 2rem;
 }
 
-#publishBtn, #sendEmailBtn {
+#publishBtn, #sendEmailBtn, #previewEmailBtn {
     font-size: 1.5rem;
     margin-top: 2rem;
-}
-
-#publishBtn {
     width: 12.5rem;
 }
 
-#sendEmailBtn {
-    width: 10rem;
-}
-
+#publishBtn {width: 12.5rem;}
+#sendEmailBtn {width: 10rem;}
+#previewEmailBtn {width: 13rem;}
 
 .contentTypeList_show {
     margin-bottom: 1rem;
@@ -1043,7 +1431,14 @@ END Newsfeed
 }
 
 
-.newMediaForm label , #newContent label {
+.generalForm .contentInput, .generalForm .ol , .generalForm .ul  {
+    margin-bottom: 2rem;
+}
+
+.generalForm label,
+.newMediaForm label, .newContent label,
+.verifyPwdForm label, .verifyPwdForm label,
+.editProfileForm label, .newContent label {
     border-bottom: 1px solid var(--aqua);
     color: var(--aqua);
     display: block;
@@ -1055,11 +1450,9 @@ END Newsfeed
     width: 10rem;
 }
 
-
-
 /*fieldset*/
-.newMediaForm fieldset {
-    border-color: var(--bright-aqua);
+.generalForm fieldset {
+    border-color: var(--brightAqua);
     border-radius: 2rem;
     padding: .5rem 1rem 4rem;
     position: relative;
@@ -1069,10 +1462,12 @@ END Newsfeed
     width: 100%;
 }
 
-.newMediaForm legend {
-    border: 1px solid var(--bright-aqua);
+.newMediaForm legend,
+.verifyPwdForm legend,
+.generalForm legend {
+    border: 1px solid var(--brightAqua);
     border-radius: 1rem;
-    color: var(--bright-aqua);
+    color: var(--brightAqua);
     font-size: 1.2rem;
     margin: 1rem auto 0;
     padding: 5px;
@@ -1080,9 +1475,6 @@ END Newsfeed
     width: 10rem;
 }
 
-.newMediaForm fieldset input {
-
-}
 
 .addToListBtn {
     background: var(--magenta);
@@ -1092,6 +1484,7 @@ END Newsfeed
     cursor: pointer;
     display: block;
     font-size: 3rem;
+    font-weight: bold;
     height: 3rem;
     line-height: 40px;
     margin: 0;
@@ -1107,19 +1500,765 @@ END Newsfeed
     background: #fff;
     border-radius: 2rem;
     color: var(--magenta);
-/*    text-align: right;
-    padding-right: .5rem;
-    width: 12rem;*/
 }
 
 
-#newContent .listItemLabel {
+.newContent .listItemLabel {
     display: inline-block;
     margin-left: -.5rem;
     margin-top: 1rem;
     width: 7rem;
 }
 
+.newMediaForm .uploadImgBtn,
+.verifyPwdForm .uploadImgBtn,
+.editProfileForm .uploadImgBtn {
+    border: none;
+    color: #fff;
+    margin: .5rem;
+    padding: .8rem 1.2rem .8rem 3rem;
+    width: 7rem;
+}
+
+
+
+    /*----------------------------------------------------------------------->
+    New Email & Edit Email
+    ------------------------------------------------------------------------->*/
+
+    .newMediaForm textarea.contentInput, .newMediaForm .emailInput,
+    .lmode .generalForm textarea,
+    .dmode .generalForm textarea,
+    .verifyPwdForm textarea.contentInput, .verifyPwdForm .emailInput,
+    .editProfileForm textarea.contentInput {
+        max-width: 40rem;
+        min-width: 28rem;
+    }
+
+    .newMediaForm textarea.contentInput, .newMediaForm textarea.emailInput,
+    .lmode .generalForm textarea,
+    .dmode .generalForm textarea,
+    .verifyPwdForm textarea.contentInput, .verifyPwdForm textarea.emailInput,
+    .editProfileForm textarea.contentInput, .editProfileForm textarea.emailInput {
+        height: 14rem;
+    }
+
+    .linkBtn_email {
+        margin: 1rem auto;
+    }
+
+
+
+    .cornerLinks .editEmailLink {
+        width: 5rem;
+    }
+
+
+    .editEmailPage .linkGeneratorBtn {
+        display: block;
+        width: 5rem;
+    }
+
+    .leaveWarning {
+        background: #fff;
+        color: var(--dmodeBlack);
+        margin-left: -15rem;
+        padding: 2rem;
+        position: absolute;
+        right: 50%;
+        width: 30rem;
+    }
+
+        .dmode .leaveWarning {
+            background: var(--dmodeBlack);
+            color: #fff;
+        }
+
+        .leaveWarning p {
+        /*margin-bottom: 2.5rem;*/
+    }
+
+    .leaveWarning a {
+        display: inline-block;
+        margin: 1rem 1.5rem 1rem 0;
+        text-align: center;
+        width: 10rem;
+    }
+
+    /*----------------------------------------------------------------------->
+    END New Email
+    ------------------------------------------------------------------------->*/
+
+
+.imgsNotice {
+    bottom: -1.5rem;
+    color: var(--aqua);
+    position: absolute;
+}
+
+.autoImgNotice {
+    margin: 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+.imgBox {
+    margin: 0 auto;
+}
+
+    .imgBox .showNewImg {
+        border: .5rem solid var(--brightAqua);
+        border-radius: 4px;
+        margin: 1rem auto;
+        width: 600px;
+    }
+
+
+.elementDeleteBtn {
+    color: rgba(0,0,0,0);
+    cursor: pointer;
+    display: inline-block;
+    font-size: .1rem;
+    height: 1.5rem;
+    position: absolute;
+    overflow: visible;
+    right: -18rem;
+    top: -1rem;
+}
+
+/*.elementDeleteBtn:before {
+    color: var(--reddish);
+    content: 'x';
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 1rem;
+    transform: scaleX(1.1);
+}*/
+
+.elementDeleteBtn:before {
+    background: url(../imgs/deleteBtn.svg);
+    background-position: 7px 10px;
+    background-repeat: no-repeat;
+    background-size: 1.4rem;
+    content: ' ';
+    cursor: pointer;
+    height: 2rem;
+    width: 2rem;
+    padding: 1rem;
+    position: relative;
+    top: 1rem;
+    left: 0;
+}
+
+    .elementDeleteBtn:hover:before {
+        background: url(../imgs/deleteBtn_hover.svg);
+        background-position: 7px 10px;
+        background-repeat: no-repeat;
+        background-size: 1.4rem;
+    }
+
+
 /*----------------------------------------------------------------------->
 END All Emails & All Articles & New Article & New Email
+------------------------------------------------------------------------->*/
+
+
+
+
+/*----------------------------------------------------------------------->
+Delete Article
+------------------------------------------------------------------------->*/
+
+.deletePage {
+    margin: 4rem auto 1rem;
+    width: 70%;
+}
+
+.deletePage h2 {
+    color: var(--darkReddish);
+}
+
+.deletePage .deleteArticleBtn {
+    margin: 0;
+    text-align: center;
+}
+
+.deletePage .cancelBtn {
+    display: inline-block;
+    margin: 0 1.5rem;
+}
+
+.deletePage .btnContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 1.2rem 0;
+}
+
+.deleteTable th, td {
+    padding: .5rem .3rem;
+}
+
+/*----------------------------------------------------------------------->
+END Delete Article
+------------------------------------------------------------------------->*/
+
+
+/*----------------------------------------------------------------------->
+`Printed & View Page Styles
+------------------------------------------------------------------------->*/
+
+.articleContent {
+    padding: 0 1rem;
+}
+
+.printedElement {
+    line-height: 2;
+}
+
+.viewImgBox {
+    display: flex;
+    height: 520px;
+    flex-direction: column;
+    float: left;
+    position: relative;
+    width: 700px;
+}
+
+.viewImg {
+    border-radius: 1rem;
+    margin: 0 auto 2rem;
+}
+
+.printedCaption {
+    bottom: 0;
+    display: inline-block;
+    float: left;
+    left: 2rem;
+    margin: 0 0 2.3rem;
+    padding: 1rem 3.7rem 1.5rem 4rem;
+    position: absolute;
+    width: 541px;
+}
+
+    .printedCaption:after {
+        bottom: 0;
+        content: '';
+        left: 3.4rem;
+        padding: 1px 265px;
+        position: absolute;
+        background: var(--brightAqua);
+    }
+
+
+.viewPage .printedArticle a, .viewPage .articleFooter a {
+    border-radius: 2rem;
+    color: var(--brightAqua);
+    padding: 0 .25rem;
+    position: relative;
+    /*text-decoration: underline;*/
+    transition: color .5s;
+}
+
+    .viewPage .printedArticle a:before, .viewPage .articleFooter a:before {
+        background: var(--green);
+        bottom: -1px;
+        content: '';
+        left: 0;
+        padding: 1px 0;
+        position: absolute;
+        transition: padding .5s;
+    }
+
+        .viewPage .articleFooter a:hover:before, .viewPage .printedArticle a:hover:before {
+            padding: 1px 50.5%;
+        }
+
+    .viewPage .printedArticle a:hover, .viewPage .articleFooter a:hover {
+        color: var(--green);
+    }
+
+
+/*headings and footer*/
+.printedHeading {
+    margin: 2rem .2rem 0;
+}
+
+.articleNameHeading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.categoryHeading {
+    color: var(--brightAqua);
+    font-weight: normal;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.articleFooter {
+    margin: 1rem .5rem;
+}
+
+.articleFooter p {
+    text-align: right;
+}
+
+.articleFooter a {
+    color: var(--brightAqua)
+}
+
+
+
+/*content*/
+.printedP {
+    margin: 0rem 1rem .5rem;
+    padding: 1rem;
+}
+
+.printedElement a {
+    color: var(--magenta);
+}
+
+    .printedElement a:hover {
+        color: var(--brightAqua)
+    }
+
+.previewEmailBox h3.adminHeading {
+    font-size: 1.7rem;
+}
+
+.newMediaHeading .cornerLinks .seeAll {
+    width: 7.5rem;
+}
+
+.previewEmailBox {
+    padding: 0 2rem;
+}
+
+.previewEmailBox .adminHeading {
+    font-size: 1.8rem
+}
+
+.emailSubject {
+    color: var(--dmodeBlack);
+    padding-left: 2rem;
+    margin-bottom: 3rem;
+}
+    .dmode .emailSubject {color: #fff;}
+
+.emailMsg {
+    font-size: 1.1rem;
+    padding: 0 2rem;
+}
+
+.emailMsg a, .newsfeedDescription a {
+    color: var(--magenta);
+}
+
+    .emailMsg a:hover, .newsfeedDescription a:hover  {
+        color: var(--brightAqua)
+    }
+
+
+.previewTable {
+    border-bottom: 2px solid var(--aqua);
+    border-top: 2px solid var(--aqua);
+    padding: .5rem 0;
+    margin: 2.5rem 0 3.5rem;
+}
+
+    .previewTable th, td {
+        font-weight: lighter;
+        padding: 1rem 1.5rem;
+    }
+
+    .previewTable th:first-of-type, .previewTable td:first-of-type {
+        padding-left: 0
+
+    }
+
+
+    .previewTable th {
+        font-size: 1.2rem;
+        color: var(--aqua);
+    }
+
+    .previewTable td {
+        font-size: 1rem;
+    }
+
+
+.printedOl, .printedUl {
+    margin: 2.5rem 1rem;
+}
+
+.printedOl {
+    list-style-type: decimal;
+}
+
+.printedOl li {
+    list-style-type: decimal;
+    margin: .8rem 0 .8rem 1.5rem;
+    padding-left: .5rem;
+}
+
+.printedUl li {
+    background-image: url("../imgs/leaf_icon.png");
+    background-repeat: no-repeat;
+    background-position: 0 ;
+    background-size: 20px;
+    list-style: none;
+    margin: .8rem 0;
+    padding-left: 2rem;
+}
+
+.printedHr {
+    margin-left: .5rem;
+}
+
+.returnToHomeBtn {
+    font-size: 1.2rem;
+    width: 9.5rem;
+}
+
+
+
+
+/*----------------------------------------------------------------------->
+END Printed Styles
+------------------------------------------------------------------------->*/
+
+
+
+/*----------------------------------------------------------------------->
+`Media Queries
+------------------------------------------------------------------------->*/
+
+
+@media only screen and (max-width: 600px) {
+    .backBtn {
+        overflow:hidden;
+    }
+    .backArrow {
+        position: absolute;
+        top: -1000rem;
+    }
+    .adminHome {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas: 'adminMainContent';
+        height: 100%;
+    }
+
+    .newsfeedContent {
+        height: .5rem;
+        left: -130rem;
+        position: absolute;
+        width: .5rem;
+    }
+
+    .adminMenu {
+        left: -100vw;
+        position: fixed;
+        overflow: visible;
+        width: 100vw;
+        z-index: 80;
+    }
+
+    .menuBtn {
+        cursor: pointer;
+        padding-left: 1rem;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 85;
+    }
+        .menuBtn svg {
+            stroke: var(--brightAqua);
+        }
+
+        .menuBtnSvg_close {
+            width: ;
+            width: .1px;
+        }
+        .menuBtnSvg_open{width:25.645px;}
+
+    .adminMC_Wrapper {
+        padding: 0;
+        height: 100%;
+        max-width: 100vw;
+    }
+
+    .profileInfo, .adminControlsP {
+        width: 275px;
+    }
+
+    .hiddenThumb {
+        top: -10rem;
+    }
+
+    .profilePicThumb {
+        height: auto;
+        margin-top: 0;
+        padding: .8rem;
+        width: 9rem;
+    }
+
+    .profilePicThumbLink {display: flex;}
+
+    .menuLinks {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            'homeBtn homeBtn'
+            'newEmailBtn newArticleBtn'
+            'allEmailsBtn allArticlesBtn'
+            'logoutBtn logoutBtn';
+    }
+
+    .menuLinks a, .menuLinks .homeBtn, .menuLinks .logoutBtn {
+        border-radius: 0;
+        box-sizing: border-box;
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 200;
+        margin: 0;
+        padding: 1.1rem 0;
+        text-align: center;
+        width: 100%;
+    }
+
+        .menuLinks .homeBtn {grid-area: homeBtn;}
+        .menuLinks .logoutBtn {grid-area: logoutBtn;}
+
+        .menuLinks .newEmailBtn {
+            border-right: .2rem solid var(--marigold);
+            border-bottom: .2rem solid var(--marigold);
+            grid-area: newEmailBtn;
+        }
+
+        .menuLinks .newArticleBtn {
+            border-left: .2rem solid var(--marigold);
+            border-bottom: .2rem solid var(--marigold);
+            grid-area: newArticleBtn;
+        }
+
+        .menuLinks .allEmailsBtn {
+            border-right: .2rem solid var(--marigold);
+            border-top: .2rem solid var(--marigold);
+            grid-area: allEmailsBtn;
+        }
+
+        .menuLinks .allArticlesBtn {
+            border-left: .2rem solid var(--marigold);
+            border-top: .2rem solid var(--marigold);
+            grid-area: allArticlesBtn;
+        }
+
+        .menuLinks .newEmailBtn, .menuLinks .newArticleBtn, .menuLinks .allEmailsBtn, .menuLinks .allArticlesBtn {
+            border-color: var(--dmodeBlack);
+
+        }
+
+    .menuLinks .adminBtn_aqua {
+        display: inline-block;
+        padding: 3rem 0;
+        width: 50vw;
+    }
+
+    .mainLinks {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+    .mainLinks a {
+        color: var(--aqua);
+        font-size: 2.2rem;
+        padding: 2rem ;
+        margin: 1rem auto;
+        text-align: center;
+        text-decoration: none;
+        /*width: 400px;*/
+    }
+
+    .mainLinks a:hover {
+        color: var(--magenta);
+    }
+
+    .lmode .mainLinks a {
+        background: rgba(12, 205, 249, 0.05);
+        border-radius: 5rem;
+    }
+
+    .newMedia {
+        padding: 1rem 0;
+        width: 100vw;
+        min-height: calc(100vh - 2rem);
+    }
+
+    .newMediaHeading {
+        display: block;
+    }
+
+    .adminHeading {
+        margin: 4rem auto 1rem;
+        max-width: calc(100vw - 1rem);
+        text-align: center;
+    }
+
+        .previewEmailBox .adminHeading {
+            margin: .5rem 0 1rem;
+        }
+
+    .cornerLinks {
+        flex-direction: column;
+        margin: 0 auto;
+        width: calc(100vw - 1rem);
+    }
+
+    .cornerLinks a {
+        margin: 1rem auto;
+    }
+
+    .generalForm {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem auto;
+        padding: 0;
+    }
+
+    .newMediaForm textarea.contentInput .newMediaForm .emailInput,
+    .lmode .generalForm textarea, .dmode .generalForm textarea,
+    .verifyPwdForm textarea.contentInput, .verifyPwdForm .emailInput,
+    .editProfileForm textarea.contentInput,
+    .generalForm select, .generalForm .createInput, .generalForm textarea {
+        max-width: calc(100vw - 100px);
+        min-width: 220px;
+    }
+
+    .generalForm select, .generalForm .createInput:not(.list-item), .generalForm textarea {
+        margin-bottom: 2.5rem;
+    }
+
+    .generalForm fieldset {
+        max-width: calc(100vw - 50px);
+        min-width: 220px;
+    }
+
+    .imgBox .showNewImg {
+        width: 80vw;
+    }
+
+    .elementDeleteBtn {right: -4rem;}
+
+    #publishBtn {margin-top:0;}
+    #sendEmailBtn, #previewEmailBtn {margin-bottom: 2rem;}
+
+    .allPage .adminHeading {
+        display: block;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .allPage .nwBox {
+        max-width: calc(100vw - 50px);
+        width: 100%;
+    }
+
+    .nwBox .btnBox {flex-direction: column;}
+    .nwBox .btnBox a {margin-bottom: 1rem;}
+    .nwBox .btnBox a:last-of-type {margin-bottom: 0;}
+
+    .allPage .backBtn {
+        position: absolute;
+        left: -100rem;
+    }
+
+
+    .previewEmailBox {
+        padding: 0;
+    }
+
+    .seeAll {
+        position: absolute;
+        top: -100rem;
+    }
+
+    .previewEmailBox .emailSubject {
+        padding: 0;
+        margin: .4rem auto 2.5rem;
+    }
+
+    .emailMsg {
+        margin-bottom: 2.5rem;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    th {
+        position: absolute;
+        left: -1000rem;
+    }
+
+    td:nth-of-type(1):before,
+    td:nth-of-type(2):before,
+    td:nth-of-type(3):before,
+    td:nth-of-type(4):before {color: var(--aqua);}
+
+    td:nth-of-type(1):before {content: 'Name: ';}
+    td:nth-of-type(2):before {content: 'Category: ';}
+    td:nth-of-type(3):before {content: 'Date Created: ';}
+    td:nth-of-type(4):before {content: 'Last Modified: ';}
+
+    .previewTable th:first-of-type, .previewTable td:first-of-type {
+        padding: 1rem 1.5rem;
+    }
+
+    .viewImgBox, .viewImg, .printedCaption {width: 90vw;}
+
+    .viewImgBox {
+        height: 300px;
+        margin: 0 5vw 2rem;
+    }
+
+    .printedCaption {
+        float: clear;
+        left: 0;
+        padding: 1rem;
+    }
+
+    .printedCaption:after {
+        left: 1rem;
+        padding: 1px 40vw;
+    }
+
+    .newMediaForm .uploadImgBtn{
+        margin: 1.5rem.5rem;
+    }
+
+    .verifyPwdForm {min-height: calc(100vh - 7rem);}
+    .editProfileForm, .changePForm {min-height: calc(100vh - 13rem);}
+    .deleteAdminForm { min-height: calc(100vh - 16.2rem);}
+    .generalForm .agreeToDelete_label {width: calc(100vw - 100px);;}
+    .deleteAdminText {text-align: center;}
+
+    .chooseThumbTable_anim, .profilePicDiv .updateThumbTable_anim {
+        width: 95%;
+        margin: 2rem auto .5rem;
+    }
+
+}
+
+@-ms-viewport{
+  width: device-width;
+}
+
+/*----------------------------------------------------------------------->
+END Media Queries
 ------------------------------------------------------------------------->*/

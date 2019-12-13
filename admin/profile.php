@@ -123,6 +123,7 @@ echo '<p id="serverLightMode" class="hidden">' . $_SESSION['light_mode'] . '</p>
                             <img src="<?= 'assets/profilePictures/' . $row['pic_location']; ?>" alt="<?= str_replace('_', ' ', $row['pic_name']); ?>" class="chooseThumb" data-id="<?= $row['profilePic_id'] ?>">
                         <?php } ?>
                     </div>
+                    <p class="bouncingArrow hidden">&rtrif;</p>
                 </div>
 
                 <?php
