@@ -133,7 +133,7 @@ input.hidden {
     display: inline-block;
     font-size: 2rem;
     left: 34.65rem;
-    padding: .75rem .85rem;
+    padding: .75rem;
     position: fixed;
     top: 2rem;
     transform: scale(-1, 1);
@@ -949,18 +949,57 @@ END Login & Register
         width: 5.7rem;
     }
 
-.menuLinks .homeBtn {
-    margin: 1rem auto;
-    width: 3.5rem;
-}
+    .menuLinks .homeBtn {
+        margin: 1rem auto;
+        width: 3.5rem;
+    }
 
 
-.menuLinks .logoutBtn {
-    margin: .7rem auto;
-    padding: .6rem 1rem;
-    width: 3.5rem;
-}
+    .menuLinks .logoutBtn {
+        margin: .7rem auto;
+        padding: .6rem 1rem;
+        width: 3.5rem;
+    }
+    .menuLinks .imgBtn{
+        background: none;
+        border: none;
+        color: rgba(0,0,0,0);
+        font-size: .1px;
+        margin: 1.5rem auto;
+        padding: 2rem .5rem;
+     }
 
+        .menuLinks .imgBtn:hover { 
+            background: none;
+        }
+
+        .imgBtn:before {
+            background: url(../imgs/sprites.svg) no-repeat;
+            background-position: 10px 5px; 
+            content: '';
+            padding: 2.2rem 3rem;
+            margin: 0 auto;
+            width: 2rem;
+        }
+
+        .newEmailBtn:hover:before {background-position: 10px -395px;}
+            .dmode .newEmailBtn:before {background-position: 10px -800px;}
+            .dmode .newEmailBtn:hover:before {background-position: 10px -1200px;}
+
+        .newArticleBtn:before {background-position: 10px -100px;}
+        .newArticleBtn:hover:before {background-position: 10px -500px;}
+            .dmode .newArticleBtn:before {background-position: 10px -900px;}
+            .dmode .newArticleBtn:hover:before {background-position: 10px -1300px;}
+
+        .allEmailsBtn:before {background-position: 10px -200px;}
+        .allEmailsBtn:hover:before {background-position: 10px -600px;}
+            .dmode .allEmailsBtn:before {background-position: 10px -1000px;}
+            .dmode .allEmailsBtn:hover:before {background-position: 10px -1400px;}
+
+        .allArticlesBtn:before {background-position: 10px -300px;}
+        .allArticlesBtn:hover:before {background-position: 10px -700px;}
+            .dmode .allArticlesBtn:before {background-position: 10px -1100px;}
+            .dmode .allArticlesBtn:hover:before {background-position: 10px -1500px;}
 .profilePicDiv {
     display: block;
         margin: 0 auto;
@@ -968,7 +1007,7 @@ END Login & Register
     .profilePicDiv .profilePic {
         background: linear-gradient(330deg, rgba(255,209,16,1) 0%, rgba(223,180,0,1) 100%);
         border: none;
-        padding: 1rem;
+        padding: 1em;
         display: block;
         height: 200px;
         margin: 0 auto;
@@ -991,9 +1030,23 @@ END Login & Register
         /*.dmode .profileBtn:hover, .dmode .changePicBtn:hover {background: linear-gradient(330deg, var(--darkReddish) 0%, #4a0b13 100%); }*/
 
 
-    .mainLinks {display: none;}
 
-/*    .mainLinks a::before {
+.mainLinks {
+    display: flex;
+    flex-direction: column;
+}
+    .mainLinks a {
+        color: var(--aqua);
+        font-size: 2.2rem;
+        padding: 2rem ;
+        margin: 1rem auto;
+        text-align: center;
+        text-decoration: none;
+    }
+
+        .mainLinks a:hover {color: var(--magenta);}
+
+    .mainLinks a::before {
         content: '';
         width: 5px;
         height: 5px;
@@ -1002,23 +1055,26 @@ END Login & Register
 
     .mainLinks .allEmails::before {
         padding: 6px 36px;
-        background: url(../imgs/allEmails.svg);
+        background: url(../imgs/allEmails.svg) no-repeat;
     }
 
     .mainLinks .allArticles::before {
         padding: 10px 35px;
-        background: url(../imgs/allArticles.svg);
+        background: url(../imgs/allArticles.svg) no-repeat;
+        background-position: 0 2px;
     }
 
     .mainLinks .newEmail::before {
         padding: 10px 40px;
-        background: url(../imgs/newEmail.svg);
+        background: url(../imgs/newEmail.svg) no-repeat;
     }
 
     .mainLinks .newArticle::before {
-        padding: 16px 42px;
-        background: url(../imgs/newArticle.svg);
-    }*/
+        padding: 25px 42px;
+        background: url(../imgs/newArticle.svg) no-repeat;
+        background-position: 0 25px;
+    }
+    .mainLinks .allEmails::before, .mainLinks .newEmail::before {background-position: 0 5px;}
 
 
 
@@ -2130,6 +2186,8 @@ END Printed Styles
             'newEmailBtn newArticleBtn'
             'allEmailsBtn allArticlesBtn'
             'logoutBtn logoutBtn';
+        margin: 1rem auto;
+        padding: 0;
     }
 
     .menuLinks a, .menuLinks .homeBtn, .menuLinks .logoutBtn {
