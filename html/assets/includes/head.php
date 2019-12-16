@@ -6,6 +6,4 @@
     <meta name="description" content="Earthship bio-friendly homes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <!-- php friendly ver -->
-    <!-- <link rel="stylesheet" <?= 'href="' . BASE_URL . '/assets/styles.css"' ?> > -->
 </head>
