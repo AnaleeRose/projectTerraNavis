@@ -1,6 +1,8 @@
 <header id="header">
     <div id="headerlogo">
-        <a  href="index.php" ><img  class="headerlogo" src="assets/images/404duck.png" alt="Terra Navis Living Logo"></a>
+        <!-- <a  href="index.php"> -->
+            <img  class="headerlogo" src="assets/images/404duck.png" alt="Terra Navis Living Logo">
+        <!-- </a>          -->
     </div>
     <nav id="main-nav">
         <ul class="main-nav">
@@ -46,6 +48,6 @@
     </nav>
     <!-- Interactive Image -->
     <div id="animatedbg">
-        <img class="animated" src="" alt="animated earthship">
+        <img class="animated" src="assets/images/animatedbg.png" alt="animated earthship">
     </div>
 </header>
