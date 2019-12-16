@@ -133,7 +133,7 @@ input.hidden {
     display: inline-block;
     font-size: 2rem;
     left: 34.65rem;
-    padding: .75rem;
+    padding: .75rem .85rem;
     position: fixed;
     top: 2rem;
     transform: scale(-1, 1);

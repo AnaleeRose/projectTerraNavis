@@ -35,6 +35,7 @@ if (isset($_POST['sendEmail'])) {
 }
 
 $sent = false;
+$prev_sent = false;
 $article_name = '';
 $article_description = '';
 $category = '';
@@ -72,6 +73,7 @@ if ($media_type === 'article') {
 			$e_msg = $row['email_message'];
 			$date_created = $row['date_added'];
 			$date_sent = $row['date_sent'];
+			if (isset($row['date_sent']) && !empty($row['date_sent'])) $prev_sent = true;
 		}
 
 		if (!empty($e_subject) && $send) {
@@ -165,6 +167,7 @@ window.addEventListener('load', (event) => {
     }
 })
 <?php
+
 echo '</script>';
 echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . ' viewPage">';
     require './assets/includes/adminMenu.inc.php';
@@ -235,6 +238,7 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . ' viewPage">';
 				</div>
 				<?php
 			} elseif ($media_type === 'email') { // ELSEIF EMAIL  -------------------------------------------------->
+
 				?>
 				<div class="previewEmailBox">
 					<form method="post" class="generalForm">
@@ -256,19 +260,19 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . ' viewPage">';
                                     }
                                 }
                             }
-							create_form_input('yourEmail', 'email', 'Your Email', $emailForm_errors);
 							?>
 					</div>
-					<!-- <a class="adminBtn adminBtn_aqua" id="sendEmailBtn" href="<?= BASE_URL; ?>admin/view.php?view_type=view&media_type=email&media_id=<?= $media_id; ?>&send=true">Send Email</a> -->
-                    <?php if (!$sent) { ?>
+
+                    <?php if (!$sent && !$prev_sent) { 
+						create_form_input('yourEmail', 'email', 'Your Email', $emailForm_errors);
+                    	?>
 					   <input type="submit" name="sendEmail" class="adminBtn adminBtn_aqua" id="sendEmailBtn" href="<?= BASE_URL; ?>admin/view.php?view_type=view&media_type=email&media_id=<?= $media_id; ?>&send=true" value="Send Email">
-                    <?php } elseif ($sent) {?>
+                    <?php } elseif ($sent || $prev_sent) {?>
                         <a class="adminBtn adminBtn_aqua returnToHomeBtn" href="index.php">Return To Home</a>
                     <?php } ?>
 					</form>
 				</div>
 				<?php
-
 			}
 
             ed();
