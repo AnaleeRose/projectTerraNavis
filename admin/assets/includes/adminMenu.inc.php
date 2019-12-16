@@ -23,11 +23,11 @@ if (isset($pageTitle)) {
         </a>
         <div class="menuLinks">
             <a href="./index.php" class="homeBtn adminBtn adminBtn_subtle" title="Home">Home</a>
-            <a href="./new.php?media_type=email" class="newEmailBtn adminBtn adminBtn_aqua imgBtn" title="Home">New Email</a>
-            <a href="./new.php?media_type=article" class="newArticleBtn adminBtn adminBtn_aqua imgBtn" title="Home">New Article</a>
-            <a href="./allEmails.php" class="allEmailsBtn adminBtn adminBtn_aqua imgBtn" title="Home">All Emails</a>
-            <a href="./allArticles.php" class="allArticlesBtn adminBtn adminBtn_aqua imgBtn" title="Home">All Articles</a>
-                <a href="./logout.php" class="logoutBtn adminBtn adminBtn_subtle" >Logout</a>
+            <a href="./new.php?media_type=email" class="newEmailBtn adminBtn adminBtn_aqua imgBtn" title="New Email">New Email</a>
+            <a href="./new.php?media_type=article" class="newArticleBtn adminBtn adminBtn_aqua imgBtn" title="New Article">New Article</a>
+            <a href="./allEmails.php" class="allEmailsBtn adminBtn adminBtn_aqua imgBtn" title="All Emails">All Emails</a>
+            <a href="./allArticles.php" class="allArticlesBtn adminBtn adminBtn_aqua imgBtn" title="All Articles">All Articles</a>
+                <a href="./logout.php" class="logoutBtn adminBtn adminBtn_subtle" title="Logout">Logout</a>
         </div>
 
 
