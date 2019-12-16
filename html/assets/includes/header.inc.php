@@ -1,5 +1,7 @@
 <header id="header">
-    <a href="index.php"><img id="headerlogo" src="images/" alt="Terra Navis Living Logo"></a>
+    <div id="headerlogo">
+        <a  href="index.php" ><img  class="headerlogo" src="assets/images/404duck.png" alt="Terra Navis Living Logo"></a>
+    </div>
     <nav id="main-nav">
         <ul class="main-nav">
             <li><a href="index.php">Home</a></li>
@@ -42,4 +44,8 @@
             <li><a href="contact.php">Contact</a></li>
         </ul>
     </nav>
+    <!-- Interactive Image -->
+    <div id="animatedbg">
+        <img class="animated" src="" alt="animated earthship">
+    </div>
 </header>

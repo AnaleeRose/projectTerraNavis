@@ -2,15 +2,11 @@
 require './assets/includes/config.inc.php';
 require './assets/includes/head.php';
 ?>
+
 <body>
 <!------ Header ------------>
 <?php require './assets/includes/header.inc.php'; ?>
-​
-<!-- Interactive Image -->
-<div id="animatedbg">
-    <img class="animated" src="" alt="animated earthship">
-</div>
-​
+
 <!-- Main body content -->
 <div id="mainpg-sec1">
     <h1 class="sec-title">What is an Earthship?</h1>

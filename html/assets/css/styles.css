@@ -74,13 +74,17 @@ iframe {border: 0;}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 html {
   cursor: default;
-  background-color: ;
+  font-size: 16px;
 }
 body {
   display: grid;
-  grid-template-columns: 1fr 4fr 4fr 1fr;
-  grid-template-rows: auto;
-  min-width: 360px;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: 250px, 518px;
+}
+#header {
+  display: grid;
+  grid-column: 1 / 10;
+  grid-row: 1 / 3;
 }
 h1 {
 
@@ -107,10 +111,27 @@ li a:hover {
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 3. Header & Nav Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
- #header {
 
+#headerlogo {
+grid-column: 1 / 3;
+grid-row: 1 / 2;
+/* width: 100%; */
+height: 250px;
 }
 .headerlogo {
+  height: 250px;
+  width: 250px;
+}
+#main-nav {
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+  position: sticky;
+  width: 250px;
+  background: #1843d0;
+}
+#animatedbg {
+  grid-column: 3 / 10;
+  grid-row: 1 / 3;
 
 }
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
