@@ -129,6 +129,7 @@ iframe {border: 0;} */
 html {
   cursor: default;
   font-size: 16px;
+  scroll-behavior:smooth;
 }
 :root {
   --page_bg: #fff;
@@ -451,16 +452,17 @@ Navigation*/
 .navListHeader a {
   position: relative;
 }
-.navListHeader:hover .dropdownUl {
-  opacity: .7;
-  transition: opacity: .3s;;
+.navListHeader:hover .dropdownUl li {
+  opacity: .85;
+  transition: opacity: .5s;;
 }
 .navListHeader>a:after {
   content: '›';
   display: inline-block;
+  font-size: 2rem;
   position: absolute;
-  right: -1rem;
-  top: 30%;
+  right: -1.5rem;
+  top: 17%;
   transform: rotate(90deg);
 }
 
