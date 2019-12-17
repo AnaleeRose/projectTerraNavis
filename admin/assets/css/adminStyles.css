@@ -2237,9 +2237,15 @@ END Printed Styles
 
     .menuLinks .adminBtn_aqua {
         display: inline-block;
-        padding: 3rem 0;
+        padding: 3.5rem 0;
         width: 50vw;
+        margin: 0 auto;
     }
+
+        .dmode .menuLinks .adminBtn_aqua {
+            border: none;
+        }
+
 
     .mainLinks {
         display: flex;
@@ -2433,6 +2439,8 @@ END Printed Styles
     .generatorInstructions {
         margin-top: 2rem 0 .5rem;
     }
+
+
 
 }
 
