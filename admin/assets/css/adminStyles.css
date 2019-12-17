@@ -2426,6 +2426,13 @@ END Printed Styles
         width: 95%;
         margin: 2rem auto .5rem;
     }
+    .linkGenBox {
+        width: 80vw;
+    }
+
+    .generatorInstructions {
+        margin-top: 2rem 0 .5rem;
+    }
 
 }
 
