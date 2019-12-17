@@ -8,7 +8,13 @@
         <nav id="main-nav">
             <ul class="main-nav">
                 <li><a href="index.php">Home</a></li>
-                <li><a href="sustainability.php">Sustainability</a>
+                <li
+                  <?php
+                    if (isset($page) && strtolower($page) == 'sustain') {
+                      echo 'class="navListHeader"';
+                    }
+                  ?>
+                  ><a href="sustainability.php">Sustainability</a>
                 <?php
                 // change the title in quotes below to match whatever the page title is on that page, all lower case in the quotes pls
                 // also added the dropdownUl class for the styles that match both (like for js to target it for special effects!)
@@ -23,7 +29,14 @@
                     <?php } ?>
                 </li>
 
-                <li><a href="construction.php">Construction</a>
+                <li
+                    <?php
+                    if (isset($page) && strtolower($page) == 'construct') {
+                      echo 'class="navListHeader"';
+                    } elseif (isset($page) && strtolower($page) == 'sustain') {
+                      echo 'class="li_underneath"';
+                    }
+                  ?>><a href="construction.php">Construction</a>
 
                     <?php
                     // change the title in quotes below to match whatever the page title is on that page, all lower case in the quotes pls
@@ -37,7 +50,13 @@
                         </ul>
                     <?php } ?>
                 </li>
-                <li><a href="econews.php">Eco News</a></li>
+                <li
+                  <?php
+                    if (isset($page) && strtolower($page) == 'construct') {
+                      echo 'class="li_underneath"';
+                    }
+                  ?>
+                ><a href="econews.php">Eco News</a></li>
                 <li><a href="resources.php">Resources</a></li>
                 <li><a href="faq.php">FAQ</a></li>
                 <li><a href="contact.php">Contact</a></li>
