@@ -15,7 +15,7 @@ $page = 'Home';
     </header>
     <section id="mainpg-sec1">
         <h2 class="sec-title">What is an Earthship?</h2>
-        <p>Earthships are a type of passive solar earth shelter first conceptualized by architect <a href="https://en.wikipedia.org/wiki/Mike_Reynolds_(architect)">Michael Reynolds</a>. They are built with a combination of upcycled and natural resources, like recycled glass bottles, tires packed with earth, and other, reclaimed materials. Reynolds developed the concept to realize three goals:
+        <p>Earthships are a type of passive solar earth shelter first conceptualized by architect <a href="https://en.wikipedia.org/wiki/Mike_Reynolds_(architect)" target="_blank">Michael Reynolds</a>. They are built with a combination of upcycled and natural resources, like recycled glass bottles, tires packed with earth, and other, reclaimed materials. Reynolds developed the concept to realize three goals:
             <ul>
                 <li><p>Utilize sustainable architecture and materials which can be recycled or naturally sourced from local environments</p></li>
                 <li><p>Build an "off-the-grid" home that would rely entirely on natural energy sources.</p></li>
