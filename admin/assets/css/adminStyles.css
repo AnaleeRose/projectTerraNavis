@@ -2044,7 +2044,8 @@ END Printed Styles
 @media only screen and (max-width: 1200px) {
 
     .dmode {background-color: var(--dmodeBlack);}
-    .lmode {background-color: #F0F0F0;}
+    .lmode {background-color: #fdfdfd;}
+    .lmode .adminMC_Wrapper {background-color: #fdfdfd;}
 
     .loginPage {
         box-shadow: none;
@@ -2108,11 +2109,14 @@ END Printed Styles
     .menuBtn {
         cursor: pointer;
         padding-left: 1rem;
+        padding-bottom: 3px;
         position: fixed;
         left: 0;
         top: 0;
         z-index: 85;
     }
+        .lmode .menuBtn {background: #fff;}
+        .dmode .menuBtn {background: var(--dmodeBlack);}
         .menuBtn svg {
             stroke: var(--brightAqua);
         }
@@ -2255,8 +2259,9 @@ END Printed Styles
     .mainLinks a {
         color: var(--aqua);
         font-size: 2.2rem;
-        padding: 2rem ;
+        line-height: 1.6;
         margin: 1rem auto;
+        padding: 2rem ;
         text-align: center;
         text-decoration: none;
         /*width: 400px;*/
@@ -2445,7 +2450,11 @@ END Printed Styles
 }
 
 @media only screen and (min-width: 750px) and (max-width: 1200px) {
-    .lmode {background: blue}
+    .menuBtn {top: -6px;}
+    .menuBtnSvg_open {
+        width: 30px;
+        height: 50px;
+    }
 }
 
 
