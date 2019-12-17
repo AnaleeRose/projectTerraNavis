@@ -451,8 +451,8 @@ Navigation*/
   display: grid;
   grid-template-areas:
   'heading_c heading_c heading_c'
-  '. sec1 sec1'
-  'sec2 sec2 .'
+  ' sec1 sec1 sec1'
+  'sec2 sec2 sec2'
   'sec3 sec3 sec3';
   grid-template-columns: repeat(3, 1fr);
   grid-column: 2 / 10;
@@ -471,36 +471,32 @@ Navigation*/
   font-size: 4.5rem;
   font-family: 'cabinbold';
   color: #ce5e3a;
-  border-bottom: 10px solid #000; 
+  border-bottom: 8px solid #000; 
 }
-#mainpg-sec1, #mainpg-sec2 {
-  margin: 1rem 0;
+#mainpg-sec1, #mainpg-sec2, #mainpg-sec3 {
   font-family: 'ptsans';
   font-size: 2.5rem;
   line-height: 1.4;
+  width: 65%;
 }
 #mainpg-sec1 {
   grid-area: sec1;
-  width: 80%;
+  margin-left: 25rem;
 }
 #mainpg-sec1 ul li {
   list-style: square;
-  margin: 1rem auto;
+  /* margin: 1rem auto; */
   margin-left: 6rem;
   font-size: 2rem;
   line-height: 1.2;
-
 }
 #mainpg-sec2 {
   grid-area: sec2;
   margin-left: 9rem;
-  width: 80%;
 }
 #mainpg-sec3 {
   grid-area: sec3;
-  margin: 1rem auto;
-  width: 80%;
-  font-family: 'ptsans';
+  margin-left: 25rem;
 
 }
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
