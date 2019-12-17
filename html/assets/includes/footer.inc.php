@@ -6,10 +6,12 @@
             <a href="team.html" class="blurb-link">Read More >></a>
         </div>
         <div id=join class="box-lg box-2">
-            <form action="">
+            <form method="post">
                 <label class="h2" for="email">Join Our Newsletter!</label>
-                <input id="email" name="email" type="email" placeholder="email@example.com">
-                <button type="submit" class="newsButton">&#10003;</button>
+                <div class="emailContainer">
+                    <input id="email" name="email" type="email" placeholder="email@example.com">
+                    <button type="submit" class="newsButton">&#10003;</button>
+                </div>
             </form>
             <div class="icons">
                 <a href="<?= FACEBOOK_LINK; ?>"><img id="fb-icon" src="images/facebook-square.png" alt="Facebook Icon"></a>

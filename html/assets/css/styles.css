@@ -545,7 +545,7 @@ Navigation*/
   'heading_c heading_c heading_c heading_c heading_c heading_c heading_c heading_c'
   '. . sec1 sec1 sec1 sec1 sec1 sec1'
   'sec2 sec2 sec2 sec2 sec2 sec2 . .'
-  '. . sec3 sec3 sec3 sec3 sec3 .';
+  '. . sec3 sec3 sec3 sec3 sec3 sec3';
   grid-template-columns: repeat(8, 1fr);
   margin: 0 0 0 20vw;
 }
@@ -582,7 +582,7 @@ Navigation*/
   background: var(--oceanBlue);
   bottom: .7rem;
   content: '';
-  padding: 3px 25rem;
+  padding: 3px 50%;
   position: absolute;
   z-index: -1;
 } 
@@ -605,6 +605,7 @@ Navigation*/
     z-index: 2;
   }
     #mainpg-sec1 h2:before {
+      padding: 3px 43.5%;
       right: 0;
     }
 #mainpg-sec2 {
@@ -627,6 +628,7 @@ Navigation*/
     }
 #mainpg-sec3 {
   grid-area: sec3;
+  margin-right: 5rem;
 }
   #mainpg-sec3 h2 {
     border: none;
@@ -634,7 +636,7 @@ Navigation*/
     text-align: center;
   }
     #mainpg-sec3 h2:before {
-      padding: 4px 30rem;
+      padding: 4px 50.5%;
       left: -1%;
     }
 
@@ -727,38 +729,77 @@ footer {
   width: 100%;
   z-index: 50;
 }
-footer div {
-  float: left;
+#f-container {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-areas: 'team join contact';
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 2.5rem 3rem;
+}
+#team-blurb, #join, #contact-info {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 22rem;
+}
+
+#team-blurb {
+  grid-area: team;
+}
+  #team-blurb h2 {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .blurb-link {
+    color: #e5e8d2;
+    display: block;
+    font-weight: bold;
+    margin-top: 1rem;
+    text-align: left;
+    text-decoration: underline;
+  }
+
+#join {
+  grid-area: join;
+}
+  #join .h2 {
+    display: block;
+    font-weight: bold;
+    margin: 1rem auto;
+    text-align: center;
+  }
+
+  .emailContainer {
+    margin: 0 auto 1.5rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  #email, .h2 {
+  }
+  .newsButton {
+    padding: 10px 7px;
+    border-radius: 0 5px 5px 0;
+    margin: 0;
+  }
+  #email {
+    border-radius: 5px 0 0 5px;
+    line-height: 1.5em;
+    padding: .45rem 2rem;
+    text-align: center;
+  }
+
+#contact-info {
+  grid-area: contact;
 }
 footer h2, .h2 {
   font-family: cabin, sans-serif;
   font-size: 30px;
 }
-#email, .h2 {
-  margin-left: 10%;
-}
-.newsButton {
-  padding: 3.5px 4px 4px;
-  border-radius: 0 5px 5px 0;
-  margin-left: -4px;
-}
-#email {
-  line-height: 1.5em;
-  width: 50%;
-  text-align: center;
-  border-radius: 5px 0 0 5px;
-}
-.blurb-link {
-  color: #e5e8d2;
-  text-decoration: underline;
-}
-#f-container {
-  margin-top: 20px;
-}
-.box-lg {
+
+
+/*.box-lg {
   width: 33%;
   height: 80%;
-  text-align: center;
 }
   .box-lg p {
     margin: 10px auto;
@@ -778,7 +819,7 @@ footer h2, .h2 {
   display: inline-flex;
   margin-top: 15px;
   margin-left: 10px;
-}
+}*/
 #copyright p {
   margin-left: 10px;
   font-size: ;
