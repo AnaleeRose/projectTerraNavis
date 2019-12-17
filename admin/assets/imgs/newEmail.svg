@@ -1,1 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="81.585" height="60.35" viewBox="0 0 81.585 60.35"><g transform="translate(0 0)"><path d="M70.155,59.111H.769a.77.77,0,0,0-.769.77v47.8a.77.77,0,0,0,.769.77H70.155a.772.772,0,0,0,.771-.77v-47.8A.772.772,0,0,0,70.155,59.111ZM58.421,65.279,35.463,82.115,12.505,65.279Zm6.338,37H6.168v-34L35.007,89.429a.774.774,0,0,0,.914,0L64.76,68.281v34Z" transform="translate(0 -59.111)" fill="#00a2b8"/></g><g transform="translate(47.456 27.31)"><line y2="33.04" transform="translate(17.044 0)" fill="none" stroke="#ecbf00" stroke-width="8"/><line x2="34.129" transform="translate(0 16.976)" fill="none" stroke="#ecbf00" stroke-width="8"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="81.585" height="60.35" viewBox="0 0 81.585 60.35">
+  <g id="Group_188" data-name="Group 188" transform="translate(-41.415 -357.497)">
+    <rect id="Rectangle_27" data-name="Rectangle 27" width="63" height="41" transform="translate(47 362)" fill="#fff"/>
+    <g id="Group_49" data-name="Group 49" transform="translate(41.415 357.497)">
+      <g id="email-envelope-outline" transform="translate(0 0)">
+        <path id="Path_2" data-name="Path 2" d="M70.155,59.111H.769a.77.77,0,0,0-.769.77v47.8a.77.77,0,0,0,.769.77H70.155a.772.772,0,0,0,.771-.77v-47.8A.772.772,0,0,0,70.155,59.111ZM58.421,65.279,35.463,82.115,12.505,65.279Zm6.338,37H6.168v-34L35.007,89.429a.774.774,0,0,0,.914,0L64.76,68.281v34Z" transform="translate(0 -59.111)" fill="#00a2b8"/>
+      </g>
+      <g id="Group_46" data-name="Group 46" transform="translate(47.456 27.31)">
+        <line id="Line_3" data-name="Line 3" y2="33.04" transform="translate(17.044 0)" fill="none" stroke="#ecbf00" stroke-width="8"/>
+        <line id="Line_4" data-name="Line 4" x2="34.129" transform="translate(0 16.976)" fill="none" stroke="#ecbf00" stroke-width="8"/>
+      </g>
+    </g>
+  </g>
+</svg>

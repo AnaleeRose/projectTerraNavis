@@ -1,17 +1,24 @@
-console.log("border");
-profilePicThumb = document.body.querySelector(".profilePic");
-registerForm = document.body.querySelector(".registerForm");
-requiredInputs = document.body.querySelectorAll(".requiredInput");
-choosePicBtn = document.body.querySelector(".choosePic");
+var registerForm = document.body.querySelector(".registerForm");
+var requiredInputs = document.body.querySelectorAll(".requiredInput");
+var choosePicBtn = document.body.querySelector(".choosePic");
+var profilePicThumb;
 
-// run these onload
-updateProfileBorder();
 
-// checks if all required inputs are valid and updates he profile picture's border accordingly
-window.addEventListener('keyup', updateProfileBorder);
+// checks if all required inputs are valid and updates he profile picture's border accordingly, but only on mobile because im annoying
+if (screen.width < 750 || registerForm) {
+    if (document.body.querySelector(".profilePic")) {
+        profilePicThumb = document.body.querySelector(".profilePic");
+    } else if (document.body.querySelector(".login_profilePic")) {
+        profilePicThumb = document.body.querySelector(".login_profilePic");
+
+    }
+    // run on load
+    updateProfileBorder();
+    window.addEventListener('keyup', updateProfileBorder);
+}
+
 function updateProfileBorder() {
     list = [];
-    console.log("ran");
     if(requiredInputs.length !== 0) {
         if(requiredInputs.length !== 1) {
             requiredInputs.forEach(function(element) {

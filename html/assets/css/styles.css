@@ -52,11 +52,63 @@ Light Red ------------------- rgb(246, 228, 224)        #f9eae6
   font-weight: normal;
   font-style: normal;
 }
-html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,
 textarea,pre,iframe,div,form,fieldset,hr,h1,h2,h3,h4,h5,h6,button,
 input,select,textarea {
     margin: 0;
     padding: 0;
+}
+* {
+  margin: 0;
+  padding: 0;
 }
 h1,h2,h3,h4,h5,h6 {
     font-size: 100%;
@@ -65,23 +117,45 @@ h1,h2,h3,h4,h5,h6 {
 ul, li, a {
   list-style: none;
   text-decoration: none;
+  margin: 0;
+  padding: 0;
 }
 html {box-sizing: border-box;}
 *,*:before,*:after {box-sizing: inherit;}
-iframe {border: 0;}
+iframe {border: 0;} */
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 2. Global Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 html {
   cursor: default;
-  background-color: ;
+  font-size: 16px;
+}
+:root {
+  --page_bg: #fff;
+  --dark_overlay: #000;
+  --link_hover: blue;
+  --link_active: yellow;
+  --link_item_hover: orange;
+  --btn_text: blue;
+  --btn_bg: linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);;
+  --btn_bg_hover: linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+  --btn_text_visited: blue;
+  --mybtn_text: black;
 }
 body {
   display: grid;
-  grid-template-columns: 1fr 4fr 4fr 1fr;
-  grid-template-rows: auto;
-  min-width: 360px;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows:  auto;
 }
+#main-header {
+  display: grid;
+  grid-column: 1 / 10;
+  grid-row: 1 / 3;
+  grid-template-areas: 'nav img';
+  grid-template-columns: 1fr 4fr;
+  /*grid-template-columns: minmax(150px, 25$0px) 1fr;*/
+  width: 100%;
+} 
 h1 {
 
 }
@@ -96,27 +170,88 @@ a {
   cursor: pointer;
 }
 a:hover {
-  color: ;
+  color: var(--link_hover);
 }
 a:active {
-  color: ;
+  color: var(--link_active);
 }
 li a:hover {
-  color: ;
+  color: var(--link_item_hover);
+}
+img {
+  width: 100%;
 }
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 3. Header & Nav Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
- #header {
+
+#headerlogo {
+grid-column: 1 / 3;
+grid-row: 1 / 2;
 
 }
-.headerlogo {
+.headerlogo { 
+  display: flex;
+  justify-self: stretch;
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+}
+#main-nav {
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+  position: sticky;
+  background: #1843d0;
+}
+#animatedbg {
+  grid-area: img;
+}
+#animatedbg img {
+  display: block;
+  float: right;
+  clear: both;
+  grid-column: 3 / 10;
+  grid-row: 1 / 3;
+}
 
+.navLogoContainer {
+  grid-area: nav;
 }
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 4. Main Body Content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
-
+#mainContent {
+  display: grid;
+  grid-template-areas: 
+  'heading_c heading_c heading_c'
+  '. sec1 sec1'
+  'sec2 sec2 .'
+  'sec3 sec3 sec3';
+  grid-template-columns: repeat(3, 1fr);
+  grid-column: 3 / 10;
+  grid-row: 3 / 6;
+}
+.mainHeading_Container {
+  grid-area: heading_c;
+}
+.mainHeading_Container h1 {
+  font-size: 2rem;
+  margin: 2rem auto;
+  text-align: center;
+}
+#mainpg-sec1 {
+  grid-area: sec1;
+  width: 100%;
+}
+#mainpg-sec2 {
+  grid-area: sec2;
+  width: 100%;
+}
+  #mainpg-sec1, #mainpg-sec2 {margin: 1rem 0;}
+#mainpg-sec3 {
+  grid-area: sec3;
+  margin: 1rem auto;
+  width: 80%;
+}
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 5. Form Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
@@ -144,7 +279,7 @@ legend {
   width: ;
   border-radius: ;
   border: ;
-  color: ;
+  color: var(--btn_text);
   font-family: ;
   font-size: ;
   font-weight: ;
@@ -155,20 +290,19 @@ legend {
   text-decoration: ;
   box-shadow: ;
   text-shadow: ;
-  background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+  background: var(--btn_bg); 
 }
 .myButton {
-  color: ;
+  color: var(--mybtn_text);
   text-align: ;
   font-family: ;
   text-shadow: ;
 }
 #button:hover {
-  background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
-	background-color:;
+	background: var(--btn_bg_hover);
 }
 #button:visited {
-  color: ;
+  color: var(--btn_text_visited);
 }
 #button:active {
 	position: relative;
@@ -178,17 +312,20 @@ legend {
 6. Footer Content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 footer {
+display: grid;
+grid-column: 1 / 10;
+grid-row: 6 / 7;
+}
 
-}
-#copyright p {
-  font-size: ;
-  font-family: ;
-  line-height: ;
-  color: ;
-}
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 7. @Media Queries
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+@media screen and (min-width: 1400px) {
+  #main-header {
+    grid-template-columns: minmax(150px, 250px) 6fr;
+  } 
+}
+
 @media screen and (max-width: 840px) {
 
 }

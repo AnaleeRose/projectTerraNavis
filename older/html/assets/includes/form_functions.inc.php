@@ -5,7 +5,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 	if ($value && get_magic_quotes_gpc()) $value = stripcslashes($value);
 	if (!empty($label)) {
 		echo '<label for="' . $name . '"';
-		if (array_key_exists($name, $errors)) echo 'class="text_error"';
+		if (array_key_exists($name, $errors)) echo 'class=""';
 		echo '>' . $label . '</label>';
 	}
 
@@ -24,17 +24,17 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 
 
 		if (array_key_exists($name, $errors)) echo ' createFormError ';
-		if ((!empty($options)) && (is_array($options))) echo ' requiredInput';
+		if ((!empty($options)) && (is_array($options)) && (array_key_exists('required', $options))) {echo ' requiredInput';}
 		echo '"';
 		if ($value) echo 'value="' . htmlspecialchars($value) . '"';
 		if (!empty($options) && is_array($options)) {
 			foreach ($options as $k => $v) {
-				echo " $k=\"$v\"";
+                if ($k !== 'addtl_classes') echo " $k=\"$v\"";
 			}
 		}
 		echo '>';
 
-		if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $errors[$name] . ' </p>';
+		if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError ">' . $errors[$name] . ' </p>';
 	} elseif ($type === 'textarea') {
 		echo '<textarea name="' . $name . '" id="' . $name . '" class="';
 		if (!empty($options) && is_array($options)) {
@@ -47,15 +47,21 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 			echo $type;
 		}
 		echo 'Input createInput';
+		if ((!empty($options)) && (is_array($options)) && (array_key_exists('required', $options))) {echo ' requiredInput';}
+		echo '"';
 		if (!empty($options) && is_array($options)) {
 			foreach ($options as $k => $v) {
-				echo " $k=\"$v\"";
+                if ($k !== 'addtl_classes') echo " $k=\"$v\"";
 			}
 		}
 		echo '>';
-		if ($value) echo $value;
+		if ($value) {
+			echo $value;
+		} else {
+			if (isset($options['value']) && !empty($options['value'])) echo $options['value'];
+		}
 		echo '</textarea>';
-		if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $errors[$name] . ' </p>';
+		if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError ">' . $errors[$name] . ' </p>';
 	}  elseif ($type === 'hidden') {
 		echo '<input type="' . $type . '" name="' . $name . '" id="' . $name . '" class="';
 		if (!empty($options) && is_array($options)) {
@@ -70,12 +76,12 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		echo 'Input createInput';
 
 		if (array_key_exists($name, $errors)) echo ' createFormError ';
-		if ((!empty($options)) && (is_array($options))) echo ' requiredInput';
+		if ((!empty($options)) && (is_array($options)) && (array_key_exists('required', $options))) {echo ' requiredInput';}
 		echo '"';
 		if ($value) echo 'value="' . htmlspecialchars($value) . '"';
 		if (!empty($options) && is_array($options)) {
 			foreach ($options as $k => $v) {
-				echo " $k=\"$v\"";
+                echo $options['addtl_classes'] . ' ' . $type;
 			}
 		}
 		echo '>';

@@ -25,7 +25,7 @@ require './assets/includes/header.html';
 if (isset($_SESSION['light_mode'])) {
     echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 } else {
-    echo '<body id="pageWrapper" class="lmode defaultPage">';
+    echo '<body id="pageWrapper" class="lmode defaultPage loginPage">';
 }
 
 // tracks errors while logging in

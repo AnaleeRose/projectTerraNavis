@@ -1,12 +1,5 @@
 <?php
 DEFINE('DB_HOST', 'localhost');
-// detects if online or offline and adjusts values accouringly
-$url = $_SERVER['SERVER_NAME'];
-if (strpos($url,'com') === false) {
-    $online = false;
-} else {
-    $online = true;
-}
 
 DEFINE('DB_NAME', 'analeerose_bpa');
 
@@ -28,9 +21,13 @@ if (isset($user) && ($user === 'admin')) {
     }
 }
 
+// connect to the db using mysqli, best for short not ultra important tasks
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
+// connect to the db using pdo, best for longer or user generated content
+$dbpdo = new PDO("mysql:host=localhost;dbname=analeerose_bpa", DB_USER, DB_PASSWORD);
 
+// escapes a string
 function escape_data($data, $dbc) {
     if (get_magic_quotes_gpc()) $data = stripslashes($data);
     return mysqli_real_escape_string ($dbc, trim ($data));

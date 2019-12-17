@@ -133,7 +133,7 @@ input.hidden {
     display: inline-block;
     font-size: 2rem;
     left: 34.65rem;
-    padding: .75rem;
+    padding: .75rem .85rem;
     position: fixed;
     top: 2rem;
     transform: scale(-1, 1);
@@ -646,16 +646,57 @@ input.hidden {
 /*----------------------------------------------------------------------->
 `Login && Register
 ------------------------------------------------------------------------->*/
+.loginPage {
+    /*border: .3rem solid var(--brightAqua);*/
+    box-shadow: 3px 4px 9px var(--aqua);
+    border-radius: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: 
+    'heading heading'
+    'img form';
+    height: 80vh;
+    margin: 5vw auto 10vw;
+    width: 80vw;
+    max-height: 500px;
+    max-width: 1000px;
+}
+
 .loginDiv {
-    /*background: #fff;*/
-    border-radius: 50%;
+    /*border-bottom: .6rem solid var(--brightAqua);*/
     display: flex;
+    grid-area: form;
     flex-direction: column;
-    margin: -2rem auto;
+    margin: auto;
     max-width: 700px;
-    min-width: 320px;
     width: 90%;
 }
+
+.login_profilePic {
+    border-right: .4rem solid var(--brightAqua);
+    display: block;
+    grid-area: img;
+    padding: 1rem 0 2.75rem 2rem;
+    position: relative;
+    width: 100%;
+}
+
+.loginHeading {
+    border-bottom: .4rem solid var(--brightAqua);
+    color: var(--brightAqua);
+    grid-area: heading;
+    font-size: 2rem;
+    font-weight: lighter;
+    margin: 2rem 4rem -1px;
+    padding: .5rem;
+}
+
+.forgotPBtn {
+    margin-top: 1.5rem;
+    text-align: center;
+    width: 8rem;
+}
+
 
 .registerDiv {
     background: #fff;
@@ -667,9 +708,6 @@ input.hidden {
 .dmode .registerDiv {background: none;}
 
 .allProfilePics {
-    align-items: center;
-    justify-content: center;
-    flex-flow: wrap;
 }
 
 .profilePic {
@@ -771,12 +809,12 @@ input.hidden {
 .chooseThumbTable * {height: 1px;}
 
 .chooseThumbTable_anim, .profilePicDiv .updateThumbTable_anim {
-    position: relative;
+    max-width: 800px;
     opacity: 1;
+    position: relative;
     top: 0;
     transition: top .5s ease-in-out, opacity .5s ease-in-out;
     width: 80%;
-    max-width: 800px;
     z-index: 2;
 }
 
@@ -785,10 +823,17 @@ input.hidden {
 .chooseThumb {
     border-radius: 50%;
     cursor: pointer;
-    width: 100px;
-    height: 100px;
+    width: .1px;
+    height: 1px;
     margin: 0 .8rem .8rem;
 }
+
+.chooseThumbTable_anim .chooseThumb,  .updateThumbTable_anim .chooseThumb {
+    height: 100px;
+    width: 100px;
+}
+
+
 
 a.registerReturnBtn, a.registerReturnBtn {
     margin: 1rem auto 0;
@@ -904,18 +949,57 @@ END Login & Register
         width: 5.7rem;
     }
 
-.menuLinks .homeBtn {
-    margin: 1rem auto;
-    width: 3.5rem;
-}
+    .menuLinks .homeBtn {
+        margin: 1rem auto;
+        width: 3.5rem;
+    }
 
 
-.menuLinks .logoutBtn {
-    margin: .7rem auto;
-    padding: .6rem 1rem;
-    width: 3.5rem;
-}
+    .menuLinks .logoutBtn {
+        margin: .7rem auto;
+        padding: .6rem 1rem;
+        width: 3.5rem;
+    }
+    .menuLinks .imgBtn{
+        background: none;
+        border: none;
+        color: rgba(0,0,0,0);
+        font-size: .1px;
+        margin: 2rem auto;
+        padding: 2rem .5rem;
+     }
 
+        .menuLinks .imgBtn:hover { 
+            background: none;
+        }
+
+        .imgBtn:before {
+            background: url(../imgs/sprites.svg) no-repeat;
+            background-position: 10px 5px; 
+            content: '';
+            padding: 2.2rem 3rem;
+            margin: 0 auto;
+            width: 2rem;
+        }
+
+        .newEmailBtn:hover:before {background-position: 10px -395px;}
+            .dmode .newEmailBtn:before {background-position: 10px -800px;}
+            .dmode .newEmailBtn:hover:before {background-position: 10px -1200px;}
+
+        .newArticleBtn:before {background-position: 10px -100px;}
+        .newArticleBtn:hover:before {background-position: 10px -500px;}
+            .dmode .newArticleBtn:before {background-position: 10px -900px;}
+            .dmode .newArticleBtn:hover:before {background-position: 10px -1300px;}
+
+        .allEmailsBtn:before {background-position: 10px -200px;}
+        .allEmailsBtn:hover:before {background-position: 10px -600px;}
+            .dmode .allEmailsBtn:before {background-position: 10px -1000px;}
+            .dmode .allEmailsBtn:hover:before {background-position: 10px -1400px;}
+
+        .allArticlesBtn:before {background-position: 10px -300px;}
+        .allArticlesBtn:hover:before {background-position: 10px -700px;}
+            .dmode .allArticlesBtn:before {background-position: 10px -1100px;}
+            .dmode .allArticlesBtn:hover:before {background-position: 10px -1500px;}
 .profilePicDiv {
     display: block;
         margin: 0 auto;
@@ -923,7 +1007,7 @@ END Login & Register
     .profilePicDiv .profilePic {
         background: linear-gradient(330deg, rgba(255,209,16,1) 0%, rgba(223,180,0,1) 100%);
         border: none;
-        padding: 1rem;
+        padding: 1em;
         display: block;
         height: 200px;
         margin: 0 auto;
@@ -946,9 +1030,23 @@ END Login & Register
         /*.dmode .profileBtn:hover, .dmode .changePicBtn:hover {background: linear-gradient(330deg, var(--darkReddish) 0%, #4a0b13 100%); }*/
 
 
-    .mainLinks {display: none;}
 
-/*    .mainLinks a::before {
+.mainLinks {
+    display: flex;
+    flex-direction: column;
+}
+    .mainLinks a {
+        color: var(--aqua);
+        font-size: 2.2rem;
+        padding: 2rem ;
+        margin: 1rem auto;
+        text-align: center;
+        text-decoration: none;
+    }
+
+        .mainLinks a:hover {color: var(--magenta);}
+
+    .mainLinks a::before {
         content: '';
         width: 5px;
         height: 5px;
@@ -957,23 +1055,26 @@ END Login & Register
 
     .mainLinks .allEmails::before {
         padding: 6px 36px;
-        background: url(../imgs/allEmails.svg);
+        background: url(../imgs/allEmails.svg) no-repeat;
     }
 
     .mainLinks .allArticles::before {
         padding: 10px 35px;
-        background: url(../imgs/allArticles.svg);
+        background: url(../imgs/allArticles.svg) no-repeat;
+        background-position: 0 2px;
     }
 
     .mainLinks .newEmail::before {
         padding: 10px 40px;
-        background: url(../imgs/newEmail.svg);
+        background: url(../imgs/newEmail.svg) no-repeat;
     }
 
     .mainLinks .newArticle::before {
-        padding: 16px 42px;
-        background: url(../imgs/newArticle.svg);
-    }*/
+        padding: 25px 42px;
+        background: url(../imgs/newArticle.svg) no-repeat;
+        background-position: 0 25px;
+    }
+    .mainLinks .allEmails::before, .mainLinks .newEmail::before {background-position: 0 5px;}
 
 
 
@@ -1939,7 +2040,41 @@ END Printed Styles
 ------------------------------------------------------------------------->*/
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1200px) {
+
+    .dmode {background-color: var(--dmodeBlack);}
+    .lmode {background-color: #F0F0F0;}
+
+    .loginPage {
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        max-height: none;
+        margin: 5vh auto;
+        padding: .5rem;
+    }
+
+    .loginDiv {
+        padding-bottom: 3rem;
+    }
+
+    .login_profilePic {
+        border: .6rem solid var(--brightAqua);
+        border-radius: 50%;
+        padding: .2rem;
+        margin: 2rem auto 1rem;
+        max-width: 200px;   
+    }
+
+    .loginHeading {
+        border: none;
+        margin: 0 auto 0;
+        text-align: center;
+    }
+
+
+    .loginForm .createInput, .registerForm .createInput {width: 215px;}
+
     .backBtn {
         overflow:hidden;
     }
@@ -1993,6 +2128,39 @@ END Printed Styles
         max-width: 100vw;
     }
 
+    .chooseThumbTable_anim, .profilePicDiv .updateThumbTable_anim {
+        height: 100px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+        .chooseThumbTable_anim::-webkit-scrollbar, .profilePicDiv .updateThumbTable_anim::-webkit-scrollbar {display: none;}
+        .bouncingArrow {
+            animation: arrow_bounce .75s infinite;
+            display: inline-block;
+            color: var(--brightAqua);
+            font-size: 4rem;
+            padding: 2px 5px 5px;
+            position: absolute;
+            top: 0;
+            transform: scaleY(.8);
+            right: 1vw;
+        }
+
+        .chooseThumbTable_anim:hover .bouncingArrow, .profilePicDiv .updateThumbTable_anim:hover .bouncingArrow {opacity: 0;}
+
+        @keyframes arrow_bounce {
+            0% {right: 1vw;}
+            50% {right: 4vw;}
+            100% {right: 1vw;}
+        }
+
+    .allProfilePics {
+        display: flex;
+        flex-direction: row;
+    }
+
+
     .profileInfo, .adminControlsP {
         width: 275px;
     }
@@ -2018,6 +2186,8 @@ END Printed Styles
             'newEmailBtn newArticleBtn'
             'allEmailsBtn allArticlesBtn'
             'logoutBtn logoutBtn';
+        margin: 1rem auto;
+        padding: 0;
     }
 
     .menuLinks a, .menuLinks .homeBtn, .menuLinks .logoutBtn {
@@ -2173,7 +2343,7 @@ END Printed Styles
     .nwBox .btnBox a {margin-bottom: 1rem;}
     .nwBox .btnBox a:last-of-type {margin-bottom: 0;}
 
-    .allPage .backBtn {
+    .backBtn, .allPage .backBtn {
         position: absolute;
         left: -100rem;
     }
@@ -2241,11 +2411,12 @@ END Printed Styles
     .newMediaForm .uploadImgBtn{
         margin: 1.5rem.5rem;
     }
-
+/*
     .verifyPwdForm {min-height: calc(100vh - 7rem);}
     .editProfileForm, .changePForm {min-height: calc(100vh - 13rem);}
     .deleteAdminForm { min-height: calc(100vh - 16.2rem);}
-    .generalForm .agreeToDelete_label {width: calc(100vw - 100px);;}
+    .generalForm .agreeToDelete_label {width: calc(100vw - 100px);}
+    .registerDiv, .profilePicDiv {min-height: calc(100vh - 5rem);}*/
     .deleteAdminText {text-align: center;}
 
     .chooseThumbTable_anim, .profilePicDiv .updateThumbTable_anim {
@@ -2255,9 +2426,11 @@ END Printed Styles
 
 }
 
-@-ms-viewport{
-  width: device-width;
+@media only screen and (min-width: 750px) and (max-width: 1200px) {
+    .lmode {background: blue}
 }
+
+
 
 /*----------------------------------------------------------------------->
 END Media Queries
