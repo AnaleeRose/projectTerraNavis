@@ -636,11 +636,72 @@ legend {
 6. Footer Content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 footer {
-display: grid;
-grid-column: 1 / 10;
-grid-row: 6 / 7;
+  font-family: pt-sans, sans-serif;
+  font-size: .8em;
+  width: 100vw;
+  height: 300px;
+  background-color: #765735;
+  color: #e5e8d2;
 }
-
+footer div {
+  float: left;
+}
+footer h2, .h2 {
+  font-family: cabin, sans-serif;
+  font-size: 30px;
+}
+#email, .h2 {
+  margin-left: 10%;
+}
+.newsButton {
+  padding: 3.5px 4px 4px;
+  border-radius: 0 5px 5px 0;
+  margin-left: -4px;
+}
+#email {
+  line-height: 1.5em;
+  width: 50%;
+  text-align: center;
+  border-radius: 5px 0 0 5px;
+}
+.blurb-link {
+  color: #e5e8d2;
+  text-decoration: underline;
+}
+#f-container {
+  margin-top: 20px;
+}
+.box-lg {
+  width: 33%;
+  height: 80%;
+  text-align: center;
+}
+  .box-lg p {
+    margin: 10px auto;
+    text-align: left;
+    width: 70%;
+    line-height: 1.3em;
+  }
+.box-2 {
+  text-align: left;
+}
+.box-sm {
+  float: none;
+  text-align: left;
+  margin-left: 40%;
+}
+.box-sm img, .box-sm p {
+  display: inline-flex;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+#copyright p {
+  margin-left: 10px;
+  font-size: ;
+  font-family: ;
+  line-height: ;
+  color: ;
+}
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 7. @Media Queries
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
