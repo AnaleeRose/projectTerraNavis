@@ -9,7 +9,7 @@
             <ul class="main-nav">
                 <li><a href="index.php">Home</a></li>
                 <li
-                    <?php
+                  <?php
                     if (isset($page) && strtolower($page) == 'sustain') {
                       echo 'class="navListHeader"';
                     }
@@ -33,6 +33,8 @@
                     <?php
                     if (isset($page) && strtolower($page) == 'construct') {
                       echo 'class="navListHeader"';
+                    } elseif (isset($page) && strtolower($page) == 'sustain') {
+                      echo 'class="li_underneath"';
                     }
                   ?>><a href="construction.php">Construction</a>
 
@@ -48,7 +50,13 @@
                         </ul>
                     <?php } ?>
                 </li>
-                <li><a href="econews.php">Eco News</a></li>
+                <li
+                  <?php
+                    if (isset($page) && strtolower($page) == 'construct') {
+                      echo 'class="li_underneath"';
+                    }
+                  ?>
+                ><a href="econews.php">Eco News</a></li>
                 <li><a href="resources.php">Resources</a></li>
                 <li><a href="faq.php">FAQ</a></li>
                 <li><a href="contact.php">Contact</a></li>
