@@ -52,7 +52,7 @@ Light Red ------------------- rgb(246, 228, 224)        #f9eae6
   font-weight: normal;
   font-style: normal;
 }
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -66,8 +66,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -78,7 +78,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -141,6 +141,8 @@ html {
   --btn_bg_hover: linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
   --btn_text_visited: blue;
   --mybtn_text: black;
+
+  --bucketOutline: #0f3e66;
 }
 body {
   display: grid;
@@ -155,7 +157,7 @@ body {
   grid-template-columns: 1fr 4fr;
   /*grid-template-columns: minmax(150px, 25$0px) 1fr;*/
   width: 100%;
-} 
+}
 h1 {
 
 }
@@ -190,7 +192,7 @@ grid-column: 1 / 3;
 grid-row: 1 / 2;
 
 }
-.headerlogo { 
+.headerlogo {
   display: flex;
   justify-self: stretch;
   grid-column: 1 / 3;
@@ -202,8 +204,12 @@ grid-row: 1 / 2;
   position: sticky;
   background: #1843d0;
 }
+.navLogoContainer {grid-area: nav;}
 #animatedbg {
+  background: darkgreen;
+  position: relative;
   grid-area: img;
+  min-height: 70vh;
 }
 #animatedbg img {
   display: block;
@@ -213,15 +219,219 @@ grid-row: 1 / 2;
   grid-row: 1 / 3;
 }
 
-.navLogoContainer {
-  grid-area: nav;
+
+.animImg_bucket {
+  border-bottom: 1rem solid var(--bucketOutline);
+  border-left: 1rem solid var(--bucketOutline);
+  border-radius: 6px;
+  border-right: 1rem solid var(--bucketOutline);
+  bottom: 0;
+  box-shadow: 0 0 0 #293814;
+  height: 100px;
+  position: absolute;
+  overflow: hidden;
+  right: 9%;
+  transition: box-shadow .2s;
+  width: 75px;
+  z-index: 2
 }
+  .animImg_bucket_bgFill {
+    animation: fill_bucket 8s infinite ease-in-out;
+    background: lightblue;
+    bottom: 0;
+    display: block;
+    height: 0;
+    left: 0;
+    position: absolute;
+    transition: height 3s ease-in-out;
+    width: 75px;
+  }
+
+
+
+.animImg_waterSpout {
+  bottom: 0;
+  position: absolute;
+  right: 5%;
+}
+  .animImg_faucet {
+    background: blue;
+    bottom: 0;
+    box-shadow: 0 0 0 #293814;
+    height: 225px;
+    position: absolute;
+    right: 0;
+    transition: box-shadow .2s;
+    width: 25px;
+  }
+  .animImg_faucet:after {
+    border: 24px solid blue;
+    border-bottom: none;
+    border-top-left-radius: 7em;
+    border-top-right-radius: 7em;
+    box-sizing: border-box;
+    box-shadow: 0 0 0 #293814;
+    content: "";
+    height: 63px;
+    margin-left: -7em;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    transition: box-shadow .2s;
+    width: 91px;
+  }
+  .animImg_faucet:before {
+    animation: water_flow_bucket 8s infinite;
+    background: lightblue;
+    content: '';
+    height: 0;
+    left: -63px;
+    position: absolute;
+    top: 31px;
+    width: 18px;
+  }
+
+.windmill {
+  bottom: 0;
+  box-shadow: 0 0 0 #293814;
+  position: absolute;
+  left: 20%;
+  height: 300px;
+  transition: box-shadow .25s;
+  width: 200px;
+  z-index: 3;
+}
+  .windmill_base {
+    bottom: 0;
+    height: 250px;
+    position: absolute;
+    right: 20%;
+  }
+
+  .windmill_nose {
+    bottom: 181px;
+    position: absolute;
+    right: 51%;
+    width: 40px;
+  }
+
+  .windmill_wings {
+    animation: rotate_wings 3s infinite linear;
+    bottom: 50px;
+    position: absolute;
+    right: -27%;
+    width: 350px;
+    height: 350px;
+  }
+
+
+.windmill_2 {
+  bottom: 13%;
+  height: 220px;
+  left: 35%;
+  opacity: .8;
+  width: 154px;
+  z-index: 1;
+}
+  .windmill_2 .windmill_base {
+    height: 200px;
+  }
+  .windmill_2 .windmill_nose {
+    width: 27px;
+    right: 61%;
+    bottom: 136px;
+  }
+  .windmill_2 .windmill_wings {
+    animation: rotate_wings 1.5s infinite linear;
+    bottom: 53px;
+    right: -10%;
+    width: 250px;
+    height: 250px;
+  }
+
+
+
+/*shadows*/
+.waterFillingBucketContainer:hover .animImg_bucket, .waterFillingBucketContainer:hover .animImg_faucet  {
+  box-shadow: 2px 2px 15px #293814;
+}
+
+ .waterFillingBucketContainer:hover .animImg_faucet:after {
+  box-shadow: -2px -6px 8px #293814;
+ }
+
+ .windmillContainer:hover .windmill {
+  box-shadow: 0 13px 8px -9px #293814;
+ }
+
+ /*animations*/
+
+@keyframes fill_bucket {
+  0% {height: 0;}
+  15% {height: 0;}
+  78% {height: 85px;}
+  82% {height: 85px;}
+  100% {height: 0;}
+}
+
+@keyframes water_flow_bucket {
+  11% {
+    top: 50;
+    height: 5px;
+  }
+  20% {
+    top: 40px;
+    height: 170px;
+  }
+  75% {
+    top: 40px;
+    height: 170px;
+  }
+  80% {
+    top: 150px;
+    height: 10px;
+  }
+  100% {
+    top: 220px;
+    height: 0;
+  }
+}
+@keyframes rotate_wings{
+  from{transform:rotate(0)}
+  to{transform:rotate(360deg)}
+}
+
+
+/*@keyframes water_flow_bucket {
+  0% {
+    top: 50;
+    height: 5px;
+  }
+  15% {
+    top: 40px;
+    height: 170px;
+  }
+  85% {
+    top: 40px;
+    height: 170px;
+  }
+  90% {
+    top: 150px;
+    height: 10px;
+  }
+  100% {
+    top: 220px;
+    height: 0;
+  }
+}
+*/
+
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 4. Main Body Content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 #mainContent {
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
   'heading_c heading_c heading_c'
   '. sec1 sec1'
   'sec2 sec2 .'
@@ -290,7 +500,7 @@ legend {
   text-decoration: ;
   box-shadow: ;
   text-shadow: ;
-  background: var(--btn_bg); 
+  background: var(--btn_bg);
 }
 .myButton {
   color: var(--mybtn_text);
@@ -323,13 +533,13 @@ grid-row: 6 / 7;
 @media screen and (min-width: 1400px) {
   #main-header {
     grid-template-columns: minmax(150px, 250px) 6fr;
-  } 
+  }
 }
 
 @media screen and (max-width: 840px) {
 
 }
- 
+
 /* ===== TABLET ============================== */
 @media screen and (max-width: 626px) {
 

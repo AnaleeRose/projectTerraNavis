@@ -4,7 +4,7 @@
                     <p>Team blurb goes here!!</p>
                     <a href="team.html" class="blurb-link">Read More >></a>
                 </div>
-                <div id=join>
+<!--                 <div id=join>
                     <label for="email">Join Our Newsletter!</label>
                     <input id="email" name="email" type="email" placeholder="email@example.com">
                     <div class="icons">
@@ -26,7 +26,7 @@
                         <img id="email-icon" src="images/" alt="Email Icon">
                         <p><?= EMAIL_LINK; ?></p>
                     </div>
-                </div>
+                </div> -->
                 <div id="copyright">
                     <p>&copy; FT BPA Team 2019-2020</p>
                 </div>

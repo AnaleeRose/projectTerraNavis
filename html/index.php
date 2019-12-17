@@ -1,6 +1,7 @@
 <?php
 require './assets/includes/config.inc.php';
 require './assets/includes/head.php';
+$page = 'Home';
 ?>
 
 <body>
