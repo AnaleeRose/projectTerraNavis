@@ -652,7 +652,7 @@ input.hidden {
     border-radius: 4rem;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-areas: 
+    grid-template-areas:
     'heading heading'
     'img form';
     height: 80vh;
@@ -946,7 +946,7 @@ END Login & Register
     .menuLinks a {
         margin: 1.5rem auto;
         padding: .6rem .5rem;
-        width: 5.7rem;
+        width: 7.2rem;
     }
 
     .menuLinks .homeBtn {
@@ -969,37 +969,38 @@ END Login & Register
         padding: 2rem .5rem;
      }
 
-        .menuLinks .imgBtn:hover { 
+        .menuLinks .imgBtn:hover {
             background: none;
         }
 
         .imgBtn:before {
             background: url(../imgs/sprites.svg) no-repeat;
-            background-position: 10px 5px; 
+            background-position: 10px 5px;
             content: '';
             padding: 2.2rem 3rem;
             margin: 0 auto;
             width: 2rem;
         }
 
-        .newEmailBtn:hover:before {background-position: 10px -395px;}
-            .dmode .newEmailBtn:before {background-position: 10px -800px;}
-            .dmode .newEmailBtn:hover:before {background-position: 10px -1200px;}
+        .newEmailBtn::before {background-position: 10px -200px;}
+        .newEmailBtn:hover:before {background-position: 10px -600px;}
+            .dmode .newEmailBtn:before {background-position: 10px -1000px;}
+            .dmode .newEmailBtn:hover:before {background-position: 10px -1400px;}
 
-        .newArticleBtn:before {background-position: 10px -100px;}
-        .newArticleBtn:hover:before {background-position: 10px -500px;}
-            .dmode .newArticleBtn:before {background-position: 10px -900px;}
-            .dmode .newArticleBtn:hover:before {background-position: 10px -1300px;}
+        .newArticleBtn:before {background-position: 10px -300px;}
+        .newArticleBtn:hover:before {background-position: 10px -700px;}
+            .dmode .newArticleBtn:before {background-position: 10px -1100px;}
+            .dmode .newArticleBtn:hover:before {background-position: 10px -1500px;}
 
-        .allEmailsBtn:before {background-position: 10px -200px;}
-        .allEmailsBtn:hover:before {background-position: 10px -600px;}
-            .dmode .allEmailsBtn:before {background-position: 10px -1000px;}
-            .dmode .allEmailsBtn:hover:before {background-position: 10px -1400px;}
+        .allEmailsBtn:before {background-position: 10px 0}
+        .allEmailsBtn:hover:before {background-position: 10px -400px;}
+            .dmode .allEmailsBtn:before {background-position: 10px -800px;}
+            .dmode .allEmailsBtn:hover:before {background-position: 10px -1200px;}
 
-        .allArticlesBtn:before {background-position: 10px -300px;}
-        .allArticlesBtn:hover:before {background-position: 10px -700px;}
-            .dmode .allArticlesBtn:before {background-position: 10px -1100px;}
-            .dmode .allArticlesBtn:hover:before {background-position: 10px -1500px;}
+        .allArticlesBtn:before {background-position: 10px -95px;}
+        .allArticlesBtn:hover:before {background-position: 10px -495px;}
+            .dmode .allArticlesBtn:before {background-position: 10px -900px;}
+            .dmode .allArticlesBtn:hover:before {background-position: 10px -1300px;}
 .profilePicDiv {
     display: block;
         margin: 0 auto;
@@ -2063,7 +2064,7 @@ END Printed Styles
         border-radius: 50%;
         padding: .2rem;
         margin: 2rem auto 1rem;
-        max-width: 200px;   
+        max-width: 200px;
     }
 
     .loginHeading {
@@ -2393,13 +2394,15 @@ END Printed Styles
     .viewImgBox, .viewImg, .printedCaption {width: 90vw;}
 
     .viewImgBox {
-        height: 300px;
+        float: none;
+        height: 330px;
         margin: 0 5vw 2rem;
     }
 
     .printedCaption {
-        float: clear;
+        bottom: 0;
         left: 0;
+        margin-bottom: 0;
         padding: 1rem;
     }
 
