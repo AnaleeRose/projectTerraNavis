@@ -477,7 +477,7 @@ Navigation*/
   margin: 1rem 0;
   font-family: 'ptsans';
   font-size: 2.5rem;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 #mainpg-sec1 {
   grid-area: sec1;
@@ -488,9 +488,12 @@ Navigation*/
   margin: 1rem auto;
   margin-left: 6rem;
   font-size: 2rem;
+  line-height: 1.2;
+
 }
 #mainpg-sec2 {
   grid-area: sec2;
+  margin-left: 9rem;
   width: 80%;
 }
 #mainpg-sec3 {
