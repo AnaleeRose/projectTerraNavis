@@ -206,10 +206,7 @@ grid-row: 1 / 2;
   position: sticky;
 }
 .navLogoContainer {
-  background: linear-gradient(to top, rgba(0,0,0,0) 10%, var(--mainNavLink) 10%, var(--mainNavLink) 95%, rgba(0,0,0,0) 95%);
-  background: var(--mainNavLink) 95%;
   left: 0;
-  padding-right: .4rem;
   position: fixed;
   top: 0;
   width: 20vw;
@@ -417,14 +414,16 @@ Navigation*/
   height: 100%;
 }
 #main-nav {margin-top: -1rem;}
-.main-nav {padding-bottom: .15rem;}
+/*.main-nav {padding-bottom: .15rem;}*/
 .main-nav a {
   color: var(--mainNavLink);
   display: block;
   font-family: 'ptsans';
-  font-size: 1.5rem;
-  padding: 1rem 0 1rem 2rem;
-  margin: 1rem 2.5rem 1rem 1rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: .7rem 0 .7rem 2rem;
+  margin: .7rem;
+  margin-right: 2.8rem;
   text-align: right;
   text-decoration: none;
 }
@@ -441,6 +440,28 @@ Navigation*/
   box-sizing: border-box;
   margin: 0 auto;
   width: 80%;
+}
+.dropdownUl a {
+  font-size: 1rem;
+  margin: .4rem;
+  margin-right: 2rem;
+  opacity: .8;
+  transition: opacity: .3s;;
+}
+.navListHeader a {
+  position: relative;
+}
+.navListHeader:hover .dropdownUl {
+  opacity: .7;
+  transition: opacity: .3s;;
+}
+.navListHeader>a:after {
+  content: '›';
+  display: inline-block;
+  position: absolute;
+  right: -1rem;
+  top: 30%;
+  transform: rotate(90deg);
 }
 
 
