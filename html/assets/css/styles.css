@@ -149,7 +149,8 @@ html {
 }
 body {
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-areas: '. mainContent';
+  grid-template-columns: 1fr 4fr;
   grid-template-rows:  auto;
   position: relative;
 }
@@ -470,7 +471,7 @@ Navigation*/
   transition: opacity: .5s;;
 }
 .navListHeader>a:after {
-  animation: arrow_turn 1.6s forwards;
+  animation: arrow_turn 1.2s forwards;
   animation-iteration-count: 1;
   content: '›';
   display: inline-block;
@@ -524,6 +525,7 @@ Navigation*/
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 #mainContent {
   display: grid;
+  grid-area: mainContent;
   grid-template-areas:
   'heading_c heading_c heading_c'
   ' sec1 sec1 sec1'
