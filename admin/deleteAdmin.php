@@ -99,11 +99,11 @@ if ($relogged_in) {
 		<h2 class="adminHeading text_error">Delete Admin</h2>
 		<p class=" deleteAdminText">Are you sure you want to delete an admin? This cannot be undone.</p>
         <form class="deleteAdminForm generalForm" method="post">
-    		<label for="agreeToDelete" class="text_error agreeToDelete_label">Yes, I want to <span class="bold">permanently</span> delete an admin.
+    		<label for="agreeToDelete" class="agreeToDelete_label">Yes, I want to <span class="bold">permanently</span> delete an admin.
     		<input type="checkbox" name="agreeToDelete" value="Yes" class="agreeToDelete_input" id="agreeToDelete">
     		</label>
             <!-- The php below is just checking for errors for this element and displaying them if they exist -->
-    		<?php if (!empty($deleteAdmin_errors['agreeToDelete'])) echo '<p class="formNotice formNotice_InlineError text_error verifyError">' . $deleteAdmin_errors['agreeToDelete'] . '</p>'; ?>
+    		<?php if (!empty($deleteAdmin_errors['agreeToDelete'])) echo '<p class="formNotice formNotice_InlineError verifyError">' . $deleteAdmin_errors['agreeToDelete'] . '</p>'; ?>
     		<hr class="newHr">
     		<p class=" deleteAdminText">Select an admin to delete:</p>
             <select name="deleteAdmin_id" class="categorySelect" id="deleteAdmin_id">
@@ -126,10 +126,10 @@ if ($relogged_in) {
             <?php
             // displays the deleteAdmin_errors for the select, but has to check if it needs to display just one or many
             if (!empty($deleteAdmin_errors['deleteAdmin_id']) && !is_array($deleteAdmin_errors['deleteAdmin_id'])) {
-                echo '<p class="formNotice formNotice_InlineError text_error">' . $deleteAdmin_errors['deleteAdmin_id'] . '</p>';
+                echo '<p class="formNotice formNotice_InlineError">' . $deleteAdmin_errors['deleteAdmin_id'] . '</p>';
             } elseif (!empty($deleteAdmin_errors['deleteAdmin_id']) && is_array($deleteAdmin_errors['deleteAdmin_id'])) {
                 foreach ($deleteAdmin_errors as $key => $value) {
-                    echo '<p class="formNotice formNotice_InlineError text_error">' . $value . '</p>';
+                    echo '<p class="formNotice formNotice_InlineError">' . $value . '</p>';
                 }
 
             }

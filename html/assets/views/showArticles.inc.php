@@ -13,13 +13,13 @@ function showArticles($displaytype) {
             while ($row = $r->fetch_assoc()) {
                 if ($row['error_flag'] === null && $num <= 5) {
                     ?>
-                        <div class="article<?= $num; ?>">
+                        <section class="article<?= $num; ?>">
                             <img class="article-img" src="<?= IMG_PATH_HTML . $row['img_name']; ?>" alt="Article Image">
                             <p class="article-date"><?= date('M j, Y', strtotime($row['date_added']));   ?></p>
                             <h2 class="sec-title"><?= $row['article_name']; ?></h2>
                             <p class="article-description"><?= $row['article_description']; ?></p>
                             <a class="readmore" href="./readArticle.php?article_id=<?= $row['article_id']?>">Read More >></a>
-                        </div>
+                        </section>
                     <?php
                     $num++;
                 } // END if no error flag

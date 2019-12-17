@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 08, 2019 at 06:43 AM
--- Server version: 10.1.39-MariaDB
--- PHP Version: 7.3.5
+-- Host: localhost
+-- Generation Time: Dec 17, 2019 at 06:28 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,7 +34,7 @@ CREATE TABLE `adminuser` (
   `admin_id` int(11) NOT NULL,
   `admin_username` varchar(40) NOT NULL,
   `admin_email` varchar(120) NOT NULL,
-  `profilePic_id` int(6) NOT NULL DEFAULT '0',
+  `profilePic_id` int(6) NOT NULL DEFAULT 0,
   `light_mode` enum('lmode','dmode') NOT NULL DEFAULT 'lmode'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -44,7 +44,7 @@ CREATE TABLE `adminuser` (
 
 INSERT INTO `adminuser` (`admin_id`, `admin_username`, `admin_email`, `profilePic_id`, `light_mode`) VALUES
 (22, 'bpaAdmin', 'bpa_admin@email.com', 4, 'lmode'),
-(27, 'analeerose', 'analeeskinner@gmail.com', 3, 'dmode');
+(27, 'AnaleeRose', 'analeeskinner@gmail.com', 18, 'lmode');
 
 -- --------------------------------------------------------
 
@@ -57,8 +57,8 @@ CREATE TABLE `articles` (
   `article_name` varchar(80) NOT NULL,
   `article_description` mediumtext NOT NULL,
   `article_category` int(11) NOT NULL,
-  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
+  `date_modified` timestamp NOT NULL DEFAULT current_timestamp(),
   `img_name` varchar(250) DEFAULT NULL,
   `caption` varchar(100) DEFAULT NULL,
   `error_flag` tinyint(1) DEFAULT NULL
@@ -72,13 +72,10 @@ INSERT INTO `articles` (`article_id`, `article_name`, `article_description`, `ar
 (1, 'Test Article #1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, '2019-11-07 08:56:13', '2019-11-11 08:56:13', NULL, NULL, NULL),
 (2, 'Test Article #2', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', 2, '2019-11-10 08:56:13', '2019-11-11 08:56:13', NULL, NULL, NULL),
 (3, 'Test Article #3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, '2019-11-11 08:56:13', '2019-11-11 08:56:13', NULL, NULL, NULL),
-(51, 'This new article contains and image and mistakess', 'gui;', 1, '2019-12-04 18:46:30', '2019-12-04 18:46:30', NULL, NULL, NULL),
 (70, 'Lorem Ipsum', 'This is an article about lorem ipsum. It\'s a test of this applications abilities so far.', 4, '2019-12-06 15:43:21', '2019-12-06 15:43:21', 'resized_LoremIpsum_603.png', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur ma', NULL),
-(75, 'Lorem Ipsum', 'This is an article about lorem ipsum. It\'s a test of this applications abilities so far.', 4, '2019-12-06 16:04:43', '2019-12-06 16:04:43', 'resized_LoremIpsum_603.png', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur ma', NULL),
 (76, 'Lorem Ipsum', 'This is an article about lorem ipsum. It\'s a test of this applications abilities so far.', 4, '2019-12-06 16:05:46', '2019-12-06 16:05:46', 'resized_LoremIpsum_603.png', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur ma', NULL),
 (77, 'New Article', 'Admin', 3, '2019-12-06 17:06:54', '2019-12-06 17:06:54', 'resized_NewArticle_603.jpg', 'Cappo', 1),
-(81, 'seg', 'aefse', 4, '2019-12-08 04:24:26', '2019-12-08 04:24:26', 'resized_seg_237.jpeg', 'segse', NULL),
-(82, 'Good Thing ', 'Good Thing, a song by Kehlani &amp; Zedd.', 3, '2019-12-05 20:47:20', '2019-12-08 04:37:43', 'resized_GoodThing_603.jpg', 'Kehlani - She\'s got a pretty voice!', NULL);
+(88, 'Rigorous Testing', 'I\'m probably gonna regret testing this hard, let\'s see where it breaks! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ull', 4, '2019-12-10 20:35:20', '2019-12-11 03:47:50', 'resized_RigorousTesting_512.png', 'My code when i beg it to function for 30 seconds straight:', NULL);
 
 -- --------------------------------------------------------
 
@@ -104,9 +101,6 @@ CREATE TABLE `article_content` (
 INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `order_of_content`, `element_name`, `content`, `is_first_li`, `is_last_li`) VALUES
 (1, 1, 2, 0, '', 'New Heading', NULL, NULL),
 (2, 1, 1, 0, '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL, NULL),
-(94, 51, 1, 1, 'p_1', '1', NULL, NULL),
-(95, 51, 1, 2, 'p_3', '2', NULL, NULL),
-(96, 51, 1, 3, 'p_2', '3', NULL, NULL),
 (153, 70, 1, 1, 'p_1', '&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;', NULL, NULL),
 (154, 70, 1, 2, 'p_2', '&quot;Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?&quot;', NULL, NULL),
 (155, 70, 1, 3, 'p_3', '&quot;But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?&quot;', NULL, NULL),
@@ -126,18 +120,17 @@ INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `orde
 (169, 77, 8, 6, 'ol_1_li_1', 'ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ', 1, 0),
 (170, 77, 8, 7, 'ol_1_li_2', 'ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ', 0, 0),
 (171, 77, 8, 8, 'ol_1_li_3', 'ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ', 0, 1),
-(180, 81, 1, 1, 'p_1', 'esg', NULL, NULL),
-(181, 81, 1, 2, 'p_2', 'esges', NULL, NULL),
-(182, 81, 7, 3, 'ul_1_li_1', 'li 1', 1, 0),
-(183, 81, 7, 4, 'ul_1_li_2', 'li 2', 0, 0),
-(184, 81, 7, 5, 'ul_1_li_3', 'li 3', 0, 0),
-(185, 81, 7, 6, 'ul_1_li_4', '::empty::', 0, 1),
-(186, 82, 1, 1, 'p_1', 'I book myself tables\r\n\r\nAt all the best restaurants, then eat alone\r\n\r\nI buy myself fast cars\r\n\r\nJustâ€…soâ€…I can driveâ€…them real fuckin\' slow\r\n\r\nI like myâ€…own company\r\n\r\nCompany, I don\'t need it\r\n\r\nI\'m not always cold\r\n\r\nI\'m just good on my own, so good on my own\r\n', NULL, NULL),
-(187, 82, 1, 2, 'p_2', 'I\'ve always been told, one day, I\'ll find\r\n\r\nSomebody who changes my mind\r\n\r\nIf they come along, I won\'t think twice', NULL, NULL),
-(188, 82, 1, 3, 'p_3', '\'Cause I already got a good thing with me\r\n\r\nYeah, I already got everything I need\r\n\r\nThe best things in life are already mine\r\n\r\nDon\'t tell me that you got a good thing for me\r\n\r\n\'Cause I already got a good thing with me\r\n\r\nYeah, I already done everything I dream\r\n\r\nI\'m good by myself, don\'t need no one else\r\n\r\nDon\'t tell me that you got a good thing for me\r\n\r\n\'Cause I already got a good thing', NULL, NULL),
-(189, 82, 1, 4, 'p_4', 'I make myself up\r\n\r\nJust to dance in the mirror when I\'m at home\r\n\r\nI pose and take pictures\r\n\r\nThen send them to people that I don\'t know\r\n\r\nI like getting compliments\r\n\r\nCompliments how I\'m feeling, oh\r\n\r\nI\'m not always selfish\r\n\r\nJust bad at romance, it\'s not in my bones\r\n', NULL, NULL),
-(190, 82, 1, 5, 'p_5', 'I\'ve always been told, one day, I\'ll find\r\n\r\nSomebody who changes my mind\r\n\r\nIf they come along, I won\'t think twice\r\n', NULL, NULL),
-(191, 82, 1, 6, 'p_6', '\'Cause I already got a good thing with me (good thing with me)\r\n\r\nYeah, I already got everything I need (everything I need) \r\n\r\nThe best things in life are already mine\r\n\r\nDon\'t tell me that you got a good thing for me\r\n\r\n\'Cause I already got a good thing with me (good thing with me)\r\n\r\nYeah, I already done everything I dream (everything I dream)\r\n\r\nI\'m good by myself, don\'t need no one else\r\n\r\nDon\'t tell me that you got a good thing for me\r\n\r\n\'Cause I already got a good thing\r\n', NULL, NULL);
+(241, 88, 2, 1, 'heading2_1', 'This Is A Heading 2', NULL, NULL),
+(242, 88, 3, 2, 'heading3_1', 'This Is A Heading 3', NULL, NULL),
+(243, 88, 4, 3, 'heading4_1', 'This Is A Heading 4', NULL, NULL),
+(244, 88, 5, 4, 'heading5_1', 'This Is A Heading 5', NULL, NULL),
+(245, 88, 7, 5, 'ul_1_li_1', '<a href=\"https://www.mylink.com\">My Link 1</a>', 1, 0),
+(246, 88, 7, 6, 'ul_1_li_2', '<a href=\"https://www.mylink.com\">My Link 2</a>', 0, 0),
+(247, 88, 7, 7, 'ul_1_li_3', '<a href=\"https://www.mylink.com\">My Link 3</a>', 0, 1),
+(248, 88, 8, 8, 'ol_1_li_1', '<a href=\"https://www.mylink.com\">My Link o1</a>', 1, 0),
+(249, 88, 8, 9, 'ol_1_li_2', '<a href=\"https://www.mylink.com\">My Link o2</a>', 0, 0),
+(250, 88, 8, 10, 'ol_1_li_3', '<a href=\"https://www.mylink.com\">My Link o3</a>', 0, 1),
+(251, 88, 1, 11, 'p_1', 'Ignoring paragraphs are we?', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -196,8 +189,8 @@ CREATE TABLE `emails` (
   `email_id` int(11) NOT NULL,
   `email_subject` varchar(250) NOT NULL,
   `email_message` longtext NOT NULL,
-  `save_for_later` tinyint(1) NOT NULL DEFAULT '1',
-  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `save_for_later` tinyint(1) NOT NULL DEFAULT 1,
+  `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
   `date_sent` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -212,13 +205,26 @@ INSERT INTO `emails` (`email_id`, `email_subject`, `email_message`, `save_for_la
 (7, 'New Email', 'THis is my new email\r\n<br>\r\n<br>\r\nLink: <a href=\"egsesg.com\">egs</a>', 0, '2019-11-20 19:20:24', '2019-11-20 19:20:24'),
 (8, 'Terra Navis Newsfeed | ygk', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out ygk or read more articles about Earthship Construction & Design at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis</a>', 0, '2019-11-20 19:21:45', '2019-11-20 19:21:45'),
 (9, 'Terra Navis Newsfeed | ygk', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out ygk or read more articles about Earthship Construction & Design at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis</a>', 0, '2019-11-20 19:22:07', '2019-11-20 19:22:07'),
-(10, 'Terra Navis Newsfeed | ygk', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out ygk or read more articles about Earthship Construction & Design at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!', 0, '2019-11-20 19:30:05', '2019-11-20 19:30:05'),
-(11, 'Terra Navis Newsfeed | edit this article', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out edit this article or read more articles about Clean Energy at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!', 0, '2019-11-21 16:18:06', '2019-11-21 16:18:06'),
-(12, 'reedy reeds', 'rdh', 1, '2019-11-21 16:37:08', NULL),
-(13, 'Terra Navis Newsfeed | edit this article', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out edit this article or read more articles about Clean Energy at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!', 1, '2019-12-02 17:10:00', NULL),
-(14, 'Terra Navis Newsfeed | edit this article', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out edit this article or read more articles about Clean Energy at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!', 1, '2019-12-02 17:10:56', NULL),
-(15, 'Terra Navis Newsfeed | edit this article', 'Terra Navis.com</a>!\">Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out edit this article or read more articles about Clean Energy at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!', 1, '2019-12-02 17:14:02', NULL),
-(16, 'Terra Navis Newsfeed | edit this article', 'Terra Navis.com</a>!\">Terra Navis.com</a>!\">Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out edit this article or read more articles about Clean Energy at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!\">Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out edit this article or read more articles about Clean Energy at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!\">Terra Navis.com</a>!\">Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out edit this article or read more articles about Clean Energy at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!', 1, '2019-12-02 18:55:29', NULL);
+(10, 'Terra Navis Newsfeed | ygk', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out ygk or read more articles about Earthship Construction & Design at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!', 0, '2019-11-20 19:30:05', '2019-11-20 19:30:05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `email_list`
+--
+
+CREATE TABLE `email_list` (
+  `id` int(11) NOT NULL,
+  `email` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `email_list`
+--
+
+INSERT INTO `email_list` (`id`, `email`) VALUES
+(1, 'analeeskinner@gmail.com'),
+(2, 'kaiasnowsteam@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -257,11 +263,18 @@ CREATE TABLE `profilepictures` (
 --
 
 INSERT INTO `profilepictures` (`profilePic_id`, `pic_location`, `pic_name`) VALUES
-(1, 'basic.png', 'Base Profile Picture'),
-(2, 'sunset.jpg', 'Sunset'),
-(3, 'leaf_girl.jpg', 'Leaf Girl'),
-(4, 'rainbow.jpg', 'Rainbow'),
-(5, 'rose.jpg', 'Rose');
+(1, 'basic.jpg', 'Default Image'),
+(9, 'f_light.jpg', 'Female - Light'),
+(10, 'f_med.jpg', 'Female - Medium'),
+(11, 'f_dark.jpg', 'Female - Dark'),
+(12, 'm_light.jpg', 'Male - Light'),
+(13, 'm_med.jpg', 'Male - Medium'),
+(14, 'm_dark.jpg', 'Male - Dark'),
+(15, 'f_light_alt.jpg', 'Female - Light -Alt ver.'),
+(16, 'f_med_alt.jpg', 'Female - Med - Alt ver.'),
+(17, 'f_dark_alt.jpg', 'Female - Dark-Alt ver.'),
+(18, 'earthship.jpg', 'Earth & A Ship'),
+(19, 'sunny_mount.jpg', 'Sunny Mountain');
 
 --
 -- Indexes for dumped tables
@@ -310,6 +323,12 @@ ALTER TABLE `emails`
   ADD PRIMARY KEY (`email_id`);
 
 --
+-- Indexes for table `email_list`
+--
+ALTER TABLE `email_list`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `info`
 --
 ALTER TABLE `info`
@@ -336,13 +355,13 @@ ALTER TABLE `adminuser`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `article_content`
 --
 ALTER TABLE `article_content`
-  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192;
+  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -354,13 +373,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `content_types`
 --
 ALTER TABLE `content_types`
-  MODIFY `content_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `content_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `emails`
 --
 ALTER TABLE `emails`
   MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `email_list`
+--
+ALTER TABLE `email_list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `info`
@@ -372,17 +397,11 @@ ALTER TABLE `info`
 -- AUTO_INCREMENT for table `profilepictures`
 --
 ALTER TABLE `profilepictures`
-  MODIFY `profilePic_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `profilePic_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `adminuser`
---
-ALTER TABLE `adminuser`
-  ADD CONSTRAINT `adminuser_ibfk_1` FOREIGN KEY (`profilePic_id`) REFERENCES `profilepictures` (`profilePic_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `articles`
@@ -404,6 +423,3 @@ ALTER TABLE `info`
   ADD CONSTRAINT `info_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `adminuser` (`admin_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

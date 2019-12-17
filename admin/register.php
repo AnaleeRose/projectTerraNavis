@@ -74,7 +74,7 @@ if ($relogged_in) {
                 if ($_POST['pwd'] === $_POST['pwdC']) {
                     $p = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
                 } else {
-                    $register_errors['pwdC'] = 'Passwords do not match.';
+                    $register_errors['pwdC'] = 'Passwords do not match';
                 }
             } else {
                 $register_errors['pwd'] = 'Password does not meet requirements';
