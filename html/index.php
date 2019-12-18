@@ -1,7 +1,7 @@
 <?php
 require './assets/includes/config.inc.php';
-require './assets/includes/head.php';
 $page = 'Home';
+require './assets/includes/head.php';
 ?>
 
 <body class="homeBody">
@@ -9,7 +9,7 @@ $page = 'Home';
 <?php require './assets/includes/header.inc.php'; ?>
 
 <!-- Main body content -->
-<article id="mainContent">
+<article id="mainContent" class="homeMainContent">
     <header class="mainHeading_Container">
         <h1>Terra Navis Living</h1>
     </header>

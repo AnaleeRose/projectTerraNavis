@@ -3,6 +3,7 @@ ob_start();
 require './assets/includes/config.inc.php';
 require MYSQL;
 require './assets/includes/form_functions.inc.php';
+$page = 'News';
 require './assets/includes/head.php';
 ?>
 
@@ -14,11 +15,11 @@ require './assets/views/showArticles.inc.php';
 $showArticle_errors;
 ?>
 
-<article id="mainContent">
-<h1 class="page-title">Eco-News!</h1>
+    <!-- Main body content -->
+<article id="mainContent" class="allArticlesPage">
+    <h1 class="page-title">Eco-News!</h1>
 
-<!-- Main body content -->
-<?php  showArticles('description_only'); ?>
+    <?php  showArticles('description_only'); ?>
 </article>
 
 <!-- NOTE -----------------------*************************************----------------- -->

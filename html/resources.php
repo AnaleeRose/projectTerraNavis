@@ -1,4 +1,6 @@
 <?php
+$page = 'Resources';
+
 require './assets/includes/config.inc.php';
 require './assets/includes/head.php';
 ?>

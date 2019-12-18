@@ -83,6 +83,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
+  font-family: 'ptsans', sans-serif;
 	line-height: 1;
 }
 ol, ul {
@@ -158,21 +159,27 @@ html {
 
   --mainNavLink: black;
 }
-body {
-/*  display: grid;
+body:not(.homeBody) {
+  display: grid;
   grid-template-areas:
-  '. mainHeader'
-  '. mainContent';
+  'mainHeader mainContent'
+  'footer footer';
   grid-template-columns: 1fr 4fr;
   grid-template-rows:  auto;
-  position: relative;*/
+  position: relative;
 }
-#main-header {
+#main-header.homePage {
   display: grid;
-  /*grid-area: mainHeader;*/
   grid-template-areas: '. img';
   grid-template-columns: 1fr 4fr;
+  max-width: none;
+}
+
+#main-header {
+  grid-area: mainHeader
+  max-width: 250px;
   width: 100%;
+
 }
 h1 {
 
@@ -227,9 +234,9 @@ grid-row: 1 / 2;
   position: fixed;
   top: 0;
   width: 20vw;
+  z-index: 50;
 }
 #animatedbg {
-  background: #55556e;
   position: relative;
   grid-area: img;
   min-height: 70vh;
@@ -299,7 +306,7 @@ grid-row: 1 / 2;
     width: 91px;
   }
   .animImg_faucet:before {
-    animation: water_flow_bucket 8s infinite;
+    animation: water_flow_bucket 8s infinite linear;
     background: lightblue;
     content: '';
     height: 0;
@@ -397,17 +404,21 @@ grid-row: 1 / 2;
     top: 50;
     height: 5px;
   }
-  20% {
+  15% {
     top: 40px;
     height: 170px;
   }
-  75% {
+  78.5% {
     top: 40px;
     height: 170px;
+    width: 10px;
+    left: -58px;
   }
   80% {
     top: 150px;
     height: 10px;
+    width: 2px;
+    left: -54px;
   }
   100% {
     top: 220px;
@@ -422,7 +433,9 @@ grid-row: 1 / 2;
 
 /*------------------------------>
 Navigation*/
-
+#main-nav a.currentPage {
+  color: var(--dRed)
+}
 .navLogoContainer {
   overflow: hidden;
 }
@@ -540,6 +553,10 @@ Navigation*/
 4. Main Body Content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 #mainContent {
+  grid-area: mainContent;
+}
+
+.homeMainContent {
   display: grid;
   grid-template-areas:
   'heading_c heading_c heading_c heading_c heading_c heading_c heading_c heading_c'
@@ -553,13 +570,13 @@ Navigation*/
   grid-area: heading_c;
 }
 .mainHeading_Container h1 {
-  display: none;
-  font-size: 2rem;
-  margin: 2rem auto;
+  color: var(--dRed);
+  font: 4.5rem/1 'cabin';
+  margin: 8rem auto 2rem;
   text-align: center;
 }
 .sec-title {
-  font-size: 4.5rem;
+  font-size: 3.8rem;
   font-family: 'cabin';
   color: var(--dRed);
   border-bottom: 6px solid #000;
@@ -624,7 +641,7 @@ Navigation*/
     #mainpg-sec2 h2:after {
       left: 0;
       padding: 10rem 3px;
-      top: 7.1rem;
+      top: 6.1rem;
     }
 #mainpg-sec3 {
   grid-area: sec3;
@@ -660,6 +677,96 @@ Navigation*/
     top: 16%;
   }
 .readMore_home:hover {color: var(--oliveGreen);}
+
+.title-img {
+  border-radius: 50%;
+  display: block;
+  margin: 4rem auto 1.5rem;
+  width: 11.5rem;
+}
+.page-title {
+  display: block;
+  font: 5.5rem/1 'cabinbold';
+  padding: 1rem 2rem 3rem;
+  text-align: center;
+}
+.multiContentPage section {
+  font: 1rem/1.8 'ptsans';
+  margin: 6rem auto;
+  width: 80%;
+}
+
+.multiContentPage .sec-title {
+  font: 3rem/1 'cabinbold';
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+  padding-bottom: 1rem;
+  text-transform: uppercase;
+}
+.multiContentPage .sec-content {
+  box-sizing: border-box;
+  padding: 1rem 2rem;
+}
+
+.multiContentPage .sec-content p {
+  margin: 0 0 1.5rem;
+  text-indent: 40px;
+}
+
+.allArticlesPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.indiArticle {
+  border-bottom: 8px solid black;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1rem 2fr;
+  grid-template-areas: 'img . info';
+  padding: 1.5rem 2.5rem 2.5rem;
+  position: relative;
+}
+
+  .indiArticle:last-of-type { border: none;}
+.indiArticle-content {
+  grid-area: info;
+}
+.indiArticle-img {
+  grid-area: img;
+  margin: auto;
+  width: 400px;
+}
+
+.indiArticle-date, .indiArticle-category {
+    font-size: 1rem;
+    margin: 1rem 0;
+}
+.indiArticle-category {
+  color: var(--dRed);
+  font-weight: bold;
+}
+.indiArticle-title {
+  color: var(--dRed);
+  font: 2.5rem/1 'cabin';
+  margin: 1rem 0 1.5rem;
+}
+.indiArticle-description {
+  font-size: 1.2;
+  line-height: 1.5;
+}
+.indiArticle .readMore {
+  bottom: 1.5rem;
+  color: var(--dRed);
+  display: block;
+  font-size: 1.3rem;
+  position: absolute;
+  right: 4vw;
+  text-align: right;
+}
+  .indiArticle .readMore:hover {
+    color: var(--oliveGreen);
+  }
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 5. Form Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
@@ -722,6 +829,7 @@ legend {
 footer {
   background-color: #765735;
   color: #e5e8d2;
+  grid-area: footer;
   font-family: pt-sans, sans-serif;
   font-size: .8em;
   height: 300px;
@@ -874,7 +982,7 @@ footer h2, .h2 {
   #main-header {
     grid-template-columns: 250px 6fr;
   }
-  #mainContent {
+  #mainContent.homeMainContent {
     margin-left: 250px;
     width: calc(100% - 300px);
   }

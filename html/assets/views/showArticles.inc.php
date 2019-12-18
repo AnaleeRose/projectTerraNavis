@@ -7,18 +7,21 @@ function showArticles($displaytype) {
     $showArticle_errors = [];
     if ($displaytype === 'description_only') {
         $num = 1;
-        $q = 'SELECT * FROM `articles` ORDER BY date_modified DESC LIMIT 10';
+        $q = 'SELECT a.*, c.category as category FROM articles a JOIN categories c ON a.article_category = c.category_id ORDER BY date_modified DESC LIMIT 10';
         $r = mysqli_query($dbc, $q);
         if ($r && mysqli_num_rows($r) > 0) {
             while ($row = $r->fetch_assoc()) {
                 if ($row['error_flag'] === null && $num <= 5) {
                     ?>
-                        <section class="article<?= $num; ?>">
-                            <img class="article-img" src="<?= IMG_PATH_HTML . $row['img_name']; ?>" alt="Article Image">
-                            <p class="article-date"><?= date('M j, Y', strtotime($row['date_added']));   ?></p>
-                            <h2 class="sec-title"><?= $row['article_name']; ?></h2>
-                            <p class="article-description"><?= $row['article_description']; ?></p>
-                            <a class="readmore" href="./readArticle.php?article_id=<?= $row['article_id']?>">Read More >></a>
+                        <section class="article<?= $num; ?> indiArticle">
+                            <img class="indiArticle-img" src="<?= IMG_PATH_HTML . $row['img_name']; ?>" alt="Article Image">
+                            <div class="indiArticle-content">
+                                <p class="indiArticle-category"><?= $row['category']; ?></p>
+                                <p class="indiArticle-date"><?= date('F jS, Y', strtotime($row['date_added']));   ?></p>
+                                <h2 class="indiArticle-title"><?= $row['article_name']; ?></h2>
+                                <p class="indiArticle-description"><?= $row['article_description']; ?></p>
+                                <a class="readMore" href="./readArticle.php?article_id=<?= $row['article_id']?>">Read Article >></a>
+                            </div>
                         </section>
                     <?php
                     $num++;

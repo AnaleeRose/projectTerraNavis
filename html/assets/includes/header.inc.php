@@ -1,20 +1,23 @@
-<header id="main-header">
+<header id="main-header"
+<?php if (isset($page) && strtolower($page) == 'home') echo 'class="homePage"';
+?>
+>
     <div class="navLogoContainer">
         <div id="headerlogo">
             <!-- <a  href="index.php"> -->
-                <img  class="headerlogo" src="assets/images/404duck.png" alt="Terra Navis Living Logo">
+                <a href="index.php"><img  class="headerlogo" src="assets/images/404duck.png" alt="Terra Navis Living Logo"></a>
             <!-- </a>          -->
         </div>
         <nav id="main-nav">
             <ul class="main-nav">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php" <?php if (isset($page) && strtolower($page) == 'home') echo 'class="currentPage"';?>>Home</a></li>
                 <li
                   <?php
                     if (isset($page) && strtolower($page) == 'sustain') {
                       echo 'class="navListHeader"';
                     }
                   ?>
-                  ><a href="sustainability.php">Sustainability</a>
+                  ><a href="sustainability.php" <?php if (isset($page) && strtolower($page) == 'sustain') echo 'class="currentPage"';?> >Sustainability</a>
                 <?php
                 // change the title in quotes below to match whatever the page title is on that page, all lower case in the quotes pls
                 // also added the dropdownUl class for the styles that match both (like for js to target it for special effects!)
@@ -36,7 +39,7 @@
                     } elseif (isset($page) && strtolower($page) == 'sustain') {
                       echo 'class="li_underneath"';
                     }
-                  ?>><a href="construction.php">Construction</a>
+                  ?>><a href="construction.php" <?php if (isset($page) && strtolower($page) == 'construct') echo 'class="currentPage"';?> >Construction</a>
 
                     <?php
                     // change the title in quotes below to match whatever the page title is on that page, all lower case in the quotes pls
@@ -56,10 +59,10 @@
                       echo 'class="li_underneath"';
                     }
                   ?>
-                ><a href="econews.php">Eco News</a></li>
-                <li><a href="resources.php">Resources</a></li>
-                <li><a href="faq.php">FAQ</a></li>
-                <li><a href="contact.php">Contact</a></li>
+                ><a href="econews.php" <?php if (isset($page) && (strtolower($page) == 'news' || strtolower($page) == 'read')) echo 'class="currentPage"';?>>Eco News</a></li>
+                <li><a href="resources.php" <?php if (isset($page) && strtolower($page) == 'resources') echo 'class="currentPage"';?>>Resources</a></li>
+                <li><a href="faq.php" <?php if (isset($page) && strtolower($page) == 'faq') echo 'class="currentPage"';?>>FAQ</a></li>
+                <li><a href="contact.php"<?php if (isset($page) && strtolower($page) == 'contact') echo 'class="currentPage"';?>>Contact</a></li>
             </ul>
         </nav>
     </div>

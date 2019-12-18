@@ -1,4 +1,5 @@
 <?php
+$page = 'FAQ';
 require './assets/includes/config.inc.php';
 require './assets/includes/head.php';
 ?>
