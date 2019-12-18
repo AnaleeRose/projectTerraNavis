@@ -64,4 +64,9 @@
         <p>&copy; FT BPA Team 2019-2020</p>
     </div>
 </footer>
-
+<script defer>
+    console.log('hullo')
+    bodyText = document.body.innerHTML
+    bodyText.replace(/(^[\s\u200b]*|[\s\u200b]*$)/g, '')
+    document.body.innerHTML = bodyText
+</script>
