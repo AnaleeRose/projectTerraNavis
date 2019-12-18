@@ -52,6 +52,9 @@ Light Red ------------------- rgb(246, 228, 224)        #f9eae6
   font-weight: normal;
   font-style: normal;
 }
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'cabin', sans-serif;
+}
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -451,7 +454,7 @@ Navigation*/
 .main-nav a {
   color: var(--mainNavLink);
   display: block;
-  font-family: 'cabin';
+  font-family: 'cabin', sans-serif;
   font-size: 1.4rem;
   font-weight: bold;
   padding: .7rem 0 .7rem 2rem;
@@ -571,18 +574,18 @@ Navigation*/
 }
 .mainHeading_Container h1 {
   color: var(--dRed);
-  font: 4.5rem/1 'cabin';
+  font: 4.5rem/1 'cabin', sans-serif;
   margin: 8rem auto 2rem;
   text-align: center;
 }
 .sec-title {
   font-size: 3.8rem;
-  font-family: 'cabin';
+  font-family: 'cabin', sans-serif;
   color: var(--dRed);
   border-bottom: 6px solid #000;
 }
 #mainpg-sec1, #mainpg-sec2, #mainpg-sec3 {
-  font: 1.4rem/1.8 'ptsans';
+  font: 1.4rem/1.8 'ptsans', sans-serif;
   margin: 5vh 0;
   position: relative;
   width: 100%;
@@ -686,18 +689,18 @@ Navigation*/
 }
 .page-title {
   display: block;
-  font: 5.5rem/1 'cabinbold';
+  font: bold 5.5rem/1 'cabinbold', sans-serif;
   padding: 1rem 2rem 3rem;
   text-align: center;
 }
 .multiContentPage section {
-  font: 1rem/1.8 'ptsans';
+  font: 1rem/1.8 'ptsans', sans-serif;
   margin: 6rem auto;
   width: 80%;
 }
 
 .multiContentPage .sec-title {
-  font: 3rem/1 'cabinbold';
+  font: bold 3rem/1 'cabinbold', sans-serif;
   margin-bottom: 1rem;
   padding-left: 2rem;
   padding-bottom: 1rem;
@@ -748,7 +751,7 @@ Navigation*/
 }
 .indiArticle-title {
   color: var(--dRed);
-  font: 2.5rem/1 'cabin';
+  font: 2.5rem/1 'cabin', sans-serif;
   margin: 1rem 0 1.5rem;
 }
 .indiArticle-description {
@@ -828,7 +831,7 @@ legend {
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 footer {
   background-color: #765735;
-  color: #e5e8d2;
+  color: var(--almond);
   grid-area: footer;
   font-family: pt-sans, sans-serif;
   font-size: .8em;
@@ -858,12 +861,12 @@ footer {
     text-align: center;
   }
   #team-blurb p {
-    font: .95rem/1.2 'ptsans';
+    font: .95rem/1.2 'ptsans', sans-serif;
   }
   .blurb-link {
     color: #e5e8d2;
     display: block;
-    font: bold 1.05rem/1 'ptsans';
+    font: bold 1.05rem/1 'ptsans', sans-serif;
     margin-top: 1rem;
     text-align: left;
     text-decoration: underline;
@@ -889,6 +892,7 @@ footer {
   #email, .h2 {
   }
   .newsButton {
+    background: var(--dRed);
     border: 3px solid var(--dRed);
     border-left: none;
     border-radius: 0 5px 5px 0;
@@ -902,7 +906,7 @@ footer {
   }
 
   .newsButton:after {
-    color: var(--dRed);
+    color: #fff;
     content: '✓';
     font-size: 2.5rem;
     font-weight: bold;
@@ -942,7 +946,7 @@ footer {
 
   #contact-info>div {
     display: grid;
-    font: 1rem/1.15 'ptsans';
+    font: 1rem/1.15 'ptsans', sans-serif;
     grid-template-columns: 75px 1fr;
     margin: 2rem auto;
     max-width: 260px;
@@ -969,7 +973,7 @@ footer h2, .h2 {
 
 #copyright p {
   color: var(--almond);
-  font: .83rem/1 'ptsans';
+  font: .83rem/1 'ptsans', sans-serif;
   position: absolute;
   left: 3px;
   bottom: 1px;
