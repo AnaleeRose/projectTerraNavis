@@ -32,7 +32,7 @@ if (!isset($_GET['article_id'])) {
 }
 
 // make sure that article exists, if it doesnt toss an error
-$q = "SELECT * FROM articles WHERE article_id = $article_id";
+$q = "SELECT a.*, c.category FROM articles a JOIN categories c ON a.article_category = c.category_id WHERE article_id = 1";
 $r = mysqli_query($dbc, $q);
 if (mysqli_num_rows($r) === 0 && !isset($_GET['delete'])) {
     ob_end_clean();
@@ -45,7 +45,7 @@ if (mysqli_num_rows($r) === 0 && !isset($_GET['delete'])) {
 } else {
     while ($row = $r->fetch_assoc()) {
         $a_name = $row['article_name'];
-        $a_category = $row['article_category'];
+        $a_category = $row['category'];
         $a_description = $row['article_description'];
         $date_created = $row['date_added'];
         $last_modified = $row['date_modified'];
@@ -92,19 +92,21 @@ echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
 			<p>Are you sure you want to delete this article?</p>
 			<table class="deleteTable">
 				<tr>
-					<th align="left">Article Name</th>
+					<th align="left">Name</th>
 					<th align="left">Category</th>
-					<th align="left">Description</th>
-					<th align="left">Date Created</th>
-					<th align="left">Last Modified</th>
 				</tr>
 				<tr>
 					<td><?= $a_name; ?></td>
 					<td><?= $a_category; ?></td>
-					<td><?= $a_description; ?></td>
-					<td><?= $date_created; ?></td>
-					<td><?= $last_modified; ?></td>
 				</tr>
+                <tr>
+                    <th align="left">Date Created</th>
+                    <th align="left">Last Modified</th>
+                </tr>
+                <tr>
+                    <td><?= date('F jS, Y', strtotime($date_created)); ?></td>
+                    <td><?= date('F jS, Y', strtotime($last_modified)); ?></td>
+                </tr>
 			</table>
 			<div class="btnContainer">
 				<a href="deleteArticle.php?article_id=<?= $article_id ?>&delete=true" class="adminBtn adminBtn_danger deleteArticleBtn">Delete Article</a>

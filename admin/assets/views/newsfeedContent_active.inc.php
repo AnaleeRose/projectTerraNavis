@@ -52,10 +52,10 @@ function create_article($a_num) {
 
     $this_article = $all_articles[$a_num];
     $date_added = strtotime($this_article['date_added']);
-    $date_added = date("m-d-Y", $date_added);
+    $date_added = date('F jS, Y', strtotime($date_added));
     if (!empty($this_article['date_modified'])) {
         $date_modified = strtotime($this_article['date_modified']);
-        $date_modified = date("m-d-Y", $date_modified);
+        $date_modified = date('F jS, Y', strtotime($date_modified));
         if ($date_modified === $date_added) $date_modified = 'Never';
     } else {
         $date_modified = 'Never';
@@ -100,10 +100,10 @@ function create_email($e_num) {
     $this_email = $all_emails[$e_num];
     $e_num++;
     $date_added = strtotime($this_email['date_added']);
-    $date_added = date("m-d-Y", $date_added);
+    $date_added = date('F jS, Y', strtotime($date_added));
     if (!empty($row['date_sent'])) {
         $date_sent = strtotime($this_email['date_sent']);
-        $date_sent = date("m-d-Y", $date_sent);
+        $date_modified = date('F jS, Y', strtotime($date_sent));
     } else {
         $date_sent = 'Never';
     }

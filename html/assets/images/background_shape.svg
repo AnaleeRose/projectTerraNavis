@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="743.455" height="1404.13" viewBox="0 0 743.455 1404.13">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.198" y1="0.158" x2="0.699" y2="0.91" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#6f9a3f"/>
+      <stop offset="1" stop-color="#c7d099"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_183" data-name="Group 183" transform="matrix(0.995, -0.105, 0.105, 0.995, 7.806, 98.782)">
+    <path id="Path_5" data-name="Path 5" d="M1105.739-.93S792.255,56.233,740.761,153.538C723.1,241.2,901.869,589.9,807.117,698.785s-188.192,33.379-360.972,92.444c.2,3.815,0-792.158,0-792.158h659.594Z" transform="translate(-446.145 -29.07)" fill="url(#linear-gradient)"/>
+    <path id="Path_4" data-name="Path 4" d="M788.867,44.261C690.6,87.868,672.557,96.9,660.775,156.53s89.309,244.423,26.115,318.483-125.512,22.7-240.745,62.88c.13,2.6,0-538.824,0-538.824h614.516S888.839,4.9,788.867,44.261Z" transform="translate(-450.576 -31.592)" fill="#fff"/>
+    <text id="_6F4A29" data-name="#6F4A29" transform="translate(37.855 1016.517)" fill="#707070" font-size="20" font-family="HelveticaNeue, Helvetica Neue"><tspan x="0" y="19">#6F4A29</tspan></text>
+  </g>
+</svg>
