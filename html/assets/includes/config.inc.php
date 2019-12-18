@@ -18,10 +18,9 @@ if ($online) {
     define('BASE_URI', '/home/analeerose/bpa-development.savannahskinner.com/');
     define('BASE_URL', 'http://bpa-development.savannahskinner.com/');
 } else {
-    define('BASE_URI', 'Applications/XAMPP/xamppfiles/htdocs/projectTerraNavis/mysql.inc.php');
-    
-    define('BASE_URL', 'http://localhost:81/BPA/');
-    // define('BASE_URL', 'http://localhost/BPA/');
+    define('BASE_URI', '/Applications/XAMPP/xamppfiles/htdocs/projectTerraNavis/');
+    // define('BASE_URL', 'http://localhost:81/BPA/');
+    define('BASE_URL', 'http://localhost/BPA/');
 }
 
 
@@ -29,7 +28,7 @@ if ($online) {
 if ($online) {
     define('MYSQL', $_SERVER['DOCUMENT_ROOT'] . '/mysql.inc.php');
 } else {
-    define('MYSQL', $_SERVER['DOCUMENT_ROOT'] . '/bpa/mysql.inc.php');
+    define('MYSQL', BASE_URI . 'mysql.inc.php');
 }
 
 
