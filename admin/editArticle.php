@@ -240,7 +240,7 @@ $options = ['required' => null];
             <?php
 
                 if ($media_type === 'article') {
-                    $options = ['required' => null, 'placeholder' => 'Name', 'maxlength' => 50];
+                    $options = ['required' => null, 'placeholder' => 'Name | Max Characters: 55', 'maxlength' => 55];
                     create_form_input('article_name', 'text', 'Aricle Name: ', $newArticle_errors, $options);
                     echo REQUIRED;
                     ?>
@@ -265,7 +265,7 @@ $options = ['required' => null];
 
                     // throw an error if something went wrong with the select (create_form_input usually handles this but since this once was made here, it has to create errors here too)
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
-                    $options = ['required' => null, 'placeholder' => 'Description', 'maxlength' => 400];
+                    $options = ['required' => null, 'placeholder' => 'Description | Max Characters: 750', 'maxlength' => 750];
                     create_form_input('article_description', 'textarea', 'Description', $newArticle_errors, $options);
                     echo REQUIRED;
 
@@ -275,7 +275,7 @@ $options = ['required' => null];
                     echo '>';
 
 
-                    $options = ['required' => null, 'placeholder' => 'Caption', 'maxlength' => 100];
+                    $options = ['required' => null, 'placeholder' => 'Caption | Max Characters: 250', 'maxlength' => 250];
                     create_form_input('caption', 'text', 'Image Caption', $newArticle_errors, $options);
                     if (!empty($img_errors)) {
                         foreach ($img_errors as $key => $value) {
@@ -315,7 +315,10 @@ $options = ['required' => null];
                     </div>
 <!-- check content if you clicked published and send it on it's way! -->
 <?php
-    if (isset($_POST['publishMediaBtn'])) {
+print_r($_REQUEST);
+// var_dump($GLOBALS);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['article_name'])) {
         // if u have clickty clicked the button and there's at least one piece of content and there's no issues with the image...
         if (empty($newArticle_errors) && empty($img_errors) && $at_least_one_element === true) {
             $a_name = htmlentities($_POST['article_name']);
@@ -375,7 +378,6 @@ $options = ['required' => null];
                         $stmt->bindParam(':elem_last_li', $this_element_last_li, PDO::PARAM_INT);
 
                         if (!$stmt->execute()) {
-
                             // if anything goes wrong, throw an error!
                             ob_end_clean();
                             require './assets/includes/header.html';
@@ -387,7 +389,7 @@ $options = ['required' => null];
 
                         }
 
-                    } else {
+                    } elseif (!empty($this_element_name)) {
                         // ...but if it's NOT a list item, add it this way
                         $this_element_id = $this_element_info['id'];
                         $this_element_order = $this_element_info['order'];
@@ -400,7 +402,6 @@ $options = ['required' => null];
                         $stmt->bindParam(':elem_content', $this_element_content, PDO::PARAM_STR);
 
                         if (!$stmt->execute()) {
-
                             // if anything goes wrong, throw an error!
                             ob_end_clean();
                             require './assets/includes/header.html';
@@ -423,7 +424,6 @@ $options = ['required' => null];
                     if ($stmt->execute()) {
                         header('Location: ' . BASE_URL . 'admin/view.php?view_type=view&media_type=article&media_id=' . $article_db_id);
                     } else {
-
                         // or throw an error, ya know, if something went wrong
                         ob_end_clean();
                         require './assets/includes/header.html';
@@ -433,6 +433,7 @@ $options = ['required' => null];
                         require './assets/includes/footer.html';
                         exit();
                     }
+
                 } else {
 
                     // throw an error, ya know, if something went wrong
@@ -444,7 +445,9 @@ $options = ['required' => null];
                     require './assets/includes/footer.html';
                     exit();
                 }
+
             } else {
+                echo 'MISTAKA';
                 print_r($dbpdo->errorInfo());
 
                 // throw an error, ya know, if something went wrong
@@ -456,8 +459,18 @@ $options = ['required' => null];
                 // require './assets/includes/footer.html';
                 // exit();
             } //stmt execute END
-    } // no errors, contents exists check END
-} // btn was pushed END
+        } else {
+            echo 'something basic!!!';
+        } // no errors, contents exists check END
+    } else {
+        if (isset($_POST['publishMediaBtn'])) {
+            echo 'pushed';
+        } else {
+            print_r($_POST);
+            echo 'not pushed';
+        }
+    } // at least article_name isset, so we can check the rest i guess idk
+} // post type == post
 ?>
                     <div class="contentTypes">
                         <p data-contentType="p" class="contentTypeBtn contentPhpBtn" data-content_type_id=1>Paragraph</p>

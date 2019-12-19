@@ -14,7 +14,7 @@ while ($row = $r->fetch_assoc()) {
                 $trackElements[$elemName]['order'] = $currentNum;
 
                 $options = [];
-                $options = ['placeholder' => 'Paragraph | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes'=>'Paragraph createInput ' . $elemName, 'required' => null, 'data-content_type_id' => 1, 'deleteable'];
+                $options = ['placeholder' => 'Paragraph | Max 1500 characters', 'maxlength' => 1500, 'addtl_classes'=>'paragraph createInput ' . $elemName, 'required' => null, 'data-content_type_id' => 1, 'deleteable'];
                 create_form_input_e_ver($elemName, 'textarea', 'Paragraph', $elemContents, $newArticle_errors, $options);
                 $listAllElements .= $elemName . ',';
                 break;
@@ -26,7 +26,7 @@ while ($row = $r->fetch_assoc()) {
                 $element_name = 'Heading ' . $heading_num;
 
                 $options = [];
-                $options['maxlength'] = 100;
+                $options['maxlength'] = 150;
                 $options['placeholder'] = $element_name . ' | Max 150 characters ';
                 $options['addtl_classes'] = $element_class . ' createInput ' . $elemName;
 
@@ -91,7 +91,7 @@ while ($row = $r->fetch_assoc()) {
                 } // unordered list
                 // create the input
                 echo '<label for="' . $elemName . '" class="listItemLabel">List Item ' . substr($elemName, 8,2) . '</label>';
-                echo '<input name="' . $elemName . '" class="' . $elemName . ' ' . substr($elemName, 0,7) . ' list-item createInput" value="' .$elemContents . '" data-content_type_id=7>';
+                echo '<input type="text" name="' . $elemName . '" class="' . $elemName . ' ' . substr($elemName, 0,7) . ' list-item createInput" value="' .$elemContents . '" data-content_type_id=7>';
 
                 // if the last li, conclude fieldset
                 if (in_array($elemName, $last)) {
@@ -124,7 +124,7 @@ while ($row = $r->fetch_assoc()) {
                 }
                 // create the input
                 echo '<label for="' . $elemName . '" class="listItemLabel">List Item ' . substr($elemName, 8,2) . '</label>';
-                echo '<input name="' . $elemName . '" class="' . $elemName . ' ' . substr($elemName, 0,7) . ' list-item createInput" value="' . $elemContents . '" data-content_type_id=8>';
+                echo '<input type="text" name="' . $elemName . '" class="' . $elemName . ' ' . substr($elemName, 0,7) . ' list-item createInput" value="' . $elemContents . '" data-content_type_id=8>';
 
                 // if the last li, conclude fieldset
                 if (in_array($elemName, $last)) {

@@ -222,7 +222,7 @@ $options = ['required' => null];
             <?php
 
                 if ($media_type === 'article') {
-                    $options = ['required' => null, 'placeholder' => 'Name', 'maxlength' => 50];
+                    $options = ['required' => null, 'placeholder' => 'Name | Max Characters: 55', 'maxlength' => 55];
                     create_form_input('article_name', 'text', 'Aricle Name', $newArticle_errors, $options);
                     ?>
                     <label for="article_category">Category</label>
@@ -244,11 +244,11 @@ $options = ['required' => null];
 
 
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
-                    $options = ['required' => null, 'placeholder' => 'Description', 'maxlength' => 250];
+                    $options = ['required' => null, 'placeholder' => 'Description | Max Characters: 750', 'maxlength' => 750];
                     create_form_input('article_description', 'textarea', 'Description', $newArticle_errors, $options);
                     echo REQUIRED;
 
-                    $options = ['required' => null, 'placeholder' => 'Caption', 'maxlength' => 100];
+                    $options = ['required' => null, 'placeholder' => 'Caption | Max Characters: 250', 'maxlength' => 250];
                     create_form_input('caption', 'text', 'Image Caption', $newArticle_errors, $options);
                     if (!empty($img_errors)) {
                         foreach ($img_errors as $key => $value) {
@@ -490,7 +490,7 @@ Check out ' . $row['article_name'] . ' or read more articles about ' . $row['cat
                     // ----------------------------------------------------------------------------->
                     $options = ['required' => null, 'placeholder' => 'Subject | Max 75 characters', 'maxlength' => 75, 'addtl_classes' => 'emailInput'];
                     create_form_input('email_subject', 'text', 'Subject', $newEmail_errors, $options);
-                    $options = ['required' => null, 'placeholder' => 'Message | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes' => 'emailInput'];
+                    $options = ['required' => null, 'placeholder' => 'Message | Max 1500 characters', 'maxlength' => 1500, 'addtl_classes' => 'emailInput'];
                     create_form_input('email_msg', 'textarea', 'Message', $newEmail_errors, $options);
                     ?>
                     <p class="contentTypeBtn linkBtn_email linkGeneratorBtn">Link</p>

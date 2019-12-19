@@ -281,7 +281,6 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
 
         c_elementTracker = elementTracker.getAttribute('value')
         elementTracker.setAttribute('value', c_elementTracker + individual_name + ',');
-        // console.log(individual_name + ', | ' + elementTracker.getAttribute('value'))
 
     } else {
 
@@ -300,8 +299,24 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
         }
         input.setAttribute('name', individual_name);
         input.setAttribute('id', individual_name);
-        input.setAttribute('placeholder', label_name);
         input.setAttribute('data-content-type-id', data_content_id);
+
+        switch (input_type) {
+            case 'textarea':
+                input.setAttribute('maxlength', 1500)
+                input.setAttribute('placeholder', label_name + ' | Max Characters: 1500');
+                break;
+
+            case 'text':
+                input.setAttribute('maxlength', 150)
+                input.setAttribute('placeholder', label_name + ' | Max Characters: 150');
+                break;
+
+            default:
+                input.setAttribute('placeholder', label_name);
+                break;
+
+        }
 
 
         elementDeleteBtn = document.createElement('p')
@@ -322,7 +337,7 @@ function create_element(input_type, type_of_input, label_name, individual_name, 
 
         c_elementTracker = elementTracker.getAttribute('value')
         elementTracker.setAttribute('value', c_elementTracker + individual_name + ',');
-        // console.log(individual_name + ', | ' + elementTracker.getAttribute('value'))
+
     }
 
 }
@@ -392,6 +407,8 @@ function add_to_list(e) {
 
         newListItemInput = document.createElement('input');
         newListItemInput.setAttribute('name', individual_name)
+        newListItemInput.setAttribute('placeholder', 'Max Characters: 500')
+        newListItemInput.setAttribute('maxlength', 500)
         newListItemInput.classList.add(list_item_name, individual_name, 'list_item', 'contentInput', 'createInput');
         btn_clicked.parentNode.insertBefore(label, btn_clicked)
         btn_clicked.parentNode.insertBefore(newListItemInput, btn_clicked)
@@ -425,10 +442,10 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
             case 'p':
                 all = document.body.querySelectorAll(".paragraph");
                 all.forEach(function(thisElement) {
+                    console.log(thisElement)
                     if (thisElement.classList.contains('hidden') && noHiddenElements === true) {
                         elementName = thisElement.getAttribute('name')
                         elementName = elementName.substring(0, elementName.length - 10);
-                        console.log("name fixed: " + elementName)
 
                         label = document.body.querySelector('label[for="' + elementName + '"]')
                         label.parentNode.removeChild(label)
@@ -441,13 +458,20 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
 
                         noHiddenElements = false;
 
-                        // c_elementTracker = elementTracker.getAttribute('value')
-                        // elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
+                        c_elementTracker = elementTracker.getAttribute('value')
+                        elementTracker.setAttribute('value', c_elementTracker + elementName + ',');
                     }
                 })
                 if (noHiddenElements === true) {
                     num = all.length + 1
                     individualName = 'p_' + num;
+                    // if (document.body.querySelector('.' + individualName)) {
+                    //     individualName = 'p_' + ++num;
+                    // }
+                    while (document.body.querySelector('.' + individualName)) {
+                        individualName = 'p_' + ++num;
+                    }
+                    
                     placeholder = 'Paragraph';
                     if (all.length < max_on_page) {
                         create_element('textarea', 'paragraph', 'Paragraph', individualName, 1)
@@ -711,7 +735,7 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
             et_n_value = et_c_value.replace(elementName+',', '')
             elementTracker.setAttribute('value', et_n_value)
         }
-        elementName = elementName + '_destroyed';
+        elementToDelete.setAttribute('name', elementName + '_destroyed');
     }
 }
 

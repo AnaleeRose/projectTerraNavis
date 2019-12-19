@@ -43,7 +43,24 @@ if (isset($_POST['loginBtn'])) { //if they clicked the log in btn
                         }
                         header('Location: index.php');
                     } else {
-                        echo "oops";
+                        $q = "UPDATE `adminuser` a SET `profilePic_id` = 1 WHERE a.`admin_email` = '$e'";
+                        $r = mysqli_query($dbc, $q);
+                        if ($r) { // if all correct, kick into logged in mode abut reset the profile img
+                            $select = "SELECT a.admin_id AS uid, a.admin_username, a.admin_email, a.profilePic_id, a.light_mode, p.pic_Location FROM `info` i JOIN adminuser a ON a.admin_id = i.admin_id JOIN profilepictures p ON p.profilePic_id = a.profilePic_id WHERE a.admin_email = '$e'";
+                            $r2 = mysqli_query($dbc, $select);
+                            if (mysqli_num_rows($r2) === 1) { // if all correct, kick into logged in mode and save a ton of info on admin
+                                session_regenerate_id();
+                                while ($row = mysqli_fetch_array($r2, MYSQLI_ASSOC)) {
+                                   $_SESSION['uid'] = $row['uid'];
+                                   $_SESSION['username'] = $row['admin_username'];
+                                   $_SESSION['email'] = $row['admin_email'];
+                                   $_SESSION['profilePic_id'] = $row['profilePic_id'];
+                                   $_SESSION['profilePic_Location'] = $row['pic_Location'];
+                                   $_SESSION['light_mode'] = $row['light_mode'];
+                                }
+                                header('Location: index.php');
+                            }
+                        }
                     }
                 } else { // Incorrect password
                     $login_errors['DoesNotExist'] = 'Incorrect password';

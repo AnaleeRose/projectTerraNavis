@@ -8,7 +8,7 @@ if (isset($_POST['publishMediaBtn'])) {
                     $trackElements[$content]['content'] = $_POST[$content];
                     $trackElements[$content]['id'] = 1;
                     $trackElements[$content]['order'] = $currentNum;
-                    $options = ['placeholder' => 'Paragraph | Max 1000 characters', 'maxlength' => 1000, 'addtl_classes'=>'Paragraph contentInput', 'required' => null, 'data-content_type_id' => 1];
+                    $options = ['placeholder' => 'Paragraph | Max 1500 characters', 'maxlength' => 1500, 'addtl_classes'=>'Paragraph contentInput', 'required' => null, 'data-content_type_id' => 1];
                     create_form_input($content, 'textarea', 'Paragraph', $newArticle_errors, $options);
                     break;
 
@@ -78,7 +78,7 @@ if (isset($_POST['publishMediaBtn'])) {
                     }
                     // create the input
                     echo '<label for="' . $content . '" class="listItemLabel">List Item ' . substr($content, 8) . '</label>';
-                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item contentInput createInput" value="' . $_POST[$content] . '" data-content_type_id=7>';
+                    echo '<input type="text" name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item contentInput createInput" value="' . $_POST[$content] . '" data-content_type_id=7 maxlength="250" placeholder="Max Characters: 250">';
 
                     // if the last li, conclude fieldset
                     if (in_array($content, $last)) {
@@ -110,7 +110,7 @@ if (isset($_POST['publishMediaBtn'])) {
                     }
                     // create the input
                     echo '<label for="' . $content . '" class="listItemLabel">List Item ' . substr($content, 8) . '</label>';
-                    echo '<input name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item contentInput createInput"  value="' . $_POST[$content] . '" data-content_type_id=8>';
+                    echo '<input type="text" name="' . $content . '" class="' . $content . ' ' . substr($content, 0,7) . ' list-item contentInput createInput"  value="' . $_POST[$content] . '" data-content_type_id=8 maxlength="250" placeholder="Max Characters: 250">';
 
                     // if the last li, conclude fieldset
                     if (in_array($content, $last)) {

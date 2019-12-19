@@ -189,7 +189,7 @@ li a:hover {
   color: var(--dRed);
 }
 img {
-  width: 100%;
+  max-width: 100%;
 }
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 3. Header & Nav Styles
@@ -898,8 +898,7 @@ footer {
     border-radius: 7px 0 0 7px;
     font-size: 1rem;
     line-height: 1.5em;
-    padding: .45rem 1rem;
-    text-align: center;
+    padding: .45rem 2rem .45rem 1rem;
   }
 
   .socialLinkIconContainer {
