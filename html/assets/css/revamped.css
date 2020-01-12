@@ -117,7 +117,7 @@ html {
 	--text-subtle: #8E8477;
 
 	/*--link: #2B9333;*/
-	--tempColor: blue;
+	--tempColor: var(--dark);
 	--link: var(--pageColor);
 	--link-hover: var(--tempColor);
 	--link-active: var(--tempColor);
@@ -129,12 +129,15 @@ html {
 	--textFont: 'ptsans';
 	--textFont-bold: 'ptsansbold';
 	--textFont-italic: 'ptsans-italic';
+
+	--formBorder: rgba(44,30,8,.5);
 }
 
 body {
 	background: #fff;
 	color: var(--text);
 	position: relative;
+	font: 100% var(--textFont);
 }
 
 a {
@@ -162,6 +165,22 @@ img {
 	left: -200vw;
 	height: .1px;
 	width: .1px;
+}
+
+.quote {
+	background: linear-gradient(to right, var(--pageColor-shade) 0%, var(--pageColor) 5%, var(--pageColor) 100%);
+	box-sizing: border-box;
+	color: #fff;
+	display: block;
+	font: bold 1.3rem var(--textFont);
+	margin: 1rem 0;
+	padding: 1.2rem 0 1.2rem 10vw;
+	text-align: center;
+	width: 85vw;
+}
+
+.requiredWarning {
+	font: .9rem var(--headingFont);
 }
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -330,7 +349,7 @@ img {
 .mainContent {
 	background: linear-gradient(to bottom, var(--pageColor), var(--pageColor-shade));
 	padding-left: .75rem;
-	margin-bottom: -1rem;
+	margin-bottom: -1.3rem;
 }
 
 .mainContent-wrapper {
@@ -354,6 +373,10 @@ img {
 	font: bold 1.7rem var(--headingFont-bold), sans-serif;
 	padding: 1rem;
 	text-align: center;
+}
+
+.homeMainContent .mainHeading {
+	display: none;
 }
 
 .mainSection-content {
@@ -391,7 +414,7 @@ img {
 	}
 	.mainSection-readMore:before {
 		background: var(--link-hover);
-		bottom: 0;
+		bottom: -3px;
 		content: "";
 		height: 3px;
 		left: 0;
@@ -403,14 +426,181 @@ img {
 			padding: 0 calc(50% + 1.5rem) 0 50%;
 		}
 
+.faqHeadingArrow-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.pointArrow {
+	width: 0;
+	height: 0;
+	border-top: 15px solid transparent;
+	border-left: 30px solid var(--pageColor);
+	border-bottom: 15px solid transparent;
+}
+
+
+
+/*contact us*/
+.contactPage .mainContent-wrapper {
+	padding-top: 1rem;
+}
+.contactSidebar-container {
+	background: rgba(113, 122, 190,.75);
+	border-left: .5rem solid var(--pageColor);
+	color: #fff;
+	display: none;
+	max-width: 30vw;
+	padding: 1rem;
+	position: absolute;
+	right: 0;
+	top: 14rem;
+}
+
+.contactSidebar-header {
+	color: #fff;
+	font: bold 1.3rem var(--headingFont-bold);
+	padding: 1rem 0;
+}
+
+.contactSidebar-IconText {
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	font: 1rem var(--textFont);
+	justify-content: left;
+	padding: 1rem .5rem;
+}
+
+	.contactSidebar-container svg {
+		fill: #fff;
+		width: 4rem;
+	}
+
+	.contactSidebar-secondLineText {
+		display: block;
+	}
+
 
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 5. Form Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
+.form-container {
+	padding: 0 1rem 1rem;
+}
 
+.form-container label {
+	color: var(--dark);
+	font: bold 1.3rem var(--headingFont-bold);
+	padding: 1rem 0;
+}
 
+.form-container input, .form-container textarea {
+	background: #fff;
+	border: 2px solid var(--formBorder);
+	border-radius: 2rem;
+	color: var(--pageColor-shade);
+	padding: .5rem .75rem;
+}
+
+.form-container input:not([type="radio"]) {
+	max-width: 25rem;
+	min-width: 280px;
+	width: 100%;
+}
+.form-container textarea {
+	border-radius: 1rem;
+	max-width: 90vw;
+	min-height: 200px;
+	min-width: 280px;
+	padding: 1rem;
+	width: 100%;
+}
+
+.cf_inputLabel-container {
+	display: flex;
+	flex-direction: column;
+	margin: 1rem 0;
+}
+
+	.cf_joinChoice-container {
+		display: flex;
+		flex-direction: column;
+		margin: .5rem auto 0;
+	}
+
+		.cf_joinChoice-indiContainer {
+			display: flex;
+			flex-direction: row;
+			padding: .5rem;
+			position: relative;
+		}
+		.cf_joinChoice-input {
+			margin-right: 1rem;
+		}
+		.cf_joinChoice-text {
+			color: var(--text-subtle);
+			font: 1.3rem var(--headingFont);
+		}
+
+.customRadioBtn {
+	background: #fff;
+	border: 2px solid var(--text-subtle);
+	border-radius: 50%;
+	height: 20px;
+	position: absolute;
+	left: 0;
+	top: 6px;
+	width: 20px;
+}
+
+.checkedCustomRadioBtn {
+	background: var(--pageColor);
+	border-color: var(--pageColor);
+}
+
+.cf_msg-container {
+    align-items: center;
+	display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+#characterCounter {
+	border-top: 1px solid var(--text-subtle);
+	border-bottom: 1px solid var(--text-subtle);
+	box-sizing: border-box;
+	color: var(--text-subtle);
+	display: block;
+	padding: .5rem 1rem;
+	position: relative;
+	margin: -3.25rem 0 0;
+	max-width: 90%;
+	text-align: center;
+}
+
+.form-container .cf_btn {
+	background: var(--pageColor);
+	border: none;
+	color: #fff;
+	display: block;
+	font: bold 1.5rem var(--headingFont-bold);
+	margin: 0 auto;
+	padding: .75rem 1rem;
+}
+
+.form-container .cf_btn:hover, .form-container .cf_btn:active {
+	background: #fff;
+	color: var(--pageColor);
+}
+
+#cf_submit {
+    min-width: auto;
+    width: 9.85rem;
+}
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 6. Footer Content
@@ -467,7 +657,9 @@ img {
 		color: var(--pageColor-link);
 		font: 1.4rem var(--textFont), sans-serif;
 	}
-
+	.f_teamBlurb-link:hover {
+		color: #fff;
+	}
 
 .f_emailInput-container {
 	display: inline-block;
@@ -571,6 +763,9 @@ img {
 	.mainNav {
 		width: 25rem;
 	}
+	.homeMainContent .mainHeading {
+		display: block;
+	}
 	.tempHeaderImg svg {
 		padding-top: 3rem;
 		margin: 0 7vw 3.5rem 3vw;
@@ -599,7 +794,7 @@ img {
 
 	.navLogo-container {
 	    background: rgba(255,255,255,.9);
-		position: fixed;
+		/*position: fixed;*/
 	    z-index: 12;
 	}
 
@@ -651,6 +846,43 @@ img {
 		top: .5rem;
 		width: 1.75rem;
 	}
+
+	.cf-container {
+		padding: .5rem 3rem;
+	}
+
+	.cf_inputLabel-container:not(.cf_msgCounter-container):not(.cf_joinNewsletter-container) {
+		align-items: center;
+		flex-direction: row;
+	}
+
+	.cf_inputLabel-container {
+		margin: 2rem 0;
+	}
+
+	.cf_joinChoice-container {
+		flex-direction: row;
+		margin: 0 2rem;
+	}
+
+	.cf_joinChoice-indiContainer {
+		margin-right: 1rem;
+	}
+
+	.requiredWarning {position: absolute;}
+
+	.equalWidthContainer {
+		display: grid;
+		grid-template-columns: 5rem 1fr;
+		grid-template-areas: 'label input';
+	}
+
+	.cf_msgCounter-container label {
+		padding-bottom: 2rem;
+	}
+
+	.form-container label {grid-area: label}
+	.form-container input {grid-area: input}
 
 	.f_teamBlurb-container .f_heading, .f_teamBlurb-link {
 		margin: 1rem 4.7vw;
@@ -789,24 +1021,18 @@ img {
 				width: 0;
 			}
 
-			.mainNav-link:after {
+			.mainNav-link:after, .mainNav-link:hover:after  {
 				border-top: 3px solid var(--pageColor-link);
 				border-top: 3px solid var(--dark);
-				bottom: 2px;
+				bottom: 4px;
 				content: "";
 				left: .7rem;
 				position: absolute;
 				transition: width .25s;
-				width: ;
+				width: 0;
 			}
 
 			.mainNav-link:hover:after {
-				border-top: 3px solid var(--pageColor-link);
-				border-top: 3px solid var(--dark);
-				bottom: 2px;
-				content: "";
-				left: .7rem;
-				position: absolute;
 				width: calc(100% - 1.4rem);
 			}
 
@@ -816,6 +1042,11 @@ img {
 	.mainSection-container {
 		padding: 3.5rem 4vw 5.5rem;
 	}
+
+	.contactSidebar-container {
+		display: block;
+	}
+
 
 	#f-container {
 		display: grid;

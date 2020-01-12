@@ -18,9 +18,11 @@ if ($online) {
     define('BASE_URI', '/home/analeerose/bpa-development.savannahskinner.com/');
     define('BASE_URL', 'http://bpa-development.savannahskinner.com/');
 } else {
-    define('BASE_URI', '/Applications/XAMPP/xamppfiles/htdocs/projectTerraNavis/');
-    define('BASE_URL', 'http://localhost:81/BPA/');
+
+    // define('BASE_URI', '/Applications/XAMPP/xamppfiles/htdocs/projectTerraNavis/');
     // define('BASE_URL', 'http://localhost/projectTerraNavis/');
+    define('BASE_URI', 'C:/xampp/htdocs/projectTerraNavis/');
+    define('BASE_URL', 'http://localhost:81/BPA/');
 }
 
 

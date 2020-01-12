@@ -3,23 +3,44 @@ ob_start();
 require './assets/includes/config.inc.php';
 require MYSQL;
 require './assets/includes/form_functions.inc.php';
+
+
+// contact form handling
+$contact_errors = [];
+$showArticle_errors = [];
+$c_options = ['required' => '', 'contactPage' => ''];
+require './assets/views/showArticles.inc.php';
+
+
+
 $page = 'News';
+if ($page = 'News') {
+?>
+<style type="text/css">
+  :root {
+      --pageColor: var(--contact);
+      --pageColor-shade: var(--contact-shade);
+      --pageColor-link: var(--contact-link);
+  }
+</style>
+<?php
+}
 require './assets/includes/head.php';
 ?>
 
-<body>
+<body class="">
 <!------ Header ------------>
-<?php
-require './assets/includes/header.inc.php';
-require './assets/views/showArticles.inc.php';
-$showArticle_errors;
-?>
+<?php require './assets/includes/header.inc.php'; ?>
 
-    <!-- Main body content -->
-<article id="mainContent" class="allArticlesPage">
-    <h1 class="page-title">Eco-News!</h1>
+<!-- Main body content -->
+<article id="mainContent" class="multiContentPage mainContent contactPage">
+    <header class="mainHeading_Container">
+       <h2 class="mainHeading">Newsfeed</h2>
+    </header>
 
-    <?php  showArticles('description_only'); ?>
+    <div class="mainContent-wrapper">
+        <?php  showArticles('description_only'); ?>
+    </div>
 </article>
 
 <!-- NOTE -----------------------*************************************----------------- -->

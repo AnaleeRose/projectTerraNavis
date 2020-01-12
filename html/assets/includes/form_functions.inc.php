@@ -1,12 +1,19 @@
 <?php
 function create_form_input($name, $type, $label = '', $errors = [], $options = array()) {
+	if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options))) {echo '<div class="cf_inputLabel-container ';}
+	if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options)) && (array_key_exists('addtl_div_classes', $options))) {echo $options['addtl_div_classes'] ;}
+	echo '">';
 	$value = false;
 	if (isset($_POST[$name])) $value = $_POST[$name];
 	if ($value && get_magic_quotes_gpc()) $value = stripcslashes($value);
 	if (!empty($label)) {
 		echo '<label for="' . $name . '"';
 		if (array_key_exists($name, $errors)) echo 'class=""';
-		echo '>' . $label . '</label>';
+		echo '>' . $label;
+
+	if ((!empty($options)) && (is_array($options)) && (array_key_exists('required', $options)) && (array_key_exists('contactPage', $options))) {echo '<p class="requiredWarning contact-requiredWarning">required</p>';}
+
+		echo '</label>';
 	}
 
 	if ( ($type === 'text') || ($type === 'password') || ($type === 'email')) {
@@ -29,13 +36,14 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		if ($value) echo 'value="' . htmlspecialchars($value) . '"';
 		if (!empty($options) && is_array($options)) {
 			foreach ($options as $k => $v) {
-                if ($k !== 'addtl_classes') echo " $k=\"$v\"";
+                if ($k !== 'addtl_classes' && $k !== 'contactPage') echo " $k=\"$v\"";
 			}
 		}
 		echo '>';
 
 		if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError ">' . $errors[$name] . ' </p>';
 	} elseif ($type === 'textarea') {
+		if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options))) {echo '<div class="cf_msg-container">';}
 		echo '<textarea name="' . $name . '" id="' . $name . '" class="';
 		if (!empty($options) && is_array($options)) {
 			if (array_key_exists('addtl_classes', $options)){
@@ -51,7 +59,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		echo '"';
 		if (!empty($options) && is_array($options)) {
 			foreach ($options as $k => $v) {
-                if ($k !== 'addtl_classes') echo " $k=\"$v\"";
+                if ($k !== 'addtl_classes' && $k !== 'contactPage') echo " $k=\"$v\"";
 			}
 		}
 		echo '>';
@@ -61,6 +69,8 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 			if (isset($options['value']) && !empty($options['value'])) echo $options['value'];
 		}
 		echo '</textarea>';
+		if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options))) {echo '<span id="characterCounter"></span>';}
+		echo '</div>';
 		if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError ">' . $errors[$name] . ' </p>';
 	}  elseif ($type === 'hidden') {
 		echo '<input type="' . $type . '" name="' . $name . '" id="' . $name . '" class="';
@@ -86,4 +96,5 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		}
 		echo '>';
 	} // END type IF-ELSE
+	if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options))) {echo '</div>';}
 } // END create_form_input()

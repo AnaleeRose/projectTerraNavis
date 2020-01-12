@@ -15,7 +15,7 @@ if ($page = 'Sustain') {
 require './assets/includes/head.php';
 ?>
 
-<body class="homeBody">
+<body class="">
 <!------ Header ------------>
 <?php require './assets/includes/header.inc.php'; ?>
 <!-- Main body content -->
@@ -28,8 +28,8 @@ require './assets/includes/head.php';
       <svg id="cursor" class="cursor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="61" height="83" viewBox="0 0 61 83">
         <defs>
           <linearGradient id="linear-gradient" x1="0.5" y1="0.315" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
-            <stop offset="0" stop-color="#435833"/>
-            <stop offset="1" stop-color="#203312"/>
+            <stop offset="0" stop-color="var(--pageColor)"/>
+            <stop offset="1" stop-color="var(--pageColor-shade)"/>
           </linearGradient>
         </defs>
         <path id="Polygon_24" data-name="Polygon 24" d="M41.5,0,83,61H0Z" transform="translate(61) rotate(90)" fill="url(#linear-gradient)"/>

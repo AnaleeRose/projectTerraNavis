@@ -13,7 +13,7 @@ function showArticles($displaytype) {
             while ($row = $r->fetch_assoc()) {
                 if ($row['error_flag'] === null && $num <= 5) {
                     ?>
-                        <section class="article<?= $num; ?> indiArticle">
+                        <section class="article<?= $num; ?> indiArticle mainSection-container">
                             <img class="indiArticle-img" src="<?= IMG_PATH_HTML . $row['img_name']; ?>" alt="Article Image">
                             <div class="indiArticle-content">
                                 <p class="indiArticle-category"><?= $row['category']; ?></p>
