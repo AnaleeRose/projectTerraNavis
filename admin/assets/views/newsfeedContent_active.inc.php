@@ -97,6 +97,7 @@ function create_email($e_num) {
     global $numwords;
     global $list_all;
 
+    $prev_sent = false;
     $this_email = $all_emails[$e_num];
     $e_num++;
     $date_added = strtotime($this_email['date_added']);
@@ -104,6 +105,7 @@ function create_email($e_num) {
     if (!empty($row['date_sent'])) {
         $date_sent = strtotime($this_email['date_sent']);
         $date_modified = date('F jS, Y', strtotime($date_sent));
+        $prev_sent = true;
     } else {
         $date_sent = 'Never';
     }

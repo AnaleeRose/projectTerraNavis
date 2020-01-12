@@ -315,8 +315,6 @@ $options = ['required' => null];
                     </div>
 <!-- check content if you clicked published and send it on it's way! -->
 <?php
-print_r($_REQUEST);
-// var_dump($GLOBALS);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['article_name'])) {
         // if u have clickty clicked the button and there's at least one piece of content and there's no issues with the image...

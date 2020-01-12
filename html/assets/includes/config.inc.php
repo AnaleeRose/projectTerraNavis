@@ -19,8 +19,8 @@ if ($online) {
     define('BASE_URL', 'http://bpa-development.savannahskinner.com/');
 } else {
     define('BASE_URI', '/Applications/XAMPP/xamppfiles/htdocs/projectTerraNavis/');
-    // define('BASE_URL', 'http://localhost:81/BPA/');
-    define('BASE_URL', 'http://localhost/projectTerraNavis/');
+    define('BASE_URL', 'http://localhost:81/BPA/');
+    // define('BASE_URL', 'http://localhost/projectTerraNavis/');
 }
 
 
@@ -88,6 +88,7 @@ define('EMAIL_LINK', 'terranavisliving@gmail.com');
 define('TWITTER_LINK', 'https://twitter.com/wddatft');
 define('FACEBOOK_LINK', 'https://www.facebook.com/wddatft');
 define('PININTEREST_LINK', 'idk_what_a_pininterest_link_looks_like');
+define('INSTAGRAM_LINK', 'https://www.instagram.com/webatft/?hl=en');
 define('IMG_PATH', './assets/imgs/article_imgs/');
 define('IMG_PATH_HTML', '../admin/assets/imgs/article_imgs/');
 define('BACK_BTN', '<a href="javascript:history.go(-1)" title="Back" class="backBtn"><span class="backArrow">➔</span></a>');
