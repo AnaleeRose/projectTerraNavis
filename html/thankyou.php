@@ -30,7 +30,7 @@ require './assets/includes/head.php';
             <h3 class="mainSection-heading subheading" data-subheading="one">Verification is On The Way!</h3>
             <div class="mainSection-content">
 				<p>We'll email you within 24 hours to verify your address. Once you click the link in the email, we can start sending you some of the best eco-friendly earthship news!</p>
-				<a class="readmore" href="index.php">Return To Home</a>
+				<a class="readmore" href="index,php">Return To Home</a>
             </div>
         </section>
     </div>
