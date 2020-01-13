@@ -3,34 +3,42 @@
 function showArticles($displaytype) {
     global $dbc;
     global $article_id;
+    global $max_shown;
+    global $customQuery;
+    $articlesCurrentlyShown = 0;
 
     $showArticle_errors = [];
     if ($displaytype === 'description_only') {
         $num = 1;
-        $q = 'SELECT a.*, c.category as category FROM articles a JOIN categories c ON a.article_category = c.category_id ORDER BY date_modified DESC LIMIT 10';
+        if (empty($customQuery)) {
+            $q = 'SELECT a.*, c.category as category FROM articles a JOIN categories c ON a.article_category = c.category_id ORDER BY date_modified DESC LIMIT 10';
+        } else {
+            $q = $customQuery;
+        }
         $r = mysqli_query($dbc, $q);
         if ($r && mysqli_num_rows($r) > 0) {
             while ($row = $r->fetch_assoc()) {
-                if ($row['error_flag'] === null && $num <= 5) {
+                if ($row['error_flag'] === null && $num <= $max_shown) {
+                    $articlesCurrentlyShown++;
                     ?>
                         <section class="article<?= $num; ?> indiArticle mainSection-container">
-                            <img class="indiArticle-img" src="<?= IMG_PATH_HTML . $row['img_name']; ?>" alt="Article Image">
+                            <a href="./readArticle.php?article_id=<?= $row['article_id']?>" class="indiArticle-imgLink"><img class="indiArticle-img" src="<?= IMG_PATH_HTML . $row['img_name']; ?>" alt="Article Image"></a>
                             <div class="indiArticle-content">
-                                <p class="indiArticle-category"><?= $row['category']; ?></p>
+                                <a href="./readArticle.php?article_id=<?= $row['article_id']?>" class="indiArticle-titleLink"><h2 class="indiArticle-titleText"><?= $row['article_name']; ?></h2></a>
                                 <p class="indiArticle-date"><?= date('F jS, Y', strtotime($row['date_added']));   ?></p>
-                                <h2 class="indiArticle-title"><?= $row['article_name']; ?></h2>
                                 <p class="indiArticle-description"><?= $row['article_description']; ?></p>
-                                <a class="readMore" href="./readArticle.php?article_id=<?= $row['article_id']?>">Read Article >></a>
+                                <div class="categoryReadBtn-container">
+                                    <p class="indiArticle-category"><?= $row['category']; ?></p>
+                                    <a class="indiArticle-readMore" href="./readArticle.php?article_id=<?= $row['article_id']?>">Read Article >></a>
+                                </div>
                             </div>
                         </section>
                     <?php
                     $num++;
                 } // END if no error flag
             } // END while
-        } elseif (mysqli_num_rows($r) > 0) {
-            echo '<p class="error major_error">We don\'t have any articles avaliable at the moment. Check back soon for more content!</p>';
         } elseif (!$r) {
-            echo 'oh now';
+            echo $q;
             // ob_end_clean();
             // require '../admin/assets/includes/header.html';
             // require '../admin/assets/includes/error.inc.php';
@@ -79,6 +87,9 @@ function showArticles($displaytype) {
         }
     } // END show errors if
 
+    if ($articlesCurrentlyShown < 1) {
+        echo '<p class="noArticles_error">We don\'t have any articles matching those criteria. Check back soon for more content!</p>';
+    }
 } // END function
 
 ?>

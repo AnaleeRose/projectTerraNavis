@@ -82,6 +82,15 @@ require './assets/includes/head.php';
                 </ul>
             </div>
         </section>
+
+        <section id="mainSection-four" class="mainSection-container">
+            <h3 class="mainSection-heading subheading" data-subheading="four">Site Sources</h3>
+            <div class="mainSection-content">
+                <ul class="resourcesList">
+                    <li>Icons provided by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></li>
+                </ul>
+            </div>
+        </section>
     </div>
 </article>
 

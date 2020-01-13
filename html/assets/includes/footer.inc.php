@@ -1,16 +1,23 @@
+
 <footer class="mainFooter">
     <div id="f-container">
         <div id="f_teamBlurb-container" class="f_teamBlurb-container f-box">
             <h2 class="f_heading">Meet Our Team</h2>
             <p class="f_teamBlurb">Jerad, Nick, Noshin, and Savannah. Four students from Francis Tuttle Technology Center who banded to gether to build a site. We created Terra Navis in hopes of offering a resource to the community while improving their skills. Want to learn more about us and our individual stories?</p>
-            <a href="team.html" class="f_teamBlurb-link">Meet Our Team >></a>
+            <a href="team.php" class="f_teamBlurb-link">Meet Our Team >></a>
         </div>
         <div id="f_newsLetter-container" class="f_newsLetter-container f-box">
             <form method="post" class="f_newsletter-form">
                 <label class="f_heading" for="emailInput">Join Our Newsletter!</label>
+                <?php if (!empty($email_errors)) { ?>
+                  <div class="emailError"><?php foreach ($email_errors as $key => $value) {
+                    echo '<p class="emailError-indi">' . $value . '</p>';
+                  }?></div>
+                <?php } ?>
+
                 <div class="f_emailInput-container">
                     <input id="emailInput" name="emailInput" class="emailInput" type="email" placeholder="youremail@email.com">
-                    <button type="submit" class="f_newsletter-btn">
+                    <button type="submit" class="f_newsletter-btn" name="newsletterSubmitBtn" value="ignore">
                         <span class="a11yText">Sign Up For Newsletter</span>
                         <svg class="f_plusIcon" id="f_plusIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                           <g id="Group_294" data-name="Group 294" transform="translate(-259.914 -4770)">
@@ -104,6 +111,18 @@
     </div>
     <div class="f_copyright-container">
         <p class="f_copyright">&copy; FT BPA Team 2019-2020</p>
+    </div>
+    <div id="bpaChapterInfo-container" class="bpaChapterInfo-container">
+      <div class="bpaChapterInfoHead-container">
+        <i class="arrow bpa-arrow"></i>
+        <p class="bpaChapterInfo-heading">BPA Information</p>
+      </div>
+      <div id="bpaChapterInfo-content" class="bpaChapterInfo-content">
+        <p>Chapter: 03-0042</p>
+        <p>Theme: BPA Bio Friendly Home</p>
+        <p>School: Francis Tuttle Technology Center</p>
+        <p>Location: Oklahoma City, OK</p>
+      </div>
     </div>
 </footer>
 <script defer>
