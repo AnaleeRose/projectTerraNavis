@@ -8,4 +8,5 @@
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/revamped.css">
     <script src="assets/js/animations.js" async></script>
+    <script src="assets/js/functionality.js" async></script>
 </head>

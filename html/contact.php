@@ -36,7 +36,8 @@ require './assets/includes/head.php';
 
     <div class="mainContent-wrapper">
         <section class="quoteHeading-container">
-            <p class="quote contact-quote">We value your feedback, feel free to reach out!</p>
+            <!-- <p class="quote contact-quote">We value your feedback, feel free to reach out!</p> -->
+            <p class="quote contact-quote">We value your feedback!</p>
         </section>
 
         <section class="contactSidebar-container">

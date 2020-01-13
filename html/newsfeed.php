@@ -18,9 +18,9 @@ if ($page = 'News') {
 ?>
 <style type="text/css">
   :root {
-      --pageColor: var(--contact);
-      --pageColor-shade: var(--contact-shade);
-      --pageColor-link: var(--contact-link);
+      --pageColor: var(--news);
+      --pageColor-shade: var(--news-shade);
+      --pageColor-link: var(--news-link);
   }
 </style>
 <?php

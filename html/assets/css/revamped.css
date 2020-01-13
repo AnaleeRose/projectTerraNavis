@@ -175,8 +175,22 @@ img {
 	font: bold 1.3rem var(--textFont);
 	margin: 1rem 0;
 	padding: 1.2rem 0 1.2rem 10vw;
+	position: relative;
 	text-align: center;
 	width: 85vw;
+}
+
+.quote:after {
+    border-top: 33px solid transparent;
+    border-left: 40px solid var(--pageColor);
+    border-bottom: 33px solid transparent;
+    content: "";
+    height: 0;
+    position: absolute;
+    margin: 0 1rem;
+    right: -3.5rem;
+    top: 0;
+    width: 0;
 }
 
 .requiredWarning {
@@ -283,8 +297,9 @@ img {
 		}
 
 .mainNav-link.currentPage {
-	color: var(--pageColor-link);
+	color: #fff;
 	position: relative;
+	text-decoration: underline;
 }
 
 	.mainNav-link.currentPage:after {
@@ -425,18 +440,48 @@ img {
 		.mainSection-readMore:hover:before {
 			padding: 0 calc(50% + 1.5rem) 0 50%;
 		}
+/*faq*/
+.faqPage .mainSection-heading {
+	background: none;
+	color: var(--pageColor);
+}
+.faqPage .mainSection-container {
+	padding: ;
+}
+.faqPage .mainSection-content {
+	height: 0;
+	overflow: hidden;
+	padding: 0;
+	transition: height .5s;
+}
 
+.faq_open .mainSection-content{
+	min-height: 1vh;
+	height: 80%;
+	padding: 1rem;
+	transition: height .5s;
+}
+/*.mainSection-container {border-bottom: .4rem solid var(--pageColor);}*/
+.mainSection-container:last-of-type {border-bottom: none;}
 .faqHeadingArrow-container {
+	align-items: center;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 }
+
 .pointArrow {
-	width: 0;
-	height: 0;
 	border-top: 15px solid transparent;
-	border-left: 30px solid var(--pageColor);
+	border-left: 20px solid var(--pageColor);
 	border-bottom: 15px solid transparent;
+	height: 0;
+	margin: 0 1rem;
+	transition: transform .5s;
+	width: 0;
+}
+
+.faq_open .pointArrow {
+	transform: rotate(90deg);
 }
 
 
@@ -862,7 +907,7 @@ img {
 
 	.cf_joinChoice-container {
 		flex-direction: row;
-		margin: 0 2rem;
+		margin: 1rem 2rem;
 	}
 
 	.cf_joinChoice-indiContainer {
@@ -954,6 +999,9 @@ img {
 		display: none;
 	}
 
+	.mainNav-link.currentPage {
+		color: var(--pageColor-link);
+	}
 
 	.mainContent {
 		margin-top: 5.4rem;
