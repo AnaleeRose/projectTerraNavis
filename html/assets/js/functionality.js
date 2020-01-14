@@ -1,10 +1,23 @@
+const body = document.body.querySelector('article')
 const faqPage = document.body.querySelector('.faqPage')
 const newsPage = document.body.querySelector('.newsPage')
-const bpaInfoBtn = document.body.querySelector('#bpaChapterInfo-container');
+const multiContentPage = document.body.querySelector(".multiContentPage");
+const homeMainContent = document.body.querySelector(".homeMainContent");
 const emailError = document.body.querySelector('.emailError');
+const cursor = document.body.querySelector('#cursor');
+const bpaInfoBtn = document.body.querySelector('#bpaChapterInfo-container');
+const allSubheadings = document.body.querySelectorAll(".subheading");
+let last_scroll_pos = 0;
+
+console.log(allSubheadings[0].getBoundingClientRect())
 
 if (emailError) {
     window.scrollTo(0,document.body.scrollHeight);
+}
+
+if (cursor) {
+    intialize_subheadings();
+    intialize_cursor();
 }
 
 bpaInfoBtn.addEventListener('click', function() {
@@ -22,7 +35,6 @@ if (newsPage) {
     const filterBtn = document.body.querySelector("#filterBtn")
     const filterContainer = document.body.querySelector(".filter-container")
     filterBtn.addEventListener('click', function(){
-        console.log("wasp")
         if (filterContainer.classList.contains("filter-container_open")) {
             filterContainer.classList.remove("filter-container_open")
         } else {
@@ -40,7 +52,6 @@ if (faqPage) {
     allFaqQuestions.forEach(function(e){
         e.addEventListener('click', function() {
             faq_collapse(e);
-
         })
     })
 }
@@ -49,8 +60,116 @@ function faq_collapse(e) {
     sectionNum = e.getAttribute("data-value");
     sectionName = "#mainSection-" + sectionNum;
     let c_openSection = document.querySelector(".faq_open")
-    c_openSection.classList.remove("faq_open");
     let openSection = document.body.querySelector(sectionName)
     let c_openSectionContent  = document.querySelector(sectionName + " .mainSection-content")
-    openSection.classList.add("faq_open")
+
+    if (c_openSection) {
+        c_openSection.classList.remove("faq_open");
+    }
+    if (c_openSection !== openSection) {
+        openSection.classList.add("faq_open")
+    }
 }
+
+function intialize_subheadings() {
+    window.addEventListener('scroll', function() {
+        check_bounding();
+    })
+    subheadingsContainer = document.createElement('div')
+    subheadingsContainer.classList.add("interactiveSubheadings-container")
+    allSubheadings.forEach(function(e){
+        let newText = document.createElement('p')
+        newText.classList.add('interactiveSubheading')
+        let textNode = e.innerText
+        newText.append(textNode)
+        newText.setAttribute('data-subheading', e.getAttribute('data-subheading'))
+        newText.addEventListener('click', function() {
+            run_cursor(e, true)
+        });
+        subheadingsContainer.append(newText)
+    })
+    body.append(subheadingsContainer)
+}
+
+function diff (num1, num2) {
+  if (num1 > num2) {
+    return num1 - num2
+  } else {
+    return num2 - num1
+  }
+}
+
+function check_bounding() {
+    if (diff(window.pageYOffset, last_scroll_pos) > 50) {
+        let temp = [];
+        allSubheadings.forEach(function(e){
+            if (is_in_viewport(e)) {
+                temp.push(e)
+            }
+        })
+
+        if (window.pageYOffset > last_scroll_pos) {
+            // going down
+            newSub = temp[temp.length - 1]
+        } else {
+            // going up
+            newSub = temp[0]
+        }
+        console.log("NEWSUB: " + newSub)
+        if (newSub) {
+            run_cursor(newSub)
+        }
+    }
+    last_scroll_pos = window.pageYOffset;
+}
+
+function is_in_viewport(e) {
+    let bounding = e.getBoundingClientRect()
+    let top_1, top_2;
+    if (multiContentPage) {
+        top_1 = 100
+        top_2 = 500
+    } else if (homeMainContent) {
+        top_1 = 400
+        top_2 = 800
+    } else {
+        top_1 = 0
+        top_2 = 0
+    }
+
+    console.log(bounding)
+    return (
+        bounding.top >= top_1 &&
+        bounding.top <= top_2 &&
+        bounding.left >= 0 &&
+        bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+}
+
+function intialize_cursor() {
+    console.log("Cursor is active");
+}
+
+function run_cursor(e, clicked = false) {
+    console.log(e)
+    console.log(e.parentElement)
+    let newSubheading = e, topOffset;
+    if (screen.width > 1199) {
+        if (homeMainContent) {
+            topOffset = newSubheading.parentElement.offsetTop - 590
+        } else {
+            topOffset = newSubheading.parentElement.offsetTop - 45
+        }
+    } else {
+        topOffset = newSubheading.parentElement.offsetTop - 167
+    }
+
+    cursor.style.top = topOffset
+    
+    if (clicked === true) {
+        window.scrollTo(0, newSubheading.parentElement.offsetTop)
+    }
+}
+
+

@@ -5,8 +5,56 @@ require './assets/includes/form_functions.inc.php';
 
 // contact form handling
 $contact_errors = [];
-$c_options = ['required' => '', 'contactPage' => ''];
+$missing = [];
+$suspectMail;
+$mailSent = 'false';
+$expected = ['c_name', 'c_email', 'cf_joinNewsletter', 'c_msg'];
+$required = ['c_name', 'c_email', 'cf_joinNewsletter', 'c_msg'];
+$to = OUR_CONTACT_EMAIL;
+if (isset($_POST['cf_submit'])) {
+    require './assets/includes/process_email.inc.php';
+    if (isset($suspectMail) && $suspectMail === true) {
+        $contact_errors['name'] = "This message is invalid";
+    } 
 
+    $joinChoice = $_POST['cf_joinNewsletter'];
+    if (isset($joinChoice) && $joinChoice === "2" && $mailSent === 'true') {
+    require MYSQL;
+        if (filter_var($_POST['c_email'], FILTER_VALIDATE_EMAIL)) {
+            $q = 'SELECT * FROM `email_list` WHERE `email` = "' . $_POST['c_email'] . '"';
+            $r = mysqli_query($dbc, $q);
+            if ($r && mysqli_num_rows($r) == 0) {
+                $stmt = $dbpdo->prepare("INSERT INTO `email_list` (`id`, `email`) VALUES (NULL, :email)");
+                $stmt->bindParam(':email', $_POST['c_email'], PDO::PARAM_STR);
+                if ($stmt->execute()) {
+                    header("Location: " . BASE_URL . "html/thankyou.php?p=cn");
+                }
+            } elseif ($r && mysqli_num_rows($r) > 0) {
+                $contact_errors['c_email'] = "You are already subscribed";
+            } else {
+                $contact_errors['major'][] = "Something went wrong, please try again later";
+            }
+        } else {
+            $contact_errors['c_email'] = "Please enter a valid email address";
+        }
+    } 
+
+    if ($mailSent === 'attempted') {
+        $contact_errors['major'][] = "Something went wrong, please try again later";
+    }
+
+    if ($mailSent === 'true') {
+        echo "TWAS SENT";
+    }
+
+
+}
+
+if (!empty($contact_errors)) print_r($contact_errors);
+// $c_options = ['required' => '', 'contactPage' => ''];
+$c_options = ['contactPage' => ''];
+
+$max_msg_characters = 1200;
 
 
 $page = 'contact';
@@ -34,10 +82,30 @@ require './assets/includes/head.php';
        <h2 class="mainHeading">Contact Us</h2>
     </header>
 
+
     <div class="mainContent-wrapper">
+
+    <?php 
+    if (!empty($contact_errors)) {
+        echo '<div class="majorError-container">';
+        if (empty($contact_errors['major'])) {
+            echo '<p class="majorError">Please resolve errors before continuing.</p>';
+        }
+        if (!empty($contact_errors['major'])) {
+            if (is_array($contact_errors['major'])) {
+                foreach ($contact_errors['major'] as $key => $value) {
+                    echo '<p class="majorError">' . $value . '</p>';
+                }
+            } else {
+                echo '<p class="majorError">' . $contact_errors['major'] . '</p>';
+            }
+        } 
+        echo '</div>';
+    }
+    ?>
         <section class="quoteHeading-container">
             <!-- <p class="quote contact-quote">We value your feedback, feel free to reach out!</p> -->
-            <p class="quote contact-quote">We value your feedback!</p>
+            <!-- <p class="quote contact-quote">We value your feedback!</p> -->
         </section>
 
         <section class="contactSidebar-container">
@@ -70,7 +138,7 @@ require './assets/includes/head.php';
             </div>
 
         </section>
-        <form class="cf-container form-container">
+        <form class="cf-container form-container" method="post">
             <?php
                 create_form_input('c_name', 'text', 'Name', $contact_errors, $c_options + ['placeholder' => 'your name', 'addtl_div_classes' => 'equalWidthContainer']);
 
@@ -82,8 +150,8 @@ require './assets/includes/head.php';
                 </label>
                 <div class="cf_joinChoice-container">
                     <div class="cf_joinChoice-indiContainer">
-                        <input class="cf_joinChoice-input" type="radio" name="cf_joinNewsletter" value="0">
-                        <span class="customRadioBtn" data-value="0"></span>
+                        <input class="cf_joinChoice-input" type="radio" name="cf_joinNewsletter" value="2">
+                        <span class="customRadioBtn" data-value="2"></span>
                         <p class="cf_joinChoice-text">Sure, I'm in!</p>
                     </div>
                     <div class="cf_joinChoice-indiContainer">
@@ -95,7 +163,7 @@ require './assets/includes/head.php';
             </div>
 
             <?php
-                create_form_input('c_msg', 'textarea', 'Message', $contact_errors, $c_options + ['placeholder' => 'What do you have to say?', 'addtl_div_classes' => 'cf_msgCounter-container']);
+                create_form_input('c_msg', 'textarea', 'Message', $contact_errors, $c_options + ['placeholder' => 'What do you have to say?', 'addtl_div_classes' => 'cf_msgCounter-container', 'maxlength' => $max_msg_characters]);
             ?>
             <input name="cf_submit" id="cf_submit" type="submit" value="Send Email" class="btn cf_btn">
         </form>

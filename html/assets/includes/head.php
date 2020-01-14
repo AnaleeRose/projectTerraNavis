@@ -3,13 +3,13 @@ $email_errors = [];
 if (isset($_POST['emailInput']) && !empty($_POST['emailInput'])) {
 	require MYSQL;
   if (filter_var($_POST['emailInput'], FILTER_VALIDATE_EMAIL)) {
-    $q = 'SELECT * FROM `email_list` WHERE `eail` = "' . $_POST['emailInput'] . '"';
+    $q = 'SELECT * FROM `email_list` WHERE `email` = "' . $_POST['emailInput'] . '"';
     $r = mysqli_query($dbc, $q);
     if ($r && mysqli_num_rows($r) == 0) {
 	    $stmt = $dbpdo->prepare("INSERT INTO `email_list` (`id`, `email`) VALUES (NULL, :email)");
 	    $stmt->bindParam(':email', $_POST['emailInput'], PDO::PARAM_STR);
 	    if ($stmt->execute()) {
-	    	header("Location: " . BASE_URL . "html/thankyou.php");
+	    	header("Location: " . BASE_URL . "html/thankyou.php?p=n");
 	    }
     } elseif ($r && mysqli_num_rows($r) > 0) {
     	$email_errors[] = "You are already subscribed";

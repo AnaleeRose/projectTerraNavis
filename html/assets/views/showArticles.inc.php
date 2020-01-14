@@ -11,7 +11,7 @@ function showArticles($displaytype) {
     if ($displaytype === 'description_only') {
         $num = 1;
         if (empty($customQuery)) {
-            $q = 'SELECT a.*, c.category as category FROM articles a JOIN categories c ON a.article_category = c.category_id ORDER BY date_modified DESC LIMIT 10';
+            $q = 'SELECT a.*, c.category as category, c.category_id as cat_id FROM articles a JOIN categories c ON a.article_category = c.category_id ORDER BY date_modified DESC LIMIT 10';
         } else {
             $q = $customQuery;
         }
@@ -28,7 +28,7 @@ function showArticles($displaytype) {
                                 <p class="indiArticle-date"><?= date('F jS, Y', strtotime($row['date_added']));   ?></p>
                                 <p class="indiArticle-description"><?= $row['article_description']; ?></p>
                                 <div class="categoryReadBtn-container">
-                                    <p class="indiArticle-category"><?= $row['category']; ?></p>
+                                    <a class="indiArticle-category" href="newsfeed.php?dateSelect=All+Time&categorySelect=<?= $row['cat_id']; ?>&filterSubmitBtn=Filter"><?= $row['category']; ?></a>
                                     <a class="indiArticle-readMore" href="./readArticle.php?article_id=<?= $row['article_id']?>">Read Article >></a>
                                 </div>
                             </div>
@@ -48,6 +48,7 @@ function showArticles($displaytype) {
             // exit();
         } // end if $r
     } elseif ($displaytype === 'full_article') {
+        $articlesCurrentlyShown++;
         if (isset($article_id)) {
             $q = 'SELECT a.*,  c.category as category FROM `articles` a JOIN categories c ON c.category_id = a.article_category WHERE article_id = ' . $article_id;
             $r = mysqli_query($dbc, $q);

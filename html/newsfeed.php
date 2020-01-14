@@ -13,11 +13,12 @@ $customQuery;
 $categoryAdded = false;
 $tailEnd = '';
 
+$permittedDateValues = ['Date', 'All Time', 'Past Year', 'Past Month', 'Past Week'];
+
 if (isset($_GET['filterSubmitBtn'])) {
   // $_GET['categorySelect'] = settype($_GET['categorySelect'], 'integer');
-  $dateSelect = $_GET['dateSelect'];
-  $cq = 'SELECT a.*, c.category as category FROM articles a JOIN categories c ON a.article_category = c.category_id WHERE ';
-  $permittedDateValues = ['date', 'allTime', 'pastYear', 'pastMonth', 'pastWeek'];
+  $dateSelect = strtolower(str_replace(' ', '', $_GET['dateSelect']));
+  $cq = 'SELECT a.*, c.category as category, c.category_id as cat_id FROM articles a JOIN categories c ON a.article_category = c.category_id WHERE ';
 
 
   $q = "SELECT category_id FROM categories";
@@ -29,26 +30,29 @@ if (isset($_GET['filterSubmitBtn'])) {
     // echo $tailEnd;
   }
 
-  if (!empty($dateSelect) && $dateSelect != 'date' && in_array($dateSelect, $permittedDateValues)) {
+  if (!empty($dateSelect) && $dateSelect != 'date' && in_array($_GET['dateSelect'], $permittedDateValues)) {
     if ($categoryAdded === true && $dateSelect !== 'allTime') $tailEnd .= ' && ';
 
     switch ($dateSelect) {
-      case 'allTime':
+      case 'alltime':
+        $tailEnd = substr($tailEnd, 0, -4);
+        $tailEnd .= ';';
         break;
 
-      case 'pastYear':
+      case 'pastyear':
         $tailEnd .= "a.`date_modified` > curdate() - interval 1 year";
         break;
 
-      case 'pastMonth':
+      case 'pastmonth':
         $tailEnd .= "a.`date_modified` > curdate() - interval 1 month";
         break;
 
-      case 'pastWeek':
+      case 'pastweek':
         $tailEnd .= "a.`date_modified` > curdate() - interval 1 week";
         break;
       
       default: 
+        echo $dateSelect;
         break;
     }
   }
@@ -94,11 +98,22 @@ require './assets/includes/header.inc.php';
         <form class="newsfeedFilter-form" method="get">
           <div class="filter-dateSelect-container">
             <select name="dateSelect" id="dateSelect" class="filter-dateSelect">
-              <option name="dataSelect" value="date">Date</option>
-              <option name="dataSelect" value="allTime">All Time</option>
-              <option name="dataSelect" value="pastYear">Past Year</option>
-              <option name="dataSelect" value="pastMonth">Past Month</option>
-              <option name="dataSelect" value="pastWeek">Past Week</option>
+<!--               <option name="dateSelect" value="date">Date</option>
+              <option name="dateSelect" value="allTime">All Time</option>
+              <option name="dateSelect" value="pastYear">Past Year</option>
+              <option name="dateSelect" value="pastMonth">Past Month</option>
+              <option name="dateSelect" value="pastWeek">Past Week</option> -->
+              <?php 
+
+                foreach ($permittedDateValues as $key => $value) {
+                  if (isset($_GET['dateSelect']) && $value ===$_GET['dateSelect']) {
+                    echo '<option name="dateSelect" value="' . $value . '" selected>' . $value . '</option>';
+                  } else {
+                    echo '<option name="dateSelect" value="' . $value . '">' . $value . '</option>';
+                  }
+                }
+
+              ?>
             </select>
             <i class="filter-arrow filter-dateSelect-arrow"></i>
           </div>

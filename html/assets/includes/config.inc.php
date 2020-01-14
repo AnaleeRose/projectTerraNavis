@@ -86,6 +86,7 @@ function check_if_admin() {
     }
 }
 
+define('OUR_CONTACT_EMAIL', 'savannah@savannahskinner.com');
 define('EMAIL_LINK', 'terranavisliving@gmail.com');
 define('TWITTER_LINK', 'https://twitter.com/wddatft');
 define('FACEBOOK_LINK', 'https://www.facebook.com/wddatft');

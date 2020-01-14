@@ -29,8 +29,14 @@ require './assets/includes/head.php';
         <section id="mainSection-one" class="mainSection-container">
             <h3 class="mainSection-heading subheading" data-subheading="one">Thank you!</h3>
             <div class="mainSection-content">
-				<p>You've been added to the subscription list. We'll send you some of the best eco-friendly earthship news!</p>
-				<a class="readmore" href="index.php">Return To Home</a>
+              <?php if ($_GET['p'] == 'n') {  ?>
+        				<p>You've been added to the subscription list. We'll be sending you some of the best eco-friendly earthship news!</p>
+              <?php } elseif($_GET['p'] == 'cn') { ?>
+                <p>You've been added to the subscription list and your message was sent. We'll do our best to respond quickly!</p>
+              <?php } elseif($_GET['p'] == 'c') { ?>
+                <p>Your message was sent. We'll do our best to respond quickly!</p>
+              <?php }?>
+                <a class="readmore" href="index.php">Return To Home</a>
             </div>
         </section>
     </div>
