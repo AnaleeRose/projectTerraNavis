@@ -3,12 +3,18 @@ $email_errors = [];
 if (isset($_POST['emailInput']) && !empty($_POST['emailInput'])) {
 	require MYSQL;
   if (filter_var($_POST['emailInput'], FILTER_VALIDATE_EMAIL)) {
-  	$v_num = rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9);
-    $stmt = $dbpdo->prepare("INSERT INTO `email_list` (`id`, `email`, `verified`, `verification_number`) VALUES (NULL, :email, '0', :v_num)");
-    $stmt->bindParam(':email', $_POST['emailInput'], PDO::PARAM_STR);
-    $stmt->bindParam(':v_num', $_POST['emailInput'], PDO::PARAM_INT);
-    if ($stmt->execute()) {
-    	header("Location: " . BASE_URL . "html/thankyou.php");
+    $q = 'SELECT * FROM `email_list` WHERE `eail` = "' . $_POST['emailInput'] . '"';
+    $r = mysqli_query($dbc, $q);
+    if ($r && mysqli_num_rows($r) == 0) {
+	    $stmt = $dbpdo->prepare("INSERT INTO `email_list` (`id`, `email`) VALUES (NULL, :email)");
+	    $stmt->bindParam(':email', $_POST['emailInput'], PDO::PARAM_STR);
+	    if ($stmt->execute()) {
+	    	header("Location: " . BASE_URL . "html/thankyou.php");
+	    }
+    } elseif ($r && mysqli_num_rows($r) > 0) {
+    	$email_errors[] = "You are already subscribed";
+    } else {
+    	$email_errors[] = "Something went wrong, please try again later";
     }
   } else {
     $email_errors[] = "Please enter a valid email address";

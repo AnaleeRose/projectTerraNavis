@@ -27,10 +27,10 @@ require './assets/includes/head.php';
 
     <div class="mainContent-wrapper">
         <section id="mainSection-one" class="mainSection-container">
-            <h3 class="mainSection-heading subheading" data-subheading="one">Verification is On The Way!</h3>
+            <h3 class="mainSection-heading subheading" data-subheading="one">Thank you!</h3>
             <div class="mainSection-content">
-				<p>We'll email you within 24 hours to verify your address. Once you click the link in the email, we can start sending you some of the best eco-friendly earthship news!</p>
-				<a class="readmore" href="index,php">Return To Home</a>
+				<p>You've been added to the subscription list. We'll send you some of the best eco-friendly earthship news!</p>
+				<a class="readmore" href="index.php">Return To Home</a>
             </div>
         </section>
     </div>

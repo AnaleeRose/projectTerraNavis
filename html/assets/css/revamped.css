@@ -368,6 +368,13 @@ img {
 	left: 200vw;
 }
 
+.teamPage .cursor {
+	display: none;
+	left: 400px;
+	top: 4rem;
+    z-index: 20;
+}
+
 .mainContent {
 	background: linear-gradient(to bottom, var(--pageColor), var(--pageColor-shade));
 	padding-left: .75rem;
@@ -856,7 +863,7 @@ img {
 .teamPage .mainSection-heading {
 	padding: 0;
 	margin-left: -.8rem;
-	width: 100vw;
+	width: 100%;
 }
 
 .portrait {
@@ -868,6 +875,7 @@ img {
 	background: #fff;
 	box-sizing: border-box;
 	display: block;
+	margin: -1px 0;
 	padding: 1rem 0;
 	text-align: center;
 	width: 100%;
@@ -1190,6 +1198,10 @@ img {
 
 	.indiArticle {border: none;}
 
+	.indiArticle-content {
+		padding-top: 2rem;
+		width: 500px;
+	}
 
 	.cf-container {
 		padding: .5rem 3rem;
@@ -1219,6 +1231,23 @@ img {
 		display: grid;
 		grid-template-columns: 5rem 1fr;
 		grid-template-areas: 'label input';
+	}
+
+	.teamPage .mainSection-heading {
+		margin-left: 0;
+		text-align: center;
+	}
+
+	.teamPage .description {
+		padding: 1rem 13vw;
+	}
+
+	.teamPage .portrait-container {
+		padding-top: 3.5rem;
+	}
+
+	.teamPage .mainSection-content {
+		padding: .5rem 0 3rem;
 	}
 
 	.cf_msgCounter-container label {
@@ -1313,7 +1342,7 @@ img {
 	.tempHeaderImg svg {
 	    margin: 0 3vw 0 2vw;
 	    max-height: none;
-	    max-width: 95vw;
+	    max-width: 92vw;
 	}
 
 	.mainHeader {
@@ -1399,6 +1428,76 @@ img {
 		bottom: 3rem;
 	}
 
+
+	.newsPage .mainContent-wrapper {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	
+	.indiArticle {
+		box-shadow: 5px 3px 6px var(--dark);
+		margin: 1rem;
+	}
+	.indiArticle:before {
+		display: none
+	}
+
+
+	.teamPage .cursor {
+		display: block;
+	}
+	.teamPage .mainHeading_Container {
+		padding-left: 400px;
+	}
+
+	.teamPage .mainContent-wrapper {
+		padding-bottom: 0;
+	}
+	.teamPage .mainSection-container {
+		display: grid;
+		grid-template-columns: 400px 1fr;
+		grid-template-areas: 'img content';
+	}
+
+	.teamPage .portrait-container {
+		background: none;
+		grid-area: img;
+	}
+
+	.teamPage .mainSection-container:first-of-type .mainSection-content {
+		padding-top: 5.5rem;
+	}
+
+	.teamPage .mainSection-heading, .teamPage .role, .teamPage .portfolioLink {
+		text-align: left;
+	}
+
+	.teamPage .mainSection-content {
+		padding: 4rem;
+		grid-area: content;
+	}
+
+	.teamPage .mainSection-container:before {
+		height: 1rem;
+		left: unset;
+		padding: 0 calc(50% - 200px);
+		right: 0;
+	}
+
+	.teamPage .mainSection-container:last-of-type:before {
+		display: none
+	}
+
+	.teamPage .description {
+	    padding: 1rem 1.75rem;
+	}
+
+	.teamPage .portrait {
+    	margin-top: -3rem;
+		max-width: 250px;
+		width: 100%;
+	}
 
 	#f-container {
 		display: grid;
