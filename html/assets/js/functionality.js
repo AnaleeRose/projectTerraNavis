@@ -91,7 +91,7 @@ function intialize_subheadings() {
     body.append(subheadingsContainer)
 }
 
-function diff (num1, num2) {
+function diff(num1, num2) {
   if (num1 > num2) {
     return num1 - num2
   } else {
@@ -100,7 +100,7 @@ function diff (num1, num2) {
 }
 
 function check_bounding() {
-    if (diff(window.pageYOffset, last_scroll_pos) > 50) {
+    if (diff(window.pageYOffset, last_scroll_pos) > (.015 * screen.height)) {
         let temp = [];
         allSubheadings.forEach(function(e){
             if (is_in_viewport(e)) {
@@ -137,7 +137,7 @@ function is_in_viewport(e) {
         top_2 = 0
     }
 
-    console.log(bounding)
+    // console.log(window.pageYOffset)
     return (
         bounding.top >= top_1 &&
         bounding.top <= top_2 &&
@@ -152,12 +152,13 @@ function intialize_cursor() {
 }
 
 function run_cursor(e, clicked = false) {
-    console.log(e)
-    console.log(e.parentElement)
     let newSubheading = e, topOffset;
+    console.log(newSubheading.parentElement)
     if (screen.width > 1199) {
         if (homeMainContent) {
-            topOffset = newSubheading.parentElement.offsetTop - 590
+            // topOffset = newSubheading.parentElement.offsetTop - 965
+            topOffset = newSubheading.parentElement.offsetTop - (screen.width * .5035)
+            // topOffset = newSubheading.parentElement.offsetTop - 590
         } else {
             topOffset = newSubheading.parentElement.offsetTop - 45
         }
@@ -166,7 +167,8 @@ function run_cursor(e, clicked = false) {
     }
 
     cursor.style.top = topOffset
-    
+
+    console.log(topOffset)
     if (clicked === true) {
         window.scrollTo(0, newSubheading.parentElement.offsetTop)
     }
