@@ -130,8 +130,8 @@ function is_in_viewport(e) {
         top_1 = 100
         top_2 = 500
     } else if (homeMainContent) {
-        top_1 = 400
-        top_2 = 800
+        top_1 = 80
+        top_2 = 420
     } else {
         top_1 = 0
         top_2 = 0
