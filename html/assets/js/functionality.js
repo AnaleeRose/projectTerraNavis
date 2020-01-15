@@ -9,7 +9,6 @@ const bpaInfoBtn = document.body.querySelector('#bpaChapterInfo-container');
 const allSubheadings = document.body.querySelectorAll(".subheading");
 let last_scroll_pos = 0;
 
-console.log(allSubheadings[0].getBoundingClientRect())
 
 if (emailError) {
     window.scrollTo(0,document.body.scrollHeight);
@@ -17,7 +16,7 @@ if (emailError) {
 
 if (cursor) {
     intialize_subheadings();
-    intialize_cursor();
+    // intialize_cursor();
 }
 
 bpaInfoBtn.addEventListener('click', function() {
@@ -100,7 +99,13 @@ function diff(num1, num2) {
 }
 
 function check_bounding() {
-    if (diff(window.pageYOffset, last_scroll_pos) > (.015 * screen.height)) {
+    let diff;
+    if (window.pageYOffse > last_scroll_pos) {
+        diff = window.pageYOffset - last_scroll_pos
+    } else {
+        diff = last_scroll_pos - window.pageYOffset
+    }
+    if (diff > (.015 * screen.height)) {
         let temp = [];
         allSubheadings.forEach(function(e){
             if (is_in_viewport(e)) {
@@ -115,7 +120,7 @@ function check_bounding() {
             // going up
             newSub = temp[0]
         }
-        console.log("NEWSUB: " + newSub)
+
         if (newSub) {
             run_cursor(newSub)
         }
@@ -147,9 +152,9 @@ function is_in_viewport(e) {
         );
 }
 
-function intialize_cursor() {
-    console.log("Cursor is active");
-}
+// function intialize_cursor() {
+//     console.log("Cursor is active");
+// }
 
 function run_cursor(e, clicked = false) {
     let newSubheading = e, topOffset;

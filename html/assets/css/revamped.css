@@ -637,7 +637,7 @@ img {
 	box-sizing: border-box;
 	color: #fff;
 	max-width: 320px;
-	padding: 2.25rem 5.5rem 1rem 2rem; 
+	padding: 2.25rem 5.5rem 1rem 2rem;
 	position: fixed;
 	right: -120vw;
 	transition: right .3s;
@@ -1470,7 +1470,15 @@ img {
 		flex-wrap: wrap;
 		justify-content: left;
 	}
-	
+
+	.majorError-container {
+    	margin: 1rem 0 0;
+	}
+
+	.formNotice_InlineError {
+	    top: -.8rem;
+	}
+
 	.indiArticle {
 		background: linear-gradient(130deg, #fff9f2 50%, #ffefdb);
 		background: #fffdfb;
@@ -1490,7 +1498,7 @@ img {
 		display: block;
 	}
 	.teamPage .mainHeading_Container {
-		padding-left: 400px;	
+		padding-left: 400px;
 	}
 
 	.teamPage .mainContent-wrapper {
