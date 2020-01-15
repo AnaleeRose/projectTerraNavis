@@ -362,12 +362,13 @@ h1, h2, h3, h4, h5, h6 {
 	stroke: #fff;
 }
 
-.tempHeaderImg svg {
-	margin: 0 9vw 3.5rem 6vw;
-	max-height: 150px;
-	max-width: 85vw;
-	width: 100%;
+.tempHeaderImg {
+	box-sizing: border-box;
+	padding: .5rem;
+	margin-top: -3.5rem;
+	/*padding: 1rem 2rem;*/
 }
+
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 4. Main Body Content
@@ -1244,18 +1245,17 @@ h1, h2, h3, h4, h5, h6 {
 	.homeMainContent .mainHeading {
 		display: block;
 	}
-	.tempHeaderImg svg {
-		padding-top: 3rem;
-		margin: 0 7vw 3.5rem 3vw;
-		max-height: 320px;
-		max-width: 90vw;
-	}
 
 	.headerLogo-container {
 		/*border-bottom: .25rem solid var(--dark);*/
 		flex-direction: row;
 		justify-content: flex-start;
 		padding: 1rem .65rem .65rem;
+	}
+
+	.tempHeaderImg {
+		margin-top: 0;
+		padding: 1rem;
 	}
 
 	.headerLogo-container .headerLogo-logo img {
@@ -1411,6 +1411,12 @@ h1, h2, h3, h4, h5, h6 {
 		font-size: 2.2rem;
 	}
 
+	.tempHeaderImg {
+		box-sizing: border-box;
+		margin: -1rem 0 1rem;
+		padding: 1rem 2rem;
+	}
+
 	.mainSection-container {
 		padding: 1.5rem 4vw 2.5rem;
 	}
@@ -1471,13 +1477,7 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 	.tempHeaderImg {
-		margin: 5rem 0 3rem;
-	}
-
-	.tempHeaderImg svg {
-	    margin: 0 3vw 0 2vw;
-	    max-height: none;
-	    max-width: 92vw;
+		margin: 3rem 0 -3rem;
 	}
 
 	.mainHeader {
