@@ -855,18 +855,13 @@ h1, h2, h3, h4, h5, h6 {
 	padding: .5rem .75rem;
 }
 
-.form-container input:not([type="radio"]) {
-	max-width: 25rem;
-	min-width: 280px;
-	width: 100%;
-}
 .form-container textarea {
 	border-radius: 1rem;
 	max-width: 90vw;
 	min-height: 200px;
-	min-width: 280px;
+	min-width: 250px;
 	padding: 1rem;
-	width: 100%;
+	width: 80vw;
 }
 
 .cf_inputLabel-container {
@@ -922,6 +917,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #characterCounter {
+	background: rgba(255,255,255,.94);
 	border-top: 1px solid var(--text-subtle);
 	border-bottom: 1px solid var(--text-subtle);
 	box-sizing: border-box;
@@ -1490,6 +1486,17 @@ h1, h2, h3, h4, h5, h6 {
 
 	.cf_msgCounter-container label {
 		padding-bottom: 2rem;
+	}
+
+	.form-container input:not([type="radio"]) {
+		max-width: 25rem;
+		min-width: 280px;
+		width: 100%;
+	}
+
+	.form-container textarea {
+		min-width: 300px;
+		width: 92.5%;
 	}
 
 	.form-container label {grid-area: label}

@@ -58,7 +58,7 @@ if (!$suspect && !empty($email)) {
 }
 
 // go ahead only if not suspect, all required fields OK, and no errors
-if (!$suspect && empty($missing) && !$contact_errors) {
+if (!$suspect && empty($missing) && empty($contact_errors)) {
     //intialyze the $message variable
     $message = '';
     //loop through the $expected array
