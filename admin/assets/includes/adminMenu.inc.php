@@ -14,11 +14,13 @@ if (isset($pageTitle)) {
         ?>
         <a href="./profile.php" class="profilePicThumbLink">
             <?php
-                echo '<img class="profilePicThumb" alt="Profile Image" src="assets/profilePictures/';
-                echo $_SESSION['profilePic_Location'];
-                echo '" data-profilePic_id="';
-                echo $_SESSION['profilePic_id'];
-                echo '" >';
+                if (isset($_SESSION['profilePic_id'])) {
+                    echo '<img class="profilePicThumb" alt="Profile Image" src="assets/profilePictures/';
+                    echo $_SESSION['profilePic_Location'];
+                    echo '" data-profilePic_id="';
+                    echo $_SESSION['profilePic_id'];
+                    echo '" >';
+                }
             ?>
         </a>
         <div class="menuLinks">

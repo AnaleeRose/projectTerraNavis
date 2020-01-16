@@ -10,6 +10,7 @@ const faqPage = document.body.querySelector('.faqPage')
 const newsPage = document.body.querySelector('.newsPage')
 const multiContentPage = document.body.querySelector(".multiContentPage");
 const contactPage = document.body.querySelector(".contactPage");
+const resourcesPage = document.body.querySelector(".resourcesPage");
 const homeMainContent = document.body.querySelector(".homeMainContent");
 const emailError = document.body.querySelector('.emailError');
 const bpaInfoBtn = document.body.querySelector('#bpaChapterInfo-container');
@@ -205,8 +206,6 @@ function diff(num1, num2) {
 
 function fix_sizing() {
     if (window.innerWidth > 1450) {
-        console.log("l")
-        console.log(screen.width)
         subheadingsContainer.style.left = "5vw"
     } else if (window.innerWidth < 1200 && body.classList.contains("mainContent_subOpen")) {
         body.classList.remove("mainContent_subOpen")
@@ -217,8 +216,16 @@ function is_in_viewport(e) {
     let bounding = e.getBoundingClientRect()
     let top_1, top_2;
     if (multiContentPage) {
-        top_1 = 100
-        top_2 = 500
+            top_1 = 100
+        if (resourcesPage && (window.pageYOffset > (document.body.scrollHeight * .4))) {
+            if (window.devicePixelRatio <= 1) {
+                top_2 = 850
+            } else {
+                top_2 = 750
+            }
+        } else {
+            top_2 = 500
+        }
     } else if (homeMainContent) {
         if (window.devicePixelRatio <= 1) {
             top_1 = 80
@@ -232,7 +239,6 @@ function is_in_viewport(e) {
         top_2 = 0
     }
 
-    // console.log(window.pageYOffset)
     return (
         bounding.top >= top_1 &&
         bounding.top <= top_2 &&
@@ -284,7 +290,7 @@ function check_for_cursor() {
         diff = last_scroll_pos - window.pageYOffset
     }
     if (diff > 25) {
-        console.log("pd: " + pixel_diff)
+        // console.log("pd: " + pixel_diff)
         let temp = [];
         allSubheadings.forEach(function(e){
             if (is_in_viewport(e)) {

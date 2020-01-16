@@ -58,17 +58,6 @@ $max_msg_characters = 1200;
 
 
 $page = 'contact';
-if ($page = 'contact') {
-?>
-<style type="text/css">
-  :root {
-      --pageColor: var(--contact);
-      --pageColor-shade: var(--contact-shade);
-      --pageColor-link: var(--contact-link);
-  }
-</style>
-<?php
-}
 require './assets/includes/head.php';
 ?>
 

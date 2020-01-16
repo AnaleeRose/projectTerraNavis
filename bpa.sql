@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 17, 2019 at 06:28 PM
+-- Generation Time: Jan 16, 2020 at 09:08 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -43,8 +43,8 @@ CREATE TABLE `adminuser` (
 --
 
 INSERT INTO `adminuser` (`admin_id`, `admin_username`, `admin_email`, `profilePic_id`, `light_mode`) VALUES
-(22, 'bpaAdmin', 'bpa_admin@email.com', 4, 'lmode'),
-(27, 'AnaleeRose', 'analeeskinner@gmail.com', 18, 'lmode');
+(22, 'bpaAdmin', 'bpa_admin@email.com', 16, 'dmode'),
+(27, 'AnaleeRose', 'analeeskinner@gmail.com', 16, 'dmode');
 
 -- --------------------------------------------------------
 
@@ -75,7 +75,8 @@ INSERT INTO `articles` (`article_id`, `article_name`, `article_description`, `ar
 (70, 'Lorem Ipsum', 'This is an article about lorem ipsum. It\'s a test of this applications abilities so far.', 4, '2019-12-06 15:43:21', '2019-12-06 15:43:21', 'resized_LoremIpsum_603.png', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur ma', NULL),
 (76, 'Lorem Ipsum', 'This is an article about lorem ipsum. It\'s a test of this applications abilities so far.', 4, '2019-12-06 16:05:46', '2019-12-06 16:05:46', 'resized_LoremIpsum_603.png', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur ma', NULL),
 (77, 'New Article', 'Admin', 3, '2019-12-06 17:06:54', '2019-12-06 17:06:54', 'resized_NewArticle_603.jpg', 'Cappo', 1),
-(88, 'Rigorous Testing', 'I\'m probably gonna regret testing this hard, let\'s see where it breaks! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ull', 4, '2019-12-10 20:35:20', '2019-12-11 03:47:50', 'resized_RigorousTesting_512.png', 'My code when i beg it to function for 30 seconds straight:', NULL);
+(98, 'Rigorous Testing', 'I\'m probably gonna regret testing this hard, let\'s see where it breaks! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ull', 4, '2019-12-10 20:35:20', '2019-12-19 17:08:27', 'resized_RigorousTesting_512.png', 'My code when i beg it to function for 30 seconds straight:', NULL),
+(105, 'Ayyye', 'lost in my thoughts on the daillllllly', 4, '2019-12-19 18:56:47', '2020-01-09 14:53:39', 'resized_Ayyye_495.jpg', 'cant sleep, cant eat kinda love, please save me, kinda love', NULL);
 
 -- --------------------------------------------------------
 
@@ -120,17 +121,20 @@ INSERT INTO `article_content` (`content_id`, `article_id`, `content_type`, `orde
 (169, 77, 8, 6, 'ol_1_li_1', 'ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ', 1, 0),
 (170, 77, 8, 7, 'ol_1_li_2', 'ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ', 0, 0),
 (171, 77, 8, 8, 'ol_1_li_3', 'ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ParagraphParagraphParagraphParagraphParagraph ', 0, 1),
-(241, 88, 2, 1, 'heading2_1', 'This Is A Heading 2', NULL, NULL),
-(242, 88, 3, 2, 'heading3_1', 'This Is A Heading 3', NULL, NULL),
-(243, 88, 4, 3, 'heading4_1', 'This Is A Heading 4', NULL, NULL),
-(244, 88, 5, 4, 'heading5_1', 'This Is A Heading 5', NULL, NULL),
-(245, 88, 7, 5, 'ul_1_li_1', '<a href=\"https://www.mylink.com\">My Link 1</a>', 1, 0),
-(246, 88, 7, 6, 'ul_1_li_2', '<a href=\"https://www.mylink.com\">My Link 2</a>', 0, 0),
-(247, 88, 7, 7, 'ul_1_li_3', '<a href=\"https://www.mylink.com\">My Link 3</a>', 0, 1),
-(248, 88, 8, 8, 'ol_1_li_1', '<a href=\"https://www.mylink.com\">My Link o1</a>', 1, 0),
-(249, 88, 8, 9, 'ol_1_li_2', '<a href=\"https://www.mylink.com\">My Link o2</a>', 0, 0),
-(250, 88, 8, 10, 'ol_1_li_3', '<a href=\"https://www.mylink.com\">My Link o3</a>', 0, 1),
-(251, 88, 1, 11, 'p_1', 'Ignoring paragraphs are we?', NULL, NULL);
+(294, 98, 2, 1, 'heading2_1', 'This Is A Heading 2', NULL, NULL),
+(295, 98, 3, 2, 'heading3_1', 'This Is A Heading 3', NULL, NULL),
+(296, 98, 4, 3, 'heading4_1', 'This Is A Heading 4', NULL, NULL),
+(297, 98, 5, 4, 'heading5_1', 'This Is A Heading 5', NULL, NULL),
+(298, 98, 7, 5, 'ul_1_li_1', '<a href=\"https://www.mylink.com\">My Link 1</a>', 1, 0),
+(299, 98, 7, 6, 'ul_1_li_2', '<a href=\"https://www.mylink.com\">My Link 2</a>', 0, 0),
+(300, 98, 7, 7, 'ul_1_li_3', '<a href=\"https://www.mylink.com\">My Link 3</a>', 0, 1),
+(301, 98, 8, 8, 'ol_1_li_1', '<a href=\"https://www.mylink.com\">My Link o1</a>', 1, 0),
+(302, 98, 8, 9, 'ol_1_li_2', '<a href=\"https://www.mylink.com\">My Link o2</a>', 0, 0),
+(303, 98, 8, 10, 'ol_1_li_3', '<a href=\"https://www.mylink.com\">My Link o3</a>', 0, 1),
+(304, 98, 1, 11, 'p_1', 'Ignoring paragraphs are we?', NULL, NULL),
+(319, 105, 1, 1, 'p_1', 'p1', NULL, NULL),
+(320, 105, 1, 2, 'p_3', 'p2', NULL, NULL),
+(321, 105, 1, 3, 'p_4', 'oh noews', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -205,7 +209,9 @@ INSERT INTO `emails` (`email_id`, `email_subject`, `email_message`, `save_for_la
 (7, 'New Email', 'THis is my new email\r\n<br>\r\n<br>\r\nLink: <a href=\"egsesg.com\">egs</a>', 0, '2019-11-20 19:20:24', '2019-11-20 19:20:24'),
 (8, 'Terra Navis Newsfeed | ygk', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out ygk or read more articles about Earthship Construction & Design at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis</a>', 0, '2019-11-20 19:21:45', '2019-11-20 19:21:45'),
 (9, 'Terra Navis Newsfeed | ygk', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out ygk or read more articles about Earthship Construction & Design at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis</a>', 0, '2019-11-20 19:22:07', '2019-11-20 19:22:07'),
-(10, 'Terra Navis Newsfeed | ygk', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out ygk or read more articles about Earthship Construction & Design at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!', 0, '2019-11-20 19:30:05', '2019-11-20 19:30:05');
+(10, 'Terra Navis Newsfeed | ygk', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out ygk or read more articles about Earthship Construction & Design at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!', 0, '2019-11-20 19:30:05', '2019-11-20 19:30:05'),
+(17, 'Terra Navis Newsfeed | Ayyye', 'Terra Navis\r\n<br>\r\nA new article has been posted on the newsfeed!\r\n<br>\r\nCheck out Ayyye or read more articles about Random at <a href=\\\"http://bpa-development.savannahskinner.com/admin/newsfeed.php\">Terra Navis.com</a>!', 1, '2019-12-19 19:47:04', NULL),
+(18, 'm,y new email :D', 'new email', 0, '2020-01-09 14:58:49', '2020-01-09 14:58:51');
 
 -- --------------------------------------------------------
 
@@ -355,13 +361,13 @@ ALTER TABLE `adminuser`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `article_content`
 --
 ALTER TABLE `article_content`
-  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
+  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=322;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -379,13 +385,13 @@ ALTER TABLE `content_types`
 -- AUTO_INCREMENT for table `emails`
 --
 ALTER TABLE `emails`
-  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `email_list`
 --
 ALTER TABLE `email_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `info`
@@ -423,3 +429,6 @@ ALTER TABLE `info`
   ADD CONSTRAINT `info_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `adminuser` (`admin_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

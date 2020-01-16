@@ -190,7 +190,11 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
 
 // start creating page...
 require './assets/includes/header.html';
-echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
+if (isset($_SESSION['light_mode'])) {
+    echo '<body id="pageWrapper" class="' . $_SESSION['light_mode'] . '">';
+} else {
+    echo '<body id="pageWrapper" class="l_mode">';
+}
 
 // options that can be passed to create_form_input, this one gives the inputs a required attribute but others do way more
 $options = ['required' => null];

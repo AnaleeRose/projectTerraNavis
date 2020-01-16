@@ -1,17 +1,6 @@
 <?php
 require './assets/includes/config.inc.php';
 $page = 'construct';
-if ($page = 'construct') {
-?>
-<style type="text/css">
-  :root {
-      --pageColor: var(--construct);
-      --pageColor-shade: var(--construct-shade);
-      --pageColor-link: var(--construct-link);
-  }
-</style>
-<?php
-}
 require './assets/includes/head.php';
 ?>
 
@@ -35,6 +24,7 @@ require './assets/includes/head.php';
         <path id="Polygon_24" data-name="Polygon 24" d="M41.5,0,83,61H0Z" transform="translate(61) rotate(90)" fill="url(#linear-gradient)"/>
       </svg>
     </p>
+    
     <div class="mainContent-wrapper">
         <section id="mainSection-one" class="mainSection-container">
             <h3 class="mainSection-heading subheading" data-subheading="one">Designing Your Earthship</h3>

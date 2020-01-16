@@ -11,7 +11,7 @@ while ($row = $r->fetch_assoc()) {
             case strpos($elemName, 'he'): {
                 $heading_num = substr($elemName, 7, 1);
                 $element_class = 'h' . $heading_num;
-                echo '<' . $element_class . ' class="readArticleElement readArticleHeading readArticle' . $element_class . '">' . $elemContents . '</' . $element_class .'>';
+                echo '<' . $element_class . ' class="readArticleElement readArticleHeading readArticle ' . $element_class . '">' . $elemContents . '</' . $element_class .'>';
                 break;
             } // heading
 
@@ -21,7 +21,7 @@ while ($row = $r->fetch_assoc()) {
 
             case (strpos($elemName, 'ul') !== false);
                 if ($row['is_first_li'] === '1') echo '<ul class="readArticleElement readArticleUl">';
-                echo '<li>' . $elemContents . '</li>';
+                    if ($elemContents != "::empty::") echo '<li>' . $elemContents . '</li>';
                 if ($row['is_last_li'] === '1') echo '</ul data-crap>';
                 break;
 

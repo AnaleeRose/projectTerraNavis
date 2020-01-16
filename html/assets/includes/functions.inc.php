@@ -14,6 +14,66 @@ function ed() {
     echo '</div>';
 }
 
+function page_colors() {
+    global $page;
+    echo '<style>
+	:root {';
+    switch (strtolower($page)) {
+    	case "sustain":
+	    	echo "      --pageColor: var(--sustain);
+	      --pageColor-shade: var(--sustain-shade);
+	      --pageColor-link: var(--sustain-link);";
+    		break;
+
+    	case "construct":
+	    	echo "      --pageColor: var(--construct);
+	      --pageColor-shade: var(--construct-shade);
+	      --pageColor-link: var(--construct-link);";
+    		break;
+
+    	case "contact":
+	    	echo "      --pageColor: var(--contact);
+	      --pageColor-shade: var(--contact-shade);
+	      --pageColor-link: var(--contact-link);";
+    		break;
+
+    	case "faq":
+	    	echo "      --pageColor: var(--faq);
+	      --pageColor-shade: var(--faq-shade);
+	      --pageColor-link: var(--faq-link);";
+    		break;
+
+    	case "resources":
+	    	echo "      --pageColor: var(--resources);
+	      --pageColor-shade: var(--resources-shade);
+	      --pageColor-link: var(--resources-link);";
+    		break;
+
+    	case "news":
+	    	echo "      --pageColor: var(--news);
+	      --pageColor-shade: var(--news-shade);
+	      --pageColor-link: var(--news-link);";
+    		break;
+
+    	case "c_article":
+	    	echo "      --pageColor: var(--home);
+	      --pageColor-shade: var(--home-shade);
+	      --pageColor-link: var(--home-link);";
+    		break;
+
+    	default:
+    		echo "
+			      --pageColor: var(--home);
+			      --pageColor-shade: var(--home-shade);
+			      --pageColor-link: var(--home-link);
+			";
+			break;
+    }
+
+	echo '}</style>';
+
+}
+
 abstract class FilesystemRegexFilter extends RecursiveRegexIterator {
     protected $regex;
     public function __construct(RecursiveIterator $iterate, $regex) {

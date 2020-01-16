@@ -20,7 +20,7 @@ require './assets/includes/head.php';
 <?php require './assets/includes/header.inc.php'; ?>
 
 <!-- Main body content -->
-<article id="mainContent" class="multiContentPage mainContent">
+<article id="mainContent" class="multiContentPage mainContent resourcesPage">
     <header class="mainHeading_Container">
        <h2 class="mainHeading">Resources</h2>
     </header>

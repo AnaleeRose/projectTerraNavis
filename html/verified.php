@@ -14,18 +14,7 @@ if (isset($_GET['vn'])) {
 	// }
 }
 require './assets/includes/config.inc.php';
-$page = 'resources';
-if ($page = 'resources') {
-?>
-<style type="text/css">
-  :root {
-      --pageColor: var(--faq);
-      --pageColor-shade: var(--faq-shade);
-      --pageColor-link: var(--faq-link);
-  }
-</style>
-<?php
-}
+$page = 'faq';
 require './assets/includes/head.php';
 ?>
 

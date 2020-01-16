@@ -2,28 +2,45 @@
 
 // grabs the url
 $url = $_SERVER['SERVER_NAME'];
+$s_online = false;
 
 // if it doesn't have com somewhere, we're probably offline so it sets the LIVE variable to false.
-if (strpos($url,'com') === false) {
-    $online = false;
-    if (!defined('LIVE')) define('LIVE', false);
+if (strpos($url,'life') == false) {
+} else {
+    $online = true;
+    define('LIVE', true);  
+}
+
+if (strpos($url,'com') == false) {
 } else {
     // if it has com somewhere, we're probably online so it sets the LIVE variable to true.
+    $s_online = true;
     $online = true;
-    if (!defined('LIVE')) define('LIVE', true);
+    define('LIVE', true);  
+}
+
+if (!defined('LIVE')) {
+    $online = false;
+    $s_online = false;
+    define('LIVE', false);  
 }
 
 // base url depending on whether we're online or not
 if ($online) {
-    define('BASE_URI', '/home/analeerose/bpa-development.savannahskinner.com/');
-    define('BASE_URL', 'http://bpa-development.savannahskinner.com/');
+    if ($s_online === true) {
+        define('BASE_URI', '/home/analeerose/bpa-development.savannahskinner.com/');
+        define('BASE_URL', 'http://bpa-development.savannahskinner.com/');
+    } else {
+        define('BASE_URI', '/home/analeerose/terranavis.life/');
+        define('BASE_URL', 'http://terranavis.life/'); 
+    }
 } else {
-
-    define('BASE_URI', '/Applications/XAMPP/xamppfiles/htdocs/projectTerraNavis/');
     define('BASE_URL', 'http://localhost/projectTerraNavis/');
+    define('BASE_URI', '/Applications/XAMPP/xamppfiles/htdocs/projectTerraNavis/');
     // define('BASE_URI', 'C:/xampp/htdocs/projectTerraNavis/');
-    // define('BASE_URL', 'http://localhost:81/BPA/');
 }
+
+
 
 
 // where to find mysql.php
@@ -41,7 +58,7 @@ function error_handler($e_number, $e_message, $e_file, $e_line, $e_vars) {
     if (!LIVE) {
         echo '<div class="alert alert-danger">' . nl2br($message) . '</div>';
     } else {
-        error_log($message, 1, 'savannah@savannahskinner.com', 'From: bpa_development');
+        error_log($message, 1, 'savannah@savannahskinner.com', 'From: terra nacis');
         // include_once './assets/includes/error.html';
     } //END of $live IF-ELSE
     return true;

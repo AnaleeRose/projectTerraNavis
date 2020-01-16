@@ -50,27 +50,28 @@ function showArticles($displaytype) {
     } elseif ($displaytype === 'full_article') {
         $articlesCurrentlyShown++;
         if (isset($article_id)) {
-            $q = 'SELECT a.*,  c.category as category FROM `articles` a JOIN categories c ON c.category_id = a.article_category WHERE article_id = ' . $article_id;
+            $q = 'SELECT a.*,  c.category as category, c.category_id as c_id  FROM `articles` a JOIN categories c ON c.category_id = a.article_category WHERE article_id = ' . $article_id;
             $r = mysqli_query($dbc, $q);
             if ($r && mysqli_num_rows($r) > 0) {
                 while ($row = $r->fetch_assoc()) {
                     if ($row['error_flag'] === null) {
                         ?>
-                            <article class="readArticle">
-                                <h2 class="readArticleName"><?= $row['article_name']; ?></h2>
-                                <h3 class="readArticle"><a href="econews.php?filter=true&category=<?= strtolower($row['category']); ?>"><?= $row['category']; ?></a></h3>
-                                <img class="readArticleImg" src="<?= IMG_PATH_HTML . $row['img_name']; ?>" alt="Article Image">
-                                <p class="readArticleCaption"><?= $row['caption']; ?></p>
-                                <p class="readArticleDate">Posted: <?= date('M j, Y', strtotime($row['date_added'])); ?></p>
-                                <hr>
-                                <?php
-                                    $q = 'SELECT * FROM `article_content` WHERE article_id = ' . $article_id;
-                                    $r = mysqli_query($dbc, $q);
-                                    if ($r && mysqli_num_rows($r) > 0) {
-                                        require './assets/includes/articleBuilder.inc.php';
-                                    }
-                                ?>
-                            </article>
+                                <a class="readArticle-category" href="newsfeed.php?dateSelect=All+Time&categorySelect=<?= strtolower($row['c_id']); ?>&filterSubmitBtn=Filter"><?= $row['category']; ?></a>
+                                <p class="readArticle-date">Posted: <?= date('M j, Y', strtotime($row['date_added'])); ?></p>
+                                <div class="readArticle-imgContainer">
+                                    <img class="readArticle-img" src="<?= IMG_PATH_HTML . $row['img_name']; ?>" alt="Article Image">
+                                    <p class="readArticle-caption"><?= $row['caption']; ?></p>
+                                </div>
+                                <div class="readArticle-content">
+                                    <hr class="readArticle-hr">
+                                    <?php
+                                        $q = 'SELECT * FROM `article_content` WHERE article_id = ' . $article_id;
+                                        $r = mysqli_query($dbc, $q);
+                                        if ($r && mysqli_num_rows($r) > 0) {
+                                            require './assets/includes/articleBuilder.inc.php';
+                                        }
+                                    ?>
+                                </div>
                         <?php
                     } // END if no error flag
                 } // END while
@@ -92,5 +93,26 @@ function showArticles($displaytype) {
         echo '<p class="noArticles_error">We don\'t have any articles matching those criteria. Check back soon for more content!</p>';
     }
 } // END function
+
+function get_c_article_info() {
+    global $article_id;
+    global $a_name;
+    global $a_desc;
+    global $dbc;
+
+    if (isset($article_id)) {
+        $q = 'SELECT a.article_name as a_name, a.article_description as a_desc FROM `articles` a WHERE article_id = ' . $article_id;
+        $r = mysqli_query($dbc, $q);
+        if ($r && mysqli_num_rows($r) === 1) {
+            while ($row = $r->fetch_assoc()) {
+                $a_name = $row['a_name'];
+                $a_desc = $row['a_desc'];
+            }
+        }
+
+    }
+
+
+}
 
 ?>

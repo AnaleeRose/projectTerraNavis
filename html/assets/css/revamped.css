@@ -73,10 +73,16 @@ Link ---------------------> #2B9333
 2. Global Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 :root {
-	--home: #39637B;
+	/*purple theme*/
+	--home: #ffb915;
+	--home-shade: #e08b17;
+	--home-link: #e08b17;
+	/*#fdcf4e*/
+
+
+/*	--home: #39637B;
 	--home-shade: #1b3d5a;
-	/*--home-shade: #214D68;*/
-	--home-link: #3c95c6;
+	--home-link: #3c95c6;*/
 
 	/*--home-shade: #182A35;*/
 	--sustain: #435833;
@@ -93,7 +99,7 @@ Link ---------------------> #2B9333
 
 	--faq: #77953E;
 	--faq-shade: #5C7925;
-	--faq-link: #77953E;
+	--faq-link: #aacb6b;
 
 	--contact: #717ABE;
 	--contact-shade: #252F79;
@@ -103,7 +109,8 @@ Link ---------------------> #2B9333
 	--news-shade: #208E86;
 	--news-link: #208E86;
 
-	--dark: #2C1E08;
+	--dark: #3f2000;
+	/*--dark: #2C1E08;*/
 	--dark-desaturated: #3C3934;
 	--text: #1F1E1E;
 	--text-subtle: #8E8477;
@@ -158,10 +165,12 @@ li a:hover {
 img {
   width: 100%;
 }
-
 h1, h2, h3, h4, h5, h6 {
 	color: var(--text);
   	font-family: var(--headingFont), sans-serif;
+}
+.btn {
+	cursor: pointer;
 }
 
 .a11yText {
@@ -302,7 +311,7 @@ h1, h2, h3, h4, h5, h6 {
 		border-top: 3px solid #fff;
 		bottom: 4px;
 		content: "";
-		right: 1rem;
+		left: 1rem;
 		position: absolute;
 		transition: width .2s;
 		width: 0;
@@ -357,6 +366,7 @@ h1, h2, h3, h4, h5, h6 {
 .navBars-open {
 	background: none;
 	padding: .5rem 1vw .5rem 0;
+	right: .9rem;
 }
 .navBars-open line {
 	stroke: #fff;
@@ -378,6 +388,7 @@ h1, h2, h3, h4, h5, h6 {
 	overflow: hidden;
 }
 .cursor {
+	cursor: pointer;
 	display: none;
 	position: absolute;
 	left: 200vw;
@@ -455,10 +466,10 @@ h1, h2, h3, h4, h5, h6 {
 	.mainSection-content ul {
 		padding-left: 1.5rem;
 	}
-		.mainSection-content li {
+		.mainSection-content li, .readArticle-content li {
 			position: relative;
 		}
-		.mainSection-content li:before {
+		.mainSection-content li:before, .readArticle-content li:before {
 			color: var(--link);
 			content: '>';
 			left: -1rem;
@@ -514,6 +525,7 @@ h1, h2, h3, h4, h5, h6 {
 .mainSection-container:last-of-type {border-bottom: none;}
 .faqHeadingArrow-container {
 	align-items: center;
+	cursor: pointer;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -549,7 +561,7 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 1rem;
 	position: absolute;
 	right: 0;
-	top: 14rem;
+	top: 3rem;
 }
 
 .contactSidebar-header {
@@ -615,7 +627,66 @@ h1, h2, h3, h4, h5, h6 {
 	}
 }
 
+.fbShareBtn-container {
+	display: block;
+	margin: 1rem auto;
+	text-align: center;
+}
 
+
+.readArticle-category, .readArticle-date {
+	display: block;
+	font: 1.3rem var(--headingFont);
+	padding: 1rem 0;
+	text-align: center;
+}
+
+.readArticle-date {
+	font-size: .9rem;
+	margin-bottom: 2rem;
+}
+
+.readArticle-imgContainer {
+	display: block;
+	margin: .5rem auto 2rem;
+	text-align: center;
+	min-width: 280px;
+	width: 85vw;
+}
+
+.readArticle-img {
+	min-width: 280px;
+	width: 85vw;
+}
+
+.readArticle-content {
+	font: 100%/170% var(--textFont);
+	padding: 1rem 5vw 0;
+}
+
+.readArticleHeading {
+	padding-top: 2rem;
+	font: bold 1.2rem/170% var(--headingFont-bold);
+	text-align: center;
+}
+
+.readArticleh2 {font-size: 1.5rem;}
+.readArticleh3 {font-size: 1.35rem;}
+.readArticleh4 {font-size: 1.15rem;}
+.readArticleh5 {font-size: 1.05rem;}
+.readArticleh6 {font-size: 1rem;}
+
+.readArticle-content p {
+	padding: 1rem;
+	text-indent: 1rem;
+}
+.readArticle-content ul, .readArticle-content ol {
+	padding: 1rem .5rem 1rem 2.25rem;
+}
+
+.readArticle-content li {
+	padding: .5rem 0;
+}
 
 .indiArticle:first-of-type {border: none;}
 .indiArticle-description {
@@ -722,6 +793,10 @@ h1, h2, h3, h4, h5, h6 {
 	/*z-index: 1;*/
 }
 
+	.multiContentPage .interactiveSubheadings-container {
+		top: 13vh;
+	}
+
 	.mainContent_subOpen .interactiveSubheadings-container {
 		color: #fff;
 		left: 3vw;
@@ -748,7 +823,7 @@ h1, h2, h3, h4, h5, h6 {
 	bottom: -.2rem;
 	content: "";
 	height: 0;
-	right: -.25rem;
+	left: -.25rem;
 	padding: 0;
 	position: absolute;
 	transition: width .3s;
@@ -861,7 +936,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .form-container .cf_btn {
 	background: var(--pageColor);
-	border: none;
+	border: 3px solid transparent;
 	color: #fff;
 	display: block;
 	font: bold 1.5rem var(--headingFont-bold);
@@ -871,6 +946,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .form-container .cf_btn:hover, .form-container .cf_btn:active {
 	background: #fff;
+	border: 3px solid var(--pageColor);
 	color: var(--pageColor);
 }
 
@@ -1197,17 +1273,15 @@ h1, h2, h3, h4, h5, h6 {
 .bpa-arrow {
 	position: relative;
 	margin: .7rem 1rem .5rem 0;
-	transition: transform .3s;
+	transition: all .3s,z;
+	transform: rotate(-135deg);
+
 }
 .bpa-arrow_turned {
-	/*transform: rotate(225deg);*/
-	transform: rotate(-135deg);
+	top: -5px;
+	transform: rotate(45deg);
 }
-/*.bpaChapterInfo-wrapper {
-	position: relative;
-	overflow: hidden;
-	height: 1.4rem;
-}*/
+
 
 .bpaChapterInfoHead-container {
 	background: var(--dark-desaturated);
@@ -1280,6 +1354,10 @@ h1, h2, h3, h4, h5, h6 {
 		right: 0;
 	}
 
+	.navBars-open {
+		right: .9rem;
+	}
+
 	.mainSection-container {
 		align-items: center;
 		padding: 1rem 4vw 2rem;
@@ -1330,6 +1408,34 @@ h1, h2, h3, h4, h5, h6 {
 	.indiArticle-content {
 		padding-top: 2rem;
 		width: 500px;
+	}
+
+	.readArticle-imgContainer {
+		box-sizing: content-box; 
+		float: right;
+		margin: 2rem;
+	}
+
+	.readArticleHeading {
+		padding-top: 1rem;
+		text-align: left;
+	}
+
+	.readArticle-date {margin-bottom: 0}
+
+	.readArticle-img, .readArticle-imgContainer {
+		max-width: 33vw;
+	}
+	.readArticle-hr {
+		display: none;
+	}
+
+	.readArticle-content {
+	}
+
+	.fbShareBtn-container {
+		padding: 0 0 0 5vw;
+		text-align: left;
 	}
 
 	.cf-container {
@@ -1528,7 +1634,7 @@ h1, h2, h3, h4, h5, h6 {
 				border-top: 3px solid var(--dark);
 				bottom: 4px;
 				content: "";
-				right: .7rem;
+				left: .7rem;
 				position: absolute;
 				transition: width .25s;
 				width: 0;

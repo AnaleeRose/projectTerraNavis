@@ -1,17 +1,6 @@
 <?php
 require './assets/includes/config.inc.php';
 $page = 'Home';
-if ($page = 'Home') {
-?>
-<style type="text/css">
-  :root {
-      --pageColor: var(--home);
-      --pageColor-shade: var(--home-shade);
-      --pageColor-link: var(--home-link);
-  }
-</style>
-<?php
-}
 require './assets/includes/head.php';
 ?>
 
