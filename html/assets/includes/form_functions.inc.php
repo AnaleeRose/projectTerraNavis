@@ -16,7 +16,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		echo '</label>';
 	}
 
-	if ( ($type === 'text') || ($type === 'password') || ($type === 'email')) {
+	if ( ($type === 'text') || ($type === 'password') || ($type === 'email')  || ($type === 'number') ) {
 		echo '<input type="' . $type . '" name="' . $name . '" id="' . $name . '" class="';
 		if (!empty($options) && is_array($options)) {
 			if (array_key_exists('addtl_classes', $options)){

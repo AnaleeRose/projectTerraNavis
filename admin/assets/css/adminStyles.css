@@ -166,6 +166,9 @@ input.hidden {
     width: 90vw;
 }
 
+    .defaultPage_centered {
+        text-align: center;
+    }
 .defaultDiv {
     background: none;
     border-radius: 10rem;
@@ -225,6 +228,9 @@ input.hidden {
     margin-top: 3rem
 }
 
+.changeSuccessHeading {
+    padding: 1rem .3rem;
+}
 .lmode .successHeading {color: var(--green);}
 .dmode .successHeading {color: var(--green);}
 
@@ -2270,7 +2276,7 @@ END Printed Styles
     .mainLinks a:hover {
         color: var(--magenta);
     }
-    
+
     .allEmailsBtn:before {
         background-position: 10px 11px;
     }

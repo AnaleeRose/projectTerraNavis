@@ -8,7 +8,7 @@ $s_online = false;
 if (strpos($url,'life') == false) {
 } else {
     $online = true;
-    define('LIVE', true);  
+    define('LIVE', true);
 }
 
 if (strpos($url,'com') == false) {
@@ -16,13 +16,13 @@ if (strpos($url,'com') == false) {
     // if it has com somewhere, we're probably online so it sets the LIVE variable to true.
     $s_online = true;
     $online = true;
-    define('LIVE', true);  
+    define('LIVE', true);
 }
 
 if (!defined('LIVE')) {
     $online = false;
     $s_online = false;
-    define('LIVE', false);  
+    define('LIVE', false);
 }
 
 // base url depending on whether we're online or not
@@ -32,12 +32,12 @@ if ($online) {
         define('BASE_URL', 'http://bpa-development.savannahskinner.com/');
     } else {
         define('BASE_URI', '/home/analeerose/terranavis.life/');
-        define('BASE_URL', 'http://terranavis.life/'); 
+        define('BASE_URL', 'http://terranavis.life/');
     }
 } else {
     define('BASE_URL', 'http://localhost/projectTerraNavis/');
-    define('BASE_URI', '/Applications/XAMPP/xamppfiles/htdocs/projectTerraNavis/');
-    // define('BASE_URI', 'C:/xampp/htdocs/projectTerraNavis/');
+    // define('BASE_URI', '/Applications/XAMPP/xamppfiles/htdocs/projectTerraNavis/');
+    define('BASE_URI', 'C:/xampp/htdocs/projectTerraNavis/');
 }
 
 
