@@ -272,13 +272,24 @@ function faq_collapse(e) {
     sectionName = "#mainSection-" + sectionNum;
     let c_openSection = document.querySelector(".faq_open")
     let openSection = document.body.querySelector(sectionName)
-    let c_openSectionContent  = document.querySelector(sectionName + " .mainSection-content")
+    let openSectionContent = document.body.querySelector(sectionName + " .mainSection-content")
+    let c_openSectionContent  = document.querySelector(".faq_open .mainSection-content")
 
     if (c_openSection) {
         c_openSection.classList.remove("faq_open");
+        c_openSectionContent.style.height = null;
     }
+
     if (c_openSection !== openSection) {
         openSection.classList.add("faq_open")
+        let allOpenSectionContent  = document.querySelectorAll(sectionName + " .mainSection-content *:not(li)")
+        let totalHeight = 0;
+        allOpenSectionContent.forEach(function(e){
+            totalHeight = totalHeight + e.clientHeight
+        })
+        openSectionContent.style.height = (totalHeight + 20) + "px";
+
+        // document.body.querySelectorAll("#mainSection-two .mainSection-content *")
     }
 }
 

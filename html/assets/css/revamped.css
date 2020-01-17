@@ -509,6 +509,7 @@ h1, h2, h3, h4, h5, h6 {
 .faqPage .mainSection-container {
 	border-bottom: .25rem solid var(--pageColor);
 }
+
 .faqPage .mainSection-content {
 	height: 0;
 	overflow: hidden;
@@ -517,8 +518,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .faq_open .mainSection-content{
-	min-height: 1vh;
-	height: 400px;
 	padding: 1rem;
 	transition: height .5s;
 }
