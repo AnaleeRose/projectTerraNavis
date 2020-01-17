@@ -64,7 +64,7 @@ if (isset($_GET['v']) && $_GET['v'] = "t") {
 	if (isset($_POST['vBtn'])) {
 		$v_code = $_POST['v_code'];
 		if (is_numeric($v_code) && (strlen((string)$v_code) === 6)) {
-			$q = "SELECT * FROM adminuser WHERE v_code = '$v_code' && v_expire >= DATE_SUB(NOW(),INTERVAL 1 HOUR)";
+			$q = "SELECT * FROM adminuser WHERE v_code = '$v_code' && v_expire >= DATE_SUB(NOW(),INTERVAL 1 MINUTE)";
     		$r = mysqli_query($dbc, $q);
     		if ($r && mysqli_num_rows($r) == 1) {
     			$row = $r->fetch_assoc();

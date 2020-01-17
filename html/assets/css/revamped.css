@@ -856,6 +856,8 @@ h1, h2, h3, h4, h5, h6 {
 	padding: .5rem .75rem;
 }
 
+.form-container .cf_joinChoice-input {border: none}
+
 .form-container textarea {
 	border-radius: 1rem;
 	max-width: 90vw;
@@ -1380,7 +1382,7 @@ h1, h2, h3, h4, h5, h6 {
 
 	.mainSection-heading {
 		background: none;
-		color: var(--Dark);
+		color: var(--dark);
 		text-align: left;
 	}
 
