@@ -36,8 +36,8 @@ if ($online) {
     }
 } else {
     define('BASE_URL', 'http://localhost/projectTerraNavis/');
-    // define('BASE_URI', '/Applications/XAMPP/xamppfiles/htdocs/projectTerraNavis/');
-    define('BASE_URI', 'C:/xampp/htdocs/projectTerraNavis/');
+    define('BASE_URI', '/Applications/XAMPP/xamppfiles/htdocs/projectTerraNavis/');
+    // define('BASE_URI', 'C:/xampp/htdocs/projectTerraNavis/');
 }
 
 
