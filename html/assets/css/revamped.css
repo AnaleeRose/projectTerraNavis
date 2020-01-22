@@ -282,7 +282,7 @@ h1, h2, h3, h4, h5, h6 {
 .headerLogo-header {
 	color: var(--dark);
 	font: bold 2.2rem var(--headingFont-bold), sans-serif;
-	padding-top: .8rem;
+	padding-top: 1.2rem;
 	text-decoration: none;
 }
 .headerLogo-logo img{
