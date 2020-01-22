@@ -409,7 +409,7 @@ h1, h2, h3, h4, h5, h6 {
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 .headerImg-container {
-	height: 40vw;
+	height: 45vw;
 	margin: 1rem auto 2rem;
 	position: relative;
 	width: 80vw;
@@ -1656,27 +1656,87 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 	.headerImg-container {
-		height: 500px;
-		margin: 2rem auto;
-		max-width: 800px;
+		height: 875px;
+		margin: -50px auto 0;
+		max-height: 100%;
+		max-width: 1200px;
+		position: relative;
+		width: 90vw;
 	}
 
 	.headerImg-container .headerImg-indi {
-		bottom: 0;
-		display: block;
-		left: 50vw;
-		margin-left: -25vw;
-		max-height: 100%;
-		max-width: 100%;
-		top: unset;
+	    display: block;
 	}
 
-	.headerImg-mobile { display: none;}
+	.headerImg-indi {
+		bottom: 0;
+	    left: 2vw;
+	    max-height: 100%;
+	    max-width: 100%;
+	    top: unset;
+		z-index: 7;
+	}
+
+		.headerImg-indi:hover:after {
+			background: yellow;
+			content: "";
+			height: 100%;
+			width: 100%;
+		}
+
+	.headerImg-container .headerImg-mobile { display: none;}
 
 	.eShip {
-		left: 50vw;
-		margin-left: -25%;
+		z-index: 6;
 	}
+
+	.turbine-indi {
+		z-index: 5;
+	}
+
+	.bucketSpout-container, .bucketSpout-container .spoutHandle, .bucketSpout-container .bucketSpout, .solarPanels, .plants {
+	    bottom: 1.5rem;
+		position: absolute;
+	}
+
+	.bucketSpout-container {
+	    height: 185px;
+		left: 12vw;
+	    width: 115px;
+	}
+
+	.bucketSpout-container .bucketSpout {
+		width: 125px;
+	}
+
+	.bucketSpout-container .spoutHandle {
+	    left: unset;
+	    right: -80px;
+	    top: -.9rem;
+	    width: 75px;
+	    z-index: 8;
+	}
+
+	.solarPanels {
+	    bottom: 1.25rem;
+		left: 29vw;
+	    height: 135px;
+	    width: 250px;
+	}
+
+	.plants {
+		height: 475px;
+	    left: unset;
+		right: -20px;
+		width: 520px;
+	}
+
+	.turbine-indi {
+		top: -32px;
+	}
+
+
+
 
 
 	.mainHeader {
@@ -1868,3 +1928,15 @@ h1, h2, h3, h4, h5, h6 {
 	.f-box:first-of-type {padding: 1rem 0 2rem;}
 	.f-box:first-of-type p {padding: 0 1rem;}
 }
+
+@media screen and (min-width: 1400px) {
+	.solarPanels {
+		left: 410px;
+	}
+
+	.bucketSpout-container {
+		left: 168px;
+	}
+
+}
+

@@ -39,12 +39,12 @@
         <img src="assets/images/mainGraphic/plants.png" alt="Header Image - Plants" class="plants headerImg-indi">
         <img src="assets/images/mainGraphic/solars.png" alt="Header Image" class="solarPanels headerImg-indi">
         <div class="bucketSpout-container">
-          <img src="assets/images/mainGraphic/wellhandle.gif" alt="Header Image - spout handle" class="spoutHandle headerImg-indi">
+          <img src="assets/images/mainGraphic/wellhandle.png" alt="Header Image - spout handle" class="spoutHandle headerImg-indi">
           <img src="assets/images/mainGraphic/well.png" alt="Header Image - bucket & spout" class="bucketSpout headerImg-indi">
         </div>
-        <img src="assets/images/mainGraphic/turbines.gif" alt="Header Image - turbines" class=" turbine-front headerImg-indi">
+        <!-- <img src="assets/images/mainGraphic/turbines.gif" alt="Header Image - turbines" class=" turbine-front turbine-indi headerImg-indi"> -->
         <img src="assets/images/mainGraphic/house.png" alt="Header Image - Earthship Building" class="eShip headerImg-indi">
-        <img src="assets/images/mainGraphic/turbines.gif" alt="Header Image - turbines" class=" turbine-back headerImg-indi">
+        <img src="assets/images/mainGraphic/turbines.gif" alt="Header Image - turbines" class=" turbine-back turbine-indi headerImg-indi">
         <img src="assets/images/mainGraphic/eship.gif" alt="Header Image - mobile ver" class="headerImg-mobile headerImg-indi">
       </div>
 <?php } ?>
