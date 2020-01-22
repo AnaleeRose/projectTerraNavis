@@ -43,7 +43,7 @@ $this_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : 
 		<meta property="og:type"          content="website" />
 		<meta property="og:title"         content="Terra Navis | <?= $a_name ?>" />
 		<meta property="og:description"   content="<?= $a_desc ?>" />
-		<meta property="og:image"         content="https://terranavis.life/html/404duck.png" />
+		<meta property="og:image"         content="https://terranavis.life/html/assets/images/logo.png" />
 	  <script defer>
 		(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
