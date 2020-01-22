@@ -69,6 +69,12 @@ Link ---------------------> #2B9333
 	font-weight: normal;
 	font-style: normal;
 }
+@font-face {
+	font-family: 'solway-bold';
+	src: url('../fonts/Solway-Bold.otf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 2. Global Styles
@@ -128,7 +134,7 @@ Link ---------------------> #2B9333
 	--link-visited: var(--tempColor);
 	--link-liHover: var(--tempColor);
 
-	--headingFont: 'cabin';
+	--headingFont: 'Solway-Bold';
 	--headingFont-bold: 'cabin-bold';
 	--textFont: 'ptsans';
 	--textFont-bold: 'ptsansbold';
