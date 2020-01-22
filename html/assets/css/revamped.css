@@ -1591,9 +1591,6 @@ h1, h2, h3, h4, h5, h6 {
 		font-size: 2.2rem;
 	}
 
-	.headerImg-container {
-	}
-
 	.mainSection-container {
 		padding: 1.5rem 4vw 2.5rem;
 	}
@@ -1659,8 +1656,28 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 	.headerImg-container {
-		margin: 3rem 0 -3rem;
+		height: 500px;
+		margin: 2rem auto;
+		max-width: 800px;
 	}
+
+	.headerImg-container .headerImg-indi {
+		bottom: 0;
+		display: block;
+		left: 50vw;
+		margin-left: -25vw;
+		max-height: 100%;
+		max-width: 100%;
+		top: unset;
+	}
+
+	.headerImg-mobile { display: none;}
+
+	.eShip {
+		left: 50vw;
+		margin-left: -25%;
+	}
+
 
 	.mainHeader {
 		height: 5.4rem;
