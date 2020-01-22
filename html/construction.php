@@ -10,7 +10,7 @@ require './assets/includes/head.php';
 <!-- Main body content -->
 <article id="mainContent" class="multiContentPage mainContent">
     <header class="mainHeading_Container">
-       <h2 class="mainHeading">Contrustion</h2>
+       <h2 class="mainHeading">Construction</h2>
     </header>
 
     <p id="cursor-container" class="cursor-container">

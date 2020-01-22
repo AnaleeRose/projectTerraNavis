@@ -326,6 +326,7 @@ function check_for_cursor() {
 
 
 function run_cursor(e, clicked = false) {
+    console.log("run")
     let newSubheading = e, topOffset;
     // if (screen.width > 1199) {
     //     if (homeMainContent) {
@@ -345,7 +346,7 @@ function run_cursor(e, clicked = false) {
 
     topOffset = newSubheading.parentElement.offsetTop + 44
     cursor.style.top = topOffset
-    subheadingsContainer.style.top = topOffset + 85
+    subheadingsContainer.setAttribute("style", "top: " + (topOffset + 85) + "px")
     if (clicked === true) {
         newSubheading_num = newSubheading.getAttribute("data-subheading");
         go_to = "#mainSection-" + newSubheading_num;

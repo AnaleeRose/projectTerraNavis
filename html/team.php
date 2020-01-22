@@ -39,7 +39,7 @@ require './assets/includes/head.php';
             </div>
         </section>
 
-        <section id="mainSection-two" class="mainSection-container">
+<!--         <section id="mainSection-two" class="mainSection-container">
             <div class="portrait-container">
                 <img class="portrait" src="assets/images/temp.png" alt="Portrait">
             </div>
@@ -49,9 +49,9 @@ require './assets/includes/head.php';
                 <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus cras adipiscing enim eu turpis egestas pretium. Ac felis donec et odio pellentesque diam. Aliquam faucibus purus in massa tempor nec feugiat nisl. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Semper feugiat nibh sed pulvinar. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliq.</p>
                 <a class="portfolioLink" href="yourportfolio.com">His Portfolio >></a>
             </div>
-        </section>
+        </section> -->
 
-        <section id="mainSection-three" class="mainSection-container">
+        <section id="mainSection-two" class="mainSection-container">
             <div class="portrait-container">
                 <img class="portrait" src="assets/images/temp.png" alt="Portrait">
             </div>
@@ -63,7 +63,7 @@ require './assets/includes/head.php';
             </div>
         </section>
 
-        <section id="mainSection-four" class="mainSection-container">
+        <section id="mainSection-three" class="mainSection-container">
             <div class="portrait-container">
                 <img class="portrait" src="assets/images/temp.png" alt="Portrait">
             </div>

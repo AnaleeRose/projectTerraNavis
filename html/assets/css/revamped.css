@@ -136,7 +136,7 @@ Link ---------------------> #2B9333
 }
 
 html {
-  	scroll-behavior:smooth;
+  	scroll-behavior: smooth;
 }
 
 body {
@@ -400,9 +400,9 @@ h1, h2, h3, h4, h5, h6 {
 .mainContent_subOpen .cursor {
 	--cursorColor: #fff;
 	--cursorColor-shade: #fff;
-    left: -1rem;
+    left: -1.5rem;
     transform: scaleX(-1);
-    width: 1rem;
+    width: 1.5rem;
 }
 
 .teamPage .cursor {
@@ -426,7 +426,6 @@ h1, h2, h3, h4, h5, h6 {
 	background: #fff;
 	padding: 0 0 2rem;
 	position: relative;
-	min-height: 70vh;
 	z-index: 2;
 }
 
@@ -1113,7 +1112,7 @@ h1, h2, h3, h4, h5, h6 {
 .mainFooter {
 	background: var(--dark);
 	color: #fff;
-	padding: 2rem 1rem;
+	padding: 2rem .65rem;
 	position: relative;
 	font: 1.15rem/155% var(--textFont), sans-serif;
 	z-index: 2;
@@ -1136,11 +1135,13 @@ h1, h2, h3, h4, h5, h6 {
 .f-box {
   display: flex;
   flex-direction: column;
-  padding: 2.5rem 0;
+  padding: 2.5rem 0 2rem;
   text-align: center;
 }
 
 .f-box:first-of-type {padding-top: 1rem;}
+.f-box:first-of-type {padding: 1rem 5vw 2rem;}
+.f-box:first-of-type p {padding: 0 4.5vw;}
 
 
 
@@ -1229,7 +1230,7 @@ h1, h2, h3, h4, h5, h6 {
 	flex-direction: column;
 	justify-content: center;
 	margin: 0 auto;
-	padding-bottom: 2.5rem;
+	padding: 1rem 0;
 }
 	.f_contactInfo-box {
 		align-items: center;
@@ -1251,7 +1252,7 @@ h1, h2, h3, h4, h5, h6 {
 .f_copyright-container {
 	display: block;
 	font-size: .9rem;
-	margin: 0 0 -1.5rem;
+	margin: 0;
 	text-align: center;
 }
 
@@ -1261,12 +1262,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bpaChapterInfo-container {
+    bottom: -2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 	margin: 0 auto;
-	width: 280px;
+	max-width: 90vw;
+	position: relative;
+	width: 100%;
 }
+
+.bpaChapterInfo-container>* {margin: 0 auto;}
 
 .bpa-arrow {
 	position: relative;
@@ -1287,7 +1293,7 @@ h1, h2, h3, h4, h5, h6 {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	width: 280px;
+	width: 300px;
 }
 
 .bpaChapterInfo-content {
@@ -1295,11 +1301,12 @@ h1, h2, h3, h4, h5, h6 {
 	overflow: hidden;
 	padding: 0 1rem 0;
 	transition: height .3s;
+    width: 300px;
 }
 
 .bpaChapterInfo-content_open {
-	padding: .5rem 1rem 1.5rem;
-	height: 8.75rem;
+    padding: .5rem 2rem 1.5rem 4rem;
+    height: 8.75rem;
 }
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1508,6 +1515,11 @@ h1, h2, h3, h4, h5, h6 {
 		padding: 0;
 	}
 
+	.bpaChapterInfo-container {
+		max-width: 400px;
+	}
+
+
 }
 
 /* ===== COMPUTER ============================= = */
@@ -1573,6 +1585,11 @@ h1, h2, h3, h4, h5, h6 {
 	.mainFooter {
 		padding-bottom: 0;
 	}
+
+	.bpaChapterInfo-container {
+	    bottom: 0;
+	}
+
 }
 
 /* ===== XL COMPUTER ============================== */
@@ -1661,7 +1678,7 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 	.faqPage .mainSection-container {
-		padding: 1rem 4vw 1.5rem;
+		padding: 1.5rem 4vw 2rem;
 	}
 
 	.contactSidebar-container {
@@ -1780,6 +1797,9 @@ h1, h2, h3, h4, h5, h6 {
 	.f_contactInfo-container {
 		justify-content: flex-start;
 	}
+
+	.f-box:first-of-type {padding: 1rem 0 2rem;}
+	.f-box:first-of-type p {padding: 0 1rem;}
 }
 
 

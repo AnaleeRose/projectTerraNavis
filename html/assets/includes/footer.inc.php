@@ -3,7 +3,7 @@
     <div id="f-container">
         <div id="f_teamBlurb-container" class="f_teamBlurb-container f-box">
             <h2 class="f_heading">Meet Our Team</h2>
-            <p class="f_teamBlurb">Jerad, Nick, Noshin, and Savannah. Four students from Francis Tuttle Technology Center who banded to gether to build a site. We created Terra Navis in hopes of offering a resource to the community while improving their skills. Want to learn more about us and our individual stories?</p>
+            <p class="f_teamBlurb">Nick, Noshin, and Savannah. Three students from Francis Tuttle Technology Center who banded together to build a site. We created Terra Navis in hopes of offering a resource to the community while improving their skills. Want to learn more about us and our individual stories?</p>
             <a href="team.php" class="f_teamBlurb-link">Meet Our Team >></a>
         </div>
         <div id="f_newsLetter-container" class="f_newsLetter-container f-box">
@@ -120,7 +120,7 @@
       <div id="bpaChapterInfo-content" class="bpaChapterInfo-content">
         <p>Chapter: 03-0042</p>
         <p>Theme: BPA Bio Friendly Home</p>
-        <p>School: Francis Tuttle Technology Center</p>
+        <p>School: Francis Tuttle Technology Center - Rockwell Campus</p>
         <p>Location: Oklahoma City, OK</p>
       </div>
     </div>

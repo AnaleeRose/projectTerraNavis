@@ -51,8 +51,8 @@ if (isset($_POST['cf_submit'])) {
 }
 
 if (!empty($contact_errors)) print_r($contact_errors);
-// $c_options = ['required' => '', 'contactPage' => ''];
-$c_options = ['contactPage' => ''];
+$c_options = ['required' => '', 'contactPage' => ''];
+// $c_options = ['contactPage' => ''];
 
 $max_msg_characters = 1200;
 
@@ -129,9 +129,9 @@ require './assets/includes/head.php';
         </section>
         <form class="cf-container form-container" method="post">
             <?php
-                create_form_input('c_name', 'text', 'Name', $contact_errors, $c_options + ['placeholder' => 'your name', 'addtl_div_classes' => 'equalWidthContainer']);
+                create_form_input('c_name', 'text', 'Name', $contact_errors, $c_options + ['placeholder' => 'Your name', 'addtl_div_classes' => 'equalWidthContainer']);
 
-                create_form_input('c_email', 'email', 'Email', $contact_errors, $c_options + ['placeholder' => 'your email', 'addtl_div_classes' => 'equalWidthContainer']);
+                create_form_input('c_email', 'email', 'Email', $contact_errors, $c_options + ['placeholder' => 'Your email', 'addtl_div_classes' => 'equalWidthContainer']);
             ?>
             <div class="cf_inputLabel-container cf_joinNewsletter-container">
                 <label for="cf_joinNewsletter">Join Our Newsletter?
