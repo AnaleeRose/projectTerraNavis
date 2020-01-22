@@ -76,6 +76,13 @@ Link ---------------------> #2B9333
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'solway-light';
+	src: url('../fonts/Solway-Light.otf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 2. Global Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
@@ -136,6 +143,7 @@ Link ---------------------> #2B9333
 
 	--headingFont: 'Solway-Bold';
 	--headingFont-bold: 'Solway-Bold';
+	--subtitle: 'Solway-Light';
 	--textFont: 'ptsans';
 	--textFont-bold: 'ptsansbold';
 	--textFont-italic: 'ptsans-italic';
@@ -196,6 +204,10 @@ img {
 h1, h2, h3, h4, h5, h6 {
 	color: var(--text-temp);
   	font-family: var(--headingFont), sans-serif;
+}
+h6 {
+	font: italic 1rem var(--subtitle), sans-serif;
+	text-align: left;
 }
 .btn {
 	cursor: pointer;
@@ -282,7 +294,7 @@ h1, h2, h3, h4, h5, h6 {
 .headerLogo-header {
 	color: var(--dark);
 	font: bold 2.2rem var(--headingFont-bold), sans-serif;
-	padding-top: 1.2rem;
+	padding-top: .4rem;
 	text-decoration: none;
 }
 .headerLogo-logo img{

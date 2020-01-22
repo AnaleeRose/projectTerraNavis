@@ -6,7 +6,7 @@
         <div id="headerLogo-container" class="headerLogo-container">
             <!-- <a  href="index.php"> -->
                 <a href="index.php" class="headerLogo-logo"><img src="assets/images/logo.png" alt="Terra Navis Living Logo"></a>
-                <a href="index.php" class="headerLogo-header"><h1>Terra Navis Living</h1></a>
+                <a href="index.php" class="headerLogo-header"><h1>Terra Navis Living</h1><h6>A Sustainable Future with Earthships</h6></a>
             <!-- </a>          -->
         </div>
         <p class="navBars-container">
