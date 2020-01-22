@@ -19,47 +19,47 @@ function page_colors() {
     echo '<style>
 	:root {';
     switch (strtolower($page)) {
-    	case "sustain":
-	    	echo "      --pageColor: var(--sustain);
-	      --pageColor-shade: var(--sustain-shade);
-	      --pageColor-link: var(--sustain-link);";
-    		break;
+    	// case "sustain":
+	    // 	echo "      --pageColor: var(--sustain);
+	    //   --pageColor-shade: var(--sustain-shade);
+	    //   --pageColor-link: var(--sustain-link);";
+    	// 	break;
 
-    	case "construct":
-	    	echo "      --pageColor: var(--construct);
-	      --pageColor-shade: var(--construct-shade);
-	      --pageColor-link: var(--construct-link);";
-    		break;
+    	// case "construct":
+	    // 	echo "      --pageColor: var(--construct);
+	    //   --pageColor-shade: var(--construct-shade);
+	    //   --pageColor-link: var(--construct-link);";
+    	// 	break;
 
-    	case "contact":
-	    	echo "      --pageColor: var(--contact);
-	      --pageColor-shade: var(--contact-shade);
-	      --pageColor-link: var(--contact-link);";
-    		break;
+    	// case "contact":
+	    // 	echo "      --pageColor: var(--contact);
+	    //   --pageColor-shade: var(--contact-shade);
+	    //   --pageColor-link: var(--contact-link);";
+    	// 	break;
 
-    	case "faq":
-	    	echo "      --pageColor: var(--faq);
-	      --pageColor-shade: var(--faq-shade);
-	      --pageColor-link: var(--faq-link);";
-    		break;
+    	// case "faq":
+	    // 	echo "      --pageColor: var(--faq);
+	    //   --pageColor-shade: var(--faq-shade);
+	    //   --pageColor-link: var(--faq-link);";
+    	// 	break;
 
-    	case "resources":
-	    	echo "      --pageColor: var(--resources);
-	      --pageColor-shade: var(--resources-shade);
-	      --pageColor-link: var(--resources-link);";
-    		break;
+    	// case "resources":
+	    // 	echo "      --pageColor: var(--resources);
+	    //   --pageColor-shade: var(--resources-shade);
+	    //   --pageColor-link: var(--resources-link);";
+    	// 	break;
 
     	case "news":
-	    	echo "      --pageColor: var(--news);
-	      --pageColor-shade: var(--news-shade);
+	    	echo "      --pageColor: var(--home);
+	      --pageColor-shade: var(--home-shade);
 	      --pageColor-link: var(--news-link);";
     		break;
 
-    	case "c_article":
-	    	echo "      --pageColor: var(--home);
-	      --pageColor-shade: var(--home-shade);
-	      --pageColor-link: var(--home-link);";
-    		break;
+    	// case "c_article":
+	    // 	echo "      --pageColor: var(--home);
+	    //   --pageColor-shade: var(--home-shade);
+	    //   --pageColor-link: var(--home-link);";
+    	// 	break;
 
     	default:
     		echo "

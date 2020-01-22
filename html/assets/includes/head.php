@@ -21,6 +21,8 @@ if (isset($_POST['emailInput']) && !empty($_POST['emailInput'])) {
   } else {
     $email_errors[] = "Please enter a valid email address";
   }
+} elseif (isset($_POST['emailInput']) && empty($_POST['emailInput'])) {
+    $email_errors[] = "Please enter a valid email address";
 }
 $this_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 ?>
@@ -42,7 +44,6 @@ $this_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : 
 		<meta property="og:title"         content="Terra Navis | <?= $a_name ?>" />
 		<meta property="og:description"   content="<?= $a_desc ?>" />
 		<meta property="og:image"         content="https://terranavis.life/html/404duck.png" />
-	    <!-- <script src="assets/js/functionality.full.js" defer></script> -->
 	  <script defer>
 		(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];

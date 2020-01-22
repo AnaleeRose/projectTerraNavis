@@ -35,6 +35,7 @@ Link ---------------------> #2B9333
 1. CSS Resets & Fonts
 2. Global Styles
 3. Header & Nav Styles
+3a. Header animations
 4. Main Body Content
 5. Form Styles
 6. Footer Content
@@ -74,9 +75,9 @@ Link ---------------------> #2B9333
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 :root {
 	/*purple theme*/
-	--home: #ffb915;
+/*	--home: #ffb915;
 	--home-shade: #e08b17;
-	--home-link: #e08b17;
+	--home-link: #e08b17;*/
 	/*#fdcf4e*/
 
 
@@ -105,11 +106,14 @@ Link ---------------------> #2B9333
 	--contact-shade: #252F79;
 	--contact-link: #717ABE;
 
-	--news: #68CEC6;
+/*	--news: #68CEC6;
 	--news-shade: #208E86;
-	--news-link: #208E86;
+	--news-link: #208E86;*/
 
-	--dark: #3f2000;
+	/*#ffb915 yellow*/
+	/*# d-blue footer*/
+
+	/*--dark: #3f2000;*/
 	/*--dark: #2C1E08;*/
 	--dark-desaturated: #3C3934;
 	--text: #1F1E1E;
@@ -133,6 +137,24 @@ Link ---------------------> #2B9333
 	--formBorder: rgba(44,30,8,.5);
 	--cursorColor: var(--pageColor);
 	--cursorColor-shade: var(--pageColor-shade);
+
+
+
+
+	--home: var(--bg);
+	--home-shade: var(--bg);
+	--home-link: #ff7125;
+	--dark: #fff;
+	--text-subtle: #10458a;
+
+	--temp-text: #fff;
+	/*--bg: #1a3160;*/
+	--bg: #0a1c58;
+	--news-link: #0b254e;
+	--bg-footer: #041433;
+/*	#ff9e68
+	#ec724f
+	#ff7125*/
 }
 
 html {
@@ -140,8 +162,8 @@ html {
 }
 
 body {
-	background: #fff;
-	color: var(--text);
+	background: var(--bg);
+	color: var(--temp-text);
 	position: relative;
 	font: 100% var(--textFont);
 }
@@ -166,7 +188,7 @@ img {
   width: 100%;
 }
 h1, h2, h3, h4, h5, h6 {
-	color: var(--text);
+	color: var(--text-temp);
   	font-family: var(--headingFont), sans-serif;
 }
 .btn {
@@ -230,7 +252,7 @@ h1, h2, h3, h4, h5, h6 {
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 .mainHeader {
-	background: rgba(255,255,255,.95);
+	background: var(--bg);
 }
 .headerLogo-container {
 	display: flex;
@@ -294,19 +316,20 @@ h1, h2, h3, h4, h5, h6 {
 
 .mainNav-link {
 	color: #fff;
-	font: 1.2rem var(--headingFont), sans-serif;
+	font: 1.65rem var(--headingFont), sans-serif;
 	margin: .25rem 0;
 	padding: .5rem 1rem;
 	position: relative;
 	text-decoration: none;
 }
-	.mainNav-link.n_homeLink:hover, .mainNav-link.n_homeLink:active {color: var(--home-link);}
-	.mainNav-link.n_sustainLink:hover, .mainNav-link.n_sustainLink:active {color: var(--sustain-link);}
-	.mainNav-link.n_constructLink:hover, .mainNav-link.n_constructLink:active {color: var(--construct-link);}
-	.mainNav-link.n_newsfeedLink:hover, .mainNav-link.n_constructLink:active {color: var(--news-link);}
-	.mainNav-link.n_resourcesLink:hover, .mainNav-link.n_constructLink:active {color: var(--resources-link);}
-	.mainNav-link.n_faqLink:hover, .mainNav-link.n_constructLink:active {color: var(--faq-link);}
-	.mainNav-link.n_contactLink:hover, .mainNav-link.n_constructLink:active {color: var(--contact-link);}
+	.mainNav-link:hover, .mainNav-link:active {color: var(--home-link);}
+	/*.mainNav-link.n_homeLink:hover, .mainNav-link.n_homeLink:active {color: var(--home-link);}*/
+	/*.mainNav-link.n_sustainLink:hover, .mainNav-link.n_sustainLink:active {color: var(--sustain-link);}*/
+	/*.mainNav-link.n_constructLink:hover, .mainNav-link.n_constructLink:active {color: var(--construct-link);}*/
+	/*.mainNav-link.n_newsfeedLink:hover, .mainNav-link.n_constructLink:active {color: var(--news-link);}*/
+	/*.mainNav-link.n_resourcesLink:hover, .mainNav-link.n_constructLink:active {color: var(--resources-link);}*/
+	/*.mainNav-link.n_faqLink:hover, .mainNav-link.n_constructLink:active {color: var(--faq-link);}*/
+	/*.mainNav-link.n_contactLink:hover, .mainNav-link.n_constructLink:active {color: var(--contact-link);}*/
 	.mainNav-link:after {
 		border-top: 3px solid #fff;
 		bottom: 4px;
@@ -373,12 +396,40 @@ h1, h2, h3, h4, h5, h6 {
 	stroke: #fff;
 }
 
-.tempHeaderImg {
+.headerImg-container {
 	box-sizing: border-box;
 	padding: .5rem;
 	margin-top: -3.5rem;
 	/*padding: 1rem 2rem;*/
 }
+
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+3a. Header Image Animations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+
+.headerImg-container {
+	height: 40vw;
+	margin: 1rem auto 2rem;
+	position: relative;
+	width: 80vw;
+	/*height: 800px;*/
+}
+
+.headerImg-indi {
+	position: absolute;
+}
+
+.headerImg-indi:not(.headerImg-mobile) {
+	display: none;
+}
+.headerImg-mobile {
+	left: 0;
+	top: -23vw;
+}
+
+
+
 
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -412,7 +463,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mainContent {
-	background: linear-gradient(to bottom, var(--pageColor), var(--pageColor-shade));
+	background: var(--bg);
 	padding-left: .75rem;
 	margin-bottom: -1.3rem;
 	transition: padding-left .5s;
@@ -423,7 +474,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mainContent-wrapper {
-	background: #fff;
+	background: rgba(255,255,255,.1);
 	padding: 0 0 2rem;
 	position: relative;
 	z-index: 2;
@@ -470,7 +521,7 @@ h1, h2, h3, h4, h5, h6 {
 			position: relative;
 		}
 		.mainSection-content li:before, .readArticle-content li:before {
-			color: var(--link);
+			color: var(--pageColor-link);
 			content: '>';
 			left: -1rem;
 			position: absolute;
@@ -712,7 +763,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .indiArticle-titleText {
-	color: #e67a41;
+	color: #0b254e;
 	font: bold 1.5rem var(--headingFont-bold);
 	padding: 1rem 0;
 }
@@ -1110,7 +1161,7 @@ h1, h2, h3, h4, h5, h6 {
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 .mainFooter {
-	background: var(--dark);
+	background: var(--bg-footer);
 	color: #fff;
 	padding: 2rem .65rem;
 	position: relative;
@@ -1179,6 +1230,7 @@ h1, h2, h3, h4, h5, h6 {
 		border-radius: 2rem;
 		color: #fff;
 		display: block;
+		height: 1.3rem;
 		padding: .65rem 3.5rem .65rem 1.1rem;
 		margin: 1rem auto 1rem;
 		max-width: 95vw;
@@ -1197,6 +1249,8 @@ h1, h2, h3, h4, h5, h6 {
 	background: #fff;
 	border: none;
 	border-radius: 0 2rem 2rem 0;
+	box-sizing: content-box;
+	height: 1.5rem;
 	padding: .5rem 1rem .75rem .6rem;
 	position: absolute;
 	right: 0;
@@ -1288,7 +1342,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .bpaChapterInfoHead-container {
-	background: var(--dark-desaturated);
+	background: var(--bg-footer);
 	cursor: pointer;
 	display: flex;
 	flex-direction: row;
@@ -1305,7 +1359,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bpaChapterInfo-content_open {
-    padding: .5rem 2rem 1.5rem 4rem;
+    padding: .5rem 2rem 1.5rem 3.25rem;
     height: 8.75rem;
 }
 
@@ -1326,15 +1380,17 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 	.headerLogo-container {
-		/*border-bottom: .25rem solid var(--dark);*/
 		flex-direction: row;
 		justify-content: flex-start;
 		padding: 1rem .65rem .65rem;
 	}
 
-	.tempHeaderImg {
-		margin-top: 0;
-		padding: 1rem;
+	.headerImg-container {
+		margin-bottom: 5.5rem;
+	}
+
+	.headerImg-mobile {
+		top: -12vw;
 	}
 
 	.headerLogo-container .headerLogo-logo img {
@@ -1350,8 +1406,6 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 	.navLogo-container {
-	    background: rgba(255,255,255,.9);
-		/*position: fixed;*/
 	}
 
 	.navBars {
@@ -1537,10 +1591,7 @@ h1, h2, h3, h4, h5, h6 {
 		font-size: 2.2rem;
 	}
 
-	.tempHeaderImg {
-		box-sizing: border-box;
-		margin: -1rem 0 1rem;
-		padding: 1rem 2rem;
+	.headerImg-container {
 	}
 
 	.mainSection-container {
@@ -1607,12 +1658,11 @@ h1, h2, h3, h4, h5, h6 {
 		margin-top: 5.4rem;
 	}
 
-	.tempHeaderImg {
+	.headerImg-container {
 		margin: 3rem 0 -3rem;
 	}
 
 	.mainHeader {
-		background: rgba(255,255,255,1);
 		height: 5.4rem;
 		position: fixed;
 		left: 0;
@@ -1706,8 +1756,8 @@ h1, h2, h3, h4, h5, h6 {
 
 	.indiArticle {
 		background: linear-gradient(130deg, #fff9f2 50%, #ffefdb);
-		background: #fffdfb;
-		box-shadow: 5px 3px 6px #d4cfc8;
+		background: rgba(255,255,255,.1);
+		/*box-shadow: 5px 3px 6px rgba(5, 19, 51, .45);*/
 		padding: 2.5rem 1vw 3.5rem;
 		margin: 1rem;
 	}
@@ -1801,10 +1851,3 @@ h1, h2, h3, h4, h5, h6 {
 	.f-box:first-of-type {padding: 1rem 0 2rem;}
 	.f-box:first-of-type p {padding: 0 1rem;}
 }
-
-
-
-
-
-
-
