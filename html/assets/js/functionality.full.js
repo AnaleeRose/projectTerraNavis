@@ -19,6 +19,7 @@ const c_msg = document.body.querySelector("#c_msg");
 const characterCounter = document.body.querySelector("#characterCounter");
 const cursor = document.body.querySelector('#cursor');
 const headerImgContainer = document.body.querySelector('.headerImg-container');
+const eShip = document.body.querySelector(".eShip")
 
 const allHeaderImgPieces = document.body.querySelectorAll('[data-hoverable="true"]');
 const allSubheadings = document.body.querySelectorAll(".subheading");
@@ -29,7 +30,7 @@ const allJoinCustomBtns = document.body.querySelectorAll('.customRadioBtn');
 const allTBoxes = document.body.querySelectorAll(".headerImg-textBox")
 
 const characterLimit = 1200
-let last_scroll_pos = 0;
+let last_scroll_pos = 0, tBox_container, turbines_Y_offset;
 
 // `END variables ============================================================>
 
@@ -113,9 +114,7 @@ if (contactPage) {
 if (headerImgContainer) {
     allHeaderImgPieces.forEach(function(e) {
         e.addEventListener('mouseover', function(){
-            console.log(e)
             if (!e.classList.contains("eShip")) {
-                console.log(headerImgContainer)
                 headerImgContainer.classList.add("headerImg-container_hover")
                 e.classList.add("headerImg-indi_hover")
             }
@@ -144,6 +143,42 @@ if (headerImgContainer) {
             }
         })
     })
+
+    eShip.addEventListener('mousemove', function(e){
+        if (window.innerWidth < 1400) {
+            turbines_Y_offset = e.srcElement.clientHeight*.785
+        } else {
+            turbines_Y_offset = e.srcElement.clientHeight*.7
+        }
+        if (e.clientX < (e.srcElement.clientWidth/1.9)
+            && e.clientX > 200
+            && e.clientY < turbines_Y_offset) {
+            tBox_container = document.body.querySelector(".turbines")
+
+            headerImgContainer.classList.add("headerImg-container_hover")
+            tBox_container.classList.add("headerImg-indi_hover")
+        }
+    })
+
+    eShip.addEventListener('mouseout', function(e){
+        if (window.innerWidth < 1400) {
+            turbines_Y_offset = e.srcElement.clientHeight*.2
+        } else {
+            turbines_Y_offset = e.srcElement.clientHeight*.7
+        }
+        if (!(e.clientX < (e.srcElement.clientWidth/1.9))
+            || !(e.clientX > 200)
+            || !(e.clientY < turbines_Y_offset)) {
+            tBox_container = document.body.querySelector(".turbines")
+
+            headerImgContainer.classList.remove("headerImg-container_hover")
+            tBox_container.classList.remove("headerImg-indi_hover")
+
+            console.log
+        }
+    })
+
+    init_tBoxes();
 }
 
 
@@ -198,15 +233,9 @@ function intialize_article_animation() {
     let prev_top, lowest_top, timeout = 1, first = true, c_list = [], all_list = [], altC_list = [];
     allArticles.forEach(function(e){
         if ((e.offsetTop - prev_top) > 50) {
-            console.log("run")
-            // setTimeout(function(){
-            //     animate_articles(c_list)
-            //     all_list.push(c_list);
-            //     c_list = [];
-            // }, timeout)
-                animate_articles(c_list)
-                all_list.push(c_list);
-                c_list = [];
+            animate_articles(c_list)
+            all_list.push(c_list);
+            c_list = [];
         }
         c_list.push(e);
         prev_top = e.offsetTop;
@@ -332,16 +361,10 @@ function faq_collapse(e) {
     }
 }
 
-init_tBoxes()
-
 function init_tBoxes() {
     allTBoxes.forEach(function(e){
         let allTBoxesContent  = e.childNodes
         let heightOffset  = e.previousElementSibling.clientHeight
-        console.log("p START")
-        console.log(e.previousElementSibling)
-        console.log(heightOffset)
-        console.log("p END")
         let t_height = 0
 
         allTBoxesContent.forEach(function(e){
@@ -350,7 +373,6 @@ function init_tBoxes() {
                 e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + (e.offsetWidth + 32) + "px;");
             }
         })
-        console.log(t_height)
         e.classList.add("headerImg-textBox_prepped")
         setTimeout(function(){
             e.setAttribute("style", "height: " + (t_height + 16) + "px;transition: width .3s;");
