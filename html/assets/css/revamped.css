@@ -1818,6 +1818,7 @@ h1 {
 
 	.headerImg-container {
 		height: 875px;
+    	margin: -20px auto 0;
 		max-height: 100%;
 		max-width: 1200px;
 		position: relative;

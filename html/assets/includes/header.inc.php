@@ -43,6 +43,8 @@
             <p class="tBox-content">This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense.</p>
           </div>
         </div>
+<!-- @media screen and (min-width: 1200px) { -->
+  <!-- .headerImg-container { -->
 
         <div class="solarPanels headerImg-indi" data-hoverable="true">
           <img src="assets/images/mainGraphic/solars.png" alt="Header Image">
@@ -69,7 +71,7 @@
             <p class="tBox-heading">NEW Heading</p>
             <p class="tBox-content">This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense.</p>
           </div>
-          
+
         </div>
 
         <img src="assets/images/mainGraphic/eship.gif" alt="Header Image - mobile ver" class="headerImg-mobile">
