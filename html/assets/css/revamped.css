@@ -1671,12 +1671,12 @@ h6 {
 	}
 
 	.mainContent {
-		margin-top: 5.4rem;
+		margin-top: 4rem;
 	}
 
 	.headerImg-container {
 		height: 875px;
-		margin: -50px auto 0;
+		margin: -20px auto 0;
 		max-height: 100%;
 		max-width: 1200px;
 		position: relative;
@@ -1759,7 +1759,7 @@ h6 {
 
 
 	.mainHeader {
-		height: 5.4rem;
+		height: 6.4rem;
 		position: fixed;
 		left: 0;
 		top: 0;
