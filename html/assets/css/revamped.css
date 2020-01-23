@@ -494,7 +494,7 @@ h6 {
 .mainContent-wrapper {
 	background: rgba(255,255,255,.1);
 	padding: 0 0 2rem;
-	margin-right: 55px;
+	margin: 0 50px 50px 0;
 	position: relative;
 	z-index: 2;
 }
