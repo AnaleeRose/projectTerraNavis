@@ -918,8 +918,9 @@ h6 {
 
 .form-container input, .form-container textarea {
 	background: #fff;
-	border: 2px solid var(--formBorder);
-	border-radius: 2rem;
+	/*border: 2px solid var(--formBorder);*/
+	/*border-radius: 2rem;*/
+	border: none;
 	color: var(--pageColor-shade);
 	padding: .5rem .75rem;
 }
@@ -927,7 +928,8 @@ h6 {
 .form-container .cf_joinChoice-input {border: none}
 
 .form-container textarea {
-	border-radius: 1rem;
+	/*border-radius: 1rem;*/
+	border: none;
 	max-width: 90vw;
 	min-height: 200px;
 	min-width: 250px;
@@ -1019,7 +1021,7 @@ h6 {
 
 #cf_submit {
     min-width: auto;
-    width: 9.85rem;
+    width: 12rem;
 }
 
 .newsfeedFilter-form {
@@ -1608,6 +1610,7 @@ h6 {
 
 	.mainHeading {
 		font-size: 2.2rem;
+		margin-top: 50px;
 	}
 
 	.mainSection-container {

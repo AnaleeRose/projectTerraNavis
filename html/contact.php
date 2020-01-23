@@ -152,7 +152,7 @@ require './assets/includes/head.php';
             </div>
 
             <?php
-                create_form_input('c_msg', 'textarea', 'Message', $contact_errors, $c_options + ['placeholder' => 'What do you have to say?', 'addtl_div_classes' => 'cf_msgCounter-container', 'maxlength' => $max_msg_characters]);
+                create_form_input('c_msg', 'textarea', 'Message', $contact_errors, $c_options + ['placeholder' => 'Type a message....', 'addtl_div_classes' => 'cf_msgCounter-container', 'maxlength' => $max_msg_characters]);
             ?>
             <input name="cf_submit" id="cf_submit" type="submit" value="Send Email" class="btn cf_btn">
         </form>
