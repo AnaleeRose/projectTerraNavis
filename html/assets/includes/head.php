@@ -36,7 +36,7 @@ $this_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : 
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/revamped.css">
     <script src="assets/js/animations.js" defer></script>
-    <script src="assets/js/functionality.js" defer></script>
+    <script src="assets/js/functionality.full.js" defer></script>
 	<?php if ($page === "c_article") { ?>
 		<meta property="fb:app_id" content="484053738969775"/>
 		<meta property="og:url"           content="<?= $this_url ?>" />

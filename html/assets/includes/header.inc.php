@@ -6,7 +6,7 @@
         <div id="headerLogo-container" class="headerLogo-container">
             <!-- <a  href="index.php"> -->
                 <a href="index.php" class="headerLogo-logo"><img src="assets/images/logo.png" alt="Terra Navis Living Logo"></a>
-                <a href="index.php" class="headerLogo-header"><h1>Terra Navis Living</h1><h6>A Sustainable Future with Earthships</h6></a>
+                <a href="index.php" class="headerLogo-header"><h1>Terra Navis Living</h1><span class="h1Tagline">A Sustainable Future with Earthships</span></a>
             <!-- </a>          -->
         </div>
         <p class="navBars-container">
@@ -36,16 +36,43 @@
 
 <?php if (isset($page) && strtolower($page) == 'home') { ?>
       <div class="headerImg-container">
-        <img src="assets/images/mainGraphic/plants.png" alt="Header Image - Plants" class="plants headerImg-indi">
-        <img src="assets/images/mainGraphic/solars.png" alt="Header Image" class="solarPanels headerImg-indi">
-        <div class="bucketSpout-container">
+        <div class="plants headerImg-indi" data-hoverable="true">
+          <img src="assets/images/mainGraphic/plants.png" alt="Header Image - Plants" data-hoverable="true">
+          <div class="headerImg-textBox">
+            <p class="tBox-heading">Heading</p>
+            <p class="tBox-content">This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense.</p>
+          </div>
+        </div>
+
+        <div class="solarPanels headerImg-indi" data-hoverable="true">
+          <img src="assets/images/mainGraphic/solars.png" alt="Header Image">
+          <div class="headerImg-textBox">
+            <p class="tBox-heading">NEW Heading</p>
+            <p class="tBox-content">This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense.</p>
+          </div>
+        </div>
+
+        <div class="bucketSpout-container headerImg-indi" data-hoverable="true">
           <img src="assets/images/mainGraphic/wellhandle.png" alt="Header Image - spout handle" class="spoutHandle headerImg-indi">
           <img src="assets/images/mainGraphic/well.png" alt="Header Image - bucket & spout" class="bucketSpout headerImg-indi">
+          <div class="headerImg-textBox">
+            <p class="tBox-heading">NEW Heading</p>
+            <p class="tBox-content">This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense.</p>
+          </div>
         </div>
-        <!-- <img src="assets/images/mainGraphic/turbines.gif" alt="Header Image - turbines" class=" turbine-front turbine-indi headerImg-indi"> -->
-        <img src="assets/images/mainGraphic/house.png" alt="Header Image - Earthship Building" class="eShip headerImg-indi">
-        <img src="assets/images/mainGraphic/turbines.gif" alt="Header Image - turbines" class=" turbine-back turbine-indi headerImg-indi">
-        <img src="assets/images/mainGraphic/eship.gif" alt="Header Image - mobile ver" class="headerImg-mobile headerImg-indi">
+
+        <img src="assets/images/mainGraphic/house.png" alt="Header Image - Earthship Building" class="eShip headerImg-indi" data-hoverable="true">
+
+        <div class="turbines headerImg-indi" data-hoverable="true">
+          <img src="assets/images/mainGraphic/turbines.gif" alt="Header Image - turbines">
+          <div class="headerImg-textBox">
+            <p class="tBox-heading">NEW Heading</p>
+            <p class="tBox-content">This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense.</p>
+          </div>
+          
+        </div>
+
+        <img src="assets/images/mainGraphic/eship.gif" alt="Header Image - mobile ver" class="headerImg-mobile">
       </div>
 <?php } ?>
 </header>
