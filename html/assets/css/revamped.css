@@ -8,9 +8,6 @@ Author's URL: http://ftclass.com
 Navy ---------------------> #39637B
 	Shade -----> #182A35
 
-Dark Green ---------------> #203312
-	Shade -----> #203312
-
 Burnt Orange -------------> #B45929
 	Shade -----> #723A29
 
@@ -25,6 +22,9 @@ Lilac --------------------> #717ABE
 
 Aquamarine ---------------> #68CEC6
 	Shade -----> #208E86
+
+Pink ---------------> #FF466A
+	Shade -----> #EF3C67
 
 Oak Brown ----------------> #2C1E08
 Text ---------------------> #1F1E1E
@@ -205,8 +205,8 @@ h1 {
 }
 
 .requiredWarning {
-	color: var(--pageColor);
-	font: .9rem var(--headingFont);
+	color: #567aa7;
+	font: italic .7rem var(--headingFont);
 }
 
 .emailError {
