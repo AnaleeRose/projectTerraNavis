@@ -1682,7 +1682,7 @@ h1 {
 
 	.form-container textarea {
 		min-width: 300px;
-		width: 92.5%;
+		width: 97%;
 	}
 
 	.form-container label {grid-area: label}
