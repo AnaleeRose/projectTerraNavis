@@ -87,47 +87,10 @@ Link ---------------------> #2B9333
 2. Global Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 :root {
-	/*purple theme*/
-/*	--home: #ffb915;
-	--home-shade: #e08b17;
-	--home-link: #e08b17;*/
-	/*#fdcf4e*/
-
-	--sustain: #435833;
-	--sustain-shade: #203312;
-	--sustain-link: #86af67;
-
-	--construct: #B45929;
-	--construct-shade: #723A29;
-	--construct-link: #B45929;
-
-	--resources: #DD9C22;
-	--resources-shade: #AA7107;
-	--resources-link: #DD9C22;
-
-	--faq: #77953E;
-	--faq-shade: #5C7925;
-	--faq-link: #aacb6b;
-
-	--contact: #717ABE;
-	--contact-shade: #252F79;
-	--contact-link: #717ABE;
-
-	--news: #68CEC6;
-	--news-shade: #208E86;
-	--news-link: #208E86;
-
-	/*#ffb915 yellow*/
-	/*# d-blue footer*/
-
-	/*--dark: #3f2000;*/
-	/*--dark: #2C1E08;*/
-	--dark-desaturated: #3C3934;
 	--text: #1F1E1E;
-	--text-subtle: #8E8477;
+	--text-subtle: #104c8a;
+	/*--text-subtle: #8E8477;*/
 	--danger: #fd2525;
-
-	/*--link: #2B9333;*/
 	--tempColor: var(--dark);
 	--link: var(--pageColor);
 	--link-hover: var(--tempColor);
@@ -159,9 +122,6 @@ Link ---------------------> #2B9333
 	--news: #68CEC6;
 	--news-shade: var(--home-shade);
 	--news-link: var(--home-link);
-/*	#ff9e68
-	#ec724f
-	#ff7125*/
 }
 
 html {
@@ -303,7 +263,6 @@ h1 {
 	opacity: 1
 }
 .headerLogo-logo img{
-	/*border-radius: 50%;*/
 	width: 2.5rem;
 }
 
@@ -590,10 +549,10 @@ h1 {
 }
 
 .mainContent_subOpen .cursor {
-	--cursorColor: #fff;
-	--cursorColor-shade: #fff;
-    left: -1.5rem;
-    opacity: .1;
+	--cursorColor: #23336A;
+	--cursorColor-shade: #23336A;
+    left: .3vw;
+    /*opacity: .1;*/
     transform: scaleX(-1);
     width: 1.5rem;
 }
@@ -606,7 +565,6 @@ h1 {
 
 .mainContent {
 	background: var(--bg);
-	padding-left: .75rem;
 	margin-bottom: .5rem;
 	transition: padding-left .5s;
 }
@@ -618,7 +576,7 @@ h1 {
 .mainContent-wrapper {
 	background: rgba(255,255,255,.1);
 	padding: 0 0 2rem;
-	margin: 0 50px 50px 0;
+	margin: 0 4vw 50px;
 	position: relative;
 	z-index: 2;
 }
@@ -643,16 +601,21 @@ h1 {
 
 .mainHeading_Container .mainHeading {font-size: 2.25rem;}
 
+.homeMainContent.mainContent{margin-top: 0;}
+
 .homeMainContent .mainHeading {
 	display: none;
 }
 
 .mainSection-content {
-	font: 1.1rem/185% var(--textFont), sans-serif;
-	padding: 1rem;
+	font: 1.2rem/185% var(--textFont), sans-serif;
+	padding: 1.5rem;
 }
 	.mainSection-content p {
 		margin: 1.5rem 0;
+	}
+	.mainSection-content>p {
+		text-indent: 1rem;
 	}
 	.mainSection-content>p:first-of-type{
 		margin-top: 0;
@@ -699,7 +662,7 @@ h1 {
 	color: #567aa7;
 	transition: color .3s ease-out;
 }
-	.faq_open .mainSection-heading{color: #fff;}
+	.faq_open .mainSection-heading, .faqPage .mainSection-heading:hover{color: #fff;}
 
 .faqPage .mainSection-container {
 	border-bottom: .25rem solid var(--pageColor);
@@ -749,8 +712,8 @@ h1 {
 }
 
 .contactSidebar-container {
-	background: rgba(113, 122, 190,.75);
-	border-left: .5rem solid var(--pageColor);
+	background: var(--pageColor);
+	/*border-left: .5rem solid var(--pageColor);*/
 	color: #fff;
 	display: none;
 	max-width: 30vw;
@@ -989,7 +952,7 @@ h1 {
 
 .interactiveSubheadings-container {
 	color: transparent;
-	font: italic 1.2rem var(--headingFont);
+	font: italic 1.2rem var(--subtitle);
 	position: absolute;
 	text-align: center;
 	top: 25vh;
@@ -1008,7 +971,7 @@ h1 {
 
 .interactiveSubheadings-heading {
 	border-bottom: 1.2px solid transparent;
-	font: bold 1.4rem var(--headingFont-bold);
+	font: bold 1.4rem var(--headingFont);
 	margin-bottom: 1rem;
 	padding-bottom: .25rem;
 }
@@ -1056,7 +1019,7 @@ h1 {
 .form-container input, .form-container textarea {
 	background: #fff;
 	/*border: 2px solid var(--formBorder);*/
-	/*border-radius: 2rem;*/
+	border-radius: 2px;
 	border: none;
 	color: var(--pageColor-shade);
 	padding: .5rem .75rem;
@@ -1065,7 +1028,7 @@ h1 {
 .form-container .cf_joinChoice-input {border: none}
 
 .form-container textarea {
-	/*border-radius: 1rem;*/
+	border-radius: 2px;
 	border: none;
 	max-width: 90vw;
 	min-height: 200px;
@@ -1114,8 +1077,8 @@ h1 {
 }
 
 .checkedCustomRadioBtn {
-	background: var(--pageColor);
-	border-color: var(--pageColor);
+	background: var(--pageColor-link);
+	border-color: var(--pageColor-link);
 }
 
 .cf_msg-container {
@@ -1263,7 +1226,7 @@ h1 {
 
 .teamPage .mainSection-content {
 	padding: .5rem 4vw 5.5rem;
-	background: #fff;
+	background: rgba(255,255,255,.1);
 }
 
 .teamPage .mainSection-heading {
@@ -1529,7 +1492,7 @@ h1 {
 /* ===== TABLET ============================== */
 @media screen and (min-width: 650px) {
 	.mainContent {
-		padding-left: 1rem;
+		margin: 0 2vw;
 	}
 	.mainNav {
 		width: 14rem;
@@ -1541,7 +1504,7 @@ h1 {
 	.headerLogo-container {
 		flex-direction: row;
 		justify-content: flex-start;
-		padding: 1rem .65rem .65rem;
+		padding: .85rem .65rem .65rem;
 	}
 
 	.headerImg-container {
@@ -1555,6 +1518,8 @@ h1 {
 	.headerLogo-container .headerLogo-logo img {
 		margin: .65rem 1rem;
 	}
+
+	.headerLogo-logo {margin-top: -.25rem;}
 
 	.homePage .headerLogo-logo img {
 		width: 2.5rem;
@@ -1614,7 +1579,7 @@ h1 {
 	}
 
 	.cursor {
-		left: 0;
+		left: 2vw;
 		top: .5rem;
 		transition: top .5s;
 		width: 1.75rem;
@@ -1837,12 +1802,12 @@ h1 {
 	.headerImg-container .headerImg-mobile {display: none;}
 
 	.mainHeader {
-		height: 6.4rem;
+		height: 5.2rem;
 		position: fixed;
 		left: 0;
 		top: 0;
 		width: 100vw;
-		z-index: 12;
+		z-index: 15;
 	}
 
 	.headerLogo-container {
@@ -1862,7 +1827,7 @@ h1 {
 		height: 2.1rem;
 		padding: 0 .3rem 0 0;
 		right: 0;
-		top: 1.7rem;
+		top: 1.4rem;
 		width: auto;
 	}
 
@@ -2038,6 +2003,9 @@ h1 {
 
 	.bucketSpout-container {
 		left: 168px;
+	}
+	.mainContent_subOpen .cursor {
+		left: .75vw
 	}
 
 }

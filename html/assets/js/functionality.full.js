@@ -464,7 +464,7 @@ function update_contact_input(e) {
     allJoinText.forEach(function(e) {
         e.style.color = 'inherit';
     })
-    checkedJoinChoice_text.style.color = "var(--pageColor)";
+    checkedJoinChoice_text.style.color = "var(--pageColor-link)";
     e.classList.add("checkedCustomRadioBtn")
     checkedJoinChoice.checked = true;
 }
