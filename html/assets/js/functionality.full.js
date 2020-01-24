@@ -160,25 +160,14 @@ if (headerImgContainer) {
         } else {
             headerImgContainer.classList.remove("headerImg-container_hover")
             tBox_container.classList.remove("headerImg-indi_hover")
-            
+
         }
     })
 
     eShip.addEventListener('mouseout', function(e){
-        // if (window.innerWidth < 1400) {
-        //     turbines_Y_offset = e.srcElement.clientHeight*.2
-        // } else {
-        //     turbines_Y_offset = e.srcElement.clientHeight*.7
-        // }
-        // if (!(e.clientX < (e.srcElement.clientWidth/1.9))
-        //     || !(e.clientX > 200)
-        //     || !(e.clientY < turbines_Y_offset)) {
-        //     tBox_container = document.body.querySelector(".turbines")
-
-        //     headerImgContainer.classList.remove("headerImg-container_hover")
-
-        //     console.log
-        // }
+            tBox_container = document.body.querySelector(".turbines")
+            tBox_container.classList.remove("headerImg-indi_hover")
+            headerImgContainer.classList.remove("headerImg-container_hover")
     })
 
     init_tBoxes();
