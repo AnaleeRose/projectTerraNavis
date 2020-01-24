@@ -21,7 +21,7 @@ require './assets/includes/header.inc.php';
 $showArticle_errors;
 ?>
 
-<article id="mainContent" class="multiContentPage mainContent">
+<article id="mainContent" class="multiContentPage mainContent indiArticlePage">
     <header class="mainHeading_Container">
 	   <h2 class="mainHeading"><?=$a_name;?></h2>
     </header>

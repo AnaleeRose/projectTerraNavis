@@ -36,11 +36,11 @@ if (!$suspect) {
         // if empty and required, add to $missing array
         if (empty($temp) && in_array($key, $required)) {
             $missing[] = $key;
-            ${$key} = '';
             $lowercase = substr($key, 3);
             $thisElem = strtoupper(substr($key, 2, 1)) . $lowercase;
             if ($thisElem === 'Msg') $thisElem = "Message";
             $contact_errors[$key] = $thisElem . " is required";
+            ${$key} = '';
         } elseif (in_array($key, $expected)) {
             // otherwise, assign to a variable of the same name as $key
             ${$key} = $temp;

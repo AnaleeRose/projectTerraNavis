@@ -39,52 +39,56 @@ require './assets/includes/head.php';
 
     <div class="mainContent-wrapper">
         <section id="mainSection-one" class="mainSection-container">
-            <h3 class="mainSection-heading subheading" data-subheading="one">Design and Construction</h3>
+            <h3 class="mainSection-heading subheading" data-subheading="one">General</h3>
             <div class="mainSection-content">
                 <ul class="resourcesList">
-                    <li><a href="">Resource Name goes here.</a></li>
-                    <li><a href="">Resource Name goes here.</a></li>
-                    <li><a href="">Resource Name goes here.</a></li>
-                    <li><a href="">Resource Name goes here.</a></li>
+                    <li>
+                        <a href="https://www.conserve-energy-future.com/earthship-construction-design-and-examples.php">Kukreja, Rinkesh. “What is a Earthship?” Conserve Energy Future</a>
+                        <small class="dateSource-info">2017. Web.</small>
+                    </li>
+
+                    <!-- example resource -->
+<!--                     <li>
+                        <a href="www.smartcitiesdive.com/ex/sustainablecitiescollective/sustainable-homes-earthship/1156549, ">Resource Name goes here.</a>
+                        <small class="dateSource-info">Date, Medium</small>
+                    </li> -->
                 </ul>
             </div>
         </section>
+
         <section id="mainSection-two" class="mainSection-container">
-            <h3 class="mainSection-heading subheading" data-subheading="two">Materials</h3>
+            <h3 class="mainSection-heading subheading" data-subheading="two">Design and Construction</h3>
             <div class="mainSection-content">
                 <ul class="resourcesList">
-                    <li><a href="">Resource Name goes here.</a></li>
-                    <li><a href="">Resource Name goes here.</a></li>
-                    <li><a href="">Resource Name goes here.</a></li>
-                    <li><a href="">Resource Name goes here.</a></li>
+                    <li>
+                        <a href="https://www.smartcitiesdive.com/ex/sustainablecitiescollective/sustainable-homes-earthship/1156549">Reynolds, Michael. “Design Principles.” EarthshipGlobal, Earthship Biotecture, </a>
+                        <small class="dateSource-info">2016. Web.</small>
+                    </li>
+
                 </ul>
             </div>
         </section>
-        <section id="mainSection-three" class="mainSection-container">
+
+<!--         <section id="mainSection-three" class="mainSection-container">
             <h3 class="mainSection-heading subheading" data-subheading="three">News Sources</h3>
             <div class="mainSection-content">
                 <ul class="resourcesList">
-                    <li><a href="">Resource Name goes here.</a></li>
-                    <li><a href="">Resource Name goes here.</a></li>
-                    <li><a href="">Resource Name goes here.</a></li>
-                    <li><a href="">Resource Name goes here.</a></li>
+
                 </ul>
             </div>
-        </section>
+        </section> -->
+        
         <section id="mainSection-four" class="mainSection-container">
             <h3 class="mainSection-heading subheading" data-subheading="four">Building Codes</h3>
             <div class="mainSection-content">
                 <ul class="resourcesList">
-                    <li><a href="">Resource Name goes here.</a></li>
-                    <li><a href="">Resource Name goes here.</a></li>
-                    <li><a href="">Resource Name goes here.</a></li>
-                    <li><a href="">Resource Name goes here.</a></li>
+                    <li><a href="https://pangeabuilders.com/permits-codes-regulations/">“Permits, Codes & Regulations,” Permits, Pangea Builders,</a></li>
                 </ul>
             </div>
         </section>
 
         <section id="mainSection-four" class="mainSection-container">
-            <h3 class="mainSection-heading subheading" data-subheading="four">Site Sources</h3>
+            <h3 class="mainSection-heading subheading" data-subheading="four">Misc. Site Sources</h3>
             <div class="mainSection-content">
                 <ul class="resourcesList">
                     <li>Icons provided by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></li>

@@ -57,6 +57,8 @@
         <div class="bucketSpout-container headerImg-indi" data-hoverable="true">
           <img src="assets/images/mainGraphic/wellhandle.png" alt="Header Image - spout handle" class="spoutHandle headerImg-indi">
           <img src="assets/images/mainGraphic/well.png" alt="Header Image - bucket & spout" class="bucketSpout headerImg-indi">
+          <span class="handleBar"></span>
+          <span class="water"></span>
           <div class="headerImg-textBox">
             <p class="tBox-heading">NEW Heading</p>
             <p class="tBox-content">This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense.</p>
