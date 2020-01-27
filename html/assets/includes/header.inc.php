@@ -39,8 +39,9 @@
         <div class="plants headerImg-indi" data-hoverable="true">
           <img src="assets/images/mainGraphic/plants.png" alt="Header Image - Plants" data-hoverable="true">
           <div class="headerImg-textBox">
-            <p class="tBox-heading">Heading</p>
-            <p class="tBox-content">This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense.</p>
+            <p class="tBox-heading">Plants</p>
+            <p class="tBox-content">Plants are primarily used to regulate the tempurature, though they often provide food as well.  <a href="sustainability.php#mainSection-two" class="tBox-link">Read About Food Sustainabilty >></a></p>
+
           </div>
         </div>
 <!-- @media screen and (min-width: 1200px) { -->
@@ -49,19 +50,21 @@
         <div class="solarPanels headerImg-indi" data-hoverable="true">
           <img src="assets/images/mainGraphic/solars.png" alt="Header Image">
           <div class="headerImg-textBox">
-            <p class="tBox-heading">NEW Heading</p>
-            <p class="tBox-content">This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense.</p>
+            <p class="tBox-heading">Solar Energy</p>
+            <p class="tBox-content">Solar energy is the bread and butter of earthships, which are often located far from city grids. It's one of many reasons earthships are often built in desert-like areas, or anywhere that recieves plenty of sunlight. <a href="sustainability.php#mainSection-one" class="tBox-link">Read About Energy Sustainabilty >></a></p>
           </div>
         </div>
 
         <div class="bucketSpout-container headerImg-indi" data-hoverable="true">
-          <img src="assets/images/mainGraphic/wellhandle.png" alt="Header Image - spout handle" class="spoutHandle headerImg-indi">
-          <img src="assets/images/mainGraphic/well.png" alt="Header Image - bucket & spout" class="bucketSpout headerImg-indi">
-          <span class="handleBar"></span>
-          <span class="water"></span>
+          <div class="bucketSpout-SizeDiv">
+            <img src="assets/images/mainGraphic/wellhandle.png" alt="Header Image - spout handle" class="spoutHandle headerImg-indi">
+            <img src="assets/images/mainGraphic/well.png" alt="Header Image - bucket & spout" class="bucketSpout headerImg-indi">
+            <span class="handleBar"></span>
+            <span class="water"></span>
+          </div>
           <div class="headerImg-textBox">
-            <p class="tBox-heading">NEW Heading</p>
-            <p class="tBox-content">This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense.</p>
+            <p class="tBox-heading">Water</p>
+            <p class="tBox-content">Earthships typically depend on a combination of well water and rainwater. When these fail, homeowners have to make a long trek to the city to haul in water in large quantities. <a href="sustainability.php#mainSection-three" class="tBox-link">Read About Water Sustainabilty >></a></p>
           </div>
         </div>
 
@@ -70,8 +73,8 @@
         <div class="turbines headerImg-indi" data-hoverable="true">
           <img src="assets/images/mainGraphic/turbines.gif" alt="Header Image - turbines">
           <div class="headerImg-textBox">
-            <p class="tBox-heading">NEW Heading</p>
-            <p class="tBox-content">This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense. This si some content! Fill it in and have fun!!! What am i talking about? Nonsense, utter nonsense.</p>
+            <p class="tBox-heading">Wind Energy</p>
+            <p class="tBox-content">Wind energy is one of two main energy sources for earthships, which are often located far from city grids. It helps fill in where solar enrgy is not enough, and vice versa. Together, these methods can provide enough energy for a comfortable and modern life.<a href="sustainability.php#mainSection-one" class="tBox-link">Read About Energy Sustainabilty >></a></p>
           </div>
 
         </div>

@@ -39,6 +39,7 @@ let last_scroll_pos = 0, tBox_container, turbines_Y_offset;
 //============================================================>
 // intialization + specific page work ============================================================>
 //============================================================>
+
 if (emailError) {
     window.scrollTo(0,document.body.scrollHeight);
 }
@@ -145,6 +146,7 @@ if (headerImgContainer) {
     })
 
     eShip.addEventListener('mousemove', function(e){
+        tBox_container = document.body.querySelector(".turbines")
         if (window.innerWidth < 1400) {
             turbines_Y_offset = e.srcElement.clientHeight*.785
         } else {
@@ -153,13 +155,13 @@ if (headerImgContainer) {
         if (e.clientX < (e.srcElement.clientWidth/1.9)
             && e.clientX > 200
             && e.clientY < turbines_Y_offset) {
-            tBox_container = document.body.querySelector(".turbines")
-
             headerImgContainer.classList.add("headerImg-container_hover")
             tBox_container.classList.add("headerImg-indi_hover")
         } else {
             headerImgContainer.classList.remove("headerImg-container_hover")
-            tBox_container.classList.remove("headerImg-indi_hover")
+            if (tBox_container.classList.contains("headerImg-indi_hover")) {
+                tBox_container.classList.remove("headerImg-indi_hover")
+            }
 
         }
     })
@@ -185,6 +187,11 @@ if (headerImgContainer) {
 //============================================================>
 
 function intialize_cursor() {
+    if (window.devicePixelRatio <= 1) {
+        cursor.style.left = "2vw"
+    } else {
+        cursor.style.left = "4vw"
+    }
     window.addEventListener('scroll', function() {
         check_for_cursor();
     })
@@ -362,12 +369,12 @@ function init_tBoxes() {
         allTBoxesContent.forEach(function(e){
             if (e.offsetHeight) {
                 t_height += e.offsetHeight
-                e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + (e.offsetWidth + 32) + "px;");
+                e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e.offsetWidth + "px;");
             }
         })
         e.classList.add("headerImg-textBox_prepped")
         setTimeout(function(){
-            e.setAttribute("style", "height: " + (t_height + 16) + "px;transition: width .3s;");
+            e.setAttribute("style", "height: " + (t_height + 38) + "px;transition: width .3s;");
         }, 30)
 
     })

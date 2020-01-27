@@ -113,7 +113,7 @@ Link ---------------------> #2B9333
 	--home-shade: var(--bg);
 	--home-link: #ff7125;
 	--dark: #fff;
-	--text-subtle: #10458a;
+	--text-subtle: #3a6193;
 
 	--temp-text: #fff;
 	--bg: #0a1c58;
@@ -267,7 +267,7 @@ h1 {
 	padding-top: .4rem;
 	opacity: .85;
 	text-decoration: none;
-	transition: opacity: .3s;
+	transition: opacity .2s;
 }
 
 .headerLogo-header:hover {
@@ -371,7 +371,7 @@ h1 {
 	cursor: pointer;
 	padding: .5rem 1.8vw .5rem 0;
 	position: fixed;
-	right: -1.5rem;
+	right: -1rem;
 	stroke: var(--dark);
 	top: 5vw;
 	transition: stroke .6s, padding .4s, right .3s;
@@ -408,9 +408,7 @@ h1 {
 
 .headerImg-indi {
 	bottom: 0;
-    left: 2vw;
-    max-height: 100%;
-    max-width: 100%;
+    left: 1.5rem;
 	position: absolute;
     top: unset;
 }
@@ -428,13 +426,21 @@ h1 {
 
 .headerImg-textBox {
 	background: var(--bg);
-	position: absolute;
 	overflow: hidden;
 	opacity: 0;
+	position: absolute;
 	right: 0;
 	top: 75%;
 	width: 20vw;
 }
+
+	.tBox-link {
+		display: block;
+	    font: 1.1rem var(--headingFont-bold);
+    	margin-top: 1rem;
+    	text-decoration: none;
+    	width: auto;
+	}
 
 .turbines .headerImg-textBox {
 	right: -15vw;
@@ -478,12 +484,9 @@ h1 {
 		opacity: .3;
 	}
 
-	.turbines.headerImg-indi_hover {
-		z-index: 12;
-
-	}
 	.headerImg-container_hover [data-hoverable="true"].headerImg-indi_hover {
 		opacity: 1;
+		z-index: 12;
 	}
 
 [data-hoverable="true"] {
@@ -523,7 +526,7 @@ h1 {
 	display: block;
 	height: 0;
 	position: absolute;
-    transform: translate(71px, 59px);
+    transform: translate(64px, 49px);
     width: .5rem;
 	will-change: transform;
 	z-index: -1;
@@ -536,7 +539,7 @@ h1 {
 	height: 3rem;
 	position: absolute;
 	right: -4rem;
-	transform: rotate(-45deg);
+   	transform: rotateZ(-45deg) translate(0, -9px);
 	top: 0;
 	width: 3rem;
 	will-change: transform;
@@ -547,17 +550,12 @@ h1 {
 	animation: handle_anim 6s infinite linear;
 	box-shadow: 0 0 0 #000;
     left: unset;
-    transform: translate(128px, -75px);
+    transform: rotateZ(0) translate(124px, -87px);
     transform-origin: top left;
     width: 65px;
 	will-change: transform;
     z-index: 8;
 }
-
-
-	/*.bucketSpout-container.headerImg-indi_hover .spoutHandle {animation: handle_anim 6s infinite linear;}*/
-	/*.bucketSpout-container.headerImg-indi_hover .handleBar {animation: handleBar_anim 6s infinite linear;}*/
-	/*.bucketSpout-container.headerImg-indi_hover .water {animation: water_anim 6s infinite linear;}*/
 
 .solarPanels {
     bottom: .75rem;
@@ -578,6 +576,8 @@ h1 {
 	top: 5%;
 }
 
+.bucketSpout-SizeDiv {width: 125px;}
+
 
 @keyframes water_anim {
 	0% {
@@ -587,113 +587,77 @@ h1 {
 
 	11% {
 		height: 60px;
-    	transform: translate(71px, 59px);
+    	transform: translate(64px, 49px);
 	}
 
 	15% {
 		height: 60px;
-    	transform: translate(71px, 59px);
+    	transform: translate(64px, 49px);
 		width: .5rem;
 	}
 
 	43.5% {
 		height: 60px;
-    	transform: translate(71px, 59px);
+    	transform: translate(64px, 49px);
 	}
 
 
 	47.5% {
 		height: 48px;
-    	transform: translate(71px, 100px);
+    	transform: translate(64px, 100px);
 	}
 
 
 	50% {
 		height: 48px;
-    	transform: translate(71px, 100px);
+    	transform: translate(64px, 100px);
 	}
 
 	100% {
 		height: 48px;
-    	transform: translate(71px, 100px);
+    	transform: translate(64px, 100px);
 	}
 }
 
 @keyframes handleBar_anim {
-	12.5% {
-		right: -70px;
-    	width: 3.8rem;
+	10% {
+   		transform: rotateZ(-45deg) translate(0, -9px);
+	}
+	14% {
+   		transform: rotateZ(-45deg) translate(16px, -13px);
 	}
 
-	39% {
-		right: -70px;
-    	width: 3.8rem;
+	32% {
+   		transform: rotateZ(-45deg) translate(16px, -13px);
 	}
 
-	42.5% {
-		right: -4rem;
-    	top: 0;
-    	width: 3rem;
+	48% {
+   		transform: rotateZ(-45deg) translate(0, -9px);
 	}
+
 
 }
 
-/*@keyframes handle_anim {
-	0% {
-		box-shadow: 0 0 0 #000;
-    	right: -80px;
-    	top: -.9rem;
-    	transform: rotateZ(0) translate3d(0,0,0);
-	}
-
-	12.5% {
-		box-shadow: 0 0 0 #000;
-    	right: -98px;
-    	top: -2.2rem;
-		transform: rotateZ(-30deg) translate3d(0,0,0);
-	}
-
-	30% {
-		box-shadow: 0 0 0 #000;
-    	right: -98px;
-    	top: -2.75rem;
-		transform: rotateZ(-45deg) translate3d(0,0,0);
-	}
-
-	37.5% {
-		box-shadow: 0 0 0 #000;
-    	right: -98px;
-    	top: -2.75rem;
-		transform: rotateZ(-45deg) translate3d(0,0,0);
-	}
-
-	50% {
-		box-shadow: 0 0 0 #000;
-    	right: -80px;
-    	top: -.9rem;
-    	transform: rotateZ(0) translate3d(0,0,0);
-	}
-
-}*/
 
 @keyframes handle_anim {
 	0% {
-    	transform: rotateZ(0) translate(128px, -75px);
+    	transform: rotateZ(0) translate(124px, -87px);
 	}
 
 	12.5% {
 
-    	transform: rotateZ(-40deg) translate(134px, 31px);
+    	transform: rotateZ(-40deg) translate(140px, 18px);
 	}
 
 	37.5% {
-    	transform: rotateZ(-40deg) translate(134px, 31px);
+    	transform: rotateZ(-40deg) translate(140px, 18px);
 	}
 
 	50% {
-    	transform: rotateZ(0) translate(128px, -75px);
+    	transform: rotateZ(0) translate(124px, -87px);
 	}
 }
+
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 4. Main Body Content
@@ -797,16 +761,17 @@ h1 {
 		}
 
 
-.mainSection-readMore {
+.mainSection-readMore, .tBox-link {
 	position: relative;
 }
 	.mainSection-readMore:after {
-		top: -3px;
 		content: ">>";
 		right: -1.5rem;
 		position: absolute;
+		top: -3px;
 	}
-	.mainSection-readMore:before {
+
+	.mainSection-readMore:before, .tBox-link:before {
 		background: var(--link-hover);
 		bottom: -3px;
 		content: "";
@@ -823,9 +788,9 @@ h1 {
 .faqPage .mainSection-heading {
 	background: none;
 	color: #567aa7;
-	transition: color .3s ease-out;
+	transition: color .2s ease-out;
 }
-	.faq_open .mainSection-heading, .faqPage .mainSection-heading:hover{color: #fff;}
+	.faq_open .mainSection-heading, .faqPage .mainSection-container:hover .mainSection-heading {color: #fff;}
 
 .faqPage .mainSection-container {
 	border-bottom: .25rem solid var(--pageColor);
@@ -834,7 +799,7 @@ h1 {
 .faqPage .mainSection-content {
 	height: 0;
 	overflow: hidden;
-	padding: 0;
+	padding: 0 0 0 1rem;
 	transition: height .5s;
 }
 
@@ -1420,8 +1385,8 @@ h1 {
 
 .teamPage .mainSection-heading {
 	padding: 0;
-	margin-left: -.8rem;
-	width: 100%;
+    margin-left: -5vw;
+    width: 95vw;
 }
 
 .portrait {
@@ -1430,10 +1395,10 @@ h1 {
 }
 
 .portrait-container{
-	background: #fff;
+    background: rgba(255, 255, 255, .1);
 	box-sizing: border-box;
 	display: block;
-	margin: -1px 0;
+	margin: 0;
 	padding: 1rem 0;
 	text-align: center;
 	width: 100%;
@@ -1848,8 +1813,9 @@ h1 {
 	}
 
 	.teamPage .mainSection-heading {
-		margin-left: 0;
+		margin: 0;
 		text-align: center;
+		width: auto;
 	}
 
 	.teamPage .description {
@@ -1979,10 +1945,9 @@ h1 {
 		height: 875px;
     	margin: -20px auto 0;
 		max-height: 100%;
-		max-width: 1200px;
 		position: relative;
 	    transition: opacity .3s;
-		width: 90vw;
+		width: 1080px;
 	}
 
 			.headerImg-indi:hover:after {
@@ -2187,8 +2152,22 @@ h1 {
 }
 
 @media screen and (min-width: 1400px) {
+
+	.headerImg-container {
+		height: 875px;
+    	margin: 4rem auto 0;
+		max-height: 100%;
+		position: relative;
+	    transition: opacity .3s;
+		width: 1300px;
+	}
+
 	.mainNav-link {
 		padding: .5rem 1rem;
+	}
+
+	.turbines {
+		top: -1%
 	}
 
 	.solarPanels {
@@ -2201,6 +2180,7 @@ h1 {
 	.mainContent_subOpen .cursor {
 		left: .75vw
 	}
+
 
 }
 

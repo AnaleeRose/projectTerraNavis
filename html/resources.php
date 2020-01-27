@@ -46,6 +46,10 @@ require './assets/includes/head.php';
                         <a href="https://www.conserve-energy-future.com/earthship-construction-design-and-examples.php">Kukreja, Rinkesh. “What is a Earthship?” Conserve Energy Future</a>
                         <small class="dateSource-info">2017. Web.</small>
                     </li>
+                    <li>
+                        <a href="https://www.britannica.com/topic/Earthship">Elizabeth R. Purdy. "Earthship", Encyclopædia Britannica, inc.</a>
+                        <small class="dateSource-info">2017. Web.</small>
+                    </li>
 
                     <!-- example resource -->
 <!--                     <li>
@@ -61,7 +65,7 @@ require './assets/includes/head.php';
             <div class="mainSection-content">
                 <ul class="resourcesList">
                     <li>
-                        <a href="https://www.smartcitiesdive.com/ex/sustainablecitiescollective/sustainable-homes-earthship/1156549">Reynolds, Michael. “Design Principles.” EarthshipGlobal, Earthship Biotecture, </a>
+                        <a href="https://www.smartcitiesdive.com/ex/sustainablecitiescollective/sustainable-homes-earthship/1156549">Reynolds, Michael. “Design Principles.” EarthshipGlobal, Earthship Biotecture</a>
                         <small class="dateSource-info">2016. Web.</small>
                     </li>
 
@@ -82,19 +86,19 @@ require './assets/includes/head.php';
             <h3 class="mainSection-heading subheading" data-subheading="four">Building Codes</h3>
             <div class="mainSection-content">
                 <ul class="resourcesList">
-                    <li><a href="https://pangeabuilders.com/permits-codes-regulations/">“Permits, Codes & Regulations,” Permits, Pangea Builders,</a></li>
+                    <li><a href="https://pangeabuilders.com/permits-codes-regulations/">“Permits, Codes & Regulations,” Permits, Pangea Builders</a></li>
                 </ul>
             </div>
         </section>
 
-        <section id="mainSection-four" class="mainSection-container">
-            <h3 class="mainSection-heading subheading" data-subheading="four">Misc. Site Sources</h3>
+<!--         <section id="mainSection-four" class="mainSection-container">
+            <h3 class="mainSection-heading subheading" data-subheading="four">Site Sources</h3>
             <div class="mainSection-content">
                 <ul class="resourcesList">
-                    <li>Icons provided by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></li>
+                    <li> provided by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></li>
                 </ul>
             </div>
-        </section>
+        </section> -->
     </div>
 </article>
 
