@@ -415,6 +415,7 @@ h1 {
 
 .headerImg-indi:not(.headerImg-mobile) {
 	display: none;
+	cursor: pointer;
 }
 
 
