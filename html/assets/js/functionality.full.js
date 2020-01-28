@@ -20,6 +20,7 @@ const characterCounter = document.body.querySelector("#characterCounter");
 const cursor = document.body.querySelector('#cursor');
 const headerImgContainer = document.body.querySelector('.headerImg-container');
 const eShip = document.body.querySelector(".eShip")
+const mainFooter = document.querySelector(".mainFooter")
 
 const allHeaderImgPieces = document.body.querySelectorAll('[data-hoverable="true"]');
 const allSubheadings = document.body.querySelectorAll(".subheading");
@@ -47,6 +48,21 @@ if (emailError) {
 if (cursor) {
     intialize_cursor();
     fix_sizing();
+}
+
+if (document.body.querySelector(".noArticles_error") && window.innerWidth ) {
+    console.log("error!")
+    if (document.body.clientHeight < window.outerHeight && document.body.clientWidth > 750) {
+        mainFooter.style.bottom = "0"
+        mainFooter.style.position = "fixed"
+        mainFooter.style.width = "100vw"
+    } else {
+        if (mainFooter.style.position = "fixed") {
+            mainFooter.style.bottom = "0"
+            mainFooter.style.position = null
+            mainFooter.style.width = "100vw"
+        }
+    }
 }
 
 bpaInfoBtn.addEventListener('click', function() {
@@ -327,8 +343,20 @@ function animate_articles(array) {
 
 function toggle_subheadingMenu() {
     if (body.classList.contains("mainContent_subOpen")) {
+        
+        cursor.style.left = "4vw";
         body.classList.remove("mainContent_subOpen")
     } else {
+        if (window.innerWidth < 1400) {
+            console.log("smaller")
+            cursor.style.left = "2vw";
+        } else if (window.innerWidth < 1600) {
+            cursor.style.left = "2.35vw";
+        } else if (window.innerWidth < 1950) {
+            cursor.style.left = "2.8vw";
+        } else {
+            cursor.style.left = "3vw";
+        }
         body.classList.add("mainContent_subOpen")
     } 
 }
@@ -435,7 +463,7 @@ function run_cursor(e, clicked = false) {
 
     topOffset = newSubheading.parentElement.offsetTop + 44
     cursor.style.top = topOffset
-    subheadingsContainer.setAttribute("style", "top: " + (topOffset + 85) + "px")
+    subheadingsContainer.setAttribute("style", "top: " + (topOffset + 130) + "px")
     if (clicked === true) {
         newSubheading_num = newSubheading.getAttribute("data-subheading");
         go_to = "#mainSection-" + newSubheading_num;

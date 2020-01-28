@@ -17,7 +17,7 @@ require './assets/includes/head.php';
     <p id="cursor-container" class="cursor-container">
       <svg id="cursor" class="cursor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="61" height="83" viewBox="0 0 61 83">
         <defs>
-          <linearGradient id="linear-gradient" x1="0.5" y1="0.315" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+          <linearGradient id="linear-gradien t" x1="0.5" y1="0.315" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
             <stop offset="0" stop-color="var(--cursorColor)"/>
             <stop offset="1" stop-color="var(--cursorColor-shade)"/>
           </linearGradient>

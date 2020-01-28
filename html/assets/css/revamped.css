@@ -473,6 +473,7 @@ h1 {
 		font: bold 1.2rem var(--headingFont-bold);
 		margin: 1rem; 
 		padding: 0 .5rem .15rem .1rem; 
+		white-space: nowrap;
 	}
 
 	.tBox-content {
@@ -1037,7 +1038,8 @@ h1 {
 
 
 .filterBtn, .filterBtn svg {
-	background: var(--pageColor);
+	background: var(--pageColor-link);
+
 	cursor: pointer;
 	height: 2rem;
 	fill: #fff;
@@ -1048,8 +1050,7 @@ h1 {
     transition: padding .3s;
 	width: 3rem;
 }
-/*temp because server hates me idk*/
-.filterBtn {display: none;}
+
 
 	.filter-container_open .filterBtn {
 		padding: 1rem 0.5vw 1rem .5vw;
@@ -1063,15 +1064,17 @@ h1 {
 
 .filter-container {
 	background: var(--pageColor);
+    border-left: var(--pageColor-link)  solid 1.1rem;
 	box-sizing: border-box;
 	color: #fff;
+	display: none;
 	max-width: 320px;
 	padding: 2.25rem 5.5rem 1rem 2rem;
 	position: fixed;
-	right: -120vw;
-	transition: right .3s;
+	right: -20vw;
+	transition: right .5s;
 	top: 5rem;
-	widows: 100%;
+	width: 100%;
 	z-index: 5;
 }
 
@@ -1357,7 +1360,7 @@ h1 {
 
 .noArticles_error {
 	font: bold 1.5rem var(--headingFont-bold);
-	padding: 5vh 5vw;
+	padding: 10vh 5vw 15vh;
 }
 
 
@@ -1507,6 +1510,7 @@ h1 {
 		background: rgba(255,255,255,.2);
 		border: #fff solid 2px;
 		border-radius: 2rem;
+	    box-sizing: content-box;
 		color: #fff;
 		display: block;
 		height: 1.3rem;
@@ -2038,6 +2042,7 @@ h1 {
 		display: block;
 	}
 
+	.filter-container {display: block}
 	.filterBtn, .filter-container {
 		top: unset;
 	}
@@ -2048,6 +2053,8 @@ h1 {
 		flex-wrap: wrap;
 		justify-content: left;
 	}
+
+
 
 	.majorError-container {
     	margin: 1rem 0 0;
