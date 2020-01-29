@@ -51,9 +51,14 @@ require './assets/includes/head.php';
                         <small class="dateSource-info">2017. Web.</small>
                     </li>
 
+                    <li>
+                        <a href="https://waterwisegroup.com/greywater-education/what-is-greywater/">Water Wise Group. "Greywater Education", Water Wise Group, Inc.</a>
+                        <small class="dateSource-info">Web.</small>
+                    </li>
+
                     <!-- example resource -->
 <!--                     <li>
-                        <a href="www.smartcitiesdive.com/ex/sustainablecitiescollective/sustainable-homes-earthship/1156549, ">Resource Name goes here.</a>
+                        <a href="www.smartcitiesdive.com/ex/sustainablecitiescollective/sustainable-homes-earthship/1156549 ">Resource Name goes here.</a>
                         <small class="dateSource-info">Date, Medium</small>
                     </li> -->
                 </ul>

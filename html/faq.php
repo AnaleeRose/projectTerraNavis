@@ -54,7 +54,7 @@ require './assets/includes/head.php';
                 <ul>
                     <li>They are hard work!</li>
                     <li>The laws for building a home “off the grid” can be obscure and vary by region, so navigating them can be tricky.</li>
-                    <li><a href=”https://en.wikipedia.org/wiki/Jerusalem_cricket”>Jerusalem crickets</a>!</li>
+                    <li><a href="https://en.wikipedia.org/wiki/Jerusalem_cricket">Jerusalem crickets</a>!</li>
                 </ul>
             </div>
         </section>
@@ -64,7 +64,7 @@ require './assets/includes/head.php';
                 <span class="faqArrow pointArrow"></span>
             </div>
             <div class="mainSection-content">
-                <p>It varies significantly depending on the process you use to build it. In theory, earthships can be very low cost, since they are built with natural and upcycled materials. In order to achieve the low-cost variety, however, you need to do all the work and gather all the materials yourself. Even so, <a href=”https://archinia.com/earthships/earthship-pros-cons”>according to Archinia</a>, “in the US, $150 per square foot will get you a bare-bones earthship.” They go on to say it costs “$225 per square foot to have Earthship Biotecture build your earthship.”</p>
+                <p>It varies significantly depending on the process you use to build it. In theory, earthships can be very low cost, since they are built with natural and upcycled materials. In order to achieve the low-cost variety, however, you need to do all the work and gather all the materials yourself. Even so, <a href="https://archinia.com/earthships/earthship-pros-cons">according to Archinia</a>, “in the US, $150 per square foot will get you a bare-bones earthship.” They go on to say it costs “$225 per square foot to have Earthship Biotecture build your earthship.”</p>
             </div>
         </section>
     </div>

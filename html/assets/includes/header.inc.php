@@ -40,7 +40,7 @@
           <img src="assets/images/mainGraphic/plants.png" alt="Header Image - Plants" data-hoverable="true">
           <div class="headerImg-textBox">
             <p class="tBox-heading">Plants</p>
-            <p class="tBox-content">Plants are primarily used to regulate the tempurature, though they often provide food as well.  <a href="sustainability.php#mainSection-two" class="tBox-link">Read About Food Sustainabilty >></a></p>
+            <p class="tBox-content">Plants are primarily used to regulate the tempurature, though they often provide food and decoration well. To avoid wasting precious resources, they are usually watered with <a href="https://waterwisegroup.com/greywater-education/what-is-greywater/">grey water</a>.<a href="sustainability.php#mainSection-two" class="tBox-link">Read About Food Sustainabilty >></a></p>
 
           </div>
         </div>

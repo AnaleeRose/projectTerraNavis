@@ -183,9 +183,9 @@ if (headerImgContainer) {
     })
 
     eShip.addEventListener('mouseout', function(e){
-            tBox_container = document.body.querySelector(".turbines")
-            tBox_container.classList.remove("headerImg-indi_hover")
-            headerImgContainer.classList.remove("headerImg-container_hover")
+        tBox_container = document.body.querySelector(".turbines")
+        tBox_container.classList.remove("headerImg-indi_hover")
+        headerImgContainer.classList.remove("headerImg-container_hover")
     })
 
     init_tBoxes();
@@ -214,6 +214,11 @@ function intialize_cursor() {
 
     window.addEventListener('resize', function() {
         fix_sizing();
+        if (homeMainContent) {
+            setTimeout(function(){
+                init_tBoxes();
+            }, 25)
+        }
     })
     subheadingsContainer = document.createElement('div')
     subheadingsContainer.classList.add("interactiveSubheadings-container")
@@ -384,30 +389,44 @@ function faq_collapse(e) {
         })
         openSectionContent.style.height = (totalHeight + 20) + "px";
 
-        // document.body.querySelectorAll("#mainSection-two .mainSection-content *")
     }
 }
 
 function init_tBoxes() {
     allTBoxes.forEach(function(e){
+        let hoverList = document.body.querySelectorAll(".headerImg-indi_hover")
+        hoverList.forEach(function(c){
+            c.classList.remove("headerImg-indi_hover")
+        })
+
+        if (document.body.querySelector(".headerImg-container_hover")) {
+            document.body.querySelector(".headerImg-container_hover").classList.remove("headerImg-container_hover")
+        }
+
+        if (e.classList.contains("headerImg-textBox_prepped")) {
+            e.classList.remove("headerImg-textBox_prepped")
+            e.removeAttribute("style");
+        }
+
         let allTBoxesContent  = e.childNodes
-        let heightOffset  = e.previousElementSibling.clientHeight
         let t_height = 0
 
         allTBoxesContent.forEach(function(e){
             if (e.offsetHeight) {
+                if (e.hasAttribute("style")) {
+                    e.removeAttribute("style");
+                }
                 t_height += e.offsetHeight
                 e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e.offsetWidth + "px;");
             }
         })
-        e.classList.add("headerImg-textBox_prepped")
+
+        // e.setAttribute("style", "opacity: 0;");
         setTimeout(function(){
             e.setAttribute("style", "height: " + (t_height + 38) + "px;transition: width .3s;");
-        }, 30)
-
+        }, 50)
+        e.classList.add("headerImg-textBox_prepped")
     })
-
-
 }
 
 function check_for_cursor() {

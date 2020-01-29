@@ -1354,24 +1354,19 @@ h2.newsfeedHeading {
 .nwBox .readEmailBtn {
     margin-top: 0;
     width: 100px;
-/*    margin: 0 38px 0 2rem;
-    text-align: center;*/
 }
 
 
 
 .nwBox .editBtn {
     width: 6rem;
-    /*width: 210px;*/
 }
 .nwBox .deleteBtn {
     width: 7.5rem;
-    /*width: 235px;*/
 }
 
 .nwBox .viewBtn {
     width: 7.5rem;
-    /*width: 200px;*/
 }
 
 .nwBox .dateInfo {color: var(--brightAqua);}
@@ -1453,7 +1448,6 @@ END Newsfeed
         width: 8.5rem;
     }
 
-    /*.cornerLinks a:last-of-type {width: 8rem;}*/
     .newPage .cornerLinks a:last-of-type {width: 5.5rem;}
 
     #templateMsgBtn {
@@ -1734,15 +1728,6 @@ END Newsfeed
     top: -1rem;
 }
 
-/*.elementDeleteBtn:before {
-    color: var(--reddish);
-    content: 'x';
-    cursor: pointer;
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 1rem;
-    transform: scaleX(1.1);
-}*/
 
 .elementDeleteBtn:before {
     background: url(../imgs/deleteBtn.svg);

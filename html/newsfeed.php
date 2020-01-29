@@ -4,6 +4,9 @@ require './assets/includes/config.inc.php';
 require MYSQL;
 require './assets/includes/form_functions.inc.php';
 
+// error_reporting( -1 );
+// ini_set( "display_errors" , 1 );
+
 // form handling
 $showArticle_errors = [];
 $filterArticles_errors = [];
@@ -26,7 +29,6 @@ if (isset($_GET['filterSubmitBtn'])) {
 
   $q = "SELECT category_id FROM categories";
   $r = mysqli_query($dbc, $q);
-  $permittedCategoryValues = mysqli_fetch_all($r, MYSQLI_ASSOC);
   while ($row = $r->fetch_assoc()) {
     $permittedCategoryValues[] = $row;
   }
