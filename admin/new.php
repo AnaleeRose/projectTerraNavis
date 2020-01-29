@@ -481,7 +481,7 @@ $_POST['email_msg'] = 'Terra Navis
 <br>
 A new article has been posted on the newsfeed!
 <br>
-Check out ' . $row['article_name'] . ' or read more articles about ' . $row['category_name'] . ' at <a href=\"http://bpa-development.savannahskinner.com/admin/newsfeed.php">Terra Navis.com</a>!';
+Check out ' . $row['article_name'] . ' or read more articles about ' . $row['category_name'] . ' at <a href=\"terranavis.life/html/newsfeed.php">TerraNavis.life</a>!';
                             }
                         } else {
                             notice('error', 'Template Message could not be generated.');

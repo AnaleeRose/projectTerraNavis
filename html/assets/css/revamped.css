@@ -273,6 +273,7 @@ h1 {
 .headerLogo-header:hover {
 	opacity: 1
 }
+
 .headerLogo-logo img{
 	width: 2.5rem;
 }
@@ -433,9 +434,9 @@ h1 {
 	opacity: 0;
 	position: absolute;
 	right: 0;
-	top: -200px;
+	top: -340px;
 	width: 20vw;
-	   z-index: 8;
+	z-index: 8;
 }
 
 	.tBox-link {
@@ -447,8 +448,8 @@ h1 {
 	}
 
 .turbines .headerImg-textBox {
-	right: -15vw;
-	top: 50%;
+	left: 90%;
+	top: 65%;
 }
 
 .solarPanels .headerImg-textBox {
@@ -457,6 +458,11 @@ h1 {
 .bucketSpout-container .headerImg-textBox {
 	left: -10vw;
 	right: unset;
+}
+
+.plants .headerImg-textBox {
+	right: -30px;
+	top: -270px;
 }
 
 .headerImg-textBox.headerImg-textBox_prepped {
@@ -1439,6 +1445,8 @@ h1 {
 	display: none
 }
 
+
+
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 6. Footer Content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
@@ -2161,7 +2169,6 @@ h1 {
 }
 
 @media screen and (min-width: 1400px) {
-
 	.headerImg-container {
 		height: 875px;
     	margin: 4rem auto 0;
@@ -2176,7 +2183,7 @@ h1 {
 	}
 
 	.turbines {
-		top: -1%
+		top: -6%
 	}
 
 	.solarPanels {
@@ -2189,7 +2196,6 @@ h1 {
 	.mainContent_subOpen .cursor {
 		left: .75vw
 	}
-
 
 }
 

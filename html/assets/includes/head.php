@@ -18,6 +18,7 @@ if (isset($_POST['emailInput']) && !empty($_POST['emailInput'])) {
     } else {
     	$email_errors[] = "Something went wrong, please try again later";
     }
+    
   } else {
     $email_errors[] = "Please enter a valid email address";
   }

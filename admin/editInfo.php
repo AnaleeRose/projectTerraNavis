@@ -42,6 +42,15 @@ if (isset($_POST['editInfoBtn']) && $relogged_in) {
 
     // if the username box is empty, throw an error, otherwise set it to an easier to type variable
 	empty($_POST['username']) ? $editProfile_errors['username'] = 'Please enter a username' : $n_username = $_POST['username'];
+    if (!empty($_POST['username'])) { //check if username
+        if (PREG_MATCH('/^[A-Z 0-9\'.-]{2,45}$/i', $_POST['username'])) { //check if valid username
+            $n_username = escape_data($_POST['username'], $dbc);
+        } else {
+            $editProfile_errors['username'] = "Please enter a valid username";
+        }
+    } else {
+       $editProfile_errors['username'] = "Please enter a username";
+    }
 
     // if the email box is empty, throw an error, otherwise set it to an easier to type variable
 	empty($_POST['email']) ? $editProfile_errors['email'] = 'Please enter a email' : $n_email = $_POST['email'];
@@ -49,31 +58,30 @@ if (isset($_POST['editInfoBtn']) && $relogged_in) {
 	$_POST['username'] === $_SESSION['username'] ? $update_username = false : $update_username = true;
 	$_POST['email'] === $_SESSION['email'] ? $update_email = false : $update_email = true;
 
+	if (empty($editProfile_errors)) {
     // if they have changed anything, toss and error
-	if (!$update_username && !$update_email) {
-		$editProfile_errors['username'] = 'Please enter a different username or email';
-	} elseif (!$update_username  && $update_email) {
+		if (!$update_username && !$update_email) {
+			$editProfile_errors['username'] = 'Please enter a different username or email';
+		} elseif (!$update_username  && $update_email) {
+	        // if they only changed the email, create the stament to only change that
+			$run = true;
+			$stmt = $dbpdo->prepare("UPDATE `adminuser` SET `admin_email` = :n_email  WHERE `adminuser`.`admin_id` = :uid");
+	        $stmt->bindParam(':n_email', $n_email, PDO::PARAM_STR);
 
-        // if they only changed the email, create the stament to only change that
-		$run = true;
-		$stmt = $dbpdo->prepare("UPDATE `adminuser` SET `admin_email` = :n_email  WHERE `adminuser`.`admin_id` = :uid");
-        $stmt->bindParam(':n_email', $n_email, PDO::PARAM_STR);
+		} elseif ($update_username  && !$update_email) {
+	        // if they only changed the username, create the stament to only change that
+			$run = true;
+			$stmt = $dbpdo->prepare("UPDATE `adminuser` SET `admin_username` = :n_username  WHERE `adminuser`.`admin_id` = :uid");
+	        $stmt->bindParam(':n_username', $n_username, PDO::PARAM_STR);
 
-	} elseif ($update_username  && !$update_email) {
+		} elseif ($update_username && $update_email) {
 
-        // if they only changed the username, create the stament to only change that
-		$run = true;
-		$stmt = $dbpdo->prepare("UPDATE `adminuser` SET `admin_username` = :n_username  WHERE `adminuser`.`admin_id` = :uid");
-        $stmt->bindParam(':n_username', $n_username, PDO::PARAM_STR);
-
-	} elseif ($update_username && $update_email) {
-
-        // if they changed both, create the stament to change both
-		$run = true;
-		$stmt = $dbpdo->prepare("UPDATE `adminuser` SET `admin_username` = :n_username, `admin_email` = :n_email  WHERE `adminuser`.`admin_id` = :uid");
-        $stmt->bindParam(':n_username', $n_username, PDO::PARAM_STR);
-        $stmt->bindParam(':n_email', $n_email, PDO::PARAM_STR);
-
+	        // if they changed both, create the stament to change both
+			$run = true;
+			$stmt = $dbpdo->prepare("UPDATE `adminuser` SET `admin_username` = :n_username, `admin_email` = :n_email  WHERE `adminuser`.`admin_id` = :uid");
+	        $stmt->bindParam(':n_username', $n_username, PDO::PARAM_STR);
+	        $stmt->bindParam(':n_email', $n_email, PDO::PARAM_STR);
+		}
 	}
 
 	if ($run) {

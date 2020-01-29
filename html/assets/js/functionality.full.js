@@ -405,7 +405,7 @@ function init_tBoxes() {
 
         if (e.classList.contains("headerImg-textBox_prepped")) {
             e.classList.remove("headerImg-textBox_prepped")
-            e.removeAttribute("style");
+            e.setAttribute("style", "width: auto;");
         }
 
         let allTBoxesContent  = e.childNodes
@@ -417,11 +417,11 @@ function init_tBoxes() {
                     e.removeAttribute("style");
                 }
                 t_height += e.offsetHeight
-                e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e.offsetWidth + "px;");
+                e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + (e.offsetWidth - 20) + "px;");
             }
         })
 
-        // e.setAttribute("style", "opacity: 0;");
+        e.setAttribute("style", "opacity: 0;");
         setTimeout(function(){
             e.setAttribute("style", "height: " + (t_height + 38) + "px;transition: width .3s;");
         }, 50)
