@@ -28,7 +28,7 @@
                     </button>
                 </div>
             </form>
-            <div class="f_socialLinkIcon-container" alt="Francis Tuttle Facebook Account" title="Facebook">
+            <div class="f_socialLinkIcon-container">
                 <a href="<?= INSTAGRAM_LINK; ?>" alt="Francis Tuttle Instagram Link" title="Instagram" class="f_socialLinkIcon">
                     <svg class="f_inIcon" id="f_inIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="71.001" height="73.5" viewBox="0 0 71.001 74.825">
                       <defs>
