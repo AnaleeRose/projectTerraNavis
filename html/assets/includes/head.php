@@ -3,7 +3,7 @@ require 'functions.inc.php';
 
 $email_errors = [];
 if (isset($_POST['emailInput']) && !empty($_POST['emailInput'])) {
-	require MYSQL;
+	require_once MYSQL;
   if (filter_var($_POST['emailInput'], FILTER_VALIDATE_EMAIL)) {
     $q = 'SELECT * FROM `email_list` WHERE `email` = "' . $_POST['emailInput'] . '"';
     $r = mysqli_query($dbc, $q);
@@ -37,14 +37,14 @@ $this_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : 
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/revamped.css">
     <script src="assets/js/functionality.full.js" defer></script>
-	<?php if ($page === "c_article") { ?>
+	<?php if (isset($page) && $page === "c_article") { ?>
 		<meta property="fb:app_id" content="484053738969775"/>
 		<meta property="og:url"           content="<?= $this_url ?>" />
 		<meta property="og:type"          content="website" />
 		<meta property="og:title"         content="Terra Navis | <?= $a_name ?>" />
 		<meta property="og:description"   content="<?= $a_desc ?>" />
 		<meta property="og:image"         content="https://terranavis.life/html/assets/images/logo.png" />
-	  <script defer>
+	  <script>
 		(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
 			if (d.getElementById(id)) return;

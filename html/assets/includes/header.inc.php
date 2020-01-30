@@ -1,7 +1,5 @@
-<header id="mainHeader" class="mainHeader
-<?php if (isset($page) && strtolower($page) == 'home') echo 'homePage';
-?>
-">
+<header id="mainHeader" class="mainHeader<?php if (isset($page) && strtolower($page) == 'home') echo 'homePage';
+?>">
     <div class="navLogo-container">
         <div id="headerLogo-container" class="headerLogo-container">
             <!-- <a  href="index.php"> -->
@@ -32,7 +30,7 @@
         </div>
     </div>
     <!-- Interactive Image -->
-  </header>
+</header>
 
 <?php if (isset($page) && strtolower($page) == 'home') { ?>
       <div class="headerImg-container">
@@ -82,4 +80,3 @@
         <img src="assets/images/mainGraphic/eship.gif" alt="Header Image - mobile ver" class="headerImg-mobile">
       </div>
 <?php } ?>
-</header>

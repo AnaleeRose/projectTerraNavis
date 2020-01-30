@@ -36,7 +36,7 @@ require './assets/includes/head.php';
                       <li><p>Build an “off-the-grid” home that would rely entirely on natural energy sources</p></li>
                       <li><p>Make the building process feasible for someone with no specialized construction skills</p></li>
                   </ol>
-              <a class="mainSection-readMore">Visit Our FAQ</a>
+              <a class="mainSection-readMore" href="faq.php">Visit Our FAQ</a>
 
           </div>
       </section>

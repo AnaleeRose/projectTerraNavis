@@ -44,10 +44,8 @@ $showArticle_errors;
 
 
 			?>
-				<div class="fbShareBtn-container">
-					 <div class="fb-share-button fbShareBtn" data-href="<?= $this_url; ?>"data-layout="button_count">
-		  			</div>
-		  		</div>
+			<div class="fbShareBtn-container">
+				 <div class="fb-share-button fbShareBtn" data-href="<?= $this_url; ?>" data-layout="button_count"></div>
 	  		</div>
 		</section>
 
