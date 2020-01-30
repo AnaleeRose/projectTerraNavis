@@ -99,7 +99,7 @@
                 <p>1-888-867-5309</p>
             </div>
             <div class="email_box f_contactInfo-box">
-                <svg class="f_emailIcon f_contactInfo-icon" id="f_emailIcon" xmlns="http://www.w3.org/2000/svg" width="45.919" height="31.943" viewBox="0 0 45.919 31.943" class="emailIcon">
+                <svg class="f_emailIcon f_contactInfo-icon" id="f_emailIcon" xmlns="http://www.w3.org/2000/svg" width="45.919" height="31.943" viewBox="0 0 45.919 31.943">
                   <g id="email-envelope-outline" transform="translate(188 179.889)">
                     <path id="Path_2" data-name="Path 2" d="M45.42,59.111H.5a.5.5,0,0,0-.5.5V90.556a.5.5,0,0,0,.5.5H45.42a.5.5,0,0,0,.5-.5V59.61A.5.5,0,0,0,45.42,59.111Zm-7.6,3.993L22.96,74,8.1,63.1Zm4.1,23.957H3.993V65.048L22.664,78.74a.5.5,0,0,0,.592,0L41.927,65.048V87.061Z" transform="translate(-188 -239)"/>
                   </g>
