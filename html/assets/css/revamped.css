@@ -45,30 +45,21 @@ Link ---------------------> #2B9333
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 1. CSS Resets & Fonts
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
-@font-face {
-	font-family: 'cabin';
-	src: url('../fonts/cabin-regular.otf') format('opentype');
-	font-weight: normal;
-	font-style: normal;
-}
-@font-face {
-	font-family: 'cabin-bold';
-	src: url('../fonts/cabin-bold.otf') format('opentype');
-	font-weight: 800;
-	font-style: 800;
-}
+
 @font-face {
 	font-family: 'ptsans';
 	src: url('../fonts/ptsans.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
+
 @font-face {
 	font-family: 'ptsans-italic';
 	src: url('../fonts/ptsans-italic.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
+
 @font-face {
 	font-family: 'solway-bold';
 	src: url('../fonts/Solway-Bold.otf') format('truetype');
@@ -387,6 +378,7 @@ h1 {
 	padding: .5rem 3vw .5rem 0;
 	right: .5rem;
 }
+
 .navBars-open line {
 	stroke: #fff;
 }
