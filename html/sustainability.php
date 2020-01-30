@@ -29,6 +29,7 @@ require './assets/includes/head.php';
         <section id="mainSection-one" class="mainSection-container">
     	    <h3 class="mainSection-heading subheading" data-subheading="one">Powering Your Earthship</h3>
             <div class="mainSection-content">
+              <img src="./assets/images/tires.png">
               <p>One of the big questions about an earthship’s sustainability is, “how do you power an off-grid home?” With the advent of so many different techniques for generating clean, renewable energy, it would seem like a daunting task to pick just one! The answer is probably whatever works best for your particular situation. However, there are two popular forms of power generation you can go with, and a third, more controversial method that’s typically only used as a backup.</p>
 
               <p>The first (and often the best) option is solar power. As the design of an Earthship makes it ideal for dry/arid locales where the number of sunny days is higher than average, solar energy is the most abundant source of renewable energy for Earthships.</p>
