@@ -1,5 +1,6 @@
 <?php
 require './assets/includes/config.inc.php';
+require './assets/includes/head.php';
 $page = 'faq';
 if ($page = 'faq') {
 ?>
@@ -12,7 +13,6 @@ if ($page = 'faq') {
 </style>
 <?php
 }
-require './assets/includes/head.php';
 ?>
 
 <body class="">
