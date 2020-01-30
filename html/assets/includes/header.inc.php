@@ -1,5 +1,5 @@
 <header id="mainHeader" class="mainHeader
-<?php if (isset($page) && strtolower($page) == 'home') echo 'homePage"';
+<?php if (isset($page) && strtolower($page) == 'home') echo 'homePage';
 ?>
 ">
     <div class="navLogo-container">
