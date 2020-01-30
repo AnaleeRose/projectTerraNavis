@@ -88,6 +88,7 @@ if (isset($_GET['filterSubmitBtn'])) {
 }
 require './assets/views/showArticles.inc.php';
 
+require './assets/includes/head.php';
 
 $page = 'News';
 if ($page = 'News') {
@@ -101,7 +102,6 @@ if ($page = 'News') {
 </style>
 <?php
 }
-require './assets/includes/head.php';
 
 if (isset($_GET['filterSubmitBtn'])) {
 echo '<body class="filterArticlesPages">';
