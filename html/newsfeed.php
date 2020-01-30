@@ -90,19 +90,6 @@ require './assets/views/showArticles.inc.php';
 
 require './assets/includes/head.php';
 
-$page = 'News';
-if ($page = 'News') {
-?>
-<style type="text/css">
-  :root {
-      --pageColor: var(--news);
-      --pageColor-shade: var(--news-shade);
-      --pageColor-link: var(--news-link);
-  }
-</style>
-<?php
-}
-
 if (isset($_GET['filterSubmitBtn'])) {
 echo '<body class="filterArticlesPages">';
 } else {
@@ -129,9 +116,9 @@ require './assets/includes/header.inc.php';
 
                 foreach ($permittedDateValues as $key => $value) {
                   if (isset($_GET['dateSelect']) && $value ===$_GET['dateSelect']) {
-                    echo '<option name="dateSelect" value="' . $value . '" selected>' . $value . '</option>';
+                    echo '<option value="' . $value . '" selected>' . $value . '</option>';
                   } else {
-                    echo '<option name="dateSelect" value="' . $value . '">' . $value . '</option>';
+                    echo '<option value="' . $value . '">' . $value . '</option>';
                   }
                 }
 
@@ -142,16 +129,16 @@ require './assets/includes/header.inc.php';
           
           <div class="filter-categorySelect-container">
             <select name="categorySelect" id="categorySelect" class="filter-categorySelect">
-              <option name="categorySelect" value="0">Category</option>
+              <option value="0">Category</option>
             <?php 
               $q = "SELECT * FROM categories";
               $r = mysqli_query($dbc, $q);
               if ($r) {
                 while ($row = $r->fetch_assoc()) {
                   if (isset($_GET['categorySelect']) && $row['category_id'] == intval($_GET['categorySelect'])) {
-                    echo '<option name="categorySelect" value="' . $row['category_id'] . '" selected>' . $row['category'] . '</option>';
+                    echo '<option value="' . $row['category_id'] . '" selected>' . $row['category'] . '</option>';
                   } else {
-                    echo '<option name="categorySelect" value="' . $row['category_id'] . '">' . $row['category'] . '</option>';
+                    echo '<option value="' . $row['category_id'] . '">' . $row['category'] . '</option>';
                   }
                 }
               }

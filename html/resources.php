@@ -1,18 +1,6 @@
 <?php
 require './assets/includes/config.inc.php';
 require './assets/includes/head.php';
-$page = 'resources';
-if ($page = 'resources') {
-?>
-<style type="text/css">
-  :root {
-      --pageColor: var(--resources);
-      --pageColor-shade: var(--resources-shade);
-      --pageColor-link: var(--resources-link);
-  }
-</style>
-<?php
-}
 ?>
 
 <body class="">

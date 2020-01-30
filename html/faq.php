@@ -1,20 +1,8 @@
 <?php
+$page = 'faq';
 require './assets/includes/config.inc.php';
 require './assets/includes/head.php';
-$page = 'faq';
-if ($page = 'faq') {
 ?>
-<style type="text/css">
-  :root {
-      --pageColor: var(--faq);
-      --pageColor-shade: var(--faq-shade);
-      --pageColor-link: var(--faq-link);
-  }
-</style>
-<?php
-}
-?>
-
 <body class="">
 <!------ Header ------------>
 <?php require './assets/includes/header.inc.php'; ?>

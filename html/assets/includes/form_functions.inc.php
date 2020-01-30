@@ -11,7 +11,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		if (array_key_exists($name, $errors)) echo 'class=""';
 		echo '>' . $label;
 
-	if ((!empty($options)) && (is_array($options)) && (array_key_exists('required', $options)) && (array_key_exists('contactPage', $options))) {echo '<p class="requiredWarning contact-requiredWarning">required</p>';}
+	if ((!empty($options)) && (is_array($options)) && (array_key_exists('required', $options)) && (array_key_exists('contactPage', $options))) {echo '<small class="requiredWarning contact-requiredWarning">required</small>';}
 
 		echo '</label>';
 	}
@@ -36,7 +36,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		if ($value) echo 'value="' . htmlspecialchars($value) . '"';
 		if (!empty($options) && is_array($options)) {
 			foreach ($options as $k => $v) {
-                if ($k !== 'addtl_classes' && $k !== 'contactPage') echo " $k=\"$v\"";
+                if ($k !== 'addtl_classes' && $k !== 'addtl_div_classes' && $k !== 'contactPage') echo " $k=\"$v\"";
 			}
 		}
 		echo '>';
@@ -59,7 +59,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		echo '"';
 		if (!empty($options) && is_array($options)) {
 			foreach ($options as $k => $v) {
-                if ($k !== 'addtl_classes' && $k !== 'contactPage') echo " $k=\"$v\"";
+                if ($k !== 'addtl_classes' && $k !== 'addtl_div_classes' && $k !== 'contactPage') echo " $k=\"$v\"";
 			}
 		}
 		echo '>';
