@@ -10,9 +10,9 @@ require './assets/includes/head.php';
 
 <!-- Main body content -->
 <article id="mainContent" class="mainContent">
-    <header class="mainHeading_Container">
+    <div class="mainHeading_Container">
        <h2 class="mainHeading">Meet Our Team</h2>
-    </header>
+    </div>
 
 <!--     <p id="cursor-container" class="cursor-container">
       <svg id="cursor" class="cursor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="61" height="83" viewBox="0 0 61 83">
