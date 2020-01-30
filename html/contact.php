@@ -135,7 +135,7 @@ require './assets/includes/head.php';
                       <path id="Path_4" data-name="Path 4" d="M47.36,65.482,40.882,60.1V48.03a.912.912,0,0,0-.947-.946H34.256a.911.911,0,0,0-.947.946V53.8l-7.217-6.034a3.669,3.669,0,0,0-4.5,0L.328,65.482A.859.859,0,0,0,0,66.117a.958.958,0,0,0,.207.7L2.044,69a1.009,1.009,0,0,0,.621.326,1.1,1.1,0,0,0,.71-.207L23.844,52.052,44.313,69.12a.912.912,0,0,0,.621.206h.089A1.01,1.01,0,0,0,45.645,69l1.834-2.189a.957.957,0,0,0,.206-.7A.862.862,0,0,0,47.36,65.482Z" transform="translate(0.001 -46.994)" />
                     </svg>
                 </a>
-                <a class="contactSidebar-text" href="https://www.google.com/maps/search/?api=1&query=35.5990429,-97.6419168&query_place_id=ChIJ_XsrK2kDsocR42W3n4UFml8">12777 N Rockwell Ave<span class="contactSidebar-secondLineText">Oklahoma City, OK 73142</span></p>
+                <a class="contactSidebar-text" href="https://www.google.com/maps/search/?api=1&query=35.5990429,-97.6419168&query_place_id=ChIJ_XsrK2kDsocR42W3n4UFml8">12777 N Rockwell Ave<span class="contactSidebar-secondLineText">Oklahoma City, OK 73142</span>
             </div>
 
             <div class="contactSidebar-IconText contactSidebar-phone-container">
