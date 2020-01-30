@@ -583,7 +583,7 @@ h1 {
 
 .turbines {
 	left: 11%;
-	top: 2%;
+	top: 5%;
 }
 
 .bucketSpout-SizeDiv {width: 125px;}
@@ -1970,6 +1970,10 @@ h1 {
 				height: 100%;
 				width: 100%;
 			}
+
+	.turbines {
+	top: 14%;
+	}
 
 	.headerImg-container .headerImg-indi {display: block;}
 	.headerImg-container .headerImg-mobile {display: none;}
