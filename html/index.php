@@ -31,11 +31,11 @@ require './assets/includes/head.php';
           <h3 class="mainSection-heading subheading hidden" data-subheading="one">What is an Earthship?</h3>
           <div class="mainSection-content">
               <p>Earthships are a type of self-sustainable, eco-friendly home first conceptualized by architect <a href="https://en.wikipedia.org/wiki/Mike_Reynolds_(architect)" target="_blank">Michael Reynolds</a>. These passive-solar shelters are built into the ground with a combination of upcycled and natural resources, like recycled glass bottles, tires packed with earth, and other reclaimed materials. Reynolds developed the concept to realize three goals:</p>
-                  <ul>
+                  <ol>
                       <li><p>Utilize sustainable architecture and materials that can be recycled or naturally sourced from local environments</p></li>
                       <li><p>Build an “off-the-grid” home that would rely entirely on natural energy sources</p></li>
                       <li><p>Make the building process feasible for someone with no specialized construction skills</p></li>
-                  </ul>
+                  </ol>
               <a class="mainSection-readMore">Visit Our FAQ</a>
 
           </div>

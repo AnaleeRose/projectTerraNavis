@@ -29,7 +29,7 @@
                 </div>
             </form>
             <div class="f_socialLinkIcon-container">
-                <a href="<?= INSTAGRAM_LINK; ?>" title="Instagram" class="f_socialLinkIcon">
+                <a href="<?= INSTAGRAM_LINK; ?>" title="Instagram" class="f_socialLinkIcon" aria-label="first link">
                     <svg class="f_inIcon" id="f_inIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="71.001" height="73.5" viewBox="0 0 71.001 74.825">
                       <defs>
                         <radialGradient id="radial-gradient" cx="0.121" cy="0.059" r="1.068" gradientTransform="matrix(0.625, 0.781, -0.781, 0.625, 0.134, -0.094)" gradientUnits="objectBoundingBox">
@@ -48,7 +48,7 @@
                       </g>
                     </svg>
                 </a>
-                <a href="<?= TWITTER_LINK; ?>" title="Twitter" class="f_socialLinkIcon">
+                <a href="<?= TWITTER_LINK; ?>" title="Twitter" class="f_socialLinkIcon" aria-label="second link">
                     <svg class="f_twIcon" id="f_twIcon" xmlns="http://www.w3.org/2000/svg" width="71.865" height="70.656" viewBox="0 0 71.865 70.656">
                       <g id="Group_210" data-name="Group 210" transform="translate(0.246)">
                         <path id="twitter-square" d="M57.728,32H6.927A6.929,6.929,0,0,0,0,38.927v50.8a6.929,6.929,0,0,0,6.927,6.927h50.8a6.929,6.929,0,0,0,6.927-6.927v-50.8A6.929,6.929,0,0,0,57.728,32ZM50.671,54.918c.029.4.029.823.029,1.227,0,12.513-9.525,26.93-26.93,26.93A26.806,26.806,0,0,1,9.237,78.832a19.942,19.942,0,0,0,2.28.115,18.977,18.977,0,0,0,11.748-4.041,9.478,9.478,0,0,1-8.847-6.567,10.2,10.2,0,0,0,4.272-.173,9.466,9.466,0,0,1-7.577-9.294v-.115a9.459,9.459,0,0,0,4.272,1.2,9.445,9.445,0,0,1-4.214-7.88A9.347,9.347,0,0,1,12.455,47.3a26.876,26.876,0,0,0,19.512,9.9,9.486,9.486,0,0,1,16.15-8.645,18.548,18.548,0,0,0,6-2.28,9.441,9.441,0,0,1-4.156,5.21,18.836,18.836,0,0,0,5.455-1.472A19.923,19.923,0,0,1,50.671,54.918Z" transform="translate(6.963 -26)" fill="#0e2d40"/>
@@ -61,7 +61,7 @@
                       </g>
                     </svg>
                 </a>
-                <a href="<?= FACEBOOK_LINK; ?>" class="f_socialLinkIcon">
+                <a href="<?= FACEBOOK_LINK; ?>" class="f_socialLinkIcon" aria-label="third link">
                     <svg class="f_fbIcon" id="f_fbIcon" data-name="Group 206" xmlns="http://www.w3.org/2000/svg" width="69.629" height="70.656" viewBox="0 0 69.629 70.656">
                       <g id="Group_205" data-name="Group 205" transform="translate(4.974 6)">
                         <rect id="Rectangle_155" data-name="Rectangle 155" width="52" height="58" transform="translate(6.656 6.591)" fill="#173067"/>
