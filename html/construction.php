@@ -62,9 +62,10 @@ require './assets/includes/head.php';
         <section id="mainSection-three" class="mainSection-container">
             <h3 class="mainSection-heading subheading" data-subheading="three">Building Your Earthship</h3>
             <div class="mainSection-content">
+              <img class="wrap multiContentPage-inlineImg" src="./assets/images/tools.png">
+              
                <p>“Rammed-earth” tires will be the main building blocks of the structure, making up most outer walls and supporting interior walls. Since these can be up to 300lbs, they are usually packed with earth right where they’ll sit on the wall. This is usually a two-person job, as one person pours earth into the tires while the other person uses a sledgehammer to pound the dirt into the tires as tightly as possible. The tires should be placed just like normal bricks, with one tire on top between the two tires on bottom. Concrete or clay can be used as filler between tires to reinforce the walls. It’s important to completely cover any tires that will be inside the home with concrete or something similar, because tires continually give off small amounts of toxic gasses!</p>
 
-               <img class="wrap multiContentPage-inlineImg" src="./assets/images/tools.png">
 
                <p>The interior walls can be made out of tin cans, as they are relatively easy to find and gather. The cans are joined by concrete or mud in a honeycomb pattern. This is where glass bottles can be utilized as well. For any back rooms that will have a hard time getting sunlight, glass bottle walls can be placed in strategic spots to funnel more sunlight wherever you want it to go.</p>
 
