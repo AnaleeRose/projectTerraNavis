@@ -5,10 +5,8 @@ require './assets/includes/head.php';
 ?>
 
 <body class="homeBody">
-<!------ Header ------------>
 <?php require './assets/includes/header.inc.php'; ?>
 
-<!-- Main body content -->
 <article id="mainContent" class="homeMainContent mainContent">
     <header class="mainHeading_Container">
         <h2 class="mainHeading">Terra Navis Living</h2>
@@ -61,7 +59,6 @@ require './assets/includes/head.php';
     </div>
 </article>
 
-<!------ Footer ------------>
 ​<?php require './assets/includes/footer.inc.php'; ?>
 
 </body>
