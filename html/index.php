@@ -51,7 +51,7 @@ require './assets/includes/head.php';
           <h3 class="mainSection-heading subheading" data-subheading="three">How is an earthship built?</h3>
           <div class="mainSection-content">
               <p>Most outer walls and load-bearing interior walls are constructed by packing used tires with compacted soil, creating strong building blocks. Some walls utilize aluminum cans, plastic bottles, and especially glass bottles surrounded by concrete to create bottle-walls that allow light to flow through the structure, thus lighting up inner rooms that otherwise wouldn’t have any source of natural light. Many earthships have one section on the exterior with large glass panels to bring more light in and act as a greenhouse for growing vegetation year round, helping to create a sustainable food source. Typically, traditional plumbing and electrical systems are run throughout the earthship--albeit powered by solar and wind energy-- allowing for modern living in an ultra green home!</p>
-              <a href="contruction.php" class="mainSection-readMore">Learn More About Building Earthships</a>
+              <a href="construction.php" class="mainSection-readMore">Learn More About Building Earthships</a>
               <div class="bg-img-container">
              </div>
           </div>
