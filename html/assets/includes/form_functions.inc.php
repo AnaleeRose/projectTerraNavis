@@ -70,7 +70,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		}
 		echo '</textarea>';
 		if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options))) {echo '<span id="characterCounter"></span>';}
-		echo '</div>';
+		if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options))) {echo '</div>';}
 		if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError ">' . $errors[$name] . ' </p>';
 	}  elseif ($type === 'hidden') {
 		echo '<input type="' . $type . '" name="' . $name . '" id="' . $name . '" class="';

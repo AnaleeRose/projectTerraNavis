@@ -3,7 +3,7 @@ $ptitle = "Login";
 nd('loginDiv', 'loginDiv');
 $options = ['required' => null];
 
-echo '<img class="profilePic" src="assets/profilePictures/';
+echo '<img class="profilePic" alt="profile picture" src="assets/profilePictures/';
 if (isset($session['profilePic_Location'])) {
     echo $_SESSION['profilePic_Location'];
 } else {

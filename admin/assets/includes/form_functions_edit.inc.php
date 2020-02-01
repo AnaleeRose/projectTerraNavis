@@ -44,12 +44,9 @@ function create_form_input_e_ver($name, $type, $label = '', $value, $errors = []
         if (!empty($options) && is_array($options)) {
             if (array_key_exists('addtl_classes', $options)){
                 echo $options['addtl_classes'] . ' ' . $type;
-            } else {
-                echo $type;
             }
-        } else {
-            echo $type;
         }
+        echo $type;
         echo 'Input createInput';
         echo '"';
         if (!empty($options) && is_array($options)) {

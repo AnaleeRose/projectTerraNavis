@@ -117,7 +117,7 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 		    'image/png'
 		];
 
-		$max_image_size = 500000;
+		$max_image_size = 10000000;
 		$destination = './assets/imgs/article_imgs/';
 		$imgCaption = $_POST['caption'];
 		$extension = pathinfo($_FILES["img"]["name"], PATHINFO_EXTENSION);

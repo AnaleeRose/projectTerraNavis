@@ -76,7 +76,7 @@ function create_article($a_num) {
             echo '<p class="dateInfo">Modified: <span>' . $date_modified . '</span></p>';
         }
         ?>
-        <p class="newsfeedDescription"><?= $article_description ?></p>
+        <p class="newsfeedDescription"><?= strip_tags($article_description) ?></p>
         <div class="btnBox">
             <?php
             if (isset($list_all) && $list_all) {
@@ -125,7 +125,7 @@ function create_email($e_num) {
                 echo '<p class="dateInfo">Sent: <span>' . $date_sent . '</span></p>';
             }
             ?>
-            <p class="newsfeedDescription"><?= $email_message ?></p>
+            <p class="newsfeedDescription"><?= strip_tags($email_message, '<br>') ?></p>
             <div class="btnBox">
                 <a href="view.php?view_type=read&media_type=email&media_id=<?= $this_email['email_id']; ?>" class="adminBtn adminBtn_aqua readEmailBtn">Read Email</a>
                 <?php

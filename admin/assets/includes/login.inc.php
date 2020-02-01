@@ -2,7 +2,7 @@
 $pageTitle = "Login";
 $options = ['required' => null];
 echo '<h1 class="loginHeading">Terra Navis Admin Center</h1>';
-echo '<img class="login_profilePic" src="assets/profilePictures/';
+echo '<img class="login_profilePic" alt="profile picture" src="assets/profilePictures/';
 if (isset($session['profilePic_Location'])) {
     echo $_SESSION['profilePic_Location'];
 } else {

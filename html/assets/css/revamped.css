@@ -1764,6 +1764,7 @@ div.readArticle {
 		padding: 2rem;
 		width: 500px;
 	}
+	.indiArticle .mainSection-container {padding-top: 1rem;}
 
 	.readArticle-imgContainer {
 		box-sizing: content-box;
