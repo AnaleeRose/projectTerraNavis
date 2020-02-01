@@ -743,9 +743,6 @@ h1 {
 	.mainSection-content p {
 		margin: 1.5rem 0;
 	}
-	.mainSection-content>p {
-		text-indent: 1rem;
-	}
 	.mainSection-content>p:first-of-type{
 		margin-top: 0;
 	}
