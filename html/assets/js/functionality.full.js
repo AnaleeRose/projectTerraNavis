@@ -420,12 +420,16 @@ function init_tBoxes() {
         allTBoxesContent.forEach(function(e){
             if (e.offsetHeight) {
                 t_height += e.offsetHeight
-                e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e_width + "px;");
+                e.classList.add("headerImg-textBox_prepped")
+                e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e.offsetWidth + "px;");
             }
         })
 
+        e.setAttribute("style", "opacity: 0;");
+        setTimeout(function(){
+            e.setAttribute("style", "height: " + (t_height + 38) + "px;transition: width .3s;");
+        }, 50)
         e.classList.add("headerImg-textBox_prepped")
-        e.setAttribute("style", "height: " + (t_height + 45) + "px;transition: width .3s;");
     })
 }
 

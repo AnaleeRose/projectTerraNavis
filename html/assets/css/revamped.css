@@ -268,8 +268,9 @@ h1 {
 
 .headerLogo-logo, .headerLogo-header {
 	display: block;
-	text-align: left;
+	text-align: center;
 }
+
 
 .headerLogo-header {
 	color: var(--dark);
@@ -774,13 +775,13 @@ h1 {
 .mainSection-readMore, .tBox-link {
 	position: relative;
 }
-	.mainSection-readMore:after {
+/*	.mainSection-readMore:after {
 		content: ">>";
 		right: -1.5rem;
 		position: absolute;
 		top: -3px;
 	}
-
+*/
 	.mainSection-readMore:before, .tBox-link:before {
 		background: var(--link-hover);
 		bottom: -3px;
@@ -1697,6 +1698,7 @@ div.readArticle {
 		top: -12vw;
 	}
 
+	.headerLogo-logo, .headerLogo-header {text-align: left;}
 	.headerLogo-container .headerLogo-logo img {
 		margin: .65rem 1rem;
 	}
