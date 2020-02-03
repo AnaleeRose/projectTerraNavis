@@ -224,8 +224,9 @@ function intialize_cursor() {
 
     window.addEventListener('resize', function() {
         fix_sizing();
-        if (homeMainContent && (diff(init_width, getWidth()) > 200) && document.body.clientWidth >= 1200)  {
-            location.reload();
+        if (homeMainContent && (diff(init_width, getWidth()) > 100) && document.body.clientWidth >= 1200)  {
+            location.reload(true);
+            console.log("relaoded")
         }
     })
 
@@ -414,22 +415,23 @@ function faq_collapse(e) {
 
 function init_tBoxes() {
     allTBoxes.forEach(function(e){
+        e.setAttribute("style", "opacity: 0;");
         let allTBoxesContent  = e.childNodes
         let t_height = 0
-
         allTBoxesContent.forEach(function(e){
             if (e.offsetHeight) {
                 t_height += e.offsetHeight
-                e.classList.add("headerImg-textBox_prepped")
                 e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e.offsetWidth + "px;");
+                setTimeout(function(){
+                    e.classList.add("headerImg-textBox_prepped")
+                }, 15)
             }
         })
 
-        e.setAttribute("style", "opacity: 0;");
         setTimeout(function(){
             e.setAttribute("style", "height: " + (t_height + 38) + "px;transition: width .3s;");
-        }, 50)
-        e.classList.add("headerImg-textBox_prepped")
+            e.classList.add("headerImg-textBox_prepped")
+        }, 15)
     })
 }
 

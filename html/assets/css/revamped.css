@@ -771,6 +771,7 @@ h1 {
 			position: absolute;
 		}
 
+.mainSection-readMore {text-decoration: none}
 
 .mainSection-readMore, .tBox-link {
 	position: relative;
@@ -793,7 +794,7 @@ h1 {
 		transition: padding .3s;
 	}
 		.mainSection-readMore:hover:before {
-			padding: 0 calc(50% + 1.5rem) 0 50%;
+			padding: 0 50% 0 50%;
 		}
 /*faq*/
 .faqPage .mainSection-heading {
