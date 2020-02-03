@@ -85,7 +85,7 @@ function showArticles($displaytype) {
 
     if (isset($showArticle_errors) && !empty($showArticle_errors)) {
         foreach ($showArticle_errors as $key => $value) {
-            echo '<p class="error">'. $key . ' | ' . $value . '</p>';
+            echo '<p class="error">'. $value . '</p>';
         }
     } // END show errors if
 

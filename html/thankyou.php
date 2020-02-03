@@ -22,7 +22,7 @@ require './assets/includes/head.php';
         				<p>You've been added to the subscription list. We'll be sending you some of the best eco-friendly earthship news!</p>
               <?php } elseif($_GET['p'] == 'cn') { 
                       if (isset($_GET['subbed'])) { ?>
-                      <p>You were already on the subscription list and your message was sent. We'll do our best to respond quickly!</p>
+                      <p>You were already on the subscription list but your message was sent. We'll do our best to respond quickly!</p>
                   <?php } else { ?>
                       <p>You've been added to the subscription list and your message was sent. We'll do our best to respond quickly!</p>
                   <?php } 

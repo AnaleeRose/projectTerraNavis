@@ -21,6 +21,9 @@ const cursor = document.body.querySelector('#cursor');
 const headerImgContainer = document.body.querySelector('.headerImg-container');
 const eShip = document.body.querySelector(".eShip")
 const mainFooter = document.querySelector(".mainFooter")
+const navBars = document.querySelector(".navBars")
+const mainNav = document.querySelector(".mainNav")
+const init_width = getWidth();
 
 const allHeaderImgPieces = document.body.querySelectorAll('[data-hoverable="true"]');
 const allSubheadings = document.body.querySelectorAll(".subheading");
@@ -64,6 +67,16 @@ if (document.body.querySelector(".noArticles_error") && window.innerWidth ) {
         }
     }
 }
+
+navBars.addEventListener
+
+navBars.addEventListener('click', function() {
+    if (mainNav.classList.contains("mainNav-visible")) {
+        mainNav.classList.remove("mainNav-visible")
+    } else {
+        mainNav.classList.add("mainNav-visible")
+    }
+})
 
 bpaInfoBtn.addEventListener('click', function() {
     let bpaArrow = document.body.querySelector('.bpa-arrow');
@@ -214,10 +227,8 @@ function intialize_cursor() {
 
     window.addEventListener('resize', function() {
         fix_sizing();
-        if (homeMainContent) {
-            setTimeout(function(){
-                init_tBoxes();
-            }, 25)
+        if (homeMainContent && diff(init_width, getWidth()) > 200) {
+            location.reload();
         }
     })
     subheadingsContainer = document.createElement('div')
@@ -282,7 +293,19 @@ function intialize_article_animation() {
 // general use functions ============================================================>
 //============================================================>
 
+function getWidth() {
+  if (self.innerWidth) {
+    return self.innerWidth;
+  }
 
+  if (document.documentElement && document.documentElement.clientWidth) {
+    return document.documentElement.clientWidth;
+  }
+
+  if (document.body) {
+    return document.body.clientWidth;
+  }
+}
 
 function diff(num1, num2) {
   if (num1 > num2) {
@@ -394,28 +417,11 @@ function faq_collapse(e) {
 
 function init_tBoxes() {
     allTBoxes.forEach(function(e){
-        let hoverList = document.body.querySelectorAll(".headerImg-indi_hover")
-        hoverList.forEach(function(c){
-            c.classList.remove("headerImg-indi_hover")
-        })
-
-        if (document.body.querySelector(".headerImg-container_hover")) {
-            document.body.querySelector(".headerImg-container_hover").classList.remove("headerImg-container_hover")
-        }
-
-        if (e.classList.contains("headerImg-textBox_prepped")) {
-            e.classList.remove("headerImg-textBox_prepped")
-            e.setAttribute("style", "width: auto;");
-        }
-
         let allTBoxesContent  = e.childNodes
         let t_height = 0
 
         allTBoxesContent.forEach(function(e){
             if (e.offsetHeight) {
-                if (e.hasAttribute("style")) {
-                    e.removeAttribute("style");
-                }
                 t_height += e.offsetHeight
                 e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + (e.offsetWidth - 20) + "px;");
             }
@@ -423,7 +429,7 @@ function init_tBoxes() {
 
         e.setAttribute("style", "opacity: 0;");
         setTimeout(function(){
-            e.setAttribute("style", "height: " + (t_height + 38) + "px;transition: width .3s;");
+            e.setAttribute("style", "height: " + (t_height + 45) + "px;transition: width .3s;");
         }, 50)
         e.classList.add("headerImg-textBox_prepped")
     })

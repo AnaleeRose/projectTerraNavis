@@ -104,7 +104,8 @@ Link ---------------------> #2B9333
 	--home-shade: var(--bg);
 	--home-link: #ff7125;
 	--dark: #fff;
-	--text-subtle: #3a6193;
+	/*--text-subtle: #3a6193;*/
+	--text-subtle: #6d8db6;
 
 	--temp-text: #fff;
 	--bg: #0a1c58;
@@ -235,6 +236,17 @@ img.wrap {
 	float: right;
 }
 
+.a11y_labels {
+	overflow: hidden;
+	position: absolute;
+	width: 0;
+}
+
+.a11y_labels label {
+	position: absolute;
+	right: -200vw;
+}
+
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 3. Header & Nav Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
@@ -247,6 +259,8 @@ img.wrap {
 	flex-direction: column;
 	justify-content: center;
 	padding: 4rem 0 2rem;
+	top: 0;
+	z-index: 30;
 }
 
 	.headerLogo-container:after {
@@ -948,6 +962,11 @@ img.wrap {
 	display: block;
 	margin: 2rem auto 1rem;
 	text-align: center;
+}
+
+.readArticle .error {
+	text-align: center;
+    padding-top: 2rem;
 }
 
 
@@ -2069,7 +2088,7 @@ img.wrap {
 		justify-content: left;
 	}
 
-
+	.readArticle .error {padding-top: 0;}
 
 	.majorError-container {
     	margin: 1rem 0 0;
