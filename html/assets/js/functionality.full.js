@@ -35,6 +35,7 @@ const allTBoxes = document.body.querySelectorAll(".headerImg-textBox")
 
 const characterLimit = 1200
 let last_scroll_pos = 0, tBox_container, turbines_Y_offset;
+let page_c_width = document.body.clientWidth;
 
 // `END variables ============================================================>
 
@@ -68,15 +69,15 @@ if (document.body.querySelector(".noArticles_error") && window.innerWidth ) {
     }
 }
 
-navBars.addEventListener
-
-navBars.addEventListener('click', function() {
-    if (mainNav.classList.contains("mainNav-visible")) {
-        mainNav.classList.remove("mainNav-visible")
-    } else {
-        mainNav.classList.add("mainNav-visible")
-    }
-})
+if (navBars) {
+    navBars.addEventListener("click", function(){
+        if (mainNav.classList.contains("mainNav-visible")) {
+            mainNav.classList.remove("mainNav-visible")
+        } else {
+            mainNav.classList.add("mainNav-visible")
+        }
+    })
+}
 
 bpaInfoBtn.addEventListener('click', function() {
     let bpaArrow = document.body.querySelector('.bpa-arrow');
@@ -216,21 +217,18 @@ if (headerImgContainer) {
 //============================================================>
 
 function intialize_cursor() {
-    if (window.devicePixelRatio <= 1) {
-        cursor.style.left = "2vw"
-    } else {
-        cursor.style.left = "4vw"
-    }
+    cursor.style.left = "4vw"
     window.addEventListener('scroll', function() {
         check_for_cursor();
     })
 
     window.addEventListener('resize', function() {
         fix_sizing();
-        if (homeMainContent && diff(init_width, getWidth()) > 200) {
+        if (homeMainContent && (diff(init_width, getWidth()) > 200) && document.body.clientWidth >= 1200)  {
             location.reload();
         }
     })
+
     subheadingsContainer = document.createElement('div')
     subheadingsContainer.classList.add("interactiveSubheadings-container")
 
@@ -285,7 +283,7 @@ function intialize_article_animation() {
             }
         })
         animate_articles(altC_list)
-    } 
+    }
 }
 
 
@@ -371,12 +369,11 @@ function animate_articles(array) {
 
 function toggle_subheadingMenu() {
     if (body.classList.contains("mainContent_subOpen")) {
-        
+
         cursor.style.left = "4vw";
         body.classList.remove("mainContent_subOpen")
     } else {
         if (window.innerWidth < 1400) {
-            console.log("smaller")
             cursor.style.left = "2vw";
         } else if (window.innerWidth < 1600) {
             cursor.style.left = "2.35vw";
@@ -386,7 +383,7 @@ function toggle_subheadingMenu() {
             cursor.style.left = "3vw";
         }
         body.classList.add("mainContent_subOpen")
-    } 
+    }
 }
 
 
@@ -423,26 +420,24 @@ function init_tBoxes() {
         allTBoxesContent.forEach(function(e){
             if (e.offsetHeight) {
                 t_height += e.offsetHeight
-                e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + (e.offsetWidth - 20) + "px;");
+                e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e_width + "px;");
             }
         })
 
-        e.setAttribute("style", "opacity: 0;");
-        setTimeout(function(){
-            e.setAttribute("style", "height: " + (t_height + 45) + "px;transition: width .3s;");
-        }, 50)
         e.classList.add("headerImg-textBox_prepped")
+        e.setAttribute("style", "height: " + (t_height + 45) + "px;transition: width .3s;");
     })
 }
 
 function check_for_cursor() {
-    let diff, pixel_diff;
+    console.log("run")
+    let diff, pixel_diff, newSub = false;
     if (window.pageYOffset > last_scroll_pos) {
         diff = window.pageYOffset - last_scroll_pos
     } else {
         diff = last_scroll_pos - window.pageYOffset
     }
-    if (diff > 25) {
+    if (diff > 15) {
         // console.log("pd: " + pixel_diff)
         let temp = [];
         allSubheadings.forEach(function(e){
@@ -468,24 +463,7 @@ function check_for_cursor() {
 
 
 function run_cursor(e, clicked = false) {
-    console.log("run")
     let newSubheading = e, topOffset;
-    // if (screen.width > 1199) {
-    //     if (homeMainContent) {
-    //         if (window.devicePixelRatio > 1) {
-    //             topOffset = newSubheading.parentElement.offsetTop - 965
-    //         } else {
-    //             topOffset = newSubheading.parentElement.offsetTop - (screen.width * .5035)
-    //         }
-    //         // topOffset = newSubheading.parentElement.offsetTop - (screen.width * .2516)
-    //         // topOffset = newSubheading.parentElement.offsetTop - 590
-    //     } else {
-    //         topOffset = newSubheading.parentElement.offsetTop - 45
-    //     }
-    // } else {
-    //     topOffset = newSubheading.parentElement.offsetTop - 167
-    // }
-
     topOffset = newSubheading.parentElement.offsetTop + 44
     cursor.style.top = topOffset
     subheadingsContainer.setAttribute("style", "top: " + (topOffset + 130) + "px")
