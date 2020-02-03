@@ -241,7 +241,7 @@ h1 {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding: 4rem 0 2rem;
+	padding: 4rem 0 3rem;
 	top: 0;
 	z-index: 30;
 }
@@ -256,20 +256,19 @@ h1 {
 
 .headerLogo-logo, .headerLogo-header {
 	display: block;
-	text-align: center;
+	text-align: left;
 }
 
 .headerLogo-header {
 	color: var(--dark);
 	font: bold 2.2rem var(--headingFont-bold), sans-serif;
 	padding-top: .4rem;
-	opacity: .85;
 	text-decoration: none;
 	transition: opacity .2s;
 }
 
 .headerLogo-header:hover {
-	opacity: 1
+	opacity: .85;
 }
 
 .headerLogo-logo img{
@@ -1396,7 +1395,7 @@ div.readArticle {
 
 .portrait {
 	display: inline-block;
-	width: 150px;
+	width: 250px;
 }
 
 .portrait-container{
@@ -1978,7 +1977,7 @@ div.readArticle {
 	.headerImg-container .headerImg-mobile {display: none;}
 
 	.mainHeader {
-		height: 5.2rem;
+		height: 5.5rem;
 		position: fixed;
 		left: 0;
 		top: 0;

@@ -29,7 +29,7 @@ require './assets/includes/head.php';
     <div class="mainContent-wrapper">
         <section id="mainSection-one" class="mainSection-container">
             <div class="portrait-container">
-                <img class="portrait" src="assets/images/temp.png" alt="Portrait">
+                <img class="portrait" src="assets/images/nicholas.jpg" alt="Portrait">
             </div>
             <div class="mainSection-content">
                 <h3 class="mainSection-heading subheading">Nicholas Ferrari</h3>
@@ -41,7 +41,7 @@ require './assets/includes/head.php';
 
         <section id="mainSection-two" class="mainSection-container">
             <div class="portrait-container">
-                <img class="portrait" src="assets/images/temp.png" alt="Portrait">
+                <img class="portrait" src="assets/images/savannah.jpg" alt="Portrait">
             </div>
             <div class="mainSection-content">
                 <h3 class="mainSection-heading subheading">Savannah Skinner</h3>
@@ -53,7 +53,7 @@ require './assets/includes/head.php';
 
         <section id="mainSection-three" class="mainSection-container">
             <div class="portrait-container">
-                <img class="portrait" src="assets/images/temp.png" alt="Portrait">
+                <img class="portrait" src="assets/images/noshin.jpg" alt="Portrait">
             </div>
             <div class="mainSection-content">
                 <h3 class="mainSection-heading subheading">Noshin Rahman</h3>
