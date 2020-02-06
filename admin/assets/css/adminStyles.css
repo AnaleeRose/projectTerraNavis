@@ -1628,9 +1628,18 @@ END Newsfeed
     height: 10vh;
 }
 
+#a_link {
+    height: 1.5rem;
+}
+
 .hidden_alink {
     height: 0;
     overflow: hidden;
+}
+
+.ext_link {
+    height: 15px;
+    width: 15px;
 }
 
 

@@ -25,6 +25,7 @@ const navBars = document.querySelector(".navBars")
 const mainNav = document.querySelector(".mainNav")
 const init_width = getWidth();
 
+const ext_links = document.querySelectorAll(".ext_link")
 const allHeaderImgPieces = document.body.querySelectorAll('[data-hoverable="true"]');
 const allSubheadings = document.body.querySelectorAll(".subheading");
 const allArticles = document.body.querySelectorAll(".indiArticle");
@@ -106,7 +107,16 @@ if (newsPage) {
     }, 250)
 }
 
-
+if (ext_links.length > 0) {
+    ext_links.forEach(function(e_link){
+        e_link.parentElement.addEventListener("mouseover", function(){
+            e_link.setAttribute("src", "./assets/images/icons/externalLink_f.svg")
+        })
+        e_link.parentElement.addEventListener("mouseout", function(){
+            e_link.setAttribute("src", "./assets/images/icons/externalLink.svg")
+        })
+    })
+}
 
 if (faqPage) {
     const allFaqSections = document.body.querySelectorAll('.mainSection-container')

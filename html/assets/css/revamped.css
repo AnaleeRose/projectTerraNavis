@@ -242,6 +242,12 @@ h1 {
 	right: -200vw;
 }
 
+.ext_link {
+    height: 15px;
+    width: 15px;
+}
+
+
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 3. Header & Nav Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
@@ -1798,6 +1804,7 @@ div.readArticle {
 		width: 500px;
 	}
 
+	section.readArticle {min-height: 350px;}
 	.readArticle-imgContainer {
 		box-sizing: content-box;
 		float: right;
@@ -1928,13 +1935,13 @@ div.readArticle {
 	.mainSection-container {
 		padding: 1.5rem 4vw 2.5rem;
 	}
-
+	
 	.cursor {
 		top: 1rem;
 	}
 
+	section.readArticle {min-height: 500px;}
 	.filter-arrow {border-width: 0;}
-
 
 	.f_copyright-container {
 		bottom: 4px;

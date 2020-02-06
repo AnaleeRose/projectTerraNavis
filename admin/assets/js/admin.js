@@ -778,7 +778,8 @@ img_input = document.body.querySelector('#img');
 img_box = document.body.querySelector('.imgBox');
 
 if (imgs_btn) {
-    imgs_btn.addEventListener("click", function(){
+    imgs_btn.addEventListener("click", function(e){
+        e.preventDefault();
         img_input.click()
     })
 }

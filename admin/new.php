@@ -144,7 +144,6 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
     if (!empty($_POST['a_link']) && (filter_var($_POST['a_link'], FILTER_SANITIZE_URL) == $_POST['a_link']) && !isset($_POST['no_link'])) {
         $a_link = $_POST['a_link'];
     } elseif (isset($_POST['no_link'])) {
-        echo "chose not to";
     } else {
         $newArticle_errors['a_link'] = 'Please add a link to the orignal article';
     }
@@ -256,8 +255,8 @@ $options = ['required' => null];
 
                     echo '<label for="a_link" class="">Orginal Content Only</label>';
                     echo '<input type="checkbox" name="no_link" id="no_link" class="no_link_checkbox" value="true" checked>';
-                    echo '<div class="articleLink-container">';
-                        $options = ['placeholder' => 'Link To Orignal Article | Max Characters: 600', 'maxlength' => 600, 'addtl_classes' => 'hidden_alink'];
+                    echo '<div class="articleLink-container hidden_alink">';
+                        $options = ['placeholder' => 'Link To Orignal Article | Max Characters: 600', 'maxlength' => 600];
                         create_form_input('a_link', 'text', 'Link To Article', $newArticle_errors, $options);
                     echo '</div>';
 

@@ -44,6 +44,7 @@ if ($online) {
 
 
 
+
 // where to find mysql.php
 if ($online) {
     define('MYSQL', $_SERVER['DOCUMENT_ROOT'] . '/mysql.inc.php');

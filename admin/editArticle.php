@@ -287,13 +287,19 @@ $options = ['required' => null];
                     // definition from config.inc.php that creates a required tag
                     echo REQUIRED;
 
-                    echo '<label for="a_link" class="">Orginal Content Only</label>';
-                    echo '<input type="checkbox" name="no_link" id="no_link" class="no_link_checkbox" value="true" checked>';
-                    echo '<div class="articleLink-container hidden_alink">';
+                    if (isset($_POST['a_link'])) {
+                        echo '<label for="a_link" class="">Orginal Content Only</label>';
+                        echo '<input type="checkbox" name="no_link" id="no_link" class="no_link_checkbox" value="true">';
+                        echo '<div class="articleLink-container">';
+
+                    } else {
+                        echo '<label for="a_link">Orginal Content Only</label>';
+                        echo '<input type="checkbox" name="no_link" id="no_link" class="no_link_checkbox" value="true" checked>';
+                        echo '<div class="articleLink-container hidden_alink">';
+                    }
                         $options = ['placeholder' => 'Link To Orignal Article | Max Characters: 600', 'maxlength' => 600];
                         create_form_input('a_link', 'text', 'Link To Article', $newArticle_errors, $options);
-                    echo '</div>';
-
+                        echo '</div>';
                     // throw an error if something went wrong with the select (create_form_input usually handles this but since this once was made here, it has to create errors here too)
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
                     $options = ['required' => null, 'placeholder' => 'Description | Max Characters: 750', 'maxlength' => 750];
@@ -461,7 +467,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
                     $stmt->bindParam(':a_id', $article_db_id, PDO::PARAM_STR);
                     if ($stmt->execute()) {
-                        header('Location: ' . BASE_URL . 'admin/allArticles.php?redirect=true&article_id=' . $article_db_id);
+                        // header('Location: ' . BASE_URL . 'admin/allArticles.php?redirect=true&article_id=' . $article_db_id);
+                        header('Location: http://terranavis.life/admin/allArticles.php?redirect=true&article_id=' . $article_db_id);
                     } else {
                         // or throw an error, ya know, if something went wrong
                         ob_end_clean();
