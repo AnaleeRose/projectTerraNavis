@@ -1334,7 +1334,7 @@ h2.newsfeedHeading {
 
 .nwBox .btnBox {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 1.5rem;
 }
 
@@ -1358,15 +1358,10 @@ h2.newsfeedHeading {
 
 
 
-.nwBox .editBtn {
-    width: 6rem;
-}
-.nwBox .deleteBtn {
-    width: 7.5rem;
-}
-
+.nwBox .editBtn,
+.nwBox .deleteBtn,
 .nwBox .viewBtn {
-    width: 7.5rem;
+    width: 3.5rem;
 }
 
 .nwBox .dateInfo {color: var(--brightAqua);}
