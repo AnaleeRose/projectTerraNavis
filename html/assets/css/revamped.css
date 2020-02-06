@@ -1673,6 +1673,13 @@ div.readArticle {
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 7. @Media Queries
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+/* ===== PHONE ============================== */
+@media screen and (max-width: 649px) {
+	.headerLogo-logo img {
+		width: 4rem;
+	}
+}
+
 
 /* ===== TABLET ============================== */
 @media screen and (min-width: 650px) {
