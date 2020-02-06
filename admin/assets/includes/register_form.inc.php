@@ -2,13 +2,13 @@
 $ptitle = "Register";
 nd('registerDiv', 'registerDiv');
 $options = ['required' => null];
-echo "REQEUST: ";
-print_r($_REQUEST);
-echo '<br>';
-echo '<br>';
-echo '<br>';
-echo '<br>';
-print_r($_SESSION);
+// echo "REQEUST: ";
+// print_r($_REQUEST);
+// echo '<br>';
+// echo '<br>';
+// echo '<br>';
+// echo '<br>';
+// print_r($_SESSION);
 ?>
 <div class="profilePicture">
     <img class="profilePic" src="assets/profilePictures/basic.jpg">
@@ -39,9 +39,9 @@ if (isset($register_errors['DoesNotExist'])) {
         notice('required', 'Required');
         create_form_input('email', 'email', 'Email', $register_errors, $options);
         notice('required', 'Required');
-        echo '<label for="pwd">Password</label><input type="password" name="pwd" id="pwd" class="passwordInput createInput requiredInput" required><small class="formNotice formNotice_Required cutom">Password must contain at least 6 characters, 1 captital letter, and 1 number</small>';
-        // create_form_input('pwd', 'password', 'Password', $register_errors, $options);
-        // notice('required', 'Password must contain at least 6 characters, 1 captital letter, and 1 number');
+        // echo '<label for="pwd">Password</label><input type="password" name="pwd" id="pwd" class="passwordInput createInput requiredInput" required><small class="formNotice formNotice_Required cutom">Password must contain at least 6 characters, 1 captital letter, and 1 number</small>';
+        create_form_input('pwd', 'password', 'Password', $register_errors, $options);
+        notice('required', 'Password must contain at least 6 characters, 1 captital letter, and 1 number');
         create_form_input('pwdC', 'password', 'Confirm Password', $register_errors, $options);
         notice('required', 'Required');
 

@@ -426,18 +426,19 @@ function faq_collapse(e) {
 function init_tBoxes() {
     allTBoxes.forEach(function(e){
         e.setAttribute("style", "opacity: 0;");
-        let allTBoxesContent  = e.childNodes
-        let t_height = 0
-        allTBoxesContent.forEach(function(e){
-            if (e.offsetHeight) {
-                t_height += e.offsetHeight
-                e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e.offsetWidth + "px;");
-                e.classList.add("headerImg-textBox_prepped")
-            }
-        })
+        // let allTBoxesContent  = e.childNodes
+        // let t_height = 0
+        // allTBoxesContent.forEach(function(e){
+        //     if (e.offsetHeight) {
+        //         t_height += e.offsetHeight
+        //         e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e.offsetWidth + "px;");
+        //         e.classList.add("headerImg-textBox_prepped")
+        //     }
+        // })
 
         e.classList.add("headerImg-textBox_prepped")
-        e.setAttribute("style", "height: " + (t_height + 42) + "px;transition: width .3s;opacity:0;");
+        // e.setAttribute("style", "height: " + (t_height + 42) + "px;transition: width .3s;opacity:0;");
+        e.setAttribute("style", "transition: width .3s ease-in-out 0s, height 1s ease-out 0s; opacity:0;");
         setTimeout(function(){
             e.style.opacity = null
         }, 300)
