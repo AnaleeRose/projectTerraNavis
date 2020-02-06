@@ -81,10 +81,10 @@ function create_article($a_num) {
             <?php
             if (isset($list_all) && $list_all) {
             ?>
-            <a href="view.php?view_type=read&media_type=article&media_id=<?php echo $this_article['article_id']; ?>" class="adminBtn adminBtn_aqua viewBtn">View Article</a>
+            <a href="<?= BASE_URL; ?>/html/newsfeed.php?preview=true&article&media_id=<?= $this_article['article_id']; ?>" class="adminBtn adminBtn_aqua viewBtn">View</a>
             <?php } ?>
-            <a href="editArticle.php?<?php echo 'article_id=' . $this_article['article_id']?>" class="adminBtn adminBtn_aqua editBtn">Edit Article</a>
-            <a href="deleteArticle.php?<?php echo 'article_id=' . $this_article['article_id']?>" class="adminBtn adminBtn_danger deleteBtn">Delete Article</a>
+            <a href="editArticle.php?<?php echo 'article_id=' . $this_article['article_id']?>" class="adminBtn adminBtn_aqua editBtn">Edit</a>
+            <a href="deleteArticle.php?<?php echo 'article_id=' . $this_article['article_id']?>" class="adminBtn adminBtn_danger deleteBtn">Delete</a>
         </div>
     </div>
 

@@ -1393,6 +1393,7 @@ div.readArticle {
 	background: none;
 }
 .teamPage .mainSection-container {
+	border-top: 1.5rem solid var(--pageColor-shade);
 	display: flex;
 	flex-direction: column;
 	padding: 0;
@@ -1408,6 +1409,7 @@ div.readArticle {
 }
 
 .teamPage .mainSection-heading {
+	background: none;
 	padding: 0;
     margin-left: -5vw;
     width: 95vw;
@@ -1418,12 +1420,12 @@ div.readArticle {
 	width: 250px;
 }
 
-.portrait-container{
+.portrait-container {
     background: rgba(255, 255, 255, .1);
 	box-sizing: border-box;
 	display: block;
 	margin: 0;
-	padding: 1rem 0;
+	padding: 5rem 0 1rem;
 	text-align: center;
 	width: 100%;
 }
@@ -1544,7 +1546,9 @@ div.readArticle {
 			color: #fff;
 		}
 
-
+.f_emailInput-container .emailInput:focus {
+	border: 2px solid red;
+}
 .f_newletter-form {
 	display: flex;
 	flex-direction: column;
@@ -1583,6 +1587,11 @@ div.readArticle {
 }
 	.f_socialLinkIcon {
 		text-decoration: none;
+	}
+
+	.f_inIcon {
+		height: 65px;
+		width: 65px;
 	}
 
 
