@@ -70,7 +70,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		}
 		echo '</textarea>';
 		if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options))) {echo '<span id="characterCounter"></span>';}
-		echo '</div>';
+		// echo '</div>'; 
 		if (array_key_exists($name, $errors)) echo '<p class="formNotice formNotice_InlineError ">' . $errors[$name] . ' </p>';
 	}  elseif ($type === 'hidden') {
 		echo '<input type="' . $type . '" name="' . $name . '" id="' . $name . '" class="';
@@ -91,10 +91,10 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		if ($value) echo 'value="' . htmlspecialchars($value) . '"';
 		if (!empty($options) && is_array($options)) {
 			foreach ($options as $k => $v) {
-                echo $options['addtl_classes'] . ' ' . $type;
+                if ($k !== 'addtl_classes' && $k !== 'addtl_div_classes' && $k !== 'contactPage') echo " $k=\"$v\"";
 			}
 		}
 		echo '>';
 	} // END type IF-ELSE
-	if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options))) {echo '</div>';}
+	if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options)) && (array_key_exists('addtl_div_classes', $options))) {echo '</div>';}
 } // END create_form_input()

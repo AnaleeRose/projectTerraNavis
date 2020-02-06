@@ -457,6 +457,7 @@ h1 {
 }
 
 .solarPanels .headerImg-textBox {
+	top: -280px;
 	right: -5vw;
 }
 .bucketSpout-container .headerImg-textBox {

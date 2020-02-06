@@ -19,48 +19,6 @@ function page_colors() {
     echo '<style>
 	:root {';
     switch (strtolower($page)) {
-    	// case "sustain":
-	    // 	echo "      --pageColor: var(--sustain);
-	    //   --pageColor-shade: var(--sustain-shade);
-	    //   --pageColor-link: var(--sustain-link);";
-    	// 	break;
-
-    	// case "construct":
-	    // 	echo "      --pageColor: var(--construct);
-	    //   --pageColor-shade: var(--construct-shade);
-	    //   --pageColor-link: var(--construct-link);";
-    	// 	break;
-
-    	// case "contact":
-	    // 	echo "      --pageColor: var(--contact);
-	    //   --pageColor-shade: var(--contact-shade);
-	    //   --pageColor-link: var(--contact-link);";
-    	// 	break;
-
-    	// case "faq":
-	    // 	echo "      --pageColor: var(--faq);
-	    //   --pageColor-shade: var(--faq-shade);
-	    //   --pageColor-link: var(--faq-link);";
-    	// 	break;
-
-    	// case "resources":
-	    // 	echo "      --pageColor: var(--resources);
-	    //   --pageColor-shade: var(--resources-shade);
-	    //   --pageColor-link: var(--resources-link);";
-    	// 	break;
-
-    	case "news":
-	    	echo "      --pageColor: var(--home);
-	      --pageColor-shade: var(--home-shade);
-	      --pageColor-link: var(--news-link);";
-    		break;
-
-    	// case "c_article":
-	    // 	echo "      --pageColor: var(--home);
-	    //   --pageColor-shade: var(--home-shade);
-	    //   --pageColor-link: var(--home-link);";
-    	// 	break;
-
     	default:
     		echo "
 			      --pageColor: var(--home);
@@ -108,8 +66,14 @@ function pullImage($filename) {
 
 
 // img uploader ----------------------------------------------------------------------------------------------------->
+if (!isset($newArticle)) $newArticle = true;
+
+// example ternary op
+// $answer = ($newArticle === true ? "new article" : "old article");
+// echo $answer;
+
 if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
-    if (!empty($_FILES['img']['name']) && !empty(trim($_POST['caption'])) && (!isset($_POST['img_location']) || empty($_POST['img_location']))) {
+    if (!empty($_FILES['img']['name']) && !empty(trim($_POST['caption']))) {
 		 $permitted = [
 		    'image/gif',
 		    'image/jpeg',
@@ -165,84 +129,172 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 		        }
 
 		        if ($checkSize && $checkType && empty($img_errors)) {
-		        	if (!isset($img_width)) $img_width = 600;
-		        	if (!isset($img_height)) $img_height = 400;
-		            $checkFile = true;
-		            $filename = preg_replace('/\s+/', '_', preg_replace('/\PL/u', '', $_POST['article_name'])) . '_' . $random_num;
-		            $complete_filename = $filename . '.' .$extension;
-		            $move = move_uploaded_file($cf['tmp_name'], $destination . $complete_filename);
-					list($c_width, $c_height, $c_type, $c_attr) = getimagesize($destination . $complete_filename);
-					$size_confirmation = false;
-					$resize = true;
-					if ($c_width > 500 && $c_height > 300) {
-						$size_confirmation = true;
-						if (($c_width > 600 && $c_height > 400) && ($c_width < 800 && $c_height < 600)) {
-							$resize = false;
+		        	if ($newArticle === true && (!isset($_POST['img_location']) || empty($_POST['img_location']))) {
+				        $_tempErrors[] = "FINEME NEW ARTICLE";
+			        	if (!isset($img_width)) $img_width = 600;
+			        	if (!isset($img_height)) $img_height = 400;
+			            $checkFile = true;
+			            $filename = preg_replace('/\s+/', '_', preg_replace('/\PL/u', '', $_POST['article_name'])) . '_' . $random_num;
+			            $complete_filename = $filename . '.' .$extension;
+			            $move = move_uploaded_file($cf['tmp_name'], $destination . $complete_filename);
+						list($c_width, $c_height, $c_type, $c_attr) = getimagesize($destination . $complete_filename);
+						$size_confirmation = false;
+						$resize = true;
+						if ($c_width > 500 && $c_height > 300) {
+							$size_confirmation = true;
+							if (($c_width > 600 && $c_height > 400) && ($c_width < 800 && $c_height < 600)) {
+								$resize = false;
+							}
+						} else {
+							$img_errors[] = 'Image is too small, please upload a larger version';
 						}
-					} else {
-						$img_errors[] = 'Image is too small, please upload a larger version';
-					}
-		            if ($move && $size_confirmation) {
-						$pic_name_location = $destination . $complete_filename;
-						if ($extension == 'jpeg') $extension = 'jpg';
-						switch ($extension) {
-							case 'png':
-								$resized_filename = 'resized_' . $complete_filename;
-								$create_img = imagecreatefrompng($pic_name_location);
-								$resize_img = imagescale($create_img, $img_width, $img_height);
-								$newName = $destination . $resized_filename;
-								imagepng($resize_img, $newName, 9);
-								if (file_exists($destination . $complete_filename)) {
-									unlink($destination . $complete_filename);
+			            if ($move && $size_confirmation) {
+							$pic_name_location = $destination . $complete_filename;
+							if ($extension == 'jpeg') $extension = 'jpg';
+							switch ($extension) {
+								case 'png':
+									$resized_filename = 'resized_' . $complete_filename;
+									$create_img = imagecreatefrompng($pic_name_location);
+									$resize_img = imagescale($create_img, $img_width, $img_height);
+									$newName = $destination . $resized_filename;
+									imagepng($resize_img, $newName, 9);
+									if (file_exists($destination . $complete_filename)) {
+										unlink($destination . $complete_filename);
+									}
+									imagedestroy($resize_img);
+									break;
+
+								case 'gif':
+									$resized_filename = 'resized_' . $complete_filename;
+									$create_img = imagecreatefromgif($pic_name_location);
+									$resize_img = imagescale($create_img, $img_width, $img_height);
+									$resized_filename = 'resized_' . $complete_filename;
+									$newName = $destination . $resized_filename;
+									imagegif($resize_img, $newName);
+									if (file_exists($destination . $complete_filename)) {
+										unlink($destination . $complete_filename);
+									}
+									imagedestroy($resize_img);
+									break;
+
+								case 'jpg':
+									$resized_filename = 'resized_' . $complete_filename;
+									$create_img = imagecreatefromjpeg($pic_name_location);
+									$resize_img = imagescale($create_img, $img_width, $img_height);
+									$newName = $destination . $resized_filename;
+									imagejpeg($resize_img, $newName, 100);
+									if (file_exists($destination . $complete_filename)) {
+										unlink($destination . $complete_filename);
+									}
+									imagedestroy($resize_img);
+									break;
+
+								default: $img_errors[] = 'Unknown picture type: ' . $extension ; break;
+							}
+
+							if (empty($img_errors)) {
+								pullImage($resized_filename);
+								if (empty($img_location) || empty($img_name)) $img_errors[] = 'Something went wrong while uploading that image. Please contact our service team.';
+							}
+
+			                $img_notices[] = $cf['name'] . ' was uploaded';
+			                $_POST['img_name'] = $resized_filename;
+			                $_POST['img_location'] = $destination . $resized_filename;
+
+			            }
+			        	} elseif ($newArticle === false) { //new article ver above, edit article ver below
+				        	$_tempErrors[] = "FINEME OLD ARTICLE";
+							if (!isset($img_width)) $img_width = 600;
+				        	if (!isset($img_height)) $img_height = 400;
+				            $checkFile = true;
+				            if (isset($article_id)) {
+					            $q = "SELECT img_name FROM articles WHERE article_id = " . $article_id;
+								$r = mysqli_query($dbc, $q);
+								if ($r && mysqli_num_rows($r) > 0) {
+									$filename = mysql_fetch_assoc($r);
+							    } else {
+							    	$_tempErrors[] = "FINEME: R WRONG";
+							    }
+								substr($filename, 0, -4);
+							} else {
+				            	$filename = preg_replace('/\s+/', '_', preg_replace('/\PL/u', '', $_POST['article_name'])) . '_' . $random_num;
+							}
+
+				            $complete_filename = $filename . '.' .$extension;
+				            $move = move_uploaded_file($cf['tmp_name'], $destination . $complete_filename);
+							list($c_width, $c_height, $c_type, $c_attr) = getimagesize($destination . $complete_filename);
+							$size_confirmation = false;
+							$resize = true;
+							if ($c_width > 500 && $c_height > 300) {
+								$size_confirmation = true;
+								if (($c_width > 600 && $c_height > 400) && ($c_width < 1000 && $c_height < 800)) {
+									$resize = false;
 								}
-								imagedestroy($resize_img);
-								break;
+							} else {
+								$img_errors[] = 'Image is too small, please upload a larger version';
+							}
+				            if ($move && $size_confirmation) {
+								$pic_name_location = $destination . $complete_filename;
+								if ($extension == 'jpeg') $extension = 'jpg';
+								switch ($extension) {
+									case 'png':
+										$resized_filename = 'resized_' . $complete_filename;
+										$create_img = imagecreatefrompng($pic_name_location);
+										$resize_img = imagescale($create_img, $img_width, $img_height);
+										$newName = $destination . $resized_filename;
+										imagepng($resize_img, $newName, 9);
+										if (file_exists($destination . $complete_filename)) {
+											unlink($destination . $complete_filename);
+										}
+										imagedestroy($resize_img);
+										break;
 
-							case 'gif':
-								$resized_filename = 'resized_' . $complete_filename;
-								$create_img = imagecreatefromgif($pic_name_location);
-								$resize_img = imagescale($create_img, $img_width, $img_height);
-								$resized_filename = 'resized_' . $complete_filename;
-								$newName = $destination . $resized_filename;
-								imagegif($resize_img, $newName);
-								if (file_exists($destination . $complete_filename)) {
-									unlink($destination . $complete_filename);
+									case 'gif':
+										$resized_filename = 'resized_' . $complete_filename;
+										$create_img = imagecreatefromgif($pic_name_location);
+										$resize_img = imagescale($create_img, $img_width, $img_height);
+										$resized_filename = 'resized_' . $complete_filename;
+										$newName = $destination . $resized_filename;
+										imagegif($resize_img, $newName);
+										if (file_exists($destination . $complete_filename)) {
+											unlink($destination . $complete_filename);
+										}
+										imagedestroy($resize_img);
+										break;
+
+									case 'jpg':
+										$resized_filename = 'resized_' . $complete_filename;
+										$create_img = imagecreatefromjpeg($pic_name_location);
+										$resize_img = imagescale($create_img, $img_width, $img_height);
+										$newName = $destination . $resized_filename;
+										imagejpeg($resize_img, $newName, 100);
+										if (file_exists($destination . $complete_filename)) {
+											unlink($destination . $complete_filename);
+										}
+										imagedestroy($resize_img);
+										break;
+
+									default: $img_errors[] = 'Unknown picture type: ' . $extension ; break;
 								}
-								imagedestroy($resize_img);
-								break;
 
-							case 'jpg':
-								$resized_filename = 'resized_' . $complete_filename;
-								$create_img = imagecreatefromjpeg($pic_name_location);
-								$resize_img = imagescale($create_img, $img_width, $img_height);
-								$newName = $destination . $resized_filename;
-								imagejpeg($resize_img, $newName, 100);
-								if (file_exists($destination . $complete_filename)) {
-									unlink($destination . $complete_filename);
+								if (empty($img_errors)) {
+									pullImage($resized_filename);
+									if (empty($img_location) || empty($img_name)) $img_errors[] = 'Something went wrong while uploading that image. Please contact our service team.';
 								}
-								imagedestroy($resize_img);
-								break;
 
-							default: $img_errors[] = 'Unknown picture type: ' . $extension ; break;
-						}
+				                $img_notices[] = $cf['name'] . ' was uploaded';
+				                $_POST['img_name'] = $resized_filename;
+				                $_POST['img_location'] = $destination . $resized_filename;
 
-						if (empty($img_errors)) {
-							pullImage($resized_filename);
-							if (empty($img_location) || empty($img_name)) $img_errors[] = 'Something went wrong while uploading that image. Please contact our service team.';
-						}
-
-		                $img_notices[] = $cf['name'] . ' was uploaded';
-		                $_POST['img_name'] = $resized_filename;
-		                $_POST['img_location'] = $destination . $resized_filename;
-
-		            }
-		        }
-		    }
+			    	        }
+			        } 
+		        } // END if basic image checks
+		    } // END if uploaded
 		} catch (Exception $e) {
-		    echo $e->getMessage();
+		   $_tempErrors[] = $e->getMessage();
 		}
-	}
-}
+	} // END basic checks
+} // END if the button has been pressed and we're dealing wiht an article
 
 
 if (isset($pageTitle) && strtolower($pageTitle) === 'edit article' && !isset($_POST['publishMediaBtn']) && isset($img_name)) {

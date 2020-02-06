@@ -18,6 +18,7 @@ var publishBtn = document.body.querySelector('#publishBtn');
 var menuBtn = document.body.querySelector('.menuBtn');
 var menuBtnSvg_open = document.body.querySelector('.menuBtnSvg_open');
 var menuBtnSvg_close = document.body.querySelector('.menuBtnSvg_close');
+var noLinkBtn = document.body.querySelector("#no_link");
 
 if (document.body.querySelector("#serverLightMode")) {
     var serverLightMode = document.body.querySelector("#serverLightMode").innerText;
@@ -65,6 +66,37 @@ if (preexistingDeleteBtns.length > 0) {
         })
     })
 
+}
+
+if (window.location.search.substr(1)) {
+    url_string = window.location.href;
+    url = new URL(url_string);
+    if ((url.searchParams.get("redirect") === "true") && window.location.search.substr(1).includes("article_id")) {
+        a_id = url.searchParams.get("article_id")
+        if (window.location.origin.includes("savannahskinner")) {
+            new_url = "https:/terranavis.life/html/newsfeed.php?preview=true&article_id="  + a_id
+        } else {
+            new_url = "http://localhost/projectTerraNavis/html/newsfeed.php?preview=true&article_id="  + a_id
+        }
+
+        if (new_url) {window.open(new_url, "_blank");}
+    }
+
+}
+
+if (noLinkBtn) {
+    var aLinkDiv = document.body.querySelector(".articleLink-container")
+    noLinkBtn.addEventListener("click", function(e){
+        if (noLinkBtn.checked !== true) {
+            if (aLinkDiv.classList.contains("hidden_alink")) {
+                aLinkDiv.classList.remove("hidden_alink")
+            }
+        } else {
+            if (!aLinkDiv.classList.contains("hidden_alink")) {
+                aLinkDiv.classList.add("hidden_alink")
+            }
+        }
+    })
 }
 
 
@@ -742,8 +774,14 @@ function type_of_element(contentBtnClicked, deleteElement = false, e = null) { /
 
 my_count_of_files = 0;
 imgs_btn = document.body.querySelector('#uploadImgBtn')
-img_input = document.body.querySelector('#imgs');
+img_input = document.body.querySelector('#img');
 img_box = document.body.querySelector('.imgBox');
+
+if (imgs_btn) {
+    imgs_btn.addEventListener("click", function(){
+        img_input.click()
+    })
+}
 
 function loadFile(e) {
     checkIfImgExists = document.body.querySelector('.showNewImg')

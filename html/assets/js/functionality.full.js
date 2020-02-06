@@ -422,16 +422,15 @@ function init_tBoxes() {
             if (e.offsetHeight) {
                 t_height += e.offsetHeight
                 e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e.offsetWidth + "px;");
-                setTimeout(function(){
-                    e.classList.add("headerImg-textBox_prepped")
-                }, 15)
+                e.classList.add("headerImg-textBox_prepped")
             }
         })
 
+        e.classList.add("headerImg-textBox_prepped")
+        e.setAttribute("style", "height: " + (t_height + 42) + "px;transition: width .3s;opacity:0;");
         setTimeout(function(){
-            e.setAttribute("style", "height: " + (t_height + 38) + "px;transition: width .3s;");
-            e.classList.add("headerImg-textBox_prepped")
-        }, 15)
+            e.style.opacity = null
+        }, 300)
     })
 }
 
