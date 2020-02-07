@@ -35,7 +35,7 @@
                 <a href="<?= TWITTER_LINK; ?>" title="Twitter" class="f_socialLinkIcon" aria-label="Twitter">
                   <img class="f_inIcon" alt="Twitter" src="./assets/images/icons/tw.png">
                 </a>
-                <a href="<?= FACEBOOK_LINK; ?>" class="f_socialLinkIcon" ria-label="Facebook">
+                <a href="<?= FACEBOOK_LINK; ?>" class="f_socialLinkIcon" aria-label="Facebook">
                   <img class="f_inIcon" alt="Facebook" src="./assets/images/icons/fb.png">
                 </a>
 
