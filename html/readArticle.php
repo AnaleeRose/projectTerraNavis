@@ -15,7 +15,7 @@ require './assets/includes/head.php';
 ?>
 
 <body>
-<!------ Header ------------>
+<!-- Header -->
 <?php
 require './assets/includes/header.inc.php';
 $showArticle_errors;

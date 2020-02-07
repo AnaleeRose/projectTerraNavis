@@ -193,7 +193,7 @@ require './assets/includes/head.php';
 </div>
 </article>
 
-<!------ Footer ------------>
+<!-- Footer -->
 ​<?php require './assets/includes/footer.inc.php'; ?>
 
 </body>
