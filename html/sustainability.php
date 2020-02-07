@@ -57,9 +57,10 @@ require './assets/includes/head.php';
         <section id="mainSection-three" class="mainSection-container">
     	    <h3 class="mainSection-heading subheading" data-subheading="three">Water Collection</h3>
             <div class="mainSection-content">
+                <img class="wrap multiContentPage-inlineImg" src="./assets/images/well-2.png">
+
       	        <p>Now we come to one of the most challenging aspects of living in an earthship: how do you get your water? With the dry and arid nature of the usual earthship locale, water collection can be a daunting task to overcome. Typical rainfall in these locations is less than 11 inches per year, so simple rainwater collection alone will not sustain you. That being said, rainwater collection should still be used to maximize the amount of water you are able to bring in, and storing this water is important, as it can sometimes be months between rainy weather.</p>
 
-                <img class="wrap multiContentPage-inlineImg" src="./assets/images/well-2.png">
 
                 <p>Another, more tedious way to get water for your earthship is to bring outside water into your earthship via water trucks or small, portable water containers that you can fill while you are away from home and bring back with you. This can be a deal breaker for some who are considering building an earthship.</p>
 

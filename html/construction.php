@@ -29,9 +29,10 @@ require './assets/includes/head.php';
         <section id="mainSection-one" class="mainSection-container">
             <h3 class="mainSection-heading subheading" data-subheading="one">Designing Your Earthship</h3>
             <div class="mainSection-content">
+              <img class="wrap multiContentPage-inlineImg" src="./assets/images/blueprint.png">
+
                <p>There are several companies that will help you design your earthship. Earthship Biotecture is the leading company in this area, which makes sense because it was founded by Michael Reynolds himself. Another popular company is Pangea Builders. If you choose to go your own route, there are some basic principles to keep in mind.</p>
 
-                <img class="wrap multiContentPage-inlineImg" src="./assets/images/blueprint.png">
 
     	         <p>The shape of your design is an important factor in how sustainable your home will be. A v-shape is generally the way to go, since the slant makes it easier to collect water, and it regulates temperatures better due to being partially underground. However, the materials you plan on using and the topography of your location could make another shape work better for your specific case.</p>
 
@@ -47,9 +48,10 @@ require './assets/includes/head.php';
         <section id="mainSection-two" class="mainSection-container">
             <h3 class="mainSection-heading subheading" data-subheading="two">Building Materials</h3>
             <div class="mainSection-content">
-               <p>How you choose the materials to use may be the most important aspect of planning the construction of your home. This is because, while the world has an abundance of renewable materials, the ease with which these materials can be acquired varies greatly. The most common materials are used tires and dirt bags for exterior and load-bearing walls, recycled cans and bottles for interior and upper walls, and trusses or vigas for the roof.</p>
+              <img class="wrap multiContentPage-inlineImg" src="./assets/images/tires.png">
 
-               <img class="wrap multiContentPage-inlineImg" src="./assets/images/tires.png">
+               <p>How you choose the materials to use may be the most important aspect of planning the construction of your home. This is because, while the world has an abundance of renewable materials, the ease with which these materials can be acquired varies greatly. The most common materials are used tires and dirt bags for exterior and load-bearing walls, recycled cans and bottles for interior and upper walls, and trusses or vigas for the roof.</p>
+               
 
                <p>Tires might be the most important material you need, and unfortunately sometimes they can be the hardest to gather. You’re going to need a lot of tires to build an earthship, and the larger you plan on making it, the more you will need. Most of the time, you’ll have to buy them in bulk from used tire dealers and the like. Otherwise, you could spend years trying to gather them yourself. So this will probably be a major aspect of your budget as well.</p>
 
@@ -78,9 +80,10 @@ require './assets/includes/head.php';
         <section id="mainSection-four" class="mainSection-container">
             <h3 class="mainSection-heading subheading" data-subheading="four">Building It To Code</h3>
             <div class="mainSection-content">
+               <img class="wrap multiContentPage-inlineImg" src="./assets/images/buildcodes.png">
+              
                <p>One of the greatest challenges to building an earthship is dealing with so many municipal codes and regulations. That’s why a large percentage of earthship dwellers live in new mexico, where there is already a knowledgeable culture and comparatively friendly laws.</p>
 
-               <img class="wrap multiContentPage-inlineImg" src="./assets/images/buildcodes.png">
 
                <p>Zoning laws in the U.S. and Canada can be very complex and change depending on which state/county/city you are building in. If you can afford it, a lawyer can help you navigate all of this. However, it is certainly possible to navigate laws yourself. It just requires a lot of research and patience.</p>
 
