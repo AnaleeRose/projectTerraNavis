@@ -1693,6 +1693,10 @@ div.readArticle {
 	.headerLogo-logo img {
 		width: 4rem;
 	}
+
+	.multiContentPage-inlineImg {
+		max-width: 150px;
+	}
 }
 
 
