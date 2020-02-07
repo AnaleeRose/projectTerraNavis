@@ -13,10 +13,6 @@ $_SESSION = [];
 // destroy this session
 session_destroy();
 
-// idk what this is for lol, I just remember seeing it once and going '...do i need that?'
-// setcookie(session_name(), '', time()-3000);
-
-
 $pageTitle = 'Logout';
 require './assets/includes/header.html';
 echo '<body id="pageWrapper" class="lmode defaultPage">';

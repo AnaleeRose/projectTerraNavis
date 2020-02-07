@@ -2,7 +2,7 @@
 // ob_start tells it not to show anything until everything is done loading so I can interrupt it at any time to load an error page without php getting mad about content already on display
 ob_start();
 
-// starts a session lol, aka it tracks information even when you go to a different page within the site
+// starts a session, aka it tracks information even when you go to a different page within the site
 session_start();
 
 if (isset($_SESSION['va_id'])) {
