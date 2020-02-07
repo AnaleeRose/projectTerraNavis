@@ -29,14 +29,14 @@
                 </div>
             </form>
             <div class="f_socialLinkIcon-container">
-                <a href="<?= INSTAGRAM_LINK; ?>" title="Instagram" class="f_socialLinkIcon" alt="Instagram" aria-label="Instagram">
-                  <img class="f_inIcon" src="./assets/images/icons/insta.png">
+                <a href="<?= INSTAGRAM_LINK; ?>" title="Instagram" class="f_socialLinkIcon" aria-label="Instagram">
+                  <img class="f_inIcon" src="./assets/images/icons/insta.png" alt="Instagram Icon">
                 </a>
-                <a href="<?= TWITTER_LINK; ?>" title="Twitter" class="f_socialLinkIcon" alt="Twitter" aria-label="Twitter">
-                  <img class="f_inIcon" src="./assets/images/icons/tw.png">
+                <a href="<?= TWITTER_LINK; ?>" title="Twitter" class="f_socialLinkIcon"  aria-label="Twitter">
+                  <img class="f_inIcon" src="./assets/images/icons/tw.png"  alt="Twitter Icon">
                 </a>
-                <a href="<?= FACEBOOK_LINK; ?>" class="f_socialLinkIcon" alt="Facebook" ria-label="Facebook">
-                  <img class="f_inIcon" src="./assets/images/icons/fb.png">
+                <a href="<?= FACEBOOK_LINK; ?>" class="f_socialLinkIcon" aria-label="Facebook">
+                  <img class="f_inIcon" src="./assets/images/icons/fb.png" alt="Facebook Icon">
                 </a>
 
 
