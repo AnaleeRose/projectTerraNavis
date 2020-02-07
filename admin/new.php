@@ -45,7 +45,7 @@ require './../html/assets/includes/functions.inc.php';
 
 if ($media_type === 'article') {
     // the minimum inputs expected
-    $expected = ['article_name', 'article_category', 'article_description', 'img', 'caption'];
+    $expected = ['article_name', 'article_category', 'a_link', 'no_link', 'article_description', 'img', 'caption'];
 
     // the minimum inputs required
     $required = ['article_name', 'article_category', 'article_description'];
@@ -141,6 +141,13 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
     if (empty(trim($_POST['img_name']))) {
         $img_errors[] = 'Please add an image';
     }
+    if (!empty($_POST['a_link']) && (filter_var($_POST['a_link'], FILTER_SANITIZE_URL) == $_POST['a_link']) && !isset($_POST['no_link'])) {
+        $a_link = $_POST['a_link'];
+    } elseif (isset($_POST['no_link'])) {
+    } else {
+        $newArticle_errors['a_link'] = 'Please add a link to the orignal article';
+    }
+
 
     foreach ($possible as $elementToCheck) {
         if (isset($_POST[$elementToCheck]) && !empty($_POST[$elementToCheck])) {
@@ -226,7 +233,7 @@ $options = ['required' => null];
             <?php
 
                 if ($media_type === 'article') {
-                    $options = ['required' => null, 'placeholder' => 'Name | Max Characters: 55', 'maxlength' => 55];
+                    $options = ['required' => null, 'placeholder' => 'Name | Max Characters: 150', 'maxlength' => 150];
                     create_form_input('article_name', 'text', 'Aricle Name', $newArticle_errors, $options);
                     ?>
                     <label for="article_category">Category</label>
@@ -246,6 +253,12 @@ $options = ['required' => null];
                     // definition from config.inc.php that creates a required tag
                     echo REQUIRED;
 
+                    echo '<label for="a_link" class="">Orginal Content Only</label>';
+                    echo '<input type="checkbox" name="no_link" id="no_link" class="no_link_checkbox" value="true" checked>';
+                    echo '<div class="articleLink-container hidden_alink">';
+                        $options = ['placeholder' => 'Link To Orignal Article | Max Characters: 600', 'maxlength' => 600];
+                        create_form_input('a_link', 'text', 'Link To Article', $newArticle_errors, $options);
+                    echo '</div>';
 
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
                     $options = ['required' => null, 'placeholder' => 'Description | Max Characters: 750', 'maxlength' => 750];
@@ -299,7 +312,14 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
             // flags this article for errors so if something goes wrong later on we can findd this specific article more easily
             $noErrors = 1;
             $dbpdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-            $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_name, caption, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :img_name, :a_caption, :error_flag)");
+            if (isset($a_link) && !empty($a_link) && !isset($no_link)) {
+                $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, article_link, date_added, date_modified, img_name, caption, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, :a_link, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :img_name, :a_caption, :error_flag)");
+
+                $stmt->bindParam(':a_link', $a_link, PDO::PARAM_STR);
+            } else {
+                $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_name, caption, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :img_name, :a_caption, :error_flag)");
+
+            }
 
             // bind the paramaters
             $stmt->bindParam(':a_name', $a_name, PDO::PARAM_STR);
@@ -398,7 +418,7 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article') {
                     require './assets/includes/footer.html';
                     exit();
                 } else {
-                    header('Location: ' . BASE_URL . 'admin/view.php?view_type=read&media_type=article&media_id=' . $article_db_id);
+                    header('Location: ' . BASE_URL . 'admin/allArticles.php?redirect=true&article_id=' . $article_db_id);
                 }
 
             } //stmt execute END

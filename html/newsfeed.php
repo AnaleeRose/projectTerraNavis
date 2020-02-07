@@ -85,7 +85,10 @@ if (isset($_GET['filterSubmitBtn'])) {
 
   if (!empty($tailEnd)) $customQuery = $cq . $tailEnd;
   // if (!empty($tailEnd)) echo $tailEnd;
+} elseif (isset($_GET['preview']) && isset($_GET['article_id'])) {
+  $customQuery = 'SELECT a.*, c.category as category, c.category_id as cat_id FROM articles a JOIN categories c ON a.article_category = c.category_id WHERE article_id = ' . $_GET['article_id'];
 }
+
 require './assets/views/showArticles.inc.php';
 
 require './assets/includes/head.php';

@@ -25,6 +25,7 @@ const navBars = document.querySelector(".navBars")
 const mainNav = document.querySelector(".mainNav")
 const init_width = getWidth();
 
+const ext_links = document.querySelectorAll(".ext_link")
 const allHeaderImgPieces = document.body.querySelectorAll('[data-hoverable="true"]');
 const allSubheadings = document.body.querySelectorAll(".subheading");
 const allArticles = document.body.querySelectorAll(".indiArticle");
@@ -106,7 +107,16 @@ if (newsPage) {
     }, 250)
 }
 
-
+if (ext_links.length > 0) {
+    ext_links.forEach(function(e_link){
+        e_link.parentElement.addEventListener("mouseover", function(){
+            e_link.setAttribute("src", "./assets/images/icons/externalLink_f.svg")
+        })
+        e_link.parentElement.addEventListener("mouseout", function(){
+            e_link.setAttribute("src", "./assets/images/icons/externalLink.svg")
+        })
+    })
+}
 
 if (faqPage) {
     const allFaqSections = document.body.querySelectorAll('.mainSection-container')
@@ -416,22 +426,22 @@ function faq_collapse(e) {
 function init_tBoxes() {
     allTBoxes.forEach(function(e){
         e.setAttribute("style", "opacity: 0;");
-        let allTBoxesContent  = e.childNodes
-        let t_height = 0
-        allTBoxesContent.forEach(function(e){
-            if (e.offsetHeight) {
-                t_height += e.offsetHeight
-                e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e.offsetWidth + "px;");
-                setTimeout(function(){
-                    e.classList.add("headerImg-textBox_prepped")
-                }, 15)
-            }
-        })
+        // let allTBoxesContent  = e.childNodes
+        // let t_height = 0
+        // allTBoxesContent.forEach(function(e){
+        //     if (e.offsetHeight) {
+        //         t_height += e.offsetHeight
+        //         e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e.offsetWidth + "px;");
+        //         e.classList.add("headerImg-textBox_prepped")
+        //     }
+        // })
 
+        e.classList.add("headerImg-textBox_prepped")
+        // e.setAttribute("style", "height: " + (t_height + 42) + "px;transition: width .3s;opacity:0;");
+        e.setAttribute("style", "transition: width .3s ease-in-out 0s, height 1s ease-out 0s; opacity:0;");
         setTimeout(function(){
-            e.setAttribute("style", "height: " + (t_height + 38) + "px;transition: width .3s;");
-            e.classList.add("headerImg-textBox_prepped")
-        }, 15)
+            e.style.opacity = null
+        }, 300)
     })
 }
 
