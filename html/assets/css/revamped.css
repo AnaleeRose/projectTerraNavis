@@ -5,31 +5,21 @@ Website Author: Francis Tuttle Web Development BPA Team 2019-2020
 Author's URL: http://ftclass.com
 
 ==================   COLOR GUIDE   ==================
-Navy ---------------------> #39637B
-	Shade -----> #182A35
+Navy ---------------------> #0A1C58
+	Shade -----> #6D8DB6
 
-Burnt Orange -------------> #B45929
-	Shade -----> #723A29
+Burnt Orange -------------> #FF7125
+	Shade -----> #FFAC80
 
-Gold ---------------------> #DD9C22
-	Shade -----> #AA7107
-
-Green Apple --------------> #77953E
-	Shade -----> #5C7925
-
-Lilac --------------------> #717ABE
-	Shade -----> #252F79
-
-Aquamarine ---------------> #68CEC6
-	Shade -----> #208E86
+Aquamarine ---------------> #00DFDB
+	Shade -----> #8AFFFD
 
 Pink ---------------> #FF466A
-	Shade -----> #EF3C67
+	Shade -----> #FF8098
 
-Oak Brown ----------------> #2C1E08
-Text ---------------------> #1F1E1E
-Subtle Text --------------> #8E8477
-Link ---------------------> #2B9333
+Text ---------------------> #FFF
+Subtle Text --------------> #6D8DB6
+Link ---------------------> #6D8DB6
 
 ===============   TABLE OF CONTENTS   ===============
 1. CSS Resets & Fonts
@@ -78,10 +68,9 @@ Link ---------------------> #2B9333
 2. Global Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 :root {
-	--text: #1F1E1E;
-	--text-subtle: #104c8a;
-	/*--text-subtle: #8E8477;*/
-	--danger: #fd2525;
+	--text: #FFF;
+	--text-subtle: #6D8DB6;
+	--danger: #FD2525;
 	--tempColor: var(--dark);
 	--link: var(--pageColor);
 	--link-hover: var(--tempColor);
@@ -102,16 +91,13 @@ Link ---------------------> #2B9333
 
 	--home: var(--bg);
 	--home-shade: var(--bg);
-	--home-link: #ff7125;
-	--dark: #fff;
-	/*--text-subtle: #3a6193;*/
-	--text-subtle: #6d8db6;
+	--home-link: #FF7125;
+	--dark: #FFF;
 
-	--temp-text: #fff;
-	--bg: #0a1c58;
-	--news-link: #ff7125;
+	--temp-text: #FFF;
+	--bg: #0A1C58;
+	--news-link: #FF7125;
 	--bg-footer: #041433;
-	--news: #68CEC6;
 	--news-shade: var(--home-shade);
 	--news-link: var(--home-link);
 }
