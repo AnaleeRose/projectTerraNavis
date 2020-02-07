@@ -45,8 +45,8 @@ require './assets/includes/head.php';
             </div>
             <div class="mainSection-content">
                 <h3 class="mainSection-heading subheading">Savannah Skinner</h3>
-                <h4 class="role">Back-end Developer & UX</h4>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus cras adipiscing enim eu turpis egestas pretium. Ac felis donec et odio pellentesque diam. Aliquam faucibus purus in massa tempor nec feugiat nisl. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Semper feugiat nibh sed pulvinar. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliq.</p>
+                <h4 class="role">Front-end & Back-end Developer</h4>
+                <p class="description">Savannah is bookworm who's been in love with technology since childhood. She was that kid who read while walking to class, brought a book to lunch, and read the cereal box during breakfast. Now you can usually find her reading a book on her tablet on the way to work or debating the superior programming language with her siblings. She also enjoys writing, drawing, and convincing others to become kpop fans. Combine all these passions together and you get a web developer who may or may not have based a class project around her favorite (and the best!) kpop group..</p>
                 <a class="portfolioLink" href="https://savannahskinner.com">Her Portfolio >></a>
             </div>
         </section>

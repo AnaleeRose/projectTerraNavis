@@ -30,8 +30,8 @@ if (isset($_POST['cf_submit'])) {
         $contact_errors['c_name'] = "Please use only numbers, letters, commas, and apostrophes";
     }
 
-        
-    if (!empty($_POST['c_msg'])) { 
+
+    if (!empty($_POST['c_msg'])) {
         $_POST['c_msg'] = htmlspecialchars($_POST['c_msg']);
         $msgSafe = true;
     } else {
@@ -43,7 +43,7 @@ if (isset($_POST['cf_submit'])) {
         require './assets/includes/process_email.inc.php';
         if (isset($suspectMail) && $suspectMail === true) {
             $contact_errors['name'] = "This message is invalid";
-        } 
+        }
 
         $joinChoice = $_POST['cf_joinNewsletter'];
 
@@ -62,7 +62,7 @@ if (isset($_POST['cf_submit'])) {
             } else {
                 $contact_errors['major'][] = "Something went wrong, please try again later";
             }
-        } 
+        }
 
     }
 
@@ -102,7 +102,7 @@ require './assets/includes/head.php';
 
     <div class="mainContent-wrapper">
 
-    <?php 
+    <?php
     if (!empty($contact_errors)) {
         echo '<div class="majorError-container">';
         if (empty($contact_errors['major'])) {
@@ -116,7 +116,7 @@ require './assets/includes/head.php';
             } else {
                 echo '<p class="majorError">' . $contact_errors['major'] . '</p>';
             }
-        } 
+        }
         echo '</div>';
     }
     ?>
@@ -168,17 +168,19 @@ require './assets/includes/head.php';
                 create_form_input('c_email', 'email', 'Email', $contact_errors, $c_options + ['placeholder' => 'Your email', 'addtl_div_classes' => 'equalWidthContainer']);
             ?>
             <div class="cf_inputLabel-container cf_joinNewsletter-container">
-                <label for="cf_joinNewsletter">Join Our Newsletter?
+                <p class="form-label">Join Our Newsletter?
                     <small class="requiredWarning cf_requiredWarning">required</small>
-                </label>
+                </p>
                 <div class="cf_joinChoice-container">
                     <div class="cf_joinChoice-indiContainer">
-                        <input class="cf_joinChoice-input" type="radio" name="cf_joinNewsletter" value="2" <?php if (isset($_POST['cf_joinNewsletter'])) {if ($_POST['cf_joinNewsletter'] == 2) echo "checked";} ?>>
+                        <label for="cf_joinChoice-join" class="a11yText"></label>
+                        <input class="cf_joinChoice-input" id="cf_joinChoice-join" type="radio" name="cf_joinNewsletter" value="2" <?php if (isset($_POST['cf_joinNewsletter'])) {if ($_POST['cf_joinNewsletter'] == 2) echo "checked";} ?>>
                         <span class="customRadioBtn" data-value="2"></span>
                         <p class="cf_joinChoice-text">Sure, I'm in!</p>
                     </div>
                     <div class="cf_joinChoice-indiContainer">
-                        <input class="cf_joinChoice-input" type="radio" name="cf_joinNewsletter" value="1" <?php if (isset($_POST['cf_joinNewsletter'])) {if ($_POST['cf_joinNewsletter'] == 1) echo "checked";} else {echo "checked";} ?>>
+                        <label for="cf_joinChoice-join" class="a11yText"></label>
+                        <input class="cf_joinChoice-input" id="cf_joinChoice-refuse" type="radio" name="cf_joinNewsletter" value="1" <?php if (isset($_POST['cf_joinNewsletter'])) {if ($_POST['cf_joinNewsletter'] == 1) echo "checked";} else {echo "checked";} ?>>
                         <span class="customRadioBtn"  data-value="1"></span>
                         <p class="cf_joinChoice-text">No, thank you...</p>
                     </div>

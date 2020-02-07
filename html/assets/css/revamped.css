@@ -1178,7 +1178,7 @@ div.readArticle {
 	padding: 0 1rem 1rem;
 }
 
-.form-container label {
+.form-container label, .form-label {
 	color: var(--dark);
 	font: bold 1.3rem var(--headingFont-bold);
 	padding: 1rem 0;
@@ -1877,7 +1877,7 @@ div.readArticle {
 		padding: .5rem 0 3rem;
 	}
 
-	.cf_msgCounter-container label {
+	.cf_msgCounter-container label, .form-label {
 		padding-bottom: 2rem;
 	}
 
@@ -1892,7 +1892,7 @@ div.readArticle {
 		width: 97%;
 	}
 
-	.form-container label {grid-area: label}
+	.form-container label, .form-label {grid-area: label}
 	.form-container input {grid-area: input}
 
 	.f_teamBlurb-container .f_heading, .f_teamBlurb-link {
@@ -1926,7 +1926,7 @@ div.readArticle {
 	.mainSection-container {
 		padding: 1.5rem 4vw 2.5rem;
 	}
-	
+
 	.cursor {
 		top: 1rem;
 	}
