@@ -90,7 +90,7 @@ require './assets/includes/head.php';
 ?>
 
 <body class="">
-<!------ Header ------------>
+<!-- Header -->
 <?php require './assets/includes/header.inc.php'; ?>
 
 <!-- Main body content -->
