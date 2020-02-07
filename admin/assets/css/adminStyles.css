@@ -1334,7 +1334,7 @@ h2.newsfeedHeading {
 
 .nwBox .btnBox {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 1.5rem;
 }
 
@@ -1358,15 +1358,10 @@ h2.newsfeedHeading {
 
 
 
-.nwBox .editBtn {
-    width: 6rem;
-}
-.nwBox .deleteBtn {
-    width: 7.5rem;
-}
-
+.nwBox .editBtn,
+.nwBox .deleteBtn,
 .nwBox .viewBtn {
-    width: 7.5rem;
+    width: 3.5rem;
 }
 
 .nwBox .dateInfo {color: var(--brightAqua);}
@@ -1549,7 +1544,7 @@ END Newsfeed
     padding: .5rem .5rem 0;
     position: relative;
     text-align: center;
-    width: 10rem;
+    width: 12rem;
 }
 
 /*fieldset*/
@@ -1622,6 +1617,30 @@ END Newsfeed
     width: 7rem;
 }
 
+
+.generalForm .no_link_checkbox {
+    display: block;
+    margin: 1rem auto;
+}
+
+.articleLink-container {
+    transition: all .4s;
+    height: 10vh;
+}
+
+#a_link {
+    height: 1.5rem;
+}
+
+.hidden_alink {
+    height: 0;
+    overflow: hidden;
+}
+
+.ext_link {
+    height: 15px;
+    width: 15px;
+}
 
 
     /*----------------------------------------------------------------------->
@@ -2120,7 +2139,7 @@ END Printed Styles
 
     .adminMC_Wrapper {
         padding: 0;
-        height: 100%;
+        /*height: 100%;*/
         max-width: 100vw;
     }
 

@@ -32,7 +32,7 @@ if (!isset($_GET['article_id'])) {
 }
 
 // make sure that article exists, if it doesnt toss an error
-$q = "SELECT a.*, c.category FROM articles a JOIN categories c ON a.article_category = c.category_id WHERE article_id = 1";
+$q = "SELECT a.*, c.category FROM articles a JOIN categories c ON a.article_category = c.category_id WHERE article_id = " . $article_id;
 $r = mysqli_query($dbc, $q);
 if (mysqli_num_rows($r) === 0 && !isset($_GET['delete'])) {
     ob_end_clean();

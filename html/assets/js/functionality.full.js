@@ -21,10 +21,12 @@ const characterCounter = document.body.querySelector("#characterCounter");
 const cursor = document.body.querySelector('#cursor');
 const headerImgContainer = document.body.querySelector('.headerImg-container');
 const eShip = document.body.querySelector(".eShip")
-const mainFooter = document.body.querySelector(".mainFooter")
-const mainNav = document.body.querySelector(".mainNav")
-const navBars = document.body.querySelector(".navBars")
+const mainFooter = document.querySelector(".mainFooter")
+const navBars = document.querySelector(".navBars")
+const mainNav = document.querySelector(".mainNav")
+const init_width = getWidth();
 
+const ext_links = document.querySelectorAll(".ext_link")
 const allHeaderImgPieces = document.body.querySelectorAll('[data-hoverable="true"]');
 const allSubheadings = document.body.querySelectorAll(".subheading");
 const allArticles = document.body.querySelectorAll(".indiArticle");
@@ -106,7 +108,16 @@ if (newsPage) {
     }, 250)
 }
 
-
+if (ext_links.length > 0) {
+    ext_links.forEach(function(e_link){
+        e_link.parentElement.addEventListener("mouseover", function(){
+            e_link.setAttribute("src", "./assets/images/icons/externalLink_f.svg")
+        })
+        e_link.parentElement.addEventListener("mouseout", function(){
+            e_link.setAttribute("src", "./assets/images/icons/externalLink.svg")
+        })
+    })
+}
 
 if (faqPage) {
     const allFaqSections = document.body.querySelectorAll('.mainSection-container')
@@ -248,10 +259,12 @@ function intialize_cursor() {
 
     window.addEventListener('resize', function() {
         fix_sizing();
-        if (homeMainContent && (diff(page_c_width, document.body.clientWidth) > 250) && document.body.clientWidth >= 1200)  {
-            location.reload();
+        if (homeMainContent && (diff(init_width, getWidth()) > 100) && document.body.clientWidth >= 1200)  {
+            location.reload(true);
+            console.log("relaoded")
         }
     })
+
     subheadingsContainer = document.createElement('div')
     subheadingsContainer.classList.add("interactiveSubheadings-container")
 
@@ -314,7 +327,19 @@ function intialize_article_animation() {
 // general use functions ============================================================>
 //============================================================>
 
+function getWidth() {
+  if (self.innerWidth) {
+    return self.innerWidth;
+  }
 
+  if (document.documentElement && document.documentElement.clientWidth) {
+    return document.documentElement.clientWidth;
+  }
+
+  if (document.body) {
+    return document.body.clientWidth;
+  }
+}
 
 function diff(num1, num2) {
   if (num1 > num2) {
@@ -425,43 +450,23 @@ function faq_collapse(e) {
 
 function init_tBoxes() {
     allTBoxes.forEach(function(e){
-        let hoverList = document.body.querySelectorAll(".headerImg-indi_hover")
-        hoverList.forEach(function(c){
-            c.classList.remove("headerImg-indi_hover")
-        })
-
-        if (document.body.querySelector(".headerImg-container_hover")) {
-            document.body.querySelector(".headerImg-container_hover").classList.remove("headerImg-container_hover")
-        }
-
-        if (e.classList.contains("headerImg-textBox_prepped")) {
-            e.classList.remove("headerImg-textBox_prepped")
-            e.setAttribute("style", "width:auto;opacity:0;");
-            e.classList.remove("headerImg-textBox")
-        }
-
-        let allTBoxesContent  = e.childNodes
-        let t_height = 0
-
-        allTBoxesContent.forEach(function(e){
-            if (e.offsetHeight) {
-                if (e.hasAttribute("style")) {
-                    e.removeAttribute("style");
-                }
-
-                // setTimeout(function(){
-                    t_height += e.offsetHeight
-                    e.offsetWidth < 150 ? e_width = 150 : e_width = e.offsetWidth
-                    e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e_width + "px;");
-                // }, 30)
-            }
-        })
+        e.setAttribute("style", "opacity: 0;");
+        // let allTBoxesContent  = e.childNodes
+        // let t_height = 0
+        // allTBoxesContent.forEach(function(e){
+        //     if (e.offsetHeight) {
+        //         t_height += e.offsetHeight
+        //         e.setAttribute("style", "height: " + e.offsetHeight + "px;width: " + e.offsetWidth + "px;");
+        //         e.classList.add("headerImg-textBox_prepped")
+        //     }
+        // })
 
         e.classList.add("headerImg-textBox_prepped")
-        e.classList.add("headerImg-textBox")
+        // e.setAttribute("style", "height: " + (t_height + 42) + "px;transition: width .3s;opacity:0;");
+        e.setAttribute("style", "transition: width .3s ease-in-out 0s, height 1s ease-out 0s; opacity:0;");
         setTimeout(function(){
-            e.setAttribute("style", "height: " + (t_height + 38) + "px;transition: width .3s;");
-        }, 20)
+            e.style.opacity = null
+        }, 300)
     })
 }
 

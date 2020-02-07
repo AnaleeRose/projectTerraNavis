@@ -21,7 +21,12 @@ require './../html/assets/includes/form_functions.inc.php';
 // makes it easy to create common inputs for this page specifically, we only need it if they haven't clicked the button yet since this code is just to rebuild the article into inputs
 if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions_edit.inc.php';
 
-
+// tracked random number
+$random_num;
+if (!isset($_SESSION['random_num'])) {
+    $_SESSION['random_num'] = rand(0, 9) . rand(0, 9) . rand(0, 9);
+}
+$random_num = $_SESSION['random_num'];
 
 // ------------------------------->intialize various variables
 $media_type = 'article';
@@ -32,9 +37,17 @@ $img_name;
 $complete_filename;
 $resized_filename;
 $img_errors = [];
+$newArticle = false;
 
 // basic functions used throughout the site
 require './../html/assets/includes/functions.inc.php';
+// if (isset($_tempErrors)) {
+//     if (is_array($_tempErrors)) {
+//         print_r($_tempErrors);
+//     } else {
+//         echo $_tempErrors;
+//     }
+// }
 
 // the minimum inputs expected
 $expected = ['article_name', 'article_category', 'article_description', 'imgs'];
@@ -87,6 +100,7 @@ if ($r && mysqli_num_rows($r) > 0) {
         if (!isset($_POST['article_name'])) $_POST['article_name'] = $row['article_name'];
         if (!isset($_POST['article_description'])) $_POST['article_description'] = $row['article_description'];
         if (!isset($_POST['article_category']))$_POST['article_category'] = $row['article_category'];
+        if (!isset($_POST['a_link'])) $_POST['a_link'] = $row['article_link'];
         if (!isset($_POST['date_added'])) $_POST['date_added'] = $row['date_added'];
         if (!isset($_POST['caption'])) $_POST['caption'] = $row['caption'];
         if (!isset($_POST['img_name'])) $_POST['img_name'] = $row['img_name'];
@@ -193,6 +207,17 @@ if (isset($_POST['publishMediaBtn'])) {
         $newArticle_errors['article_description'] = "Links are not allowed in the name or description.";
     }
 
+    if (!isset($_POST['no_link'])) {
+        if (!empty($_POST['a_link']) && (filter_var($_POST['a_link'], FILTER_SANITIZE_URL) == $_POST['a_link']) && !isset($_POST['no_link'])) {
+            $a_link = $_POST['a_link'];
+        } else {
+            $newArticle_errors['a_link'] = 'Please add a link to the orignal article';
+        }
+    } else {
+        $a_link = false;
+        $no_link = true;
+    }
+
     // check each possible element to see if at least one is not empty
     foreach ($possible as $elementToCheck) {
         if (isset($_POST[$elementToCheck]) && !empty($_POST[$elementToCheck]) && $at_least_one_element === false) {
@@ -240,7 +265,7 @@ $options = ['required' => null];
             <?php
 
                 if ($media_type === 'article') {
-                    $options = ['required' => null, 'placeholder' => 'Name | Max Characters: 55', 'maxlength' => 55];
+                    $options = ['required' => null, 'placeholder' => 'Name | Max Characters: 150', 'maxlength' => 150];
                     create_form_input('article_name', 'text', 'Aricle Name: ', $newArticle_errors, $options);
                     echo REQUIRED;
                     ?>
@@ -259,10 +284,22 @@ $options = ['required' => null];
                         }
                     }
                     echo '</select>';
-
                     // definition from config.inc.php that creates a required tag
                     echo REQUIRED;
 
+                    if (isset($_POST['a_link'])) {
+                        echo '<label for="a_link" class="">Orginal Content Only</label>';
+                        echo '<input type="checkbox" name="no_link" id="no_link" class="no_link_checkbox" value="true">';
+                        echo '<div class="articleLink-container">';
+
+                    } else {
+                        echo '<label for="a_link">Orginal Content Only</label>';
+                        echo '<input type="checkbox" name="no_link" id="no_link" class="no_link_checkbox" value="true" checked>';
+                        echo '<div class="articleLink-container hidden_alink">';
+                    }
+                        $options = ['placeholder' => 'Link To Orignal Article | Max Characters: 600', 'maxlength' => 600];
+                        create_form_input('a_link', 'text', 'Link To Article', $newArticle_errors, $options);
+                        echo '</div>';
                     // throw an error if something went wrong with the select (create_form_input usually handles this but since this once was made here, it has to create errors here too)
                     if (array_key_exists('article_category', $newArticle_errors)) echo '<p class="formNotice formNotice_InlineError text_error">' . $newArticle_errors['article_category'] . ' </p>';
                     $options = ['required' => null, 'placeholder' => 'Description | Max Characters: 750', 'maxlength' => 750];
@@ -327,8 +364,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // flags this article for errors so if something goes wrong later on we can findd this specific article more easily
             $noErrors = 1;
             $dbpdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-            $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_name, caption, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, :date_added, CURRENT_TIMESTAMP, :img_name, :a_caption, :error_flag)");
-
+            if (isset($a_link) && $a_link !=false && !empty($a_link) && !isset($no_link)) {
+                echo "A LIN K: " . $a_link;
+                $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, article_link, date_added, date_modified, img_name, caption, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, :a_link, :date_added, CURRENT_TIMESTAMP, :img_name, :a_caption, :error_flag)");
+                $stmt->bindParam(':a_link', $a_link, PDO::PARAM_STR);
+            } else {
+                $stmt = $dbpdo->prepare("INSERT INTO articles (article_id, article_name, article_description, article_category, date_added, date_modified, img_name, caption, error_flag) VALUES (NULL, :a_name, :a_description, :a_category, :date_added, CURRENT_TIMESTAMP, :img_name, :a_caption, :error_flag)");
+            }
             // bind the paramaters
             $stmt->bindParam(':a_name', $a_name, PDO::PARAM_STR);
             $stmt->bindParam(':a_description', $a_description, PDO::PARAM_STR);
@@ -338,6 +380,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bindParam(':date_added', $_POST['date_added']);
             $stmt->bindParam(':error_flag', $noErrors, PDO::PARAM_BOOL);
 
+            
+            if (!$stmt) {
+                echo "\nPDO::errorInfo():\n";
+                print_r($dbh->errorInfo());
+            }
             // ...attempt to add that bad boi to the db...
             if ($stmt->execute()) {
                 // if all that nonsense worked, grab that shiny new id
@@ -420,7 +467,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
                     $stmt->bindParam(':a_id', $article_db_id, PDO::PARAM_STR);
                     if ($stmt->execute()) {
-                        header('Location: ' . BASE_URL . 'admin/view.php?view_type=view&media_type=article&media_id=' . $article_db_id);
+                        // header('Location: ' . BASE_URL . 'admin/allArticles.php?redirect=true&article_id=' . $article_db_id);
+                        header('Location: http://terranavis.life/admin/allArticles.php?redirect=true&article_id=' . $article_db_id);
                     } else {
                         // or throw an error, ya know, if something went wrong
                         ob_end_clean();
@@ -457,16 +505,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // require './assets/includes/footer.html';
                 // exit();
             } //stmt execute END
-        } else {
-            echo 'something basic!!!';
         } // no errors, contents exists check END
-    } else {
-        if (isset($_POST['publishMediaBtn'])) {
-            echo 'pushed';
-        } else {
-            print_r($_POST);
-            echo 'not pushed';
-        }
     } // at least article_name isset, so we can check the rest i guess idk
 } // post type == post
 ?>
@@ -492,7 +531,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <label for="imgs" class="contentTypeBtn uploadImgBtn" id="uploadImgBtn" data-content_type_id=9>Image</label>
                         <small class="imgsNotice">Images will be placed automatically, based upon size</small>
-                <input type="file" name="imgs" class="hidden" id="imgs" onChange="loadFile(event)" data-content_type_id=9>
+                        <input type="file" name="img" class="hidden" id="img" onChange="loadFile(event)" data-content_type_id=9>
                     </div>
 
 

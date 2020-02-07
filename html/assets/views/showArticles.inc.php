@@ -22,14 +22,23 @@ function showArticles($displaytype) {
                     $articlesCurrentlyShown++;
                     ?>
                         <section class="article<?= $num; ?> indiArticle mainSection-container">
+                        <?php if (isset($row['article_link']) && !empty($row['article_link'])) { ?>
+                            <a href="<?= $row['article_link']; ?>" class="indiArticle-imgLink"><img class="indiArticle-img" src="<?= IMG_PATH_HTML . $row['img_name']; ?>" alt="Article Image"></a>
+                        <?php } else { ?>
                             <a href="./readArticle.php?article_id=<?= $row['article_id']?>" class="indiArticle-imgLink"><img class="indiArticle-img" src="<?= IMG_PATH_HTML . $row['img_name']; ?>" alt="Article Image"></a>
+                        <?php } ?>
                             <div class="indiArticle-content">
                                 <a href="./readArticle.php?article_id=<?= $row['article_id']?>" class="indiArticle-titleLink"><h2 class="indiArticle-titleText"><?= $row['article_name']; ?></h2></a>
                                 <p class="indiArticle-date"><?= date('F jS, Y', strtotime($row['date_added']));   ?></p>
                                 <p class="indiArticle-description"><?= $row['article_description']; ?></p>
                                 <div class="categoryReadBtn-container">
                                     <a class="indiArticle-category" href="newsfeed.php?dateSelect=All+Time&categorySelect=<?= $row['cat_id']; ?>&filterSubmitBtn=Filter"><?= $row['category']; ?></a>
-                                    <a class="indiArticle-readMore" href="./readArticle.php?article_id=<?= $row['article_id']?>">Read Article >></a>
+                                    <?php if (isset($row['article_link']) && !empty($row['article_link'])) { ?>
+                                        <a class="indiArticle-readMore" href="<?= $row['article_link']; ?>">Read Article <img class="ext_link" src="./assets/images/icons/externalLink.svg"></a>
+                                    <?php } else { ?>
+                                        <!-- <a class="indiArticle-readMore" href="./readArticle.php?article_id=<?= $row['article_id']?>">Read Article <img class="ext_link" src="./assets/images/icons/externalLink.svg"></a> -->
+                                        <a class="indiArticle-readMore" href="./readArticle.php?article_id=<?= $row['article_id']?>">Read Article >></a>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </section>
@@ -38,14 +47,13 @@ function showArticles($displaytype) {
                 } // END if no error flag
             } // END while
         } elseif (!$r) {
-            echo $q;
-            // ob_end_clean();
-            // require '../admin/assets/includes/header.html';
-            // require '../admin/assets/includes/error.inc.php';
-            // $links = ['Return To Home' => 'index.php'];
-            // produce_error_page('Hmm...something went wrong. We\'ll be sure to fix it soon!', $links);
-            // require '../admin/assets/includes/footer.html';
-            // exit();
+            ob_end_clean();
+            require '../admin/assets/includes/header.html';
+            require '../admin/assets/includes/error.inc.php';
+            $links = ['Return To Home' => 'index.php'];
+            produce_error_page('Hmm...something went wrong. We\'ll be sure to fix it soon!', $links);
+            require '../admin/assets/includes/footer.html';
+            exit();
         } // end if $r
     } elseif ($displaytype === 'full_article') {
         $articlesCurrentlyShown++;
@@ -85,7 +93,7 @@ function showArticles($displaytype) {
 
     if (isset($showArticle_errors) && !empty($showArticle_errors)) {
         foreach ($showArticle_errors as $key => $value) {
-            echo '<p class="error">'. $key . ' | ' . $value . '</p>';
+            echo '<p class="error">'. $value . '</p>';
         }
     } // END show errors if
 

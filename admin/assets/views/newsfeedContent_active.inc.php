@@ -73,7 +73,7 @@ function create_article($a_num) {
         if (!empty($this_article['date_modified']) && (strtotime($this_article['date_modified']) > strtotime('-3 day'))) echo '<p class="badge badge_accent">New</p>';
         if (isset($list_all) && $list_all) {
             echo '<p class="dateInfo">Created: <span>' . $date_added  . '</span></p>';
-            echo '<p class="dateInfo">Modified: <span>' . $date_modified . '</span></p>';
+            // echo '<p class="dateInfo">Modified: <span>' . $date_modified . '</span></p>';
         }
         ?>
         <p class="newsfeedDescription"><?= strip_tags($article_description) ?></p>
@@ -81,10 +81,10 @@ function create_article($a_num) {
             <?php
             if (isset($list_all) && $list_all) {
             ?>
-            <a href="view.php?view_type=read&media_type=article&media_id=<?php echo $this_article['article_id']; ?>" class="adminBtn adminBtn_aqua viewBtn">View Article</a>
+            <a href="<?= BASE_URL; ?>/html/newsfeed.php?preview=true&article_id=<?= $this_article['article_id']; ?>" class="adminBtn adminBtn_aqua viewBtn">View</a>
             <?php } ?>
-            <a href="editArticle.php?<?php echo 'article_id=' . $this_article['article_id']?>" class="adminBtn adminBtn_aqua editBtn">Edit Article</a>
-            <a href="deleteArticle.php?<?php echo 'article_id=' . $this_article['article_id']?>" class="adminBtn adminBtn_danger deleteBtn">Delete Article</a>
+            <a href="editArticle.php?<?php echo 'article_id=' . $this_article['article_id']?>" class="adminBtn adminBtn_aqua editBtn">Edit</a>
+            <a href="deleteArticle.php?<?php echo 'article_id=' . $this_article['article_id']?>" class="adminBtn adminBtn_danger deleteBtn">Delete</a>
         </div>
     </div>
 
@@ -141,21 +141,23 @@ function create_email($e_num) {
     <?php
 }
 
+// $content_created = false;
+if (!isset($list_all) || !$list_all) {
+    if (isset($no_emails) && $no_emails && isset($no_articles) && $no_articles) {
+    } else {
+        // $content_created = true;
+        $num = 0;
+        while ($num < 8) {
+            if (isset($all_articles[$num]) && !empty($all_articles[$num])) {
+                create_article($num);
+            }
 
-if (isset($no_emails) && $no_emails && isset($no_articles) && $no_articles) {
-} else {
-    $num = 0;
-    while ($num < 8) {
-        if (isset($all_articles[$num]) && !empty($all_articles[$num])) {
-            create_article($num);
-        }
-
-        if (isset($all_emails[$num]) && !empty($all_emails[$num])) {
-            create_email($num);
-        }
-        $num++;
-    } // END while stmt
-
+            if (isset($all_emails[$num]) && !empty($all_emails[$num])) {
+                create_email($num);
+            }
+            $num++;
+        } // END while stmt
+    }
 }
 
 if ((isset($no_emails) && $no_emails) && (!isset($no_articles))) { // aka all articles

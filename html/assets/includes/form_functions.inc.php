@@ -91,10 +91,10 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		if ($value) echo 'value="' . htmlspecialchars($value) . '"';
 		if (!empty($options) && is_array($options)) {
 			foreach ($options as $k => $v) {
-                echo $options['addtl_classes'] . ' ' . $type;
+                if ($k !== 'addtl_classes' && $k !== 'addtl_div_classes' && $k !== 'contactPage') echo " $k=\"$v\"";
 			}
 		}
 		echo '>';
 	} // END type IF-ELSE
-	if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options))) {echo '</div>';}
+	if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options)) && (array_key_exists('addtl_div_classes', $options))) {echo '</div>';}
 } // END create_form_input()

@@ -29,7 +29,7 @@ require './assets/includes/head.php';
         <section id="mainSection-one" class="mainSection-container">
     	    <h3 class="mainSection-heading subheading" data-subheading="one">Powering Your Earthship</h3>
             <div class="mainSection-content">
-              <img class="wrap multiContentPage-inlineImg" src="./assets/images/turbines.png">
+              <img class="wrap multiContentPage-inlineImg" alt="turbines" src="./assets/images/turbines.png">
 
               <p>One of the big questions about an earthship’s sustainability is, “how do you power an off-grid home?” With the advent of so many different techniques for generating clean, renewable energy, it would seem like a daunting task to pick just one! The answer is probably whatever works best for your particular situation. However, there are two popular forms of power generation you can go with, and a third, more controversial method that’s typically only used as a backup.</p>
 
@@ -46,7 +46,7 @@ require './assets/includes/head.php';
         <section id="mainSection-two" class="mainSection-container">
     	    <h3 class="mainSection-heading subheading" data-subheading="two">Growing Your Own Food</h3>
             <div class="mainSection-content">
-              <img class="wrap multiContentPage-inlineImg" src="./assets/images/plants-2.png">
+              <img class="wrap multiContentPage-inlineImg" alt="plants" src="./assets/images/plants-2.png">
 
       	    	<p>The ability to grow one's own food is a crucial part of the culture of self-reliance that earthships are all about. Most earthships will have a large, windowed area in the front of the structure that is facing out from the earth mound it’s set into. This area is typically used as both a temperature buffer and greenhouse. By having an area of the earthship that gets sun all year round, you maintain a consistent ability to grow your own food!</p>
 
@@ -57,9 +57,10 @@ require './assets/includes/head.php';
         <section id="mainSection-three" class="mainSection-container">
     	    <h3 class="mainSection-heading subheading" data-subheading="three">Water Collection</h3>
             <div class="mainSection-content">
+                <img class="wrap multiContentPage-inlineImg" alt="well" src="./assets/images/well-2.png">
+
       	        <p>Now we come to one of the most challenging aspects of living in an earthship: how do you get your water? With the dry and arid nature of the usual earthship locale, water collection can be a daunting task to overcome. Typical rainfall in these locations is less than 11 inches per year, so simple rainwater collection alone will not sustain you. That being said, rainwater collection should still be used to maximize the amount of water you are able to bring in, and storing this water is important, as it can sometimes be months between rainy weather.</p>
 
-                <img class="wrap multiContentPage-inlineImg" src="./assets/images/well-2.png">
 
                 <p>Another, more tedious way to get water for your earthship is to bring outside water into your earthship via water trucks or small, portable water containers that you can fill while you are away from home and bring back with you. This can be a deal breaker for some who are considering building an earthship.</p>
 
@@ -71,7 +72,7 @@ require './assets/includes/head.php';
         <section id="mainSection-four" class="mainSection-container">
             <h3 class="mainSection-heading subheading" data-subheading="four">Recycling</h3>
             <div class="mainSection-content">
-              <img class="wrap multiContentPage-inlineImg" src="./assets/images/compost.png">
+              <img class="wrap multiContentPage-inlineImg" alt="compost" src="./assets/images/compost.png">
 
               <p>As resources are finite and sometimes hard to come by in the remote locations most earthship-dwellers live in, recycling everything you can is a must. Starting with your most scarce resource, water. There are many ways to recycle your grey and black water waste. Grey water is a bit easier, as it can be stored and reused to flush toilets water your greenhouse plants. The black water (sewer water) can be irrigated into an outdoor garden to fertilize and water outdoor plants.</p>
 

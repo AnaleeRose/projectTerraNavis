@@ -5,31 +5,21 @@ Website Author: Francis Tuttle Web Development BPA Team 2019-2020
 Author's URL: http://ftclass.com
 
 ==================   COLOR GUIDE   ==================
-Navy ---------------------> #39637B
-	Shade -----> #182A35
+Navy ---------------------> #0A1C58
+	Shade -----> #6D8DB6
 
-Burnt Orange -------------> #B45929
-	Shade -----> #723A29
+Burnt Orange -------------> #FF7125
+	Shade -----> #FFAC80
 
-Gold ---------------------> #DD9C22
-	Shade -----> #AA7107
-
-Green Apple --------------> #77953E
-	Shade -----> #5C7925
-
-Lilac --------------------> #717ABE
-	Shade -----> #252F79
-
-Aquamarine ---------------> #68CEC6
-	Shade -----> #208E86
+Aquamarine ---------------> #00DFDB
+	Shade -----> #8AFFFD
 
 Pink ---------------> #FF466A
-	Shade -----> #EF3C67
+	Shade -----> #FF8098
 
-Oak Brown ----------------> #2C1E08
-Text ---------------------> #1F1E1E
-Subtle Text --------------> #8E8477
-Link ---------------------> #2B9333
+Text ---------------------> #FFF
+Subtle Text --------------> #6D8DB6
+Link ---------------------> #6D8DB6
 
 ===============   TABLE OF CONTENTS   ===============
 1. CSS Resets & Fonts
@@ -78,10 +68,9 @@ Link ---------------------> #2B9333
 2. Global Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 :root {
-	--text: #1F1E1E;
-	--text-subtle: #104c8a;
-	/*--text-subtle: #8E8477;*/
-	--danger: #fd2525;
+	--text: #FFF;
+	--text-subtle: #6D8DB6;
+	--danger: #FD2525;
 	--tempColor: var(--dark);
 	--link: var(--pageColor);
 	--link-hover: var(--tempColor);
@@ -102,15 +91,13 @@ Link ---------------------> #2B9333
 
 	--home: var(--bg);
 	--home-shade: var(--bg);
-	--home-link: #ff7125;
-	--dark: #fff;
-	--text-subtle: #3a6193;
+	--home-link: #FF7125;
+	--dark: #FFF;
 
-	--temp-text: #fff;
-	--bg: #0a1c58;
-	--news-link: #ff7125;
+	--temp-text: #FFF;
+	--bg: #0A1C58;
+	--news-link: #FF7125;
 	--bg-footer: #041433;
-	--news: #68CEC6;
 	--news-shade: var(--home-shade);
 	--news-link: var(--home-link);
 }
@@ -230,6 +217,23 @@ h1 {
 	font-family: var(--headingFont), sans-serif;
 }
 
+.a11y_labels {
+	overflow: hidden;
+	position: absolute;
+	width: 0;
+}
+
+.a11y_labels label {
+	position: absolute;
+	right: -200vw;
+}
+
+.ext_link {
+    height: 15px;
+    width: 15px;
+}
+
+
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 3. Header & Nav Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
@@ -259,17 +263,17 @@ h1 {
 	text-align: center;
 }
 
+
 .headerLogo-header {
 	color: var(--dark);
 	font: bold 2.2rem var(--headingFont-bold), sans-serif;
 	padding-top: .4rem;
-	opacity: .85;
 	text-decoration: none;
 	transition: opacity .2s;
 }
 
 .headerLogo-header:hover {
-	opacity: 1
+	opacity: .85;
 }
 
 .headerLogo-logo img{
@@ -427,7 +431,7 @@ h1 {
 	position: absolute;
 	right: 0;
 	top: -340px;
-	width: 20vw;
+	width: 25vw;
 	z-index: 8;
 }
 
@@ -445,6 +449,7 @@ h1 {
 }
 
 .solarPanels .headerImg-textBox {
+	top: -280px;
 	right: -5vw;
 }
 .bucketSpout-container .headerImg-textBox {
@@ -759,17 +764,18 @@ h1 {
 			position: absolute;
 		}
 
+.mainSection-readMore {text-decoration: none}
 
 .mainSection-readMore, .tBox-link {
 	position: relative;
 }
-	.mainSection-readMore:after {
+/*	.mainSection-readMore:after {
 		content: ">>";
 		right: -1.5rem;
 		position: absolute;
 		top: -3px;
 	}
-
+*/
 	.mainSection-readMore:before, .tBox-link:before {
 		background: var(--link-hover);
 		bottom: -3px;
@@ -781,7 +787,7 @@ h1 {
 		transition: padding .3s;
 	}
 		.mainSection-readMore:hover:before {
-			padding: 0 calc(50% + 1.5rem) 0 50%;
+			padding: 0 50% 0 50%;
 		}
 /*faq*/
 .faqPage .mainSection-heading {
@@ -935,6 +941,11 @@ h1 {
 	display: block;
 	margin: 2rem auto 1rem;
 	text-align: center;
+}
+
+.readArticle .error {
+	text-align: center;
+    padding-top: 2rem;
 }
 
 
@@ -1374,6 +1385,7 @@ div.readArticle {
 	background: none;
 }
 .teamPage .mainSection-container {
+	border-top: 1.5rem solid var(--pageColor-shade);
 	display: flex;
 	flex-direction: column;
 	padding: 0;
@@ -1389,6 +1401,7 @@ div.readArticle {
 }
 
 .teamPage .mainSection-heading {
+	background: none;
 	padding: 0;
     margin-left: -5vw;
     width: 95vw;
@@ -1396,15 +1409,15 @@ div.readArticle {
 
 .portrait {
 	display: inline-block;
-	width: 150px;
+	width: 250px;
 }
 
-.portrait-container{
+.portrait-container {
     background: rgba(255, 255, 255, .1);
 	box-sizing: border-box;
 	display: block;
 	margin: 0;
-	padding: 1rem 0;
+	padding: 5rem 0 1rem;
 	text-align: center;
 	width: 100%;
 }
@@ -1525,7 +1538,9 @@ div.readArticle {
 			color: #fff;
 		}
 
-
+.f_emailInput-container .emailInput:focus {
+	border: 2px solid red;
+}
 .f_newletter-form {
 	display: flex;
 	flex-direction: column;
@@ -1564,6 +1579,11 @@ div.readArticle {
 }
 	.f_socialLinkIcon {
 		text-decoration: none;
+	}
+
+	.f_inIcon {
+		height: 65px;
+		width: 65px;
 	}
 
 
@@ -1654,6 +1674,17 @@ div.readArticle {
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 7. @Media Queries
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+/* ===== PHONE ============================== */
+@media screen and (max-width: 649px) {
+	.headerLogo-logo img {
+		width: 4rem;
+	}
+
+	.multiContentPage-inlineImg {
+		max-width: 150px;
+	}
+}
+
 
 /* ===== TABLET ============================== */
 @media screen and (min-width: 650px) {
@@ -1681,6 +1712,7 @@ div.readArticle {
 		top: -12vw;
 	}
 
+	.headerLogo-logo, .headerLogo-header {text-align: left;}
 	.headerLogo-container .headerLogo-logo img {
 		margin: .65rem 1rem;
 	}
@@ -1763,6 +1795,7 @@ div.readArticle {
 	}
 	.indiArticle .mainSection-container {padding-top: 1rem;}
 
+	section.readArticle {min-height: 350px;}
 	.readArticle-imgContainer {
 		box-sizing: content-box;
 		float: right;
@@ -1893,13 +1926,13 @@ div.readArticle {
 	.mainSection-container {
 		padding: 1.5rem 4vw 2.5rem;
 	}
-
+	
 	.cursor {
 		top: 1rem;
 	}
 
+	section.readArticle {min-height: 500px;}
 	.filter-arrow {border-width: 0;}
-
 
 	.f_copyright-container {
 		bottom: 4px;
@@ -1979,7 +2012,7 @@ div.readArticle {
 	.headerImg-container .headerImg-mobile {display: none;}
 
 	.mainHeader {
-		height: 5.2rem;
+		height: 5.5rem;
 		position: fixed;
 		left: 0;
 		top: 0;
@@ -2067,7 +2100,7 @@ div.readArticle {
 		justify-content: left;
 	}
 
-
+	.readArticle .error {padding-top: 0;}
 
 	.majorError-container {
     	margin: 1rem 0 0;
