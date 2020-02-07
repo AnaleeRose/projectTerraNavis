@@ -25,11 +25,12 @@ Link ---------------------> #6D8DB6
 1. CSS Resets & Fonts
 2. Global Styles
 3. Header & Nav Styles
-3a. Header animations
+3a. Header Image Animations
 4. Main Body Content
-5. Form Styles
-6. Footer Content
-7. @Media Queries
+5. Page Styles
+6. Form Styles
+7. Footer Content
+8. @Media Queries
 ****************************************************/
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -386,7 +387,6 @@ h1 {
 .navBars-open line {
 	stroke: #fff;
 }
-
 
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -789,7 +789,11 @@ h1 {
 		.mainSection-readMore:hover:before {
 			padding: 0 50% 0 50%;
 		}
-/*faq*/
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+5. Page Styles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+/* ===== FAQ ============================== */
 .faqPage .mainSection-heading {
 	background: none;
 	color: #567aa7;
@@ -842,15 +846,14 @@ h1 {
 }
 
 
-
-/*contact us page*/
+/* ===== CONTACT PAGE ============================== */
 .contactPage .mainContent-wrapper {
 	padding-top: 1rem;
 }
 
 .contactSidebar-container {
 	background: var(--pageColor);
-	/*border-left: .5rem solid var(--pageColor);*/
+	border-left: .5rem solid var(--pageColor);
 	color: #fff;
 	display: none;
 	max-width: 30vw;
@@ -896,10 +899,7 @@ h1 {
 	}
 
 
-
-
-/*newsfeed*/
-
+/* ===== NEWSFEED ============================== */
 .mainContent.newsPage {
 	padding: 0 5vw;
 }
@@ -1102,14 +1102,11 @@ div.readArticle {
 	min-height: 50vh;
 }
 
-
-
 .multiContentPage-inlineImg {
 	margin: 0 0 0 20px;
     max-width: 200px;
     float: right;
 }
-
 
 .interactiveSubheadings-container {
 	color: transparent;
@@ -1170,8 +1167,87 @@ div.readArticle {
 	margin-left: 1rem;
 }
 
+
+/* ===== TEAM PAGE ============================== */
+.teamPage .mainContent {
+	padding: 0;
+}
+
+.teamPage .mainContent-wrapper {
+	background: none;
+}
+.teamPage .mainSection-container {
+	border-top: 1.5rem solid var(--pageColor-shade);
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+}
+
+.teamPage #mainSection-one .portrait-container {
+	padding-top: 3rem;
+}
+
+.teamPage .mainSection-content {
+	padding: .5rem 4vw 5.5rem;
+	background: rgba(255,255,255,.1);
+}
+
+.teamPage .mainSection-heading {
+	background: none;
+	padding: 0;
+    margin-left: -5vw;
+    width: 95vw;
+}
+
+.portrait {
+	display: inline-block;
+	width: 250px;
+}
+
+.portrait-container {
+    background: rgba(255, 255, 255, .1);
+	box-sizing: border-box;
+	display: block;
+	margin: 0;
+	padding: 5rem 0 1rem;
+	text-align: center;
+	width: 100%;
+}
+
+.role {
+	color: var(--text-subtle);
+	font: bold 1.1rem var(--headingFont-bold), sans-serif;
+	padding: 1rem 0;
+	text-align: center;
+}
+
+.teamPage .description {
+	padding: 1rem;
+}
+
+.teamPage .portfolioLink {
+	display: block;
+	font: bold 1.3rem var(--headingFont-bold), sans-serif;
+	text-align: center;
+	text-decoration: none;
+}
+
+
+/* ===== THANK YOU PAGE ============================== */
+.thxPage p {
+	text-indent: 0
+}
+
+.thxPage .mainContent-wrapper{
+	min-height: 55vh;
+}
+.thxPage .mainSection-heading {
+	display: none
+}
+
+
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-5. Form Styles
+6. Form Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 .form-container {
@@ -1376,86 +1452,8 @@ div.readArticle {
 }
 
 
-/*team page*/
-.teamPage .mainContent {
-	padding: 0;
-}
-
-.teamPage .mainContent-wrapper {
-	background: none;
-}
-.teamPage .mainSection-container {
-	border-top: 1.5rem solid var(--pageColor-shade);
-	display: flex;
-	flex-direction: column;
-	padding: 0;
-}
-
-.teamPage #mainSection-one .portrait-container {
-	padding-top: 3rem;
-}
-
-.teamPage .mainSection-content {
-	padding: .5rem 4vw 5.5rem;
-	background: rgba(255,255,255,.1);
-}
-
-.teamPage .mainSection-heading {
-	background: none;
-	padding: 0;
-    margin-left: -5vw;
-    width: 95vw;
-}
-
-.portrait {
-	display: inline-block;
-	width: 250px;
-}
-
-.portrait-container {
-    background: rgba(255, 255, 255, .1);
-	box-sizing: border-box;
-	display: block;
-	margin: 0;
-	padding: 5rem 0 1rem;
-	text-align: center;
-	width: 100%;
-}
-
-.role {
-	color: var(--text-subtle);
-	font: bold 1.1rem var(--headingFont-bold), sans-serif;
-	padding: 1rem 0;
-	text-align: center;
-}
-
-.teamPage .description {
-	padding: 1rem;
-}
-
-.teamPage .portfolioLink {
-	display: block;
-	font: bold 1.3rem var(--headingFont-bold), sans-serif;
-	text-align: center;
-	text-decoration: none;
-}
-
-/*thxPage*/
-.thxPage p {
-	text-indent: 0
-}
-
-.thxPage .mainContent-wrapper{
-	min-height: 55vh;
-}
-.thxPage .mainSection-heading {
-	display: none
-}
-
-
-
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-6. Footer Content
+7. Footer Content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 .mainFooter {
@@ -1480,7 +1478,7 @@ div.readArticle {
   /*padding: 2.5rem 3rem;*/
 }
 
-/*universal*/
+/* ===== UNIVERSAL ============================== */
 .f-box {
   display: flex;
   flex-direction: column;
@@ -1493,9 +1491,7 @@ div.readArticle {
 .f-box:first-of-type p {padding: 0 4.5vw;}
 
 
-
-/*individual boxes*/
-
+/* ===== INDIVIDUAL BOXES ============================== */
 .f_teamBlurb-container .f_heading, .f_teamBlurb-link {
 	margin: 1rem 3.2vw;
 	padding: 0;
@@ -1672,7 +1668,7 @@ div.readArticle {
 }
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-7. @Media Queries
+8. @Media Queries
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 /* ===== PHONE ============================== */
 @media screen and (max-width: 649px) {
@@ -1907,6 +1903,7 @@ div.readArticle {
 
 }
 
+
 /* ===== COMPUTER ============================= = */
 @media screen and (min-width: 750px) {
 
@@ -1972,6 +1969,7 @@ div.readArticle {
 	}
 
 }
+
 
 /* ===== XL COMPUTER ============================== */
 @media screen and (min-width: 1200px) {

@@ -4,7 +4,7 @@ require './assets/includes/head.php';
 ?>
 
 <body class="">
-<!------ Header ------------>
+<!-- Header -->
 <?php require './assets/includes/header.inc.php'; ?>
 
 <!-- Main body content -->
@@ -96,7 +96,7 @@ require './assets/includes/head.php';
 </article>
 
 
-<!------ Footer ------------>
+<!-- Footer -->
 ​<?php require './assets/includes/footer.inc.php'; ?>
 
 </body>
