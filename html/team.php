@@ -14,8 +14,6 @@ require './assets/includes/head.php';
        <h2 class="mainHeading">Meet Our Team</h2>
     </div>
 
-    </p> -->
-
     <div class="mainContent-wrapper">
         <section id="mainSection-one" class="mainSection-container">
             <div class="portrait-container">
