@@ -29,7 +29,7 @@ require './assets/includes/head.php';
         <section id="mainSection-one" class="mainSection-container">
             <h3 class="mainSection-heading subheading" data-subheading="one">Designing Your Earthship</h3>
             <div class="mainSection-content">
-              <img class="wrap multiContentPage-inlineImg" src="./assets/images/blueprint.png">
+              <img class="wrap multiContentPage-inlineImg" alt="blueprint" src="./assets/images/blueprint.png">
 
                <p>There are several companies that will help you design your earthship. Earthship Biotecture is the leading company in this area, which makes sense because it was founded by Michael Reynolds himself. Another popular company is Pangea Builders. If you choose to go your own route, there are some basic principles to keep in mind.</p>
 
@@ -48,7 +48,7 @@ require './assets/includes/head.php';
         <section id="mainSection-two" class="mainSection-container">
             <h3 class="mainSection-heading subheading" data-subheading="two">Building Materials</h3>
             <div class="mainSection-content">
-              <img class="wrap multiContentPage-inlineImg" src="./assets/images/tires.png">
+              <img class="wrap multiContentPage-inlineImg" alt="tires" src="./assets/images/tires.png">
 
                <p>How you choose the materials to use may be the most important aspect of planning the construction of your home. This is because, while the world has an abundance of renewable materials, the ease with which these materials can be acquired varies greatly. The most common materials are used tires and dirt bags for exterior and load-bearing walls, recycled cans and bottles for interior and upper walls, and trusses or vigas for the roof.</p>
                
@@ -64,7 +64,7 @@ require './assets/includes/head.php';
         <section id="mainSection-three" class="mainSection-container">
             <h3 class="mainSection-heading subheading" data-subheading="three">Building Your Earthship</h3>
             <div class="mainSection-content">
-              <img class="wrap multiContentPage-inlineImg" src="./assets/images/tools.png">
+              <img class="wrap multiContentPage-inlineImg" alt="tools" src="./assets/images/tools.png">
               
                <p>“Rammed-earth” tires will be the main building blocks of the structure, making up most outer walls and supporting interior walls. Since these can be up to 300lbs, they are usually packed with earth right where they’ll sit on the wall. This is usually a two-person job, as one person pours earth into the tires while the other person uses a sledgehammer to pound the dirt into the tires as tightly as possible. The tires should be placed just like normal bricks, with one tire on top between the two tires on bottom. Concrete or clay can be used as filler between tires to reinforce the walls. It’s important to completely cover any tires that will be inside the home with concrete or something similar, because tires continually give off small amounts of toxic gasses!</p>
 
@@ -80,7 +80,7 @@ require './assets/includes/head.php';
         <section id="mainSection-four" class="mainSection-container">
             <h3 class="mainSection-heading subheading" data-subheading="four">Building It To Code</h3>
             <div class="mainSection-content">
-               <img class="wrap multiContentPage-inlineImg" src="./assets/images/buildcodes.png">
+               <img class="wrap multiContentPage-inlineImg" alt="buildcodes" src="./assets/images/buildcodes.png">
               
                <p>One of the greatest challenges to building an earthship is dealing with so many municipal codes and regulations. That’s why a large percentage of earthship dwellers live in new mexico, where there is already a knowledgeable culture and comparatively friendly laws.</p>
 
