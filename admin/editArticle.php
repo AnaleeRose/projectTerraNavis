@@ -41,13 +41,6 @@ $newArticle = false;
 
 // basic functions used throughout the site
 require './../html/assets/includes/functions.inc.php';
-// if (isset($_tempErrors)) {
-//     if (is_array($_tempErrors)) {
-//         print_r($_tempErrors);
-//     } else {
-//         echo $_tempErrors;
-//     }
-// }
 
 // the minimum inputs expected
 $expected = ['article_name', 'article_category', 'article_description', 'imgs'];
@@ -496,14 +489,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo 'MISTAKA';
                 print_r($dbpdo->errorInfo());
 
-                // throw an error, ya know, if something went wrong
-                // ob_end_clean();
-                // require './assets/includes/header.html';
-                // require './assets/includes/error.php';
-                // $links = ['Return To Home' => 'index.php'];
-                // produce_error_page('Could not connect to the database. Please contact our service team to resolve the issue.', $links);
-                // require './assets/includes/footer.html';
-                // exit();
             } //stmt execute END
         } // no errors, contents exists check END
     } // at least article_name isset, so we can check the rest i guess idk

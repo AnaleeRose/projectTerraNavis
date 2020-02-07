@@ -8,7 +8,7 @@ session_start();
  // config sets up a number of vital defnitions and a few functions too
 require './../html/assets/includes/config.inc.php';
 
-// connects ya to the db as admin for delete priveleges
+// connects to the db as admin for delete priveleges
 $user = 'admin';
 require MYSQL;
 

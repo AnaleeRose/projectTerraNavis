@@ -11,7 +11,7 @@ require './../html/assets/includes/config.inc.php';
 // toss user back to login page if they're not logged in
 check_if_admin();
 
-// connects ya to the db
+// connects to the db
 require MYSQL;
 
 // makes it easy to create forms
