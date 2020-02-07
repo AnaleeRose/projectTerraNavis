@@ -27,9 +27,10 @@ Link ---------------------> #6D8DB6
 3. Header & Nav Styles
 3a. Header Image Animations
 4. Main Body Content
-5. Form Styles
-6. Footer Content
-7. @Media Queries
+5. Page Styles
+6. Form Styles
+7. Footer Content
+8. @Media Queries
 ****************************************************/
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -789,7 +790,9 @@ h1 {
 			padding: 0 50% 0 50%;
 		}
 
-
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+5. Page Styles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 /* ===== FAQ ============================== */
 .faqPage .mainSection-heading {
 	background: none;
@@ -1244,7 +1247,7 @@ div.readArticle {
 
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-5. Form Styles
+6. Form Styles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 .form-container {
@@ -1450,7 +1453,7 @@ div.readArticle {
 
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-6. Footer Content
+7. Footer Content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 .mainFooter {
@@ -1665,7 +1668,7 @@ div.readArticle {
 }
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-7. @Media Queries
+8. @Media Queries
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 /* ===== PHONE ============================== */
 @media screen and (max-width: 649px) {
