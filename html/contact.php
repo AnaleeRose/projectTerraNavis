@@ -130,6 +130,7 @@ require './assets/includes/head.php';
 
             <div class="contactSidebar-IconText contactSidebar-home-container">
                 <a class="contactSidebar-text" href="https://www.google.com/maps/search/?api=1&query=35.5990429,-97.6419168&query_place_id=ChIJ_XsrK2kDsocR42W3n4UFml8">
+                    <span class="a11yText">Our address</span>
                     <svg class="contactSidebar-icon contactSidebar-houseIcon" id="contactSidebar-houseIcon" data-name="Group 2" xmlns="http://www.w3.org/2000/svg" width="47.689" height="37.952" viewBox="0 0 47.689 37.952">
                       <path id="Path_3_hi" data-name="Path 3 hi" d="M82.736,120.939,65.728,134.96a.4.4,0,0,1-.015.089.4.4,0,0,0-.015.088v14.2a1.921,1.921,0,0,0,1.893,1.894H78.949V139.87h7.573v11.359H97.881a1.923,1.923,0,0,0,1.894-1.894v-14.2a.416.416,0,0,0-.03-.177Z" transform="translate(-58.891 -113.278)" />
                       <path id="Path_4_hi" data-name="Path 4 hi" d="M47.36,65.482,40.882,60.1V48.03a.912.912,0,0,0-.947-.946H34.256a.911.911,0,0,0-.947.946V53.8l-7.217-6.034a3.669,3.669,0,0,0-4.5,0L.328,65.482A.859.859,0,0,0,0,66.117a.958.958,0,0,0,.207.7L2.044,69a1.009,1.009,0,0,0,.621.326,1.1,1.1,0,0,0,.71-.207L23.844,52.052,44.313,69.12a.912.912,0,0,0,.621.206h.089A1.01,1.01,0,0,0,45.645,69l1.834-2.189a.957.957,0,0,0,.206-.7A.862.862,0,0,0,47.36,65.482Z" transform="translate(0.001 -46.994)" />
@@ -140,6 +141,7 @@ require './assets/includes/head.php';
 
             <div class="contactSidebar-IconText contactSidebar-phone-container">
                 <a href="tel:+1-888-867-5309">
+                    <span class="a11yText">Our Phone Number</span>
                     <svg class="contactSidebar-icon contactSidebar-phoneIcon" id="contactSidebar-phoneIcon" xmlns="http://www.w3.org/2000/svg" width="29.422" height="50" viewBox="0 0 29.422 50">
                       <g class="smartphone-call" transform="translate(-7.334)">
                         <path id="Path_1_pi" data-name="Path 1 pi" d="M33.335,0H10.755A3.409,3.409,0,0,0,7.334,3.377V46.621A3.41,3.41,0,0,0,10.755,50h22.58a3.408,3.408,0,0,0,3.421-3.377V3.377A3.409,3.409,0,0,0,33.335,0Zm-14.9,2.434h7.224a.409.409,0,1,1,0,.819H18.433a.409.409,0,1,1,0-.819Zm3.612,45.877a1.689,1.689,0,1,1,1.71-1.69A1.7,1.7,0,0,1,22.045,48.311ZM34.376,43.75H9.714V5.356H34.376Z"/>
@@ -151,6 +153,7 @@ require './assets/includes/head.php';
 
             <div class="contactSidebar-IconText contactSidebar-email-container">
                 <a class="contactSidebar-text" href="mailto:<?= EMAIL_LINK ?>">
+                    <span class="a11yText">Our email address</span>
                     <svg class="contactSidebar-icon contactSidebar-emailIcon" id="contactSidebar-emailIcon" xmlns="http://www.w3.org/2000/svg" width="45.919" height="31.943" viewBox="0 0 45.919 31.943">
                       <g class="email-envelope-outline" transform="translate(188 179.889)">
                         <path id="Path_2_ei" data-name="Path 2 ei" d="M45.42,59.111H.5a.5.5,0,0,0-.5.5V90.556a.5.5,0,0,0,.5.5H45.42a.5.5,0,0,0,.5-.5V59.61A.5.5,0,0,0,45.42,59.111Zm-7.6,3.993L22.96,74,8.1,63.1Zm4.1,23.957H3.993V65.048L22.664,78.74a.5.5,0,0,0,.592,0L41.927,65.048V87.061Z" transform="translate(-188 -239)"/>
@@ -173,13 +176,13 @@ require './assets/includes/head.php';
                 </p>
                 <div class="cf_joinChoice-container">
                     <div class="cf_joinChoice-indiContainer">
-                        <label for="cf_joinChoice-join" class="a11yText"></label>
+                        <label for="cf_joinChoice-join" class="a11yText">Check this to join our newsletter</label>
                         <input class="cf_joinChoice-input" id="cf_joinChoice-join" type="radio" name="cf_joinNewsletter" value="2" <?php if (isset($_POST['cf_joinNewsletter'])) {if ($_POST['cf_joinNewsletter'] == 2) echo "checked";} ?>>
                         <span class="customRadioBtn" data-value="2"></span>
                         <p class="cf_joinChoice-text">Sure, I'm in!</p>
                     </div>
                     <div class="cf_joinChoice-indiContainer">
-                        <label for="cf_joinChoice-join" class="a11yText"></label>
+                        <label for="cf_joinChoice-refuse" class="a11yText">Check this to refuse to join our newsletter</label>
                         <input class="cf_joinChoice-input" id="cf_joinChoice-refuse" type="radio" name="cf_joinNewsletter" value="1" <?php if (isset($_POST['cf_joinNewsletter'])) {if ($_POST['cf_joinNewsletter'] == 1) echo "checked";} else {echo "checked";} ?>>
                         <span class="customRadioBtn"  data-value="1"></span>
                         <p class="cf_joinChoice-text">No, thank you...</p>
