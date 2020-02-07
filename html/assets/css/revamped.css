@@ -1786,6 +1786,7 @@ div.readArticle {
 		padding: 2rem;
 		width: 500px;
 	}
+	.indiArticle .mainSection-container {padding-top: 1rem;}
 
 	section.readArticle {min-height: 350px;}
 	.readArticle-imgContainer {

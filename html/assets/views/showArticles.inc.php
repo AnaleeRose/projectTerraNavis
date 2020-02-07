@@ -34,7 +34,7 @@ function showArticles($displaytype) {
                                 <div class="categoryReadBtn-container">
                                     <a class="indiArticle-category" href="newsfeed.php?dateSelect=All+Time&categorySelect=<?= $row['cat_id']; ?>&filterSubmitBtn=Filter"><?= $row['category']; ?></a>
                                     <?php if (isset($row['article_link']) && !empty($row['article_link'])) { ?>
-                                        <a class="indiArticle-readMore" href="<?= $row['article_link']; ?>">Read Article <img class="ext_link" src="./assets/images/icons/externalLink.svg"></a>
+                                        <a class="indiArticle-readMore" href="<?= $row['article_link']; ?>">Read Article <img class="ext_link" src="./assets/images/icons/externalLink.svg" alt="External Link"></a>
                                     <?php } else { ?>
                                         <!-- <a class="indiArticle-readMore" href="./readArticle.php?article_id=<?= $row['article_id']?>">Read Article <img class="ext_link" src="./assets/images/icons/externalLink.svg"></a> -->
                                         <a class="indiArticle-readMore" href="./readArticle.php?article_id=<?= $row['article_id']?>">Read Article >></a>

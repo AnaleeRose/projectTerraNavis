@@ -6,6 +6,7 @@
 const body = document.body.querySelector('article')
 body.classList.add("js-enabled")
 
+const indiArticlePage = document.body.querySelector('.indiArticlePage')
 const faqPage = document.body.querySelector('.faqPage')
 const newsPage = document.body.querySelector('.newsPage')
 const multiContentPage = document.body.querySelector(".multiContentPage");
@@ -215,6 +216,30 @@ if (headerImgContainer) {
     init_tBoxes();
 }
 
+
+if (indiArticlePage) {
+    let allRAElems = document.body.querySelectorAll(".readArticleElement")
+    allRAElems.forEach(function(indiElem){
+        let starting_num = indiElem.innerText.search("<a href")
+        let ending_num = indiElem.innerText.search("</a>") + 4
+        if (indiElem.innerText.search("<a href") >= 1) {
+            newLink = indiElem.innerText.slice(starting_num, ending_num)
+            console.log(newLink)
+            end_a_href = newLink.search('">') + 2
+            a_href = newLink.slice(0, end_a_href)
+            console.log(a_href)
+            text = newLink.slice(end_a_href, newLink.search("</a>"))
+            end = "</a>";
+
+            fixedLink = a_href + text + end
+            tempVer = indiElem.innerText.replace(newLink, fixedLink)
+
+            console.log("replace...")
+            indiElem.textContent = tempVer + "REPLACED"
+
+        }
+    })
+}
 
 //===========================================>
 //============================================================>
