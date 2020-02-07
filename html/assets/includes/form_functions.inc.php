@@ -96,5 +96,6 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 		}
 		echo '>';
 	} // END type IF-ELSE
-	if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options)) && (array_key_exists('addtl_div_classes', $options))) {echo '</div>';}
+	// if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options))) {echo '</div>';}
+	if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options))) {echo '</div>';}
 } // END create_form_input()
