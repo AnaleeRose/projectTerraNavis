@@ -5,7 +5,7 @@ function create_form_input($name, $type, $label = '', $errors = [], $options = a
 	if ((!empty($options)) && (is_array($options)) && (array_key_exists('contactPage', $options)) || (array_key_exists('addtl_div_classes', $options))) {echo '">';}
 	$value = false;
 	if (isset($_POST[$name])) $value = $_POST[$name];
-	if ($value && get_magic_quotes_gpc()) $value = stripcslashes($value);
+	if ($value) $value = stripcslashes($value);
 	if (!empty($label)) {
 		echo '<label for="' . $name . '"';
 		if (array_key_exists($name, $errors)) echo 'class=""';

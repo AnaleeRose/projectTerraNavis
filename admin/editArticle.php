@@ -23,10 +23,11 @@ if (!isset($_POST['publishMediaBtn'])) require './assets/includes/form_functions
 
 // tracked random number
 $random_num;
-if (!isset($_SESSION['random_num'])) {
-    $_SESSION['random_num'] = rand(0, 9) . rand(0, 9) . rand(0, 9);
+if (!isset($_SESSION['random_num_e'])) {
+    $_SESSION['random_num_e'] = rand(0, 9) . rand(0, 9) . rand(0, 9);
 }
-$random_num = $_SESSION['random_num'];
+
+$random_num = $_SESSION['random_num_e'];
 
 // ------------------------------->intialize various variables
 $media_type = 'article';
@@ -54,6 +55,8 @@ $possible = [];
 // we'll build all possible lists from this list l8r
 $element_types = ['p', 'heading2', 'heading3', 'heading4', 'heading5', 'hr', 'ul', 'ol'];
 $article_id = $_GET['article_id'];
+$original_id = $article_id;
+$db_article_id;
 $elementsUsed;
 
 // max amount of any element type on the page
@@ -382,6 +385,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($stmt->execute()) {
                 // if all that nonsense worked, grab that shiny new id
                 $article_db_id = $dbpdo->lastInsertId();
+                $db_article_id = $article_db_id;
 
                 // ...and add each new element...
                 foreach ($trackElements as $this_element_name => $this_element_info) {
@@ -460,8 +464,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = $dbpdo->prepare("UPDATE `articles` SET `error_flag` = NULL WHERE `articles`.`article_id` = :a_id");
                     $stmt->bindParam(':a_id', $article_db_id, PDO::PARAM_STR);
                     if ($stmt->execute()) {
+                        $stmt = $dbpdo->prepare("UPDATE `articles` SET `article_id` = :o_a_id WHERE `articles`.`article_id` = ':c_id");
+                        $stmt->bindParam(':c_id', $db_article_id, PDO::PARAM_STR);
+                        $stmt->bindParam(':o_a_id', $article_id, PDO::PARAM_STR);
+
                         // header('Location: ' . BASE_URL . 'admin/allArticles.php?redirect=true&article_id=' . $article_db_id);
-                        header('Location: http://terranavis.life/admin/allArticles.php?redirect=true&article_id=' . $article_db_id);
+                        // header('Location: http://terranavis.life/admin/allArticles.php?redirect=true&article_id=' . $article_db_id);
                     } else {
                         // or throw an error, ya know, if something went wrong
                         ob_end_clean();

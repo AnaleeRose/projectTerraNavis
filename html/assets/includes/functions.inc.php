@@ -74,11 +74,15 @@ if (!isset($newArticle)) $newArticle = true;
 
 if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
     if (!empty($_FILES['img']['name']) && !empty(trim($_POST['caption']))) {
-		 $permitted = [
+		$permitted = [
 		    'image/gif',
 		    'image/jpeg',
 		    'image/jpg',
-		    'image/png'
+		    'image/png',
+		    'gif',
+		    'jpeg',
+		    'jpg',
+		    'png'
 		];
 
 		$max_image_size = 10000000;
@@ -96,7 +100,6 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 			        $cf['tmp_name'] = $_FILES['img']['tmp_name'];
 			        $cf['error'] = $_FILES['img']['error'];
 			        $cf['size'] = $_FILES['img']['size'];
-
 
 			        if ($cf['error'] == 1 || $cf['error'] == 2) {
 			            $img_errors[] = "Something went wrong... Please try again later!";
@@ -143,11 +146,11 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 							$resize = true;
 							if ($c_width > 500 && $c_height > 300) {
 								$size_confirmation = true;
-								if (($c_width > 600 && $c_height > 400) && ($c_width < 800 && $c_height < 600)) {
+								if (($c_width > 600 && $c_height > 400) && ($c_width < 1200 && $c_height < 800)) {
 									$resize = false;
 								}
 							} else {
-								$img_errors[] = 'Image is too small, please upload a larger version';
+								$img_errors[] = 'Image must be between 500px x 300px and 1200px x 800px';
 							}
 				            if ($move && $size_confirmation) {
 								$pic_name_location = $destination . $complete_filename;
@@ -204,7 +207,7 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 
 				            }
 				        	} elseif ($newArticle === false) { //new article ver above, edit article ver below
-					        	$_tempErrors[] = "FINEME OLD ARTICLE";
+					        	// $_tempErrors[] = "FINEME OLD ARTICLE";
 								if (!isset($img_width)) $img_width = 600;
 					        	if (!isset($img_height)) $img_height = 400;
 					            $checkFile = true;
@@ -213,9 +216,10 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 									$r = mysqli_query($dbc, $q);
 									if ($r && mysqli_num_rows($r) > 0) {
 										$filename = mysql_fetch_assoc($r);
-								    } else {
-								    	$_tempErrors[] = "FINEME: R WRONG";
-								    }
+								    } 
+								    // else {
+								    // 	$_tempErrors[] = "FINEME: R WRONG";
+								    // }
 									substr($filename, 0, -4);
 								} else {
 					            	$filename = preg_replace('/\s+/', '_', preg_replace('/\PL/u', '', $_POST['article_name'])) . '_' . $random_num;
@@ -228,11 +232,11 @@ if (isset($_POST['publishMediaBtn']) && $media_type === 'article')  {
 								$resize = true;
 								if ($c_width > 500 && $c_height > 300) {
 									$size_confirmation = true;
-									if (($c_width > 600 && $c_height > 400) && ($c_width < 1000 && $c_height < 800)) {
+									if (($c_width > 600 && $c_height > 400) && ($c_width < 1200 && $c_height < 800)) {
 										$resize = false;
 									}
 								} else {
-									$img_errors[] = 'Image is too small, please upload a larger version';
+									$img_errors[] = 'Image must be between 500px x 300px and 1200px x 800px';
 								}
 					            if ($move && $size_confirmation) {
 									$pic_name_location = $destination . $complete_filename;

@@ -914,6 +914,9 @@ function generate_link() {
         linkOutputHref.innerText = linkHref;
         linkGenOutput.innerText = '<a href="'+linkHref+'">'+linkName+'</a>';
     }
+
+    linkGenBox.style.bottom
+
 }
 
 // ------------------------------------------------------------------------------------------------>

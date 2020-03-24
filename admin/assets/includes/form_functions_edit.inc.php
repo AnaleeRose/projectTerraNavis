@@ -1,6 +1,6 @@
 <?php
 function create_form_input_e_ver($name, $type, $label = '', $value, $errors = [], $options = array()) {
-    if (!empty($value) && get_magic_quotes_gpc()) $value = stripcslashes($value);
+    if (!empty($value)) $value = stripcslashes($value);
     if (!empty($label)) {
         echo '<label for="' . $name . '"';
         if (array_key_exists($name, $errors)) echo 'class=""';

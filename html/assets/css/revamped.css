@@ -1659,11 +1659,12 @@ div.readArticle {
 	overflow: hidden;
 	padding: 0 1rem 0;
 	transition: height .3s;
-    width: 300px;
+    width: 270px;
 }
 
 .bpaChapterInfo-content_open {
-    padding: .5rem 2rem 1.5rem 3.25rem;
+    /* padding: .5rem 2rem 1.5rem 3.25rem; */
+    padding:  .5rem 0 1.5rem 1rem;
     height: 8.75rem;
 }
 
@@ -1900,7 +1901,9 @@ div.readArticle {
 		max-width: 400px;
 	}
 
-
+	.bpaChapterInfo-content_open {
+	    padding: .5rem 2rem 1.5rem 3.25rem;
+	}
 }
 
 
